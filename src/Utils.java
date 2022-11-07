@@ -5,6 +5,7 @@ import java.util.*;
 
 public class Utils {
 
+//    Lists the drivers
     public static void main(String[] args) throws Exception {
         System.out.println("\nDrivers loaded as properties:");
         System.out.println(System.getProperty("jdbc.drivers"));
@@ -14,25 +15,29 @@ public class Utils {
             System.out.println(list.nextElement());
     }
 
-    public static Connection connect(String username, String password) throws SQLException {
+//    Returns a databse connection with the credentials inputted
+    public static Connection connect() throws SQLException {
         Connection con = null; // a Connection object
         try {
-            con = DriverManager.getConnection("jdbc:mysql://stusql.dcs.shef.ac.uk/"+username, username, password);
+            String[] creds = Utils.getCredentials();
+            con = DriverManager.getConnection("jdbc:mysql://stusql.dcs.shef.ac.uk/"+creds[0], creds[0], creds[1]);
         }
         catch (Exception ex) {
             ex.printStackTrace();
         }
 
-//        Returns the connection
+
         return con;
     }
 
+//    Closes database connection
     public static void closeConnection(Connection con) throws SQLException {
         if (con != null)
             con.close();
     }
 
-    public static String[] getCredentials(){
+//    Retrieves the credentials from Credentials.txt
+    private static String[] getCredentials(){
         String[] creds = new String[2];
 
         try {

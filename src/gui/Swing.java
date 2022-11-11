@@ -1,4 +1,4 @@
-package Swing;
+package gui;
 
 public class Swing {
 

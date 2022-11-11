@@ -1,3 +1,5 @@
+package SQL;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.sql.*;
@@ -15,29 +17,8 @@ public class Utils {
             System.out.println(list.nextElement());
     }
 
-//    Returns a databse connection with the credentials inputted
-    public static Connection connect() throws SQLException {
-        Connection con = null; // a Connection object
-        try {
-            String[] creds = Utils.getCredentials();
-            con = DriverManager.getConnection("jdbc:mysql://stusql.dcs.shef.ac.uk/"+creds[0], creds[0], creds[1]);
-        }
-        catch (Exception ex) {
-            ex.printStackTrace();
-        }
-
-
-        return con;
-    }
-
-//    Closes database connection
-    public static void closeConnection(Connection con) throws SQLException {
-        if (con != null)
-            con.close();
-    }
-
 //    Retrieves the credentials from Credentials.txt
-    private static String[] getCredentials(){
+    static String[] getCredentials(){
         String[] creds = new String[2];
 
         try {

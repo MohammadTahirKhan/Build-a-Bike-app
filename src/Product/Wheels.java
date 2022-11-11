@@ -1,5 +1,10 @@
 package Product;
 
+import SQL.DbConnection;
+import SQL.Queries;
+
+import java.sql.Connection;
+
 public class Wheels extends Product{
 
 //    Declaring ENUM's
@@ -51,5 +56,12 @@ public class Wheels extends Product{
     private void setBrakeType(String brakeType){
         this.brakeType = BrakeType.valueOf(brakeType);
     }
+
+//    SQL Get wheels
+    public static Wheels[] pullWheels(){
+        return Queries.getWheels();
+    }
+
+
 
 }

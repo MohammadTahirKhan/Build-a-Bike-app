@@ -54,7 +54,7 @@ public class DbConnection {
         String safeQuery = sanitiseInput(unsafeQuery);
         Connection connection = getCon();
 
-        return results;
+        return null;
     }
 
 }

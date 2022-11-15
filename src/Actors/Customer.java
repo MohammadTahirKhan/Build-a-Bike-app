@@ -60,4 +60,7 @@ public class Customer extends Shopper {
         this.postCode = postCode;
     }
 
+
+
+
 }

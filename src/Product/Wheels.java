@@ -11,7 +11,8 @@ public class Wheels extends Product{
     public enum Style {
         ROAD,
         MOUNTAIN,
-        HYBRID
+        HYBRID,
+        ALL
     }
     public enum BrakeType{
         DISKBRAKE,
@@ -58,9 +59,9 @@ public class Wheels extends Product{
     }
 
 //    SQL Get wheels
-    public static Wheels[] pullWheels(){
-        return Queries.getWheels();
-    }
+//    public static Wheels[] pullWheels(){
+//        return Queries.getWheels();
+//    }
 
 
 

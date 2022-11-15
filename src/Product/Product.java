@@ -2,6 +2,14 @@ package Product;
 
 public abstract class Product {
 
+//    Declaring ENUM's
+    public enum Products {
+        BIKE,
+        FRAME,
+        HANDLEBAR,
+        WHEELS
+    }
+
 //    Declaring Variables
     protected String name;
     protected int serialNumber;

@@ -13,12 +13,12 @@ public abstract class Product {
 //    Declaring Variables
     protected String name;
     protected int serialNumber;
-    protected float itemCost;
+    protected double itemCost;
     protected String brandName;
     protected int stock;
 
 //    Sets Product variables
-    protected void setProductDetails(String name, int serialNumber, float itemCost, String brandName, int stock){
+    protected void setProductDetails(String name, int serialNumber, double itemCost, String brandName, int stock){
         this.name = name;
         this.serialNumber = serialNumber;
         this.itemCost = itemCost;
@@ -33,7 +33,7 @@ public abstract class Product {
     public int getSerialNumber() {
         return serialNumber;
     }
-    public float getItemCost() {
+    public double getItemCost() {
         return itemCost;
     }
     public String getBrandName() {

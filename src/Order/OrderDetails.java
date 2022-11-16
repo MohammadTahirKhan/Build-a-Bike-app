@@ -1,40 +1,24 @@
+
 package Order;
 
-public class OrderDetails extends Order{
-    public String orderedItemName;
-    public int orderedItemQuantity;
-    public double itemCost;
+import Product.Product;
 
+import java.util.HashMap;
+import java.util.Map;
 
-    public OrderDetails(int orderNumber, double totalCost, Status status, String orderedItemName, int orderedItemQuantity, double itemCost) {
-        super(orderNumber, totalCost, status);
-        this.orderedItemName=orderedItemName;
-        this.orderedItemQuantity=orderedItemQuantity;
-        this.itemCost=itemCost;
+public class OrderDetails {
+
+    Map<Product, Integer> itemMap = new HashMap<>();
+
+    public OrderDetails(Map<Product, Integer> itemMap){
+        this.itemMap = itemMap;
     }
 
-    public String getOrderedItemName() {
-        return orderedItemName;
+    public Map<Product, Integer> getItemMap() {
+        return itemMap;
     }
 
-    public void setOrderedItemName(String orderedItemName) {
-        this.orderedItemName = orderedItemName;
-    }
-
-    public int getOrderedItemQuantity() {
-        return orderedItemQuantity;
-    }
-
-    public void setOrderedItemQuantity(int orderedItemQuantity) {
-        this.orderedItemQuantity = orderedItemQuantity;
-    }
-
-    public double getItemCost() {
-        return itemCost;
-    }
-
-    public void setItemCost(double itemCost) {
-        this.itemCost = itemCost;
+    public void setItemMap(Map<Product, Integer> itemMap) {
+        this.itemMap = itemMap;
     }
 }
-

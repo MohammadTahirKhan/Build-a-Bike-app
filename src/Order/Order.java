@@ -3,6 +3,7 @@ package Order;
 public class Order {
     public int orderNumber;
 
+    public OrderDetails itemDetail;
     public double totalCost;
     public enum Status {
         PENDING,
@@ -11,10 +12,11 @@ public class Order {
     }
     public Status status;
 
-    public Order (int orderNumber , double totalCost, Status status){
+    public Order (int orderNumber ,OrderDetails itemDetail, double totalCost, Status status){
         this.orderNumber=orderNumber;
         this.totalCost=totalCost;
         this.status=status;
+        this.itemDetail = itemDetail;
     }
 
     public int getOrderNumber() {
@@ -39,6 +41,14 @@ public class Order {
 
     public void setTotalCost(double totalCost) {
         this.totalCost = totalCost;
+    }
+
+    public OrderDetails getItemDetail() {
+        return itemDetail;
+    }
+
+    public void setItemDetail(OrderDetails itemDetail) {
+        this.itemDetail = itemDetail;
     }
 }
 

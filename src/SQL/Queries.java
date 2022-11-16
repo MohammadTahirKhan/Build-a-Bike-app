@@ -48,7 +48,7 @@ public class Queries {
     }
 
 //    Database inserts
-    private static void insertWheel(String productName, float unitCost, String brandName, int serialNumber, int stock, float diameter, Wheels.Style style, Wheels.BrakeType brakeType) throws SQLException {
+    private static int insertWheel(String productName, float unitCost, String brandName, int serialNumber, int stock, float diameter, Wheels.Style style, Wheels.BrakeType brakeType) throws SQLException {
         int productID = insertProduct(productName, unitCost, brandName, serialNumber, stock);
         String sql = "INSERT INTO `team002`.`Wheels` (`productID`,`diameter`,`style`,`brakeSystem`) VALUES (?, ?, ?, ?);";
         PreparedStatement statement = DbConnection.getCon().prepareStatement(sql);
@@ -57,8 +57,9 @@ public class Queries {
         statement.setString(3, style.name());
         statement.setString(4, brakeType.name());
         statement.executeUpdate();
+        return DbConnection.getPrimaryKey(statement);
     }
-    private static void insertFrame(String productName, float unitCost, String brandName, int serialNumber, int stock, int frameSize, String gears, boolean containsShocks) throws SQLException {
+    private static int insertFrame(String productName, float unitCost, String brandName, int serialNumber, int stock, int frameSize, String gears, boolean containsShocks) throws SQLException {
         int productID = insertProduct(productName, unitCost, brandName, serialNumber, stock);
         String sql = "INSERT INTO `team002`.`FrameSet` (`productID`,`frameSize`,`shocks`,`gears`) VALUES (?, ?, ?, ?);";
         PreparedStatement statement = DbConnection.getCon().prepareStatement(sql);
@@ -67,14 +68,16 @@ public class Queries {
         statement.setBoolean(3, containsShocks);
         statement.setString(4, gears);
         statement.executeUpdate();
+        return DbConnection.getPrimaryKey(statement);
     }
-    private static void insertHandleBar(String productName, float unitCost, String brandName, int serialNumber, int stock, HandleBar.Style style) throws SQLException {
+    private static int insertHandleBar(String productName, float unitCost, String brandName, int serialNumber, int stock, HandleBar.Style style) throws SQLException {
         int productID = insertProduct(productName, unitCost, brandName, serialNumber, stock);
         String sql = "INSERT INTO `team002`.`Handlebar` (`productID`,`style`) VALUES (?, ?);";
         PreparedStatement statement = DbConnection.getCon().prepareStatement(sql);
         statement.setInt(1, productID);
         statement.setString(2, style.name());
         statement.executeUpdate();
+        return DbConnection.getPrimaryKey(statement);
     }
     private static int insertBike(String productName, float unitCost, String brandName, int serialNumber, int stock, int wheelsID, int handleBarID, int frameSetID) throws SQLException {
         int productID = insertProduct(productName, unitCost, brandName, serialNumber, stock);
@@ -95,12 +98,7 @@ public class Queries {
         statement.setString(3, cityName);
         statement.setString(4, postCode);
         statement.executeUpdate();
-        int addressID = 0;
-        ResultSet rs = statement.getGeneratedKeys();
-        if (rs.next()) {
-            addressID = rs.getInt(1);
-        }
-        return addressID;
+        return DbConnection.getPrimaryKey(statement);
     }
     private static int insertOrder(Date date, float orderCost, Order.Status orderStatus, String orderContents, int customerID, int productID) throws SQLException {
         String sql = "INSERT INTO `team002`.`Order` (`orderDate`, `orderCost`, `orderStatus`, `orderContents`, `customerID`, `productID`) VALUES (?, ?, ?, ?, ?, ?);";
@@ -112,34 +110,61 @@ public class Queries {
         statement.setInt(5, customerID);
         statement.setInt(5, productID);
         statement.executeUpdate();
-        ResultSet rs = statement.getGeneratedKeys();
-        int orderID = 0;
-        if (rs.next()) {
-            orderID = rs.getInt(1);
-        }
-        return orderID;
+        return DbConnection.getPrimaryKey(statement);
     }
-    private static void insertCustomer(String forename, String surname, int customerID) throws SQLException {
+    private static int insertCustomer(String forename, String surname, int customerID) throws SQLException {
         String sql = "INSERT INTO `team002`.`Customer` (`forename`, `surname`, `addressID`) VALUES (?, ?, ?, ?, ?, ?);";
         PreparedStatement statement = DbConnection.getCon().prepareStatement(sql);
         statement.setString(1, forename);
         statement.setString(2, surname);
         statement.setInt(3, customerID);
         statement.executeUpdate();
+        return DbConnection.getPrimaryKey(statement);
     }
-    private static void insertStaff(String username, String password) throws SQLException {
+    private static int insertStaff(String username, String password) throws SQLException {
 //        INSECURE, UPDATE THE PASSWORD HASHING BOIIII
         String sql = "INSERT INTO `team002`.`Staff` (`username`, `password`) VALUES (?, ?);";
         PreparedStatement statement = DbConnection.getCon().prepareStatement(sql);
         statement.setString(1, username);
         statement.setString(2, password);
         statement.executeUpdate();
+        return DbConnection.getPrimaryKey(statement);
     }
 
+//    Getting order
+    private static Order getOrder(int productID){
+        return null;
+    }
+    private static Order getOrder(String forename, String surname, int houseNumber, String address){
+        return null;
+    }
 
-    private static Wheel getWheelsWhere(int diameter, String type, String brakeSystem) {
-        SELECT FROM Wheels WHERE diameter = * AND type = *
+    private static Wheels getWheelsWhere(float diameter, Wheels.Style style, Wheels.BrakeType brakeSystem) throws SQLException {
+
+
+
+        String sql = "SELECT Product.productName, Product.unitCost, Product.serialNumber, Product.serialNumber, Product.Stock" +
+                    "Wheels.diameter, Wheels.style, Wheels.brakeSystem" +
+                    "FROM (Product" +
+                    " INNER JOIN Wheels ON Product.productID = Wheels.productID) " +
+                    "WHERE Wheels.diameter = ?, Wheels.style = ?, WHeels.brakeSystem = ?; ";
+
+        PreparedStatement statement = DbConnection.getCon().prepareStatement(sql);
+        if (diameter == -1)
+            statement.setString(1, "*");
+        else
+            statement.setInt(1, diameter);
+
+        statement.setString(2, Utils.isAllEnum(style));
+        statement.setString(3, Utils.isAllEnum(brakeSystem));
+
+        ResultSet rs = statement.executeQuery();
+
+        System.out.println(rs.toString());
+
+//        SELECT FROM Wheels WHERE diameter = * AND type = *
 //        GENIUS ENUM THING DO IT YES : )
+        return null;
     }
 
 //    Stock handler
@@ -168,6 +193,8 @@ public class Queries {
 //        add all the dummy data
 //        DbConnection.executeQuery(query);
     }
+
+//    Deletes all data in all tables of the database
     static void deleteDatabase() throws SQLException {
         Connection con = DbConnection.getCon();
         con.prepareStatement("DELETE FROM `team002`.`Address;").executeUpdate();
@@ -184,12 +211,16 @@ public class Queries {
 
     public static void main(String[] args) throws SQLException {
         System.out.println("Inserting...");
-//        insertWheel("CHECKHeels", 6.99F, "CHECKNike", 696969, 1, 6.21F, Wheels.Style.ROAD, Wheels.BrakeType.RIM);
+        insertWheel("CHECKHeels", 6.99F, "CHECKNike", 696969, 1, 6.21F, Wheels.Style.ROAD, Wheels.BrakeType.RIM);
 //        insertFrame("framyMcFrame", 6.99F, "CHECKNike", 696969, 1, 12, "PHAT", true);
 //        insertHandleBar("handyMcHandBar", 6.21F, "CHECKBAR", 345679, 200, HandleBar.Style.STRAIGHT);
 //        setStock(33, 400);
-        deleteDatabase();
+//        deleteDatabase();
+        getWheelsWhere(6.21F, Wheels.Style.ROAD, Wheels.BrakeType.DISKBRAKE);
         System.out.println("Successfull");
     }
-
 }
+
+
+
+

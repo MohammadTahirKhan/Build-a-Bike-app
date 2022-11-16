@@ -6,7 +6,8 @@ public class HandleBar extends Product{
     public enum Style {
         STRAIGHT,
         HIGH,
-        DROPPED
+        DROPPED,
+        ALL
     }
 
 //    Declaring variable(s)

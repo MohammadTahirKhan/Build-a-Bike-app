@@ -16,7 +16,8 @@ public class Wheels extends Product{
     }
     public enum BrakeType{
         DISKBRAKE,
-        RIM
+        RIM,
+        ALL
     }
 
 //    Declaring variables

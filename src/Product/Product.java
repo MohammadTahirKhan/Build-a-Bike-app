@@ -15,13 +15,15 @@ public abstract class Product {
     protected int serialNumber;
     protected float itemCost;
     protected String brandName;
+    protected int stock;
 
 //    Sets Product variables
-    protected void setProductDetails(String name, int serialNumber, float itemCost, String brandName){
+    protected void setProductDetails(String name, int serialNumber, float itemCost, String brandName, int stock){
         this.name = name;
         this.serialNumber = serialNumber;
         this.itemCost = itemCost;
         this.brandName = brandName;
+        this.stock = stock;
     }
 
 //    Getters
@@ -36,5 +38,8 @@ public abstract class Product {
     }
     public String getBrandName() {
         return brandName;
+    }
+    public int getStock() {
+        return stock;
     }
 }

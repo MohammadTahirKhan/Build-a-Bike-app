@@ -1,5 +1,7 @@
 package SQL;
 
+import Product.Wheels;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.sql.*;
@@ -37,6 +39,11 @@ public class Utils {
     }
 
 
-
+    static String isAllEnum(Enum enumValue){
+        if (enumValue.name().equals("ALL"))
+            return "*";
+        else
+            return enumValue.name();
+    }
 
 }

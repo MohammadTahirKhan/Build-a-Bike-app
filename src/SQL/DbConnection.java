@@ -38,6 +38,16 @@ public class DbConnection {
         DbConnection.con = con;
     }
 
+    public static int getPrimaryKey(Statement statement) throws SQLException {
+        int pKey = 0;
+        ResultSet rs = statement.getGeneratedKeys();
+        if (rs.next()) {
+            pKey = rs.getInt(1);
+        }
+        return pKey;
+    }
+
+
 
 
 

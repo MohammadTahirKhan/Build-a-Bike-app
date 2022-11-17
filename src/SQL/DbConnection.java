@@ -1,9 +1,6 @@
 package SQL;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class DbConnection {
 
@@ -30,8 +27,15 @@ public class DbConnection {
             con.close();
     }
 
+    public static boolean isConnected(){
+        if (con != null)
+            return true;
+        else
+            return false;
+    }
+
 //    getter(s) and setter(s)
-    private static Connection getCon() throws SQLException {
+    protected static Connection getCon() throws SQLException {
         if (con == null){
             new DbConnection();
         }
@@ -49,12 +53,25 @@ public class DbConnection {
     }
 
 
-    public static ResultSet executeQuery(String unsafeQuery) throws SQLException {
+//    public static ResultSet executeQuery(String unsafeQuery) throws SQLException {
+//
+//        String safeQuery = sanitiseInput(unsafeQuery);
+//        Connection connection = getCon();
+//
+//        return results;
+//    }
 
-        String safeQuery = sanitiseInput(unsafeQuery);
-        Connection connection = getCon();
-
-        return results;
+    public static int executeUpdate(String sql) throws SQLException {
+        Statement statement = con.createStatement();
+        return statement.executeUpdate(sql);
     }
+
+    public static ResultSet executeQuery(String sql) throws SQLException {
+        Statement statement = con.createStatement();
+        statement.executeQuery(sql);
+        return statement.executeQuery(sql);
+    }
+
+
 
 }

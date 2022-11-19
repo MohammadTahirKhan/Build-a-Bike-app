@@ -1,5 +1,8 @@
 package gui.Panels;
 
+import gui.Utils.BorderUtils;
+import gui.Utils.FontUtils;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -9,12 +12,19 @@ public class StaffLogin extends JPanel {
 
     public StaffLogin() {
         this.setLayout(new GridBagLayout());
+        this.setBorder(BorderUtils.createBorder("Staff Login"));
 
         JLabel usernameLabel = new JLabel("Username:");
         JTextField usernameField = new JTextField();
         JLabel passwordLabel = new JLabel("Password:");
         JPasswordField passwordField = new JPasswordField();
         JButton loginButton = new JButton("Login");
+
+        usernameLabel.setFont(FontUtils.DEFAULT_FONT);
+        usernameField.setFont(FontUtils.DEFAULT_FONT);
+        passwordLabel.setFont(FontUtils.DEFAULT_FONT);
+        passwordField.setFont(FontUtils.DEFAULT_FONT);
+        loginButton.setFont(FontUtils.DEFAULT_FONT);
 
         this.add(usernameLabel, createGbc(0, 0));
         this.add(usernameField, createGbc(1, 0));

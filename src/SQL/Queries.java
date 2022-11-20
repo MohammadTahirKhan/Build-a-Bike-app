@@ -1,6 +1,7 @@
 package SQL;
 
 import Order.Order;
+import Product.Frame;
 import Product.HandleBar;
 import Product.Wheels;
 
@@ -177,6 +178,72 @@ public class Queries {
 //        GENIUS ENUM THING DO IT YES : )
     }
 
+
+    private static HandleBar getHandleBar(HandleBar.Style style) throws SQLException {
+
+        String sql = "SELECT HandleBar.style, Product.productName, " +
+                "Product.serialNumber, Product.unitCost, Product.brandName, Product.Stock" +
+                " FROM (Product INNER JOIN HandleBar ON Product.productID = HandleBar.productID)" +
+                " WHERE HandleBar.style = ?;";
+        PreparedStatement statement = DbConnection.getCon().prepareStatement(sql);
+        statement.setString(1, Utils.isAllEnum(style));
+
+        ResultSet rs = statement.executeQuery();
+        System.out.println(statement);
+        if (rs.next()) {
+            HandleBar handleBar = new HandleBar(rs.getString(1),
+                    rs.getString(2),
+                    rs.getInt(3),
+                    rs.getInt(4),
+                    rs.getString(5),
+                    rs.getInt(6));
+
+            rs.close();
+            return handleBar;
+        } else {
+            rs.close();
+            return null;
+        }
+    }
+
+    private static Frame getFrame(int frameSize , String gears, boolean containsShocks) throws SQLException {
+
+        String sql = "SELECT Frame.frameSize, Frame.gears, Frame.contaisShocks, Product.productName, " +
+                "Product.serialNumber, Product.unitCost, Product.brandName, Product.Stock" +
+                " FROM (Product INNER JOIN FrameSet ON Product.productID = FrameSet.productID)" +
+                " WHERE Frame.frameSize = ? AND Frame.gears = ? AND Frame.contaisShocks = ?;";
+        PreparedStatement statement = DbConnection.getCon().prepareStatement(sql);
+
+        if (frameSize == -1)
+            statement.setString(1, "*");
+        else
+            statement.setInt(1, frameSize);
+        if (gears == "@")
+            statement.setString(2, "*");
+        else
+            statement.setString(2, gears);
+        statement.setBoolean(3, containsShocks);
+
+        ResultSet rs = statement.executeQuery();
+        System.out.println(statement);
+        if (rs.next()) {
+            Frame frame = new Frame(rs.getInt(1),
+                    rs.getString(2),
+                    rs.getBoolean(3),
+                    rs.getString(4),
+                    rs.getInt(5),
+                    rs.getInt(6),
+                    rs.getString(7),
+                    rs.getInt(8));
+            rs.close();
+            return frame;
+        } else {
+            rs.close();
+            return null;
+        }
+    }
+
+
 //    Stock handler
     private static void decrementStock(int productID) throws SQLException {
 //        Have a decerement exception
@@ -199,21 +266,29 @@ public class Queries {
         deleteDatabase();
         populateDatabase();
     }
-    static void populateDatabase(){
+    static void populateDatabase() throws SQLException {
 //        add all the dummy data
+        insertWheel("xyz", 5.99, "brand123", 678, 1, 7, Wheels.Style.ROAD, Wheels.BrakeType.RIM);
+        insertFrame("pqr", 9, "brand123", 789, 1, 10, "ABC", true);
+        insertHandleBar("klm", 3, "brand123", 345, 2, HandleBar.Style.STRAIGHT);
+        insertBike("pqr", 30, "brand123",567, 1, 278, 675,395);
+        insertAddress(45, "St-georges", "Sheffield", "S37HB");
+//        insertOrder(12-12-2022,41, Order.Status.CONFIRMED, "abc, pqr, xyz", 567, 90);
+        insertCustomer("abccc", "bcddd",267);
+        insertStaff("aksb", "qbcnksx");
 //        DbConnection.executeQuery(query);
     }
     static void deleteDatabase() throws SQLException {
         Connection con = DbConnection.getCon();
-        con.prepareStatement("DELETE FROM `team002`.`Address;").executeUpdate();
-        con.prepareStatement("DELETE FROM `team002`.`Bike;").executeUpdate();
-        con.prepareStatement("DELETE FROM `team002`.`Customer;").executeUpdate();
-        con.prepareStatement("DELETE FROM `team002`.`FrameSet;").executeUpdate();
-        con.prepareStatement("DELETE FROM `team002`.`Handlebar;").executeUpdate();
-        con.prepareStatement("DELETE FROM `team002`.`Order;").executeUpdate();
-        con.prepareStatement("DELETE FROM `team002`.`Product;").executeUpdate();
-        con.prepareStatement("DELETE FROM `team002`.`Staff;").executeUpdate();
-        con.prepareStatement("DELETE FROM `team002`.`Wheels;").executeUpdate();
+        con.prepareStatement("DELETE FROM `team002`.`Address`;").executeUpdate();
+        con.prepareStatement("DELETE FROM `team002`.`Bike`;").executeUpdate();
+        con.prepareStatement("DELETE FROM `team002`.`Customer`;").executeUpdate();
+        con.prepareStatement("DELETE FROM `team002`.`FrameSet`;").executeUpdate();
+        con.prepareStatement("DELETE FROM `team002`.`Handlebar`;").executeUpdate();
+        con.prepareStatement("DELETE FROM `team002`.`Order`;").executeUpdate();
+        con.prepareStatement("DELETE FROM `team002`.`Product`;").executeUpdate();
+        con.prepareStatement("DELETE FROM `team002`.`Staff`;").executeUpdate();
+        con.prepareStatement("DELETE FROM `team002`.`Wheels`;").executeUpdate();
     }
 
 

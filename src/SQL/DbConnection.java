@@ -11,14 +11,11 @@ public class DbConnection {
     public DbConnection() throws SQLException {
         Connection con = null; // a Connection object
         try {
-            String[] creds = Utils.getCredentials();
-            con = DriverManager.getConnection("jdbc:mysql://stusql.dcs.shef.ac.uk/" + creds[0], creds[0], creds[1]);
+            getCon();
         }
         catch (Exception ex) {
             ex.printStackTrace();
         }
-
-        setCon(con);
     }
 
     //    Closes database connection
@@ -30,12 +27,10 @@ public class DbConnection {
 //    getter(s) and setter(s)
     public static Connection getCon() throws SQLException {
         if (con == null){
-            new DbConnection();
+            String[] creds = Utils.getCredentials();
+            DbConnection.con = DriverManager.getConnection("jdbc:mysql://stusql.dcs.shef.ac.uk/" + creds[0], creds[0], creds[1]);
         }
         return con;
-    }
-    private void setCon(Connection con) {
-        DbConnection.con = con;
     }
 
     public static int getPrimaryKey(Statement statement) throws SQLException {

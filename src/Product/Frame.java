@@ -4,13 +4,15 @@ public class Frame extends Product{
 
 //    Declaring variable(s)
     protected int frameSize;
+    protected String gears;
     protected boolean containsShocks;
 
 //    Constructor
-    public Frame(int frameSize, boolean containsShocks, String name, int serialNumber, float itemCost, String brandName){
+    public Frame(int frameSize, String gears, boolean containsShocks, String name, int serialNumber, double itemCost, String brandName, int stock){
         this.frameSize = frameSize;
+        this.gears = gears;
         this.containsShocks = containsShocks;
-        this.setProductDetails(name, serialNumber, itemCost, brandName);
+        this.setProductDetails(name, serialNumber, itemCost, brandName, stock);
     }
 
 //    Getters

@@ -1,15 +1,19 @@
 package Order;
 
 public class Order {
+
+=======
     public int orderNumber;
 
     public OrderDetails itemDetail;
     public double totalCost;
+
     public enum Status {
         PENDING,
         CONFIRMED,
         FULFILLED
     }
+    
     public Status status;
 
     public Order (int orderNumber ,OrderDetails itemDetail, double totalCost, Status status){
@@ -50,4 +54,7 @@ public class Order {
     public void setItemDetail(OrderDetails itemDetail) {
         this.itemDetail = itemDetail;
     }
+
 }
+
+

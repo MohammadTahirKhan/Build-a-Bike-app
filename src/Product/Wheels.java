@@ -11,28 +11,30 @@ public class Wheels extends Product{
     public enum Style {
         ROAD,
         MOUNTAIN,
-        HYBRID
+        HYBRID,
+        ALL
     }
     public enum BrakeType{
         DISKBRAKE,
-        RIM
+        RIM,
+        ALL
     }
 
 //    Declaring variables
-    protected int diameter;
+    protected double diameter;
     protected Style style;
     protected BrakeType brakeType;
 
 //    Constructor
-    public Wheels(int diameter, String style, String brakeType , String name, int serialNumber, float itemCost, String brandName) {
+    public Wheels(double diameter, String style, String brakeType , String name, int serialNumber, double itemCost, String brandName, int stock) {
         this.diameter = diameter;
         setStyle(style);
         setBrakeType(brakeType);
-        this.setProductDetails(name, serialNumber, itemCost, brandName);
+        this.setProductDetails(name, serialNumber, itemCost, brandName, stock);
     }
 
 //    Getters
-    public int getDiameter() {
+    public double getDiameter() {
         return diameter;
     }
     public Style getStyle() {
@@ -58,9 +60,9 @@ public class Wheels extends Product{
     }
 
 //    SQL Get wheels
-    public static Wheels[] pullWheels(){
-        return Queries.getWheels();
-    }
+//    public static Wheels[] pullWheels(){
+//        return Queries.getWheels();
+//    }
 
 
 

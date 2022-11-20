@@ -1,9 +1,6 @@
 package SQL;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class DbConnection {
 
@@ -31,7 +28,7 @@ public class DbConnection {
     }
 
 //    getter(s) and setter(s)
-    private static Connection getCon() throws SQLException {
+    public static Connection getCon() throws SQLException {
         if (con == null){
             new DbConnection();
         }
@@ -41,20 +38,24 @@ public class DbConnection {
         DbConnection.con = con;
     }
 
+    public static int getPrimaryKey(Statement statement) throws SQLException {
+        int pKey = 0;
+        ResultSet rs = statement.getGeneratedKeys();
+        if (rs.next()) {
+            pKey = rs.getInt(1);
+        }
+        return pKey;
+    }
+
+
+
+
+
+//    Do transaction at the end
+//    public static ResultSet executeQuery(PreparedStatement query) throws SQLException {
 //
-    private static String sanitiseInput(String unsafeQuery){
-//        GO FOR PREPARED STATEMENTSSSS!!!!!!!!!
-        String safeQuery = unsafeQuery;
-        return safeQuery;
-    }
-
-
-    public static ResultSet executeQuery(String unsafeQuery) throws SQLException {
-
-        String safeQuery = sanitiseInput(unsafeQuery);
-        Connection connection = getCon();
-
-        return results;
-    }
-
+//        Connection connection = getCon();
+//
+//        return results;
+//    }
 }

@@ -10,12 +10,12 @@ public class Bike extends Product{
 
 //    Constructor
 //    itemCost is calculated automatically
-    public Bike(Wheels wheels, Frame frame, HandleBar handleBar, String name, int serialNumber, String brandName) {
+    public Bike(Wheels wheels, Frame frame, HandleBar handleBar, String name, int serialNumber, String brandName, int stock) {
         this.wheels = wheels;
         this.frame = frame;
         this.handleBar = handleBar;
-        float bikePrice = wheels.getItemCost() + frame.getItemCost() + handleBar.getItemCost() + ASSEMBLYCOST;
-        this.setProductDetails(name, serialNumber, bikePrice, brandName);
+        double bikePrice = wheels.getItemCost() + frame.getItemCost() + handleBar.getItemCost() + ASSEMBLYCOST;
+        this.setProductDetails(name, serialNumber, bikePrice, brandName, stock);
     }
 
 //    Getters

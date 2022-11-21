@@ -281,31 +281,56 @@ public class Queries {
     static void populateDatabase() throws SQLException {
 //        First insert all the components of a bike
         int wheelID = insertWheel("xyz", 5.99, "brand123", 678, 1, 7, Wheels.Style.ROAD, Wheels.BrakeType.RIM);
-        int frameID = insertFrame("pqr", 9, "brand123", 789, 1, 10, "ABC", true);
-        int handleBarID = insertHandleBar("klm", 3, "brand123", 345, 2, HandleBar.Style.STRAIGHT);
+        int wheelID1 = insertWheel("fgh", 6.99, "brand1233", 978, 1, 8, Wheels.Style.MOUNTAIN, Wheels.BrakeType.DISKBRAKE);
+        int wheelID2 = insertWheel("bnm", 9.99, "brand1223", 688, 1, 6, Wheels.Style.HYBRID, Wheels.BrakeType.ALL);
+        int wheelID3 = insertWheel("rbm", 10.0, "brand1234", 888, 1, 8, Wheels.Style.HYBRID, Wheels.BrakeType.RIM);
 
+        int frameID = insertFrame("pqr", 9, "brand123", 789, 1, 10, "ABC", true);
+        int frameID1 = insertFrame("qsr", 10, "brand1234", 989, 1, 11, "ADC", false);
+        int frameID2 = insertFrame("rst", 8, "brand1233", 739, 1, 12, "AKD", true);
+        int frameID3 = insertFrame("ppt", 8, "brand1223", 659, 1, 12, "AVC", false);
+
+        int handleBarID = insertHandleBar("klm", 3, "brand123", 345, 2, HandleBar.Style.STRAIGHT);
+        int handleBarID1 = insertHandleBar("tgl", 4, "brand1523", 395, 1, HandleBar.Style.ALL);
+        int handleBarID2 = insertHandleBar("ssm", 2.99, "brand1243", 3445, 1, HandleBar.Style.DROPPED);
+        int handleBarID3 = insertHandleBar("prm", 3, "brand1234", 3455, 2, HandleBar.Style.HIGH);
 //        bike requires the ID's from each component
         int bikeID = insertBike("pqraa", 30, "brand123",567, 1, wheelID,handleBarID,frameID);
+        int bikeID1 = insertBike("aaa", 31, "brand123",5679, 1, wheelID1,handleBarID1,frameID1);
+        int bikeID2 = insertBike("pqv", 40, "brand123",5657, 1, wheelID2,handleBarID2,frameID2);
+        int bikeID3 = insertBike("rav", 35, "brand123",5667, 1, wheelID3,handleBarID3,frameID3);
 
 //        Order requires customer ID, Customer requires the addressID
         int addressID = insertAddress(45, "St-georges", "Sheffield", "S37HB");
         int customerID = insertCustomer("abccc", "bcddd",addressID);
-        insertOrder(Date.valueOf(LocalDate.now()), 69.99, Order.Status.PENDING, "Contains 1 Neon Pink Bike", customerID, bikeID);
+        int addressID1 = insertAddress(777, "Hawkins-St", "Sheffield", "KL4MN");
+        int customerID1 = insertCustomer("qmn", "dfgh",addressID1);
+        int addressID2 = insertAddress(901, "West-St", "Sheffield", "A3BFG");
+        int customerID2 = insertCustomer("brp", "okd",addressID2);
+        int customerID3 = insertCustomer("klmn", "pqrs",addressID2);
 
+        insertOrder(Date.valueOf(LocalDate.now()), 69.99, Order.Status.PENDING, "Contains 1 Neon Pink Bike", customerID, bikeID);
+        insertOrder(Date.valueOf(LocalDate.now()), 59.99, Order.Status.CONFIRMED, "Contains 1 Azure Blue Bike", customerID1, bikeID1);
+        insertOrder(Date.valueOf(LocalDate.now()), 79.99, Order.Status.PENDING, "Contains 1 Vermilion Bike", customerID2, bikeID2);
+        insertOrder(Date.valueOf(LocalDate.now()), 66.99, Order.Status.FULFILLED, "Contains 1 golden Bike", customerID3, bikeID3);
 //        Inserts staff
+
         insertStaff("aksb", "qbcnksx");
+        insertStaff("roronoa", "zoro");
+        insertStaff("bob", "marley");
+        insertStaff("vinsmoke", "sanji");
     }
     static void deleteDatabase() throws SQLException {
         Connection con = DbConnection.getCon();
-        con.prepareStatement("DELETE FROM `team002`.`Order;").executeUpdate();
-        con.prepareStatement("DELETE FROM `team002`.`Customer;").executeUpdate();
-        con.prepareStatement("DELETE FROM `team002`.`Bike;").executeUpdate();
-        con.prepareStatement("DELETE FROM `team002`.`Address;").executeUpdate();
-        con.prepareStatement("DELETE FROM `team002`.`Wheels;").executeUpdate();
-        con.prepareStatement("DELETE FROM `team002`.`FrameSet;").executeUpdate();
-        con.prepareStatement("DELETE FROM `team002`.`Handlebar;").executeUpdate();
-        con.prepareStatement("DELETE FROM `team002`.`Product;").executeUpdate();
-        con.prepareStatement("DELETE FROM `team002`.`Staff;").executeUpdate();
+        con.prepareStatement("DELETE FROM `team002`.`Order`;").executeUpdate();
+        con.prepareStatement("DELETE FROM `team002`.`Customer`;").executeUpdate();
+        con.prepareStatement("DELETE FROM `team002`.`Bike`;").executeUpdate();
+        con.prepareStatement("DELETE FROM `team002`.`Address`;").executeUpdate();
+        con.prepareStatement("DELETE FROM `team002`.`Wheels`;").executeUpdate();
+        con.prepareStatement("DELETE FROM `team002`.`FrameSet`;").executeUpdate();
+        con.prepareStatement("DELETE FROM `team002`.`Handlebar`;").executeUpdate();
+        con.prepareStatement("DELETE FROM `team002`.`Product`;").executeUpdate();
+        con.prepareStatement("DELETE FROM `team002`.`Staff`;").executeUpdate();
 
     }
 

@@ -1,5 +1,10 @@
 package Order;
 
+import Actors.Customer;
+import Product.Bike;
+
+import java.util.Date;
+
 public class Order {
 
 //    Enum(s)
@@ -11,9 +16,13 @@ public class Order {
 
 //    Variables
     private int orderNumber;
-    private OrderDetails itemDetail;
+    private Date orderDate;
     private double totalCost;
-    private Status status;
+    private Status orderStatus;
+    private OrderDetails orderDetails;
+    private Customer orderCustomer;
+    private Bike orderBike;
+
 
 
     /**
@@ -26,8 +35,8 @@ public class Order {
     public Order (int orderNumber ,OrderDetails itemDetail, double totalCost, Status status){
         this.orderNumber=orderNumber;
         this.totalCost=totalCost;
-        this.status=status;
-        this.itemDetail = itemDetail;
+        this.orderStatus =status;
+        this.orderDetails = itemDetail;
     }
 
 //    Getters
@@ -37,11 +46,11 @@ public class Order {
     public double getTotalCost() {
         return totalCost;
     }
-    public Status getStatus() {
-        return status;
+    public Status getOrderStatus() {
+        return orderStatus;
     }
-    public OrderDetails getItemDetail() {
-        return itemDetail;
+    public OrderDetails getOrderDetails() {
+        return orderDetails;
     }
 
 //    Setters
@@ -51,14 +60,10 @@ public class Order {
     public void setTotalCost(double totalCost) {
         this.totalCost = totalCost;
     }
-    public void setStatus(Status status) {
-        this.status = status;
+    public void setOrderStatus(Status orderStatus) {
+        this.orderStatus = orderStatus;
     }
-    public void setItemDetail(OrderDetails itemDetail) {
-        this.itemDetail = itemDetail;
+    public void setOrderDetails(OrderDetails orderDetails) {
+        this.orderDetails = orderDetails;
     }
-
-
-
-
 }

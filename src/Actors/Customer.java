@@ -59,8 +59,4 @@ public class Customer extends Shopper {
     public void setPostCode(String postCode) {
         this.postCode = postCode;
     }
-
-
-
-
 }

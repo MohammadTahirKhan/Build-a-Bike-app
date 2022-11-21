@@ -273,6 +273,31 @@ public class Queries {
         statement.executeUpdate();
     }
 
+//    Update customer
+    public static void updateCustomer(Order order, String forename, String surname){
+        return;
+    }
+
+//    Set users
+    public static void setUsers(){
+        return;
+    }
+
+//    Hash password
+    public static String hashPassword(String password){
+        return password;
+    }
+
+//    delete Order
+    public static void deleteOrder(int orderID) throws SQLException {
+        Connection con = DbConnection.getCon();
+        String sql = "DELETE FROM `team002`.`Order` WHERE Order.orderID = ? AND Order.orderStatus = ?";
+        PreparedStatement statement = con.prepareStatement(sql);
+        statement.setInt(1, orderID);
+        statement.setString(2, Order.Status.PENDING.name());
+        statement.executeUpdate();
+    }
+
 //    Initialising database
     static void setDatabase() throws SQLException {
         deleteDatabase();
@@ -333,7 +358,6 @@ public class Queries {
         con.prepareStatement("DELETE FROM `team002`.`Staff`;").executeUpdate();
 
     }
-
 
     public static void main(String[] args) throws SQLException {
         System.out.println("Setting database...");

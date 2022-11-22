@@ -1,6 +1,7 @@
 package SQL;
 
 import Actors.Customer;
+import Actors.Staff;
 import Order.Order;
 import Product.Bike;
 import Product.Frame;
@@ -11,6 +12,8 @@ import com.sun.org.apache.xpath.internal.operations.Or;
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Objects;
 import java.util.function.DoubleBinaryOperator;
 
 public class Queries {
@@ -105,12 +108,13 @@ public class Queries {
         statement.executeUpdate();
         return DbConnection.getPrimaryKey(statement);
     }
-    private static int insertStaff(String username, String password) throws SQLException {
+    private static int insertStaff(String username, byte[][] hashSalt) throws SQLException {
 //        INSECURE, UPDATE THE PASSWORD HASHING BOIIII
-        String sql = "INSERT INTO `team002`.`Staff` (`username`, `password`) VALUES (?, ?);";
+        String sql = "INSERT INTO `team002`.`Staff` (`username`, `hash`, `salt`) VALUES (?, ?, ?);";
         PreparedStatement statement = DbConnection.getCon().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
         statement.setString(1, username);
-        statement.setString(2, password);
+        statement.setBytes(2, hashSalt[0]);
+        statement.setBytes(3, hashSalt[1]);
         statement.executeUpdate();
         return DbConnection.getPrimaryKey(statement);
     }
@@ -300,6 +304,19 @@ public class Queries {
         statement.executeUpdate();
     }
 
+    private static Staff getStaff(String staffUsername) throws SQLException {
+        String sql = "SELECT Staff.hash, Staff.salt FROM `team002`.`Staff` WHERE Staff.username = ?";
+        PreparedStatement statement = DbConnection.getCon().prepareStatement(sql);
+        statement.setString(1, staffUsername);
+        ResultSet rs = statement.executeQuery();
+
+        rs.next();
+        byte[] hash = rs.getBytes(1);
+        byte[] salt = rs.getBytes(2);
+        Staff staff = new Staff(staffUsername, hash, salt);
+        return staff;
+    }
+
 //    !!!!!!!!!!!!!!!!!!GET ORDER STUFF!!!!!!!!!!!!!!!!!!!
 //    private static Order getOrder(int orderID) throws SQLException {
 //
@@ -336,7 +353,7 @@ public class Queries {
             throws SQLException {
 
 
-//        Get connection, and set up[ transaction
+//        Get connection, and set up transaction
             Connection con = DbConnection.getCon();
         try {
             con.setAutoCommit(false);
@@ -418,12 +435,14 @@ public class Queries {
         insertOrder(Date.valueOf(LocalDate.now()), 59.99, Order.Status.CONFIRMED, "Contains 1 Azure Blue Bike", customerID1, bikeID1);
         insertOrder(Date.valueOf(LocalDate.now()), 79.99, Order.Status.PENDING, "Contains 1 Vermilion Bike", customerID2, bikeID2);
         insertOrder(Date.valueOf(LocalDate.now()), 66.99, Order.Status.FULFILLED, "Contains 1 golden Bike", customerID3, bikeID3);
-//        Inserts staff
 
-        insertStaff("aksb", "qbcnksx");
-        insertStaff("roronoa", "zoro");
-        insertStaff("bob", "marley");
-        insertStaff("vinsmoke", "sanji");
+        //        Inserts staff
+        byte[][] salts = new byte[4][4];
+        Arrays.fill(salts, Password.getSalt());
+        insertStaff("aksb", Objects.requireNonNull(Password.encryptPassword("Hello", salts[0])));
+        insertStaff("roronoa", Objects.requireNonNull(Password.encryptPassword("Hello", salts[1])));
+        insertStaff("bob", Objects.requireNonNull(Password.encryptPassword("Hello", salts[2])));
+        insertStaff("vinsmoke", Objects.requireNonNull(Password.encryptPassword("Hello", salts[3])));
     }
     private static void deleteDatabase() throws SQLException {
         Connection con = DbConnection.getCon();
@@ -445,6 +464,9 @@ public class Queries {
 //        ArrayList<Wheels> wheels = getWheelsWhere(-1, Wheels.Style.ROAD, Wheels.BrakeType.RIM);
 //        System.out.println(wheels);
         updateCustomer(93, 72, "Alex", "Chapman", 12, "Crookes", "Sheffield", "S105MJ");
+        Staff staff = getStaff("aksb");
+        Boolean isCorrect = Password.checkPassword(staff.getHash(), "Hello", staff.getSalt());
+        System.out.println(isCorrect);
         System.out.println("Successfull");
     }
 }

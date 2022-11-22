@@ -17,7 +17,14 @@ public abstract class Product {
     protected String brandName;
     protected int stock;
 
-//    Sets Product variables
+    /**
+     * Constructor for a Product
+     * @param name Name of the Product
+     * @param serialNumber Serial number of the Product
+     * @param itemCost Cost of the Product
+     * @param brandName Brand name
+     * @param stock Stock available
+     */
     protected void setProductDetails(String name, int serialNumber, double itemCost, String brandName, int stock){
         this.name = name;
         this.serialNumber = serialNumber;

@@ -282,7 +282,7 @@ public class Queries {
 //        First insert all the components of a bike
         int wheelID = insertWheel("xyz", 5.99, "brand123", 678, 1, 7, Wheels.Style.ROAD, Wheels.BrakeType.RIM);
         int wheelID1 = insertWheel("fgh", 6.99, "brand1233", 978, 1, 8, Wheels.Style.MOUNTAIN, Wheels.BrakeType.DISKBRAKE);
-        int wheelID2 = insertWheel("bnm", 9.99, "brand1223", 688, 1, 6, Wheels.Style.HYBRID, Wheels.BrakeType.ALL);
+        int wheelID2 = insertWheel("bnm", 9.99, "brand1223", 688, 1, 6, Wheels.Style.HYBRID, Wheels.BrakeType.DISKBRAKE);
         int wheelID3 = insertWheel("rbm", 10.0, "brand1234", 888, 1, 8, Wheels.Style.HYBRID, Wheels.BrakeType.RIM);
 
         int frameID = insertFrame("pqr", 9, "brand123", 789, 1, 10, "ABC", true);
@@ -291,7 +291,7 @@ public class Queries {
         int frameID3 = insertFrame("ppt", 8, "brand1223", 659, 1, 12, "AVC", false);
 
         int handleBarID = insertHandleBar("klm", 3, "brand123", 345, 2, HandleBar.Style.STRAIGHT);
-        int handleBarID1 = insertHandleBar("tgl", 4, "brand1523", 395, 1, HandleBar.Style.ALL);
+        int handleBarID1 = insertHandleBar("tgl", 4, "brand1523", 395, 1, HandleBar.Style.STRAIGHT);
         int handleBarID2 = insertHandleBar("ssm", 2.99, "brand1243", 3445, 1, HandleBar.Style.DROPPED);
         int handleBarID3 = insertHandleBar("prm", 3, "brand1234", 3455, 2, HandleBar.Style.HIGH);
 //        bike requires the ID's from each component
@@ -313,8 +313,8 @@ public class Queries {
         insertOrder(Date.valueOf(LocalDate.now()), 59.99, Order.Status.CONFIRMED, "Contains 1 Azure Blue Bike", customerID1, bikeID1);
         insertOrder(Date.valueOf(LocalDate.now()), 79.99, Order.Status.PENDING, "Contains 1 Vermilion Bike", customerID2, bikeID2);
         insertOrder(Date.valueOf(LocalDate.now()), 66.99, Order.Status.FULFILLED, "Contains 1 golden Bike", customerID3, bikeID3);
-//        Inserts staff
 
+//        Inserts staff
         insertStaff("aksb", "qbcnksx");
         insertStaff("roronoa", "zoro");
         insertStaff("bob", "marley");
@@ -338,8 +338,8 @@ public class Queries {
     public static void main(String[] args) throws SQLException {
         System.out.println("Setting database...");
         setDatabase();
-        ArrayList<Wheels> wheels = getWheelsWhere(-1, Wheels.Style.ROAD, Wheels.BrakeType.RIM);
-        System.out.println(wheels);
+//        ArrayList<Wheels> wheels = getWheelsWhere(-1, Wheels.Style.ROAD, Wheels.BrakeType.RIM);
+//        System.out.println(wheels);
         System.out.println("Successfull");
     }
 }

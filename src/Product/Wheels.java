@@ -25,7 +25,17 @@ public class Wheels extends Product{
     protected Style style;
     protected BrakeType brakeType;
 
-//    Constructor
+    /**
+     * Constructor for a Wheels
+     * @param diameter Diameter of the Wheels
+     * @param style Style of the Wheels
+     * @param brakeType Type of brakes in Wheels
+     * @param name Name of the Wheels
+     * @param serialNumber Serial number of the Wheels
+     * @param itemCost Cost of the Wheels
+     * @param brandName Brand name
+     * @param stock Stock available
+     */
     public Wheels(double diameter, String style, String brakeType , String name, int serialNumber, double itemCost, String brandName, int stock) {
         this.diameter = diameter;
         setStyle(style);

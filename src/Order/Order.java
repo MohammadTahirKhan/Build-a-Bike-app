@@ -1,5 +1,7 @@
 package Order;
 
+import java.util.Date;
+
 public class Order {
 
 //    Enum(s)
@@ -10,52 +12,64 @@ public class Order {
     }
 
 //    Variables
-    private int orderNumber;
-    private OrderDetails itemDetail;
-    private double totalCost;
-    private Status status;
+    private int orderId;
+    private Date orderDate;
+    private OrderDetails orderContents;
+    private double orderCost;
+    private Status orderStatus;
 
 
     /**
      * Constructor for an Order
-     * @param orderNumber Orders number
-     * @param itemDetail Details of item ordered
-     * @param totalCost Total cost of the order
-     * @param status Status of the order
+     * @param orderDate Date of the order
+     * @param orderId Orders number
+     * @param orderContents Details of item ordered
+     * @param orderCost Total cost of the order
+     * @param orderStatus Status of the order
      */
-    public Order (int orderNumber ,OrderDetails itemDetail, double totalCost, Status status){
-        this.orderNumber=orderNumber;
-        this.totalCost=totalCost;
-        this.status=status;
-        this.itemDetail = itemDetail;
+    public Order (Date orderDate, int orderId ,OrderDetails orderContents, double orderCost, Status orderStatus){
+        this.orderDate = orderDate;
+        this.orderId =orderId;
+        this.orderCost =orderCost;
+        this.orderStatus =orderStatus;
+        this.orderContents = orderContents;
     }
 
 //    Getters
-    public int getOrderNumber() {
-        return orderNumber;
+    public int getOrderId() {
+        return orderId;
     }
-    public double getTotalCost() {
-        return totalCost;
+
+    public Date getOrderDate() {
+        return orderDate;
     }
-    public Status getStatus() {
-        return status;
+
+    public double getOrderCost() {
+        return orderCost;
     }
-    public OrderDetails getItemDetail() {
-        return itemDetail;
+    public Status getOrderStatus() {
+        return orderStatus;
+    }
+    public OrderDetails getOrderContents() {
+        return orderContents;
     }
 
 //    Setters
-    public void setOrderNumber(int orderNumber) {
-    this.orderNumber = orderNumber;
-}
-    public void setTotalCost(double totalCost) {
-        this.totalCost = totalCost;
+    public void setOrderId(int orderId) {
+        this.orderId = orderId;
     }
-    public void setStatus(Status status) {
-        this.status = status;
+
+    public void setOrderDate(Date orderDate) {
+        this.orderDate = orderDate;
     }
-    public void setItemDetail(OrderDetails itemDetail) {
-        this.itemDetail = itemDetail;
+    public void setOrderCost(double orderCost) {
+        this.orderCost = orderCost;
+    }
+    public void setOrderStatus(Status orderStatus) {
+        this.orderStatus = orderStatus;
+    }
+    public void setOrderContents(OrderDetails orderContents) {
+        this.orderContents = orderContents;
     }
 
 

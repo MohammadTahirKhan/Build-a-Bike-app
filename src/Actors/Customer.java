@@ -1,66 +1,57 @@
 package Actors;
 
 public class Customer extends Shopper {
+//    variables
+    public int customerId;
     public String forename;
     public String surname;
-    public String houseNo;
-    public String roadName;
-    public String cityName;
-    public String postCode;
+    public Address address;
 
-    public Customer (String forename, String surname, String houseNo, String roadName, String cityName, String postCode){
+    /**
+     * Constructor for a Customer
+     * @param customerId Customer ID
+     * @param forename First name
+     * @param surname Last name
+     * @param address Full address of the customer
+     */
+    public Customer (int customerId, String forename, String surname, Address address){
+        this.customerId = customerId;
         this.forename = forename;
         this.surname = surname;
-        this.houseNo = houseNo;
-        this.roadName = roadName;
-        this.cityName = cityName;
-        this.postCode = postCode;
+        this.address = address;
     }
 
     //Getters and Setters
+
+    public int getCustomerId() {
+        return customerId;
+    }
+
     public String getForename() {
         return forename;
-    }
-    public void setForename(String forename) {
-        this.forename = forename;
     }
 
     public String getSurname() {
         return surname;
     }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setCustomerId(int customerId) {
+        this.customerId = customerId;
+    }
+
+    public void setForename(String forename) {
+        this.forename = forename;
+    }
+
     public void setSurname(String surname) {
         this.surname = surname;
     }
 
-    public String getHouseNo() {
-        return houseNo;
+    public void setAddress(Address address) {
+        this.address = address;
     }
-    public void setHouseNo(String houseNo) {
-        this.houseNo = houseNo;
-    }
-
-    public String getRoadName() {
-        return roadName;
-    }
-    public void setAddress(String roadName) {
-        this.roadName = roadName;
-    }
-
-    public String getCityName() {
-        return cityName;
-    }
-    public void setCityName(String cityName) {
-        this.cityName = cityName;
-    }
-
-    public String getPostCode() {
-        return postCode;
-    }
-    public void setPostCode(String postCode) {
-        this.postCode = postCode;
-    }
-
-
-
-
 }

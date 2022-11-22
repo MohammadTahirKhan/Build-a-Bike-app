@@ -1,6 +1,7 @@
 package Actors;
 
 public class Customer extends Shopper {
+    public int customerID;
     public String forename;
     public String surname;
     public String houseNo;
@@ -8,7 +9,8 @@ public class Customer extends Shopper {
     public String cityName;
     public String postCode;
 
-    public Customer (String forename, String surname, String houseNo, String roadName, String cityName, String postCode){
+    public Customer (int customerID, String forename, String surname, String houseNo, String roadName, String cityName, String postCode){
+        this.customerID = customerID;
         this.forename = forename;
         this.surname = surname;
         this.houseNo = houseNo;

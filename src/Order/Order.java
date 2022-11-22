@@ -24,20 +24,17 @@ public class Order {
     private Bike orderBike;
 
 
-
-    /**
-     * Constructor for an Order
-     * @param orderNumber Orders number
-     * @param itemDetail Details of item ordered
-     * @param totalCost Total cost of the order
-     * @param status Status of the order
-     */
-    public Order (int orderNumber ,OrderDetails itemDetail, double totalCost, Status status){
-        this.orderNumber=orderNumber;
-        this.totalCost=totalCost;
-        this.orderStatus =status;
-        this.orderDetails = itemDetail;
+    public Order(int orderNumber, Date orderDate, double totalCost, Status orderStatus, OrderDetails orderDetails,
+                 Customer orderCustomer, Bike orderBike) {
+        this.orderNumber = orderNumber;
+        this.orderDate = orderDate;
+        this.totalCost = totalCost;
+        this.orderStatus = orderStatus;
+        this.orderDetails = orderDetails;
+        this.orderCustomer = orderCustomer;
+        this.orderBike = orderBike;
     }
+
 
 //    Getters
     public int getOrderNumber() {

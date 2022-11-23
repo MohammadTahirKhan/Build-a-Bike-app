@@ -25,12 +25,17 @@ public class DbConnection {
     }
 
 //    getter(s) and setter(s)
-    public static Connection getCon() throws SQLException {
-        if (con == null){
-            String[] creds = Utils.getCredentials();
-            DbConnection.con = DriverManager.getConnection("jdbc:mysql://stusql.dcs.shef.ac.uk/" + creds[0], creds[0], creds[1]);
+    public static Connection getCon(){
+        try{
+            if (con == null){
+                String[] creds = Utils.getCredentials();
+                DbConnection.con = DriverManager.getConnection("jdbc:mysql://stusql.dcs.shef.ac.uk/" + creds[0], creds[0], creds[1]);
+            }
+            return con;
+        } catch (Exception e){
+            e.printStackTrace();
         }
-        return con;
+        return null;
     }
 
     public static int getPrimaryKey(Statement statement) throws SQLException {

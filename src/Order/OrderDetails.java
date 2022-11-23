@@ -9,7 +9,7 @@ import java.util.Map;
 
 public class OrderDetails {
 //    Map to store ordered products and their quantity
-    Map<Product, Integer> itemMap = new HashMap<>();
+    private Map<Product, Integer> itemMap = new HashMap<>();
 
 //    Constructor
     public OrderDetails(Map<Product, Integer> itemMap){

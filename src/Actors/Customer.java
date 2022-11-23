@@ -21,37 +21,30 @@ public class Customer extends Shopper {
         this.address = address;
     }
 
-    //Getters and Setters
-
+//    Getters
     public int getCustomerId() {
         return customerId;
     }
-
     public String getForename() {
         return forename;
     }
-
     public String getSurname() {
         return surname;
     }
-
     public Address getAddress() {
         return address;
     }
 
+//    Setters
     public void setCustomerId(int customerId) {
         this.customerId = customerId;
     }
-
     public void setForename(String forename) {
         this.forename = forename;
     }
-
     public void setSurname(String surname) {
         this.surname = surname;
     }
-
-
     public void setAddress(Address address) {
         this.address = address;
     }

@@ -42,6 +42,15 @@ public class DbConnection {
         return pKey;
     }
 
+    public static void rollback(Connection con){
+        try {
+            System.err.print("Transaction is being rolled back\n");
+            con.rollback();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
+
 
 
 

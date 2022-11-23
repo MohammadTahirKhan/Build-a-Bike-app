@@ -51,6 +51,7 @@ public class Customer extends Shopper {
         this.surname = surname;
     }
 
+
     public void setAddress(Address address) {
         this.address = address;
     }

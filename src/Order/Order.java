@@ -1,5 +1,7 @@
 package Order;
 
+import Actors.Customer;
+import Product.Bike;
 import java.util.Date;
 
 public class Order {
@@ -12,28 +14,26 @@ public class Order {
     }
 
 //    Variables
-    private int orderId;
+    private int orderNumber;
     private Date orderDate;
-    private OrderDetails orderContents;
-    private double orderCost;
+    private double totalCost;
     private Status orderStatus;
+    private OrderDetails orderDetails;
+    private Customer orderCustomer;
+    private Bike orderBike;
 
 
-    /**
-     * Constructor for an Order
-     * @param orderDate Date of the order
-     * @param orderId Orders number
-     * @param orderContents Details of item ordered
-     * @param orderCost Total cost of the order
-     * @param orderStatus Status of the order
-     */
-    public Order (Date orderDate, int orderId ,OrderDetails orderContents, double orderCost, Status orderStatus){
+    public Order(int orderNumber, Date orderDate, double totalCost, Status orderStatus, OrderDetails orderDetails,
+                 Customer orderCustomer, Bike orderBike) {
+        this.orderNumber = orderNumber;
         this.orderDate = orderDate;
-        this.orderId =orderId;
-        this.orderCost =orderCost;
-        this.orderStatus =orderStatus;
-        this.orderContents = orderContents;
+        this.totalCost = totalCost;
+        this.orderStatus = orderStatus;
+        this.orderDetails = orderDetails;
+        this.orderCustomer = orderCustomer;
+        this.orderBike = orderBike;
     }
+
 
 //    Getters
     public int getOrderId() {
@@ -50,8 +50,8 @@ public class Order {
     public Status getOrderStatus() {
         return orderStatus;
     }
-    public OrderDetails getOrderContents() {
-        return orderContents;
+    public OrderDetails getOrderDetails() {
+        return orderDetails;
     }
 
 //    Setters
@@ -68,11 +68,7 @@ public class Order {
     public void setOrderStatus(Status orderStatus) {
         this.orderStatus = orderStatus;
     }
-    public void setOrderContents(OrderDetails orderContents) {
-        this.orderContents = orderContents;
+    public void setOrderDetails(OrderDetails orderDetails) {
+        this.orderDetails = orderDetails;
     }
-
-
-
-
 }

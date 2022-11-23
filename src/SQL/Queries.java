@@ -1,13 +1,19 @@
 package SQL;
 
+import Actors.Customer;
+import Actors.Staff;
 import Order.Order;
+import Product.Bike;
 import Product.Frame;
 import Product.HandleBar;
 import Product.Wheels;
+import com.sun.org.apache.xpath.internal.operations.Or;
 
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Objects;
 import java.util.function.DoubleBinaryOperator;
 
 public class Queries {
@@ -102,21 +108,19 @@ public class Queries {
         statement.executeUpdate();
         return DbConnection.getPrimaryKey(statement);
     }
-    private static int insertStaff(String username, String password) throws SQLException {
+    private static int insertStaff(String username, byte[][] hashSalt) throws SQLException {
 //        INSECURE, UPDATE THE PASSWORD HASHING BOIIII
-        String sql = "INSERT INTO `team002`.`Staff` (`username`, `password`) VALUES (?, ?);";
+        String sql = "INSERT INTO `team002`.`Staff` (`username`, `hash`, `salt`) VALUES (?, ?, ?);";
         PreparedStatement statement = DbConnection.getCon().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
         statement.setString(1, username);
-        statement.setString(2, password);
+        statement.setBytes(2, hashSalt[0]);
+        statement.setBytes(3, hashSalt[1]);
         statement.executeUpdate();
         return DbConnection.getPrimaryKey(statement);
     }
 
-//    Get order
-    private static Order getOrder(int productID){
-        return null;
-    }
     private static Order getOrder(String forename, String surname, int houseNumber, String address){
+
         return null;
     }
 
@@ -273,16 +277,134 @@ public class Queries {
         statement.executeUpdate();
     }
 
-//    Initialising database
-    static void setDatabase() throws SQLException {
+//    Set users
+    public static void setUsers(){
+        return;
+    }
+
+//    Hash password
+    public static String hashPassword(String password){
+        return password;
+    }
+
+//    Order queries
+    public static void deleteOrder(int orderID) throws SQLException {
+        Connection con = DbConnection.getCon();
+        String sql = "DELETE FROM `team002`.`Order` WHERE Order.orderID = ? AND Order.orderStatus = ?";
+        PreparedStatement statement = con.prepareStatement(sql);
+        statement.setInt(1, orderID);
+        statement.setString(2, Order.Status.PENDING.name());
+        statement.executeUpdate();
+    }
+    public static void updateOrderStatus(int orderID, Order.Status status) throws SQLException {
+        String sql = "UPDATE `team002`.`Order` SET `orderStatus` = ? WHERE `orderID` = ?";
+        PreparedStatement statement = DbConnection.getCon().prepareStatement(sql);
+        statement.setString(1, status.name());
+        statement.setInt(2, orderID);
+        statement.executeUpdate();
+    }
+
+    private static Staff getStaff(String staffUsername) throws SQLException {
+        String sql = "SELECT Staff.hash, Staff.salt FROM `team002`.`Staff` WHERE Staff.username = ?";
+        PreparedStatement statement = DbConnection.getCon().prepareStatement(sql);
+        statement.setString(1, staffUsername);
+        ResultSet rs = statement.executeQuery();
+
+        rs.next();
+        byte[] hash = rs.getBytes(1);
+        byte[] salt = rs.getBytes(2);
+        Staff staff = new Staff(staffUsername, hash, salt);
+        return staff;
+    }
+
+//    !!!!!!!!!!!!!!!!!!GET ORDER STUFF!!!!!!!!!!!!!!!!!!!
+//    private static Order getOrder(int orderID) throws SQLException {
+//
+//        String sql = "SELECT * FROM `team002`.`Order` WHERE Order.orderID = ?";
+//        PreparedStatement statement = DbConnection.getCon().prepareStatement(sql);
+//        statement.setInt(1, orderID);
+//        ResultSet resultSet = statement.executeQuery();
+//        Date orderDate = resultSet.getDate(2);
+//        double orderCost = resultSet.getDouble(3);
+//        Order.Status orderStatus = Order.Status.valueOf(resultSet.getString(4));
+////        Order.OrderDetails orderDetails = Order.OrderDetails
+//        Customer orderCustomer = getCustomer(resultSet.getInt(6));
+//        Bike orderBike = getBike(resultSet.getInt(7));
+//
+////        GET RID OF null!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+//        Order order = new Order(orderID, orderDate, orderCost, orderStatus, null, orderCustomer, orderBike);
+//        return order;
+//    }
+//
+//    private static Bike getBike(int productID) throws SQLException {
+//        String sql = "SELECT * FROM `team002`.`Bike` WHERE Order.productID = ?";
+//        PreparedStatement statement = DbConnection.getCon().prepareStatement(sql);
+//        statement.setInt(1, productID);
+//        ResultSet resultSet = statement.executeQuery();
+//
+//
+//    }
+//
+//    private static Customer getCustomer(int customerID) {
+//    }
+
+
+    public static void updateCustomer(int customerID, int addressID, String forename, String surname, int houseNo, String roadName, String cityName, String postCode)
+            throws SQLException {
+
+
+//        Get connection, and set up transaction
+            Connection con = DbConnection.getCon();
+        try {
+            con.setAutoCommit(false);
+
+//        Create the SQL syntax
+            String addressUPDATE = "UPDATE `team002`.`Address` ";
+            String addressSET = "SET Address.houseNo = ?, Address.roadName = ?, Address.cityName = ?, Address.postCode = ? ";
+            String addressWHERE = "WHERE Address.addressID = ?; ";
+            String customerUPDATE = "UPDATE `team002`.`Customer` ";
+            String customerSET = "SET Customer.forename = ?, Customer.surname = ? ";
+            String customerWHERE = "WHERE Customer.customerID = ?; ";
+
+//        Create the prepared statements
+            PreparedStatement updateAddress = DbConnection.getCon().prepareStatement(addressUPDATE + addressSET + addressWHERE);
+            PreparedStatement updateCustomer = DbConnection.getCon().prepareStatement(customerUPDATE + customerSET + customerWHERE);
+
+//        Set the variables
+            updateAddress.setInt(1, houseNo);
+            updateAddress.setString(2, roadName);
+            updateAddress.setString(3, cityName);
+            updateAddress.setString(4, postCode);
+            updateAddress.setInt(5, addressID);
+            updateCustomer.setString(1, forename);
+            updateCustomer.setString(2, surname);
+            updateCustomer.setInt(3, customerID);
+
+//        Execute the queries
+            updateAddress.executeUpdate();
+            updateCustomer.executeUpdate();
+
+//        Commit the queries
+            con.commit();
+        } catch (SQLException e){
+//            If commit fails, rollback
+            System.out.println(e);
+            DbConnection.rollback(con);
+        } finally{
+            con.setAutoCommit(true);
+        }
+    }
+
+    //    Initialising database
+    private static void setDatabase() throws SQLException {
         deleteDatabase();
         populateDatabase();
     }
-    static void populateDatabase() throws SQLException {
+    private static void populateDatabase() throws SQLException {
 //        First insert all the components of a bike
         int wheelID = insertWheel("xyz", 5.99, "brand123", 678, 1, 7, Wheels.Style.ROAD, Wheels.BrakeType.RIM);
         int wheelID1 = insertWheel("fgh", 6.99, "brand1233", 978, 1, 8, Wheels.Style.MOUNTAIN, Wheels.BrakeType.DISKBRAKE);
-        int wheelID2 = insertWheel("bnm", 9.99, "brand1223", 688, 1, 6, Wheels.Style.HYBRID, Wheels.BrakeType.DISKBRAKE);
+        int wheelID2 = insertWheel("bnm", 9.99, "brand1223", 688, 1, 6, Wheels.Style.HYBRID, Wheels.BrakeType.RIM);
         int wheelID3 = insertWheel("rbm", 10.0, "brand1234", 888, 1, 8, Wheels.Style.HYBRID, Wheels.BrakeType.RIM);
 
         int frameID = insertFrame("pqr", 9, "brand123", 789, 1, 10, "ABC", true);
@@ -314,13 +436,15 @@ public class Queries {
         insertOrder(Date.valueOf(LocalDate.now()), 79.99, Order.Status.PENDING, "Contains 1 Vermilion Bike", customerID2, bikeID2);
         insertOrder(Date.valueOf(LocalDate.now()), 66.99, Order.Status.FULFILLED, "Contains 1 golden Bike", customerID3, bikeID3);
 
-//        Inserts staff
-        insertStaff("aksb", "qbcnksx");
-        insertStaff("roronoa", "zoro");
-        insertStaff("bob", "marley");
-        insertStaff("vinsmoke", "sanji");
+        //        Inserts staff
+        byte[][] salts = new byte[4][4];
+        Arrays.fill(salts, Password.getSalt());
+        insertStaff("aksb", Objects.requireNonNull(Password.encryptPassword("Hello", salts[0])));
+        insertStaff("roronoa", Objects.requireNonNull(Password.encryptPassword("Hello", salts[1])));
+        insertStaff("bob", Objects.requireNonNull(Password.encryptPassword("Hello", salts[2])));
+        insertStaff("vinsmoke", Objects.requireNonNull(Password.encryptPassword("Hello", salts[3])));
     }
-    static void deleteDatabase() throws SQLException {
+    private static void deleteDatabase() throws SQLException {
         Connection con = DbConnection.getCon();
         con.prepareStatement("DELETE FROM `team002`.`Order`;").executeUpdate();
         con.prepareStatement("DELETE FROM `team002`.`Customer`;").executeUpdate();
@@ -334,12 +458,15 @@ public class Queries {
 
     }
 
-
     public static void main(String[] args) throws SQLException {
         System.out.println("Setting database...");
         setDatabase();
 //        ArrayList<Wheels> wheels = getWheelsWhere(-1, Wheels.Style.ROAD, Wheels.BrakeType.RIM);
 //        System.out.println(wheels);
+        updateCustomer(93, 72, "Alex", "Chapman", 12, "Crookes", "Sheffield", "S105MJ");
+        Staff staff = getStaff("aksb");
+        Boolean isCorrect = Password.checkPassword(staff.getHash(), "Hello", staff.getSalt());
+        System.out.println(isCorrect);
         System.out.println("Successfull");
     }
 }

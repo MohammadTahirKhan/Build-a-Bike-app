@@ -119,9 +119,6 @@ public class Queries {
         return DbConnection.getPrimaryKey(statement);
     }
 
-
-
-
 //    Get order
     private static Order getOrder(int orderId) throws SQLException {
 
@@ -146,26 +143,27 @@ public class Queries {
 
         return new Order(orderId, orderDate, orderCost, orderStatus, orderDetails, orderCustomer, orderBike);
     }
-    private static Order[] getOrder(String forename, String surname, int houseNumber, String address){
+    private static ArrayList<Order> getOrder(String forename, String surname, Address address) throws SQLException {
 
-        String sql = "SELECT " +
-                "Order.orderDate, Order.orderCost, Order.orderStatus, Order.orderContents, Order.customerID, Order.productID FROM team002.Order " +
-                "WHERE Order.orderID = ?";
+        String getOrderSQL = "SELECT team002.Order.orderID " +
+                "FROM (team002.Order INNER JOIN Customer ON team002.Order.customerID = Customer.customerID INNER JOIN Address ON Customer.addressID = Address.addressID) " +
+                "WHERE Customer.forename = ? AND Customer.surname = ? AND Address.houseNo = ? AND Address.roadName = ? AND Address.cityName = ? AND Address.postCode = ?";
 
-        String getCustomerSQL = "SELECT Order.orderID " +
-                "FROM (Order INNER JOIN Customer ON Order.customerID = Customer.customerID INNER JOIN Address ON Customer.addressID = Address.addressID) " +
-                "WHERE Customer.forename = ? AND Customer.surname = ? AND Address.houseNumber = ? AND Address.surname = ?";
-
-        PreparedStatement customerStatement = DbConnection.getCon().prepareStatement(getCustomerSQL);
-        customerStatement.setInt(1, customerID);
+        PreparedStatement customerStatement = DbConnection.getCon().prepareStatement(getOrderSQL);
+        customerStatement.setString(1, forename);
+        customerStatement.setString(2, surname);
+        customerStatement.setInt(3, address.getHouseNo());
+        customerStatement.setString(4, address.getRoadName());
+        customerStatement.setString(5, address.getCityName());
+        customerStatement.setString(6, address.getPostCode());
 
         ResultSet getCustomerRS = customerStatement.executeQuery();
-        getCustomerRS.next();
 
-        Address address = new Address(getCustomerRS.getInt(3), getCustomerRS.getInt(4),
-                getCustomerRS.getString(5), getCustomerRS.getString(6),
-                getCustomerRS.getString(7));
-        return new Customer(customerID, getCustomerRS.getString(1), getCustomerRS.getString(2), address);
+        ArrayList<Order> orders = new ArrayList<Order>();
+        while (getCustomerRS.next()){
+            orders.add(getOrder(getCustomerRS.getInt(1)));
+        }
+        return orders;
     }
 
 //    Get Customer
@@ -321,7 +319,6 @@ public class Queries {
         }
 
         ResultSet rs = statement.executeQuery();
-        System.out.println(statement);
 
         ArrayList<Wheels> wheels = new ArrayList<Wheels>();
         while (rs.next()) {
@@ -355,7 +352,6 @@ public class Queries {
         }
 
         ResultSet rs = statement.executeQuery();
-        System.out.println(statement);
         ArrayList<HandleBar> handleBars = new ArrayList<>();
         while (rs.next()) {
             handleBars.add(new HandleBar(rs.getString(1),
@@ -419,7 +415,6 @@ public class Queries {
         return frames;
     }
 
-
 //    Stock handler
     private static void decrementStock(int productID) throws SQLException {
 //        Have a decerement exception
@@ -463,6 +458,7 @@ public class Queries {
         statement.executeUpdate();
     }
 
+//    Gets staff member from username
     private static Staff getStaff(String staffUsername) throws SQLException {
         String sql = "SELECT Staff.hash, Staff.salt FROM `team002`.`Staff` WHERE Staff.username = ?";
         PreparedStatement statement = DbConnection.getCon().prepareStatement(sql);
@@ -476,38 +472,7 @@ public class Queries {
         return staff;
     }
 
-//    !!!!!!!!!!!!!!!!!!GET ORDER STUFF!!!!!!!!!!!!!!!!!!!
-//    private static Order getOrder(int orderID) throws SQLException {
-//
-//        String sql = "SELECT * FROM `team002`.`Order` WHERE Order.orderID = ?";
-//        PreparedStatement statement = DbConnection.getCon().prepareStatement(sql);
-//        statement.setInt(1, orderID);
-//        ResultSet resultSet = statement.executeQuery();
-//        Date orderDate = resultSet.getDate(2);
-//        double orderCost = resultSet.getDouble(3);
-//        Order.Status orderStatus = Order.Status.valueOf(resultSet.getString(4));
-////        Order.OrderDetails orderDetails = Order.OrderDetails
-//        Customer orderCustomer = getCustomer(resultSet.getInt(6));
-//        Bike orderBike = getBike(resultSet.getInt(7));
-//
-////        GET RID OF null!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-//        Order order = new Order(orderID, orderDate, orderCost, orderStatus, null, orderCustomer, orderBike);
-//        return order;
-//    }
-//
-//    private static Bike getBike(int productID) throws SQLException {
-//        String sql = "SELECT * FROM `team002`.`Bike` WHERE Order.productID = ?";
-//        PreparedStatement statement = DbConnection.getCon().prepareStatement(sql);
-//        statement.setInt(1, productID);
-//        ResultSet resultSet = statement.executeQuery();
-//
-//
-//    }
-//
-//    private static Customer getCustomer(int customerID) {
-//    }
-
-
+//    Update customer details
     public static void updateCustomer(Customer customer) throws SQLException{
 
 
@@ -554,7 +519,7 @@ public class Queries {
         }
     }
 
-    //    Initialising database
+//    Initialise database
     private static void setDatabase() throws SQLException {
         deleteDatabase();
         populateDatabase();
@@ -630,7 +595,9 @@ public class Queries {
 //        Boolean isCorrect = Password.checkPassword(staff.getHash(), "Hello", staff.getSalt());
         Order order = getOrder(107);
         System.out.println(order.getCustomer().getForename() + " " + order.getCustomer().getSurname());
-        System.out.println("Successfull");
+        ArrayList<Order> order2 = getOrder(order.getCustomer().getForename(), order.getCustomer().getSurname(), order.getCustomer()
+                .getAddress());
+        System.out.println(order2.get(0).getDate());
     }
 }
 

@@ -2,10 +2,10 @@ package Actors;
 
 public class Customer extends Shopper {
 //    variables
-    public int customerId;
-    public String forename;
-    public String surname;
-    public Address address;
+    private int customerId;
+    private String forename;
+    private String surname;
+    private Address address;
 
     /**
      * Constructor for a Customer

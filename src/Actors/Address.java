@@ -22,6 +22,13 @@ public class Address {
         this.cityName = cityName;
         this.postCode = postCode;
     }
+    public Address(int houseNo, String roadName, String cityName, String postCode) {
+        this.addressId = -1;
+        this.houseNo = houseNo;
+        this.roadName = roadName;
+        this.cityName = cityName;
+        this.postCode = postCode;
+    }
 
 //    getters
     public int getAddressId() {

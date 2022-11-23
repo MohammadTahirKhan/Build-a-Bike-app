@@ -2,7 +2,6 @@ package Order;
 
 import Actors.Customer;
 import Product.Bike;
-
 import java.util.Date;
 
 public class Order {
@@ -37,11 +36,16 @@ public class Order {
 
 
 //    Getters
-    public int getOrderNumber() {
-        return orderNumber;
+    public int getOrderId() {
+        return orderId;
     }
-    public double getTotalCost() {
-        return totalCost;
+
+    public Date getOrderDate() {
+        return orderDate;
+    }
+
+    public double getOrderCost() {
+        return orderCost;
     }
     public Status getOrderStatus() {
         return orderStatus;
@@ -51,11 +55,15 @@ public class Order {
     }
 
 //    Setters
-    public void setOrderNumber(int orderNumber) {
-    this.orderNumber = orderNumber;
-}
-    public void setTotalCost(double totalCost) {
-        this.totalCost = totalCost;
+    public void setOrderId(int orderId) {
+        this.orderId = orderId;
+    }
+
+    public void setOrderDate(Date orderDate) {
+        this.orderDate = orderDate;
+    }
+    public void setOrderCost(double orderCost) {
+        this.orderCost = orderCost;
     }
     public void setOrderStatus(Status orderStatus) {
         this.orderStatus = orderStatus;

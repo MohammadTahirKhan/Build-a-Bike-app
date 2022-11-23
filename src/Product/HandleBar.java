@@ -2,7 +2,7 @@ package Product;
 
 public class HandleBar extends Product{
 
-//    Declating ENUM
+//    Declaring ENUM
     public enum Style {
         STRAIGHT,
         HIGH,
@@ -13,7 +13,15 @@ public class HandleBar extends Product{
 //    Declaring variable(s)
     protected Style style;
 
-//    Constructor
+    /**
+     * Constructor for a HandleBar
+     * @param style Style of the Handle Bar
+     * @param name Name of the Handle Bar
+     * @param serialNumber Serial number of the Handle Bar
+     * @param itemCost Cost of the Handle Bar
+     * @param brandName Brand name
+     * @param stock Stock available
+     */
     public HandleBar(String style, String name, int serialNumber, double itemCost, String brandName, int stock) {
         setStyle(style);
         this.setProductDetails(name, serialNumber, itemCost, brandName, stock);

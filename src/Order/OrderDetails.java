@@ -1,9 +1,7 @@
-
 package Order;
 
-import Product.Product;
+import Product.*;
 
-import java.lang.reflect.Constructor;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -11,10 +9,12 @@ public class OrderDetails {
 //    Map to store ordered products and their quantity
     private Map<Product, Integer> itemMap = new HashMap<>();
 
-//    Constructor
-//    public OrderDetails(Wheels wheels, HandleBar handleBar, Frame, frame){
-//        this.itemMap = itemMap;
-//    }
+
+    public OrderDetails(Wheels wheels, HandleBar handleBar, Frame frame){
+        this.itemMap.put(wheels, wheels.getStock());
+        this.itemMap.put(handleBar, handleBar.getStock());
+        this.itemMap.put(frame, frame.getStock());
+    }
 
 //    getter
     public Map<Product, Integer> getItemMap() {

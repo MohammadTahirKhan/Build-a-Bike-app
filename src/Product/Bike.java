@@ -37,6 +37,7 @@ public class Bike extends Product{
     }
 
 //    Getters
+
     public Wheels getWheels() {
         return wheels;
     }
@@ -46,4 +47,16 @@ public class Bike extends Product{
     public HandleBar getHandleBar() {
         return handleBar;
     }
+    public void setWheels(Wheels wheels) {
+        this.wheels = wheels;
+    }
+    public void setFrame(Frame frame) {
+        this.frame = frame;
+    }
+    public void setHandleBar(HandleBar handleBar) {
+        this.handleBar = handleBar;
+    }
 }
+
+
+

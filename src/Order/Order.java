@@ -24,23 +24,23 @@ public class Order {
     private Bike bike;
 
 
-    public Order(int orderNumber, Date orderDate, Status orderStatus, OrderDetails orderDetails,
+    public Order(int orderNumber, Date orderDate, Status orderStatus,
                  Customer orderCustomer, Bike orderBike) {
         this.ID = orderNumber;
         this.date = orderDate;
         this.cost = orderBike.getItemCost();
         this.status = orderStatus;
-        this.details = orderDetails;
+        setDetails(orderBike);
         this.customer = orderCustomer;
         this.bike = orderBike;
     }
-    public Order(Date orderDate, Status orderStatus, OrderDetails orderDetails,
+    public Order(Date orderDate, Status orderStatus,
                  Customer orderCustomer, Bike orderBike) {
         this.ID = -1;
         this.date = orderDate;
         this.cost = orderBike.getItemCost();
         this.status = orderStatus;
-        this.details = orderDetails;
+        setDetails(orderBike);
         this.customer = orderCustomer;
         this.bike = orderBike;
     }
@@ -82,8 +82,8 @@ public class Order {
     public void setStatus(Status status) {
         this.status = status;
     }
-    public void setDetails(OrderDetails details) {
-        this.details = details;
+    public void setDetails(Bike bike) {
+        this.details = new OrderDetails(bike.getWheels(), bike.getHandleBar(), bike.getFrame());
     }
     public void setCustomer(Customer customer) {
         this.customer = customer;

@@ -54,6 +54,9 @@ public abstract class Product {
     public int getStock() {
         return stock;
     }
+    public Product getProduct(){
+        return this;
+    }
 
 //    Setters
     public void setPKey(int pKey) {

@@ -20,6 +20,12 @@ public class Customer extends Shopper {
         this.surname = surname;
         this.address = address;
     }
+    public Customer (String forename, String surname, Address address){
+        this.customerId = -1;
+        this.forename = forename;
+        this.surname = surname;
+        this.address = address;
+    }
 
 //    Getters
     public int getCustomerId() {
@@ -48,4 +54,5 @@ public class Customer extends Shopper {
     public void setAddress(Address address) {
         this.address = address;
     }
+
 }

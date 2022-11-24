@@ -5,14 +5,12 @@ import javax.crypto.spec.PBEKeySpec;
 import java.security.SecureRandom;
 import java.security.spec.KeySpec;
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
 
 public class Password {
 
     public static boolean checkPassword(byte[] hash, String inputPassword, byte[] salt){
         try {
-            byte[][] inputHashSalt = encryptPassword(inputPassword, salt);
+            byte[][] inputHashSalt = hashPassword(inputPassword, salt);
             return Arrays.equals(inputHashSalt[0], hash);
         } catch (Exception e) {
             e.printStackTrace();
@@ -21,7 +19,7 @@ public class Password {
     }
 
 
-    public static byte[][] encryptPassword(String password, byte[] salt) {
+    public static byte[][] hashPassword(String password, byte[] salt) {
         try {
             KeySpec spec = new PBEKeySpec(password.toCharArray(), salt, 65536, 128);
             SecretKeyFactory factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");

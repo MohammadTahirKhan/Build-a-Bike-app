@@ -31,11 +31,23 @@ public class Wheels extends Product{
      * @param brandName Brand name
      * @param stock Stock available
      */
+    public Wheels(int pKey, double diameter, String style, String brakeType , String name, int serialNumber, double itemCost, String brandName, int stock) {
+        this.diameter = diameter;
+        setStyle(style);
+        setBrakeType(brakeType);
+        this.setProductDetails(pKey, name, serialNumber, itemCost, brandName, stock);
+    }
     public Wheels(double diameter, String style, String brakeType , String name, int serialNumber, double itemCost, String brandName, int stock) {
         this.diameter = diameter;
         setStyle(style);
         setBrakeType(brakeType);
-        this.setProductDetails(name, serialNumber, itemCost, brandName, stock);
+        this.setProductDetails(-1, name, serialNumber, itemCost, brandName, stock);
+    }
+    public Wheels(double diameter, Style style, BrakeType brakeType , String name, int serialNumber, double itemCost, String brandName, int stock) {
+        this.diameter = diameter;
+        setStyle(style);
+        setBrakeType(brakeType);
+        this.setProductDetails(-1, name, serialNumber, itemCost, brandName, stock);
     }
 
 //    Getters
@@ -45,24 +57,29 @@ public class Wheels extends Product{
     public Style getStyle() {
         return style;
     }
-    public String getStyleString() {
-        return style.toString();
-    }
     public BrakeType getBrakeType() {
         return brakeType;
-    }
-    public String getBrakeTypeString() {
-        return brakeType.toString();
     }
 
 
 //    Private Setters
-    private void setStyle(String style){
+
+    public void setDiameter(double diameter) {
+        this.diameter = diameter;
+    }
+    public void setStyle(Style style) {
+        this.style = style;
+    }
+    public void setStyle(String style) {
         this.style = Style.valueOf(style);
     }
-    private void setBrakeType(String brakeType){
+    public void setBrakeType(BrakeType brakeType) {
+        this.brakeType = brakeType;
+    }
+    public void setBrakeType(String brakeType) {
         this.brakeType = BrakeType.valueOf(brakeType);
     }
+
 
 //    SQL Get wheels
 //    public static Wheels[] pullWheels(){

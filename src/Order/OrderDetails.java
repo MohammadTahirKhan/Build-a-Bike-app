@@ -12,9 +12,9 @@ public class OrderDetails {
     private Map<Product, Integer> itemMap = new HashMap<>();
 
 //    Constructor
-    public OrderDetails(Map<Product, Integer> itemMap){
-        this.itemMap = itemMap;
-    }
+//    public OrderDetails(Wheels wheels, HandleBar handleBar, Frame, frame){
+//        this.itemMap = itemMap;
+//    }
 
 //    getter
     public Map<Product, Integer> getItemMap() {
@@ -25,4 +25,5 @@ public class OrderDetails {
     public void setItemMap(Map<Product, Integer> itemMap) {
         this.itemMap = itemMap;
     }
+
 }

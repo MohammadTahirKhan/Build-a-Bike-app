@@ -10,7 +10,8 @@ public class Order {
     public enum Status {
         PENDING,
         CONFIRMED,
-        FULFILLED
+        FULFILLED,
+        All
     }
 
 //    Variables
@@ -23,11 +24,21 @@ public class Order {
     private Bike bike;
 
 
-    public Order(int orderNumber, Date orderDate, double totalCost, Status orderStatus, OrderDetails orderDetails,
+    public Order(int orderNumber, Date orderDate, Status orderStatus, OrderDetails orderDetails,
                  Customer orderCustomer, Bike orderBike) {
         this.ID = orderNumber;
         this.date = orderDate;
-        this.cost = totalCost;
+        this.cost = orderBike.getItemCost();
+        this.status = orderStatus;
+        this.details = orderDetails;
+        this.customer = orderCustomer;
+        this.bike = orderBike;
+    }
+    public Order(Date orderDate, Status orderStatus, OrderDetails orderDetails,
+                 Customer orderCustomer, Bike orderBike) {
+        this.ID = -1;
+        this.date = orderDate;
+        this.cost = orderBike.getItemCost();
         this.status = orderStatus;
         this.details = orderDetails;
         this.customer = orderCustomer;
@@ -48,8 +59,8 @@ public class Order {
     public Status getStatus() {
         return status;
     }
-    public OrderDetails getDetails() {
-        return details;
+    public String getDetails() {
+        return details.toString();
     }
     public Customer getCustomer() {
         return customer;

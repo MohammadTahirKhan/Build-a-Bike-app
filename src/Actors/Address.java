@@ -2,11 +2,11 @@ package Actors;
 
 public class Address {
 //    variables
-    public int addressId;
-    public int houseNo;
-    public String roadName;
-    public String cityName;
-    public String postCode;
+    private int addressId;
+    private int houseNo;
+    private String roadName;
+    private String cityName;
+    private String postCode;
 
     /**
      * Constructor for an Address

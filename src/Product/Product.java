@@ -62,4 +62,7 @@ public abstract class Product {
     public void setPKey(int pKey) {
         this.pKey = pKey;
     }
+    public void decrementStock() {
+        this.stock--;
+    }
 }

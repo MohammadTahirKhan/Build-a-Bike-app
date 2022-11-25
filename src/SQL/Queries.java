@@ -481,11 +481,36 @@ public class Queries {
     }
 
 //    Stock handler
-    public static void decrementStock(int productID) throws SQLException {
-//        Have a decerement exception
+    public static void decrementStock(Order order) throws SQLException {
+
+//    Get connection, and set up transaction
+    Connection con = DbConnection.getCon();
+    try {
+
+        con.setAutoCommit(false);
+        decrementStock(order.getBike().getFrame());
+        order.getBike().getFrame().decrementStock();
+        decrementStock(order.getBike().getWheels());
+        order.getBike().getWheels().decrementStock();
+        decrementStock(order.getBike().getHandleBar());
+        order.getBike().getHandleBar().decrementStock();
+
+        //        Commit the queries
+        con.commit();
+    } catch (SQLException e){
+//            If commit fails, rollback
+        System.out.println(e);
+        DbConnection.rollback(con);
+    } finally{
+        con.setAutoCommit(true);
+    }
+
+    }
+    private static void decrementStock(Product product) throws SQLException {
+//        Have a decrement exception
         String sql = "UPDATE `team002`.`Product` SET `stock` = `stock` - 1 WHERE `productID` = ?;";
         PreparedStatement statement = DbConnection.getCon().prepareStatement(sql);
-        statement.setInt(1, productID);
+        statement.setInt(1, product.getPKey());
         statement.executeUpdate();
     }
     public static void setStock(int productID, int quantity) throws SQLException {
@@ -680,11 +705,10 @@ public class Queries {
         }
         ArrayList<Order> order3 = getOrder(Order.Status.CONFIRMED);
         System.out.println(order3);
-        updateOrderStatus(order3.get(0), Order.Status.FULFILLED);
-        order3 = getOrder(Order.Status.All);
-        for (Order odr: order3){
-            System.out.println(odr.getStatus());
-        }
+        System.out.println(order3.get(0).getBike().getWheels().getStock());
+        decrementStock(order3.get(0));
+        order3 = getOrder(Order.Status.CONFIRMED);
+        System.out.println(order3.get(0).getBike().getWheels().getStock());
     }
 }
 

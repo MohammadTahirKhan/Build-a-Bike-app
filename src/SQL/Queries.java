@@ -526,7 +526,7 @@ public class Queries {
     }
 
 //    Gets staff member from username
-    public static Staff getStaff(String staffUsername) throws SQLException {
+    public static Staff getStaff(String staffUsername, String inputPassword) throws SQLException {
         String sql = "SELECT Staff.hash, Staff.salt FROM `team002`.`Staff` WHERE Staff.username = ?";
         PreparedStatement statement = DbConnection.getCon().prepareStatement(sql);
         statement.setString(1, staffUsername);
@@ -536,7 +536,10 @@ public class Queries {
         byte[] hash = rs.getBytes(1);
         byte[] salt = rs.getBytes(2);
         Staff staff = new Staff(staffUsername, hash, salt);
-        return staff;
+        boolean isCorrect = Password.checkPassword(staff.getHash(), inputPassword, staff.getSalt());
+        if (isCorrect)
+            return staff;
+        return null;
     }
 
 //    Update customer details

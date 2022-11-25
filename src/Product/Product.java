@@ -11,14 +11,23 @@ public abstract class Product {
     }
 
 //    Declaring Variables
-    protected String name;
-    protected int serialNumber;
-    protected double itemCost;
-    protected String brandName;
-    protected int stock;
+    private int pKey;
+    private String name;
+    private int serialNumber;
+    private double itemCost;
+    private String brandName;
+    private int stock;
 
-//    Sets Product variables
-    protected void setProductDetails(String name, int serialNumber, double itemCost, String brandName, int stock){
+    /**
+     * Constructor for a Product
+     * @param name Name of the Product
+     * @param serialNumber Serial number of the Product
+     * @param itemCost Cost of the Product
+     * @param brandName Brand name
+     * @param stock Stock available
+     */
+    protected void setProductDetails(int pKey, String name, int serialNumber, double itemCost, String brandName, int stock){
+        this.pKey = pKey;
         this.name = name;
         this.serialNumber = serialNumber;
         this.itemCost = itemCost;
@@ -27,6 +36,9 @@ public abstract class Product {
     }
 
 //    Getters
+    public int getPKey(){
+        return  pKey;
+    }
     public String getName() {
         return name;
     }
@@ -41,5 +53,13 @@ public abstract class Product {
     }
     public int getStock() {
         return stock;
+    }
+    public Product getProduct(){
+        return this;
+    }
+
+//    Setters
+    public void setPKey(int pKey) {
+        this.pKey = pKey;
     }
 }

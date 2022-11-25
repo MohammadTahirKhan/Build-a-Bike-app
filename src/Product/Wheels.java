@@ -1,10 +1,5 @@
 package Product;
 
-import SQL.DbConnection;
-import SQL.Queries;
-
-import java.sql.Connection;
-
 public class Wheels extends Product{
 
 //    Declaring ENUM's
@@ -25,12 +20,34 @@ public class Wheels extends Product{
     protected Style style;
     protected BrakeType brakeType;
 
-//    Constructor
+    /**
+     * Constructor for a Wheels
+     * @param diameter Diameter of the Wheels
+     * @param style Style of the Wheels
+     * @param brakeType Type of brakes in Wheels
+     * @param name Name of the Wheels
+     * @param serialNumber Serial number of the Wheels
+     * @param itemCost Cost of the Wheels
+     * @param brandName Brand name
+     * @param stock Stock available
+     */
+    public Wheels(int pKey, double diameter, String style, String brakeType , String name, int serialNumber, double itemCost, String brandName, int stock) {
+        this.diameter = diameter;
+        setStyle(style);
+        setBrakeType(brakeType);
+        this.setProductDetails(pKey, name, serialNumber, itemCost, brandName, stock);
+    }
     public Wheels(double diameter, String style, String brakeType , String name, int serialNumber, double itemCost, String brandName, int stock) {
         this.diameter = diameter;
         setStyle(style);
         setBrakeType(brakeType);
-        this.setProductDetails(name, serialNumber, itemCost, brandName, stock);
+        this.setProductDetails(-1, name, serialNumber, itemCost, brandName, stock);
+    }
+    public Wheels(double diameter, Style style, BrakeType brakeType , String name, int serialNumber, double itemCost, String brandName, int stock) {
+        this.diameter = diameter;
+        setStyle(style);
+        setBrakeType(brakeType);
+        this.setProductDetails(-1, name, serialNumber, itemCost, brandName, stock);
     }
 
 //    Getters
@@ -40,24 +57,29 @@ public class Wheels extends Product{
     public Style getStyle() {
         return style;
     }
-    public String getStyleString() {
-        return style.toString();
-    }
     public BrakeType getBrakeType() {
         return brakeType;
-    }
-    public String getBrakeTypeString() {
-        return brakeType.toString();
     }
 
 
 //    Private Setters
-    private void setStyle(String style){
+
+    public void setDiameter(double diameter) {
+        this.diameter = diameter;
+    }
+    public void setStyle(Style style) {
+        this.style = style;
+    }
+    public void setStyle(String style) {
         this.style = Style.valueOf(style);
     }
-    private void setBrakeType(String brakeType){
+    public void setBrakeType(BrakeType brakeType) {
+        this.brakeType = brakeType;
+    }
+    public void setBrakeType(String brakeType) {
         this.brakeType = BrakeType.valueOf(brakeType);
     }
+
 
 //    SQL Get wheels
 

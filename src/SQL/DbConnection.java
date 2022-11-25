@@ -25,12 +25,17 @@ public class DbConnection {
     }
 
 //    getter(s) and setter(s)
-    public static Connection getCon() throws SQLException {
-        if (con == null){
-            String[] creds = Utils.getCredentials();
-            DbConnection.con = DriverManager.getConnection("jdbc:mysql://stusql.dcs.shef.ac.uk/" + creds[0], creds[0], creds[1]);
+    public static Connection getCon(){
+        try{
+            if (con == null){
+                String[] creds = Utils.getCredentials();
+                DbConnection.con = DriverManager.getConnection("jdbc:mysql://stusql.dcs.shef.ac.uk/" + creds[0], creds[0], creds[1]);
+            }
+            return con;
+        } catch (Exception e){
+            e.printStackTrace();
         }
-        return con;
+        return null;
     }
 
     public static int getPrimaryKey(Statement statement) throws SQLException {
@@ -41,6 +46,17 @@ public class DbConnection {
         }
         return pKey;
     }
+
+    public static void rollback(Connection con){
+        try {
+            System.err.print("Transaction is being rolled back\n");
+            con.rollback();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
+
+
 
 //    Do transaction at the end
 //    public static ResultSet executeQuery(PreparedStatement query) throws SQLException {

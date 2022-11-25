@@ -1,64 +1,94 @@
 package Order;
 
+import Actors.Customer;
+import Product.Bike;
+import java.util.Date;
+
 public class Order {
 
 //    Enum(s)
     public enum Status {
         PENDING,
         CONFIRMED,
-        FULFILLED
+        FULFILLED,
+        All
     }
 
 //    Variables
-    private int orderNumber;
-    private OrderDetails itemDetail;
-    private double totalCost;
+    private int ID;
+    private Date date;
+    private double cost;
     private Status status;
+    private OrderDetails details;
+    private Customer customer;
+    private Bike bike;
 
 
-    /**
-     * Constructor for an Order
-     * @param orderNumber Orders number
-     * @param itemDetail Details of item ordered
-     * @param totalCost Total cost of the order
-     * @param status Status of the order
-     */
-    public Order (int orderNumber ,OrderDetails itemDetail, double totalCost, Status status){
-        this.orderNumber=orderNumber;
-        this.totalCost=totalCost;
-        this.status=status;
-        this.itemDetail = itemDetail;
+    public Order(int orderNumber, Date orderDate, Status orderStatus,
+                 Customer orderCustomer, Bike orderBike) {
+        this.ID = orderNumber;
+        this.date = orderDate;
+        this.cost = orderBike.getItemCost();
+        this.status = orderStatus;
+        setDetails(orderBike);
+        this.customer = orderCustomer;
+        this.bike = orderBike;
     }
+    public Order(Date orderDate, Status orderStatus,
+                 Customer orderCustomer, Bike orderBike) {
+        this.ID = -1;
+        this.date = orderDate;
+        this.cost = orderBike.getItemCost();
+        this.status = orderStatus;
+        setDetails(orderBike);
+        this.customer = orderCustomer;
+        this.bike = orderBike;
+    }
+
 
 //    Getters
-    public int getOrderNumber() {
-        return orderNumber;
+    public int getID() {
+        return ID;
     }
-    public double getTotalCost() {
-        return totalCost;
+    public Date getDate() {
+        return date;
+    }
+    public double getCost() {
+        return cost;
     }
     public Status getStatus() {
         return status;
     }
-    public OrderDetails getItemDetail() {
-        return itemDetail;
+    public String getDetails() {
+        return details.toString();
+    }
+    public Customer getCustomer() {
+        return customer;
+    }
+    public Bike getBike() {
+        return bike;
     }
 
 //    Setters
-    public void setOrderNumber(int orderNumber) {
-    this.orderNumber = orderNumber;
-}
-    public void setTotalCost(double totalCost) {
-        this.totalCost = totalCost;
+    public void setID(int ID) {
+        this.ID = ID;
+    }
+    public void setDate(Date date) {
+        this.date = date;
+    }
+    public void setCost(double cost) {
+        this.cost = cost;
     }
     public void setStatus(Status status) {
         this.status = status;
     }
-    public void setItemDetail(OrderDetails itemDetail) {
-        this.itemDetail = itemDetail;
+    public void setDetails(Bike bike) {
+        this.details = new OrderDetails(bike.getWheels(), bike.getHandleBar(), bike.getFrame());
     }
-
-
-
-
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+    public void setBike(Bike bike) {
+        this.bike = bike;
+    }
 }

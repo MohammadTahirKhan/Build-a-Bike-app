@@ -22,6 +22,9 @@
 #Testing directory
 Testing/
 
+#lib folder
+lib/
+
 # Database login details
 Credentials.txt
 

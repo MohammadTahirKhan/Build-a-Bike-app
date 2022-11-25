@@ -1,14 +1,23 @@
 package Actors;
 
 public class Staff {
+//    variables
     private String username;
-    private String password;
+    private byte[] hash;
+    private byte[] salt;
 
-    public Staff (String username, String password){
+    /**
+     * Constructor for a Staff
+     * @param username Username of the staff
+     * @param password Password
+     */
+    public Staff(String username, byte[] hash, byte[] salt) {
         this.username = username;
-        this.password = password;
+        this.hash = hash;
+        this.salt = salt;
     }
 
+//    getters and setters
     public String getUsername() {
         return username;
     }
@@ -17,18 +26,19 @@ public class Staff {
         this.username = username;
     }
 
-    public String getPassword() {
-        return password;
+    public byte[] getHash() {
+        return hash;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setHash(byte[] hash) {
+        this.hash = hash;
     }
 
-    public boolean passwordIsCorrect(String password){
-        boolean result = false;
-        if (password.equals(this.password))
-            result = true;
-        return result;
+    public byte[] getSalt() {
+        return salt;
+    }
+
+    public void setSalt(byte[] salt) {
+        this.salt = salt;
     }
 }

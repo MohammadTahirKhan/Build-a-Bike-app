@@ -1,127 +1,343 @@
 package SQL;
 
+import Actors.Address;
+import Actors.Customer;
+import Actors.Staff;
 import Order.Order;
-import Product.Frame;
-import Product.HandleBar;
-import Product.Wheels;
+import Product.*;
 
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.function.DoubleBinaryOperator;
+import java.util.Arrays;
 
 public class Queries {
 
 //    Database inserts
-    private static int insertProduct(String productName, double unitCost, String brandName, int serialNumber, int stock) throws SQLException {
+    private static Product insertProductTable(Product product) throws SQLException {
     String sql = "INSERT INTO `team002`.`Product` (`productName`,`unitCost`,`brandName`,`serialNumber`,`stock`) VALUES (?, ?, ?, ?, ?);";
     PreparedStatement statement = DbConnection.getCon().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-    statement.setString(1, productName);
-    statement.setDouble(2, unitCost);
-    statement.setString(3, brandName);
-    statement.setInt(4, serialNumber);
-    statement.setInt(5, stock);
+    statement.setString(1, product.getName());
+    statement.setDouble(2, product.getItemCost());
+    statement.setString(3, product.getBrandName());
+    statement.setInt(4, product.getSerialNumber());
+    statement.setInt(5, product.getStock());
     statement.executeUpdate();
     ResultSet rs = statement.getGeneratedKeys();
     int productID = 0;
     if (rs.next()) {
         productID = rs.getInt(1);
     }
-    return productID;
+    product.setPKey(productID);
+    return product;
 }
-    private static int insertWheel(String productName, double unitCost, String brandName, int serialNumber, int stock, double diameter, Wheels.Style style, Wheels.BrakeType brakeType) throws SQLException {
-        int productID = insertProduct(productName, unitCost, brandName, serialNumber, stock);
+    private static Wheels insertWheelTable(Wheels wheels) throws SQLException {
+        int productID = insertProductTable(wheels.getProduct()).getPKey();
         String sql = "INSERT INTO `team002`.`Wheels` (`productID`,`diameter`,`style`,`brakeSystem`) VALUES (?, ?, ?, ?);";
         PreparedStatement statement = DbConnection.getCon().prepareStatement(sql);
         statement.setInt(1, productID);
-        statement.setDouble(2,diameter);
-        statement.setString(3, style.name());
-        statement.setString(4, brakeType.name());
+        statement.setDouble(2, wheels.getDiameter());
+        statement.setString(3, wheels.getStyle().name());
+        statement.setString(4, wheels.getBrakeType().name());
         statement.executeUpdate();
-        return productID;
+        wheels.setPKey(productID);
+        return wheels;
     }
-    private static int insertFrame(String productName, double unitCost, String brandName, int serialNumber, int stock, int frameSize, String gears, boolean containsShocks) throws SQLException {
-        int productID = insertProduct(productName, unitCost, brandName, serialNumber, stock);
+    private static Frame insertFrameTable(Frame frame) throws SQLException {
+        int productID = insertProductTable(frame.getProduct()).getPKey();
         String sql = "INSERT INTO `team002`.`FrameSet` (`productID`,`frameSize`,`shocks`,`gears`) VALUES (?, ?, ?, ?);";
         PreparedStatement statement = DbConnection.getCon().prepareStatement(sql);
         statement.setInt(1, productID);
-        statement.setInt(2, frameSize);
-        statement.setBoolean(3, containsShocks);
-        statement.setString(4, gears);
+        statement.setInt(2, frame.getFrameSize());
+        statement.setBoolean(3, frame.isContainsShocks());
+        statement.setString(4, frame.getGears());
         statement.executeUpdate();
-        return productID;
+        frame.setPKey(productID);
+        return frame;
     }
-    private static int insertHandleBar(String productName, double unitCost, String brandName, int serialNumber, int stock, HandleBar.Style style) throws SQLException {
-        int productID = insertProduct(productName, unitCost, brandName, serialNumber, stock);
+    private static HandleBar insertHandleBarTable(HandleBar handleBar) throws SQLException {
+        int productID = insertProductTable(handleBar.getProduct()).getPKey();
         String sql = "INSERT INTO `team002`.`Handlebar` (`productID`,`style`) VALUES (?, ?);";
         PreparedStatement statement = DbConnection.getCon().prepareStatement(sql);
         statement.setInt(1, productID);
-        statement.setString(2, style.name());
+        statement.setString(2, handleBar.getStyle().name());
         statement.executeUpdate();
-        return productID;
+        handleBar.setPKey(productID);
+        return handleBar;
     }
-    private static int insertBike(String productName, double unitCost, String brandName, int serialNumber, int stock, int wheelsID, int handleBarID, int frameSetID) throws SQLException {
-        int productID = insertProduct(productName, unitCost, brandName, serialNumber, stock);
+    private static Bike insertBikeTable(Bike bike) throws SQLException {
+        int productID = insertProductTable(bike.getProduct()).getPKey();
         String sql = "INSERT INTO `team002`.`Bike` (`productID`, `wheelsID`, `handleBarID`, `frameSetID`) VALUES (?, ?, ?, ?);";
         PreparedStatement statement = DbConnection.getCon().prepareStatement(sql);
         statement.setInt(1, productID);
-        statement.setInt(2, wheelsID);
-        statement.setInt(3, handleBarID);
-        statement.setInt(4, frameSetID);
+        statement.setInt(2, bike.getWheels().getPKey());
+        statement.setInt(3, bike.getHandleBar().getPKey());
+        statement.setInt(4, bike.getFrame().getPKey());
         statement.executeUpdate();
-        return productID;
+        bike.setPKey(productID);
+        return bike;
     }
-    private static int insertAddress(int houseNo, String roadName, String cityName, String postCode) throws SQLException {
+    private static Address insertAddressTable(Address address) throws SQLException {
         String sql = "INSERT INTO `team002`.`Address`(`houseNo`, `roadName`, `cityName`, `postCode`) VALUES (?, ?, ?, ?);";
         PreparedStatement statement = DbConnection.getCon().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-        statement.setInt(1, houseNo);
-        statement.setString(2, roadName);
-        statement.setString(3, cityName);
-        statement.setString(4, postCode);
+        statement.setInt(1, address.getHouseNo());
+        statement.setString(2, address.getRoadName());
+        statement.setString(3, address.getCityName());
+        statement.setString(4, address.getPostCode());
         statement.executeUpdate();
-        return DbConnection.getPrimaryKey(statement);
+        int key = DbConnection.getPrimaryKey(statement);
+        address.setAddressId(key);
+        return address;
     }
-    private static int insertOrder(Date date, double orderCost, Order.Status orderStatus, String orderContents, int customerID, int productID) throws SQLException {
-        String sql = "INSERT INTO `team002`.`Order` (`orderDate`, `orderCost`, `orderStatus`, `orderContents`, `customerID`, `productID`) VALUES (?, ?, ?, ?, ?, ?);";
+    private static Order insertOrderTable(Order order) throws SQLException {
+        String sql = "INSERT INTO `team002`.`Order` (`orderDate`, `orderCost`, `orderStatus`, `customerID`, `productID`) VALUES (?, ?, ?, ?, ?);";
         PreparedStatement statement = DbConnection.getCon().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-        statement.setDate(1, date);
-        statement.setDouble(2, orderCost);
-        statement.setString(3, orderStatus.name());
-        statement.setString(4, orderContents);
-        statement.setInt(5, customerID);
-        statement.setInt(6, productID);
+        statement.setDate(1, (Date) order.getDate());
+        statement.setDouble(2, order.getCost());
+        statement.setString(3, order.getStatus().name());
+        statement.setInt(4, order.getCustomer().getCustomerId());
+        statement.setInt(5, order.getBike().getPKey());
         statement.executeUpdate();
-        return DbConnection.getPrimaryKey(statement);
+        int key = DbConnection.getPrimaryKey(statement);
+        order.setID(key);
+        return order;
     }
-    private static int insertCustomer(String forename, String surname, int addressID) throws SQLException {
+    private static Customer insertCustomerTable(Customer customer) throws SQLException {
         String sql = "INSERT INTO `team002`.`Customer` (`forename`, `surname`, `addressID`) VALUES (?, ?, ?);";
         PreparedStatement statement = DbConnection.getCon().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-        statement.setString(1, forename);
-        statement.setString(2, surname);
-        statement.setInt(3, addressID);
+        statement.setString(1, customer.getForename());
+        statement.setString(2, customer.getSurname());
+        statement.setInt(3, customer.getAddress().getAddressId());
         statement.executeUpdate();
-        return DbConnection.getPrimaryKey(statement);
+        int key = DbConnection.getPrimaryKey(statement);
+        customer.setCustomerId(key);
+        return customer;
     }
-    private static int insertStaff(String username, String password) throws SQLException {
-//        INSECURE, UPDATE THE PASSWORD HASHING BOIIII
-        String sql = "INSERT INTO `team002`.`Staff` (`username`, `password`) VALUES (?, ?);";
+    private static Staff insertStaffTable(Staff staff) throws SQLException {
+        String sql = "INSERT INTO `team002`.`Staff` (`username`, `hash`, `salt`) VALUES (?, ?, ?);";
         PreparedStatement statement = DbConnection.getCon().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-        statement.setString(1, username);
-        statement.setString(2, password);
+        statement.setString(1, staff.getUsername());
+        statement.setBytes(2, staff.getHash());
+        statement.setBytes(3, staff.getSalt());
         statement.executeUpdate();
-        return DbConnection.getPrimaryKey(statement);
+        return staff;
     }
 
 //    Get order
-    private static Order getOrder(int productID){
-        return null;
+    private static Order getOrder(int orderId) throws SQLException {
+
+        Connection con = DbConnection.getCon();
+
+        String getOrderSQL = "SELECT " +
+                "Order.orderDate, Order.orderCost, Order.orderStatus, Order.customerID, Order.productID FROM team002.Order " +
+                "WHERE Order.orderID = ?";
+        PreparedStatement orderStatement = con.prepareStatement(getOrderSQL);
+        orderStatement.setInt(1, orderId);
+
+        ResultSet getOrderRS = orderStatement.executeQuery();
+        if (getOrderRS.next()){
+            Date orderDate = getOrderRS.getDate(1);
+            Order.Status orderStatus = Order.Status.valueOf(getOrderRS.getString(3));
+            Customer orderCustomer = getCustomer(getOrderRS.getInt(4));
+            Bike orderBike = getBike(getOrderRS.getInt(5));
+
+            return new Order(orderId, orderDate, orderStatus, orderCustomer, orderBike);
+        } else {
+            return null;
+        }
+
+
     }
-    private static Order getOrder(String forename, String surname, int houseNumber, String address){
+    private static ArrayList<Order> getOrder(String forename, String surname, Address address) throws SQLException {
+
+        String getOrderSQL = "SELECT team002.Order.orderID " +
+                "FROM (team002.Order INNER JOIN Customer ON team002.Order.customerID = Customer.customerID INNER JOIN Address ON Customer.addressID = Address.addressID) " +
+                "WHERE Customer.forename = ? AND Customer.surname = ? AND Address.houseNo = ? AND Address.roadName = ? AND Address.cityName = ? AND Address.postCode = ?";
+
+        PreparedStatement customerStatement = DbConnection.getCon().prepareStatement(getOrderSQL);
+        customerStatement.setString(1, forename);
+        customerStatement.setString(2, surname);
+        customerStatement.setInt(3, address.getHouseNo());
+        customerStatement.setString(4, address.getRoadName());
+        customerStatement.setString(5, address.getCityName());
+        customerStatement.setString(6, address.getPostCode());
+
+        ResultSet getCustomerRS = customerStatement.executeQuery();
+
+        ArrayList<Order> orders = new ArrayList<>();
+        while (getCustomerRS.next()){
+            orders.add(getOrder(getCustomerRS.getInt(1)));
+        }
+        if (orders.isEmpty())
+            return null;
+        return orders;
+    }
+    private static ArrayList<Order> getOrder(Order.Status orderStatus) throws SQLException {
+
+        String orderSQL = "";
+        if (orderStatus != Order.Status.All){
+            orderSQL = "WHERE Order.orderStatus = ?";
+        }
+
+        String getOrderSQL = "SELECT team002.Order.orderID " +
+                "FROM (team002.Order INNER JOIN Customer ON team002.Order.customerID = Customer.customerID INNER JOIN Address ON Customer.addressID = Address.addressID) "
+                + orderSQL;
+
+        PreparedStatement customerStatement = DbConnection.getCon().prepareStatement(getOrderSQL);
+        if (orderStatus != Order.Status.All){
+            customerStatement.setString(1, orderStatus.name());
+        }
+        ResultSet getCustomerRS = customerStatement.executeQuery();
+
+        ArrayList<Order> orders = new ArrayList<>();
+        while (getCustomerRS.next()){
+            orders.add(getOrder(getCustomerRS.getInt(1)));
+        }
+        return orders;
+    }
+
+//    Insert order
+    private static Order insertOrder(Order order) throws SQLException {
+        Connection con = DbConnection.getCon();
+        try {
+            con.setAutoCommit(false);
+
+            order.getCustomer().setAddress(insertAddressTable(order.getCustomer().getAddress()));
+            order.setCustomer(insertCustomerTable(order.getCustomer()));
+            order.getBike().setWheels(insertWheelTable(order.getBike().getWheels()));
+            order.getBike().setFrame(insertFrameTable(order.getBike().getFrame()));
+            order.getBike().setHandleBar(insertHandleBarTable(order.getBike().getHandleBar()));
+            order.setBike(insertBikeTable(order.getBike()));
+            order = insertOrderTable(order);
+
+            con.commit();
+            return order;
+//            Commit the queries
+        } catch (SQLException e){
+//            If commit fails, rollback
+            System.out.println(e);
+            DbConnection.rollback(con);
+        } finally{
+            con.setAutoCommit(true);
+        }
         return null;
     }
 
+//    Get Customer
+    private static Customer getCustomer(int customerID) throws SQLException {
+
+        String getCustomerSQL = "SELECT Customer.forename, Customer.surname, Customer.addressID, Address.houseNo, " +
+                "Address.roadName, Address.cityName, Address.postCode " +
+                "FROM (Customer INNER JOIN Address ON Address.addressID = Customer.addressID) " +
+                "WHERE Customer.customerID = ?";
+
+        PreparedStatement customerStatement = DbConnection.getCon().prepareStatement(getCustomerSQL);
+        customerStatement.setInt(1, customerID);
+
+        ResultSet getCustomerRS = customerStatement.executeQuery();
+        getCustomerRS.next();
+
+        Address address = new Address(getCustomerRS.getInt(3), getCustomerRS.getInt(4),
+                getCustomerRS.getString(5), getCustomerRS.getString(6),
+                getCustomerRS.getString(7));
+        return new Customer(customerID, getCustomerRS.getString(1), getCustomerRS.getString(2), address);
+    }
+
+//    Get Bike
+    private static Bike getBike(int productId) throws SQLException {
+
+    Connection con = DbConnection.getCon();
+
+    String getBikeSQL = "SELECT Bike.wheelsID, Bike.handleBarID, Bike.frameSetID, Product.productName, " +
+            "Product.serialNumber, Product.unitCost, Product.brandName, Product.Stock " +
+            "FROM (Product INNER JOIN Bike ON Product.productID = Bike.productID) " +
+            "WHERE Product.ProductID = ?";
+
+    PreparedStatement getBikeStatement = con.prepareStatement(getBikeSQL);
+    getBikeStatement.setInt(1, productId);
+
+    ResultSet getBikeRS = getBikeStatement.executeQuery();
+    getBikeRS.next();
+
+    Wheels wheels = getWheels(getBikeRS.getInt(1));
+    HandleBar handleBar = getHandleBar(getBikeRS.getInt(2));
+    Frame frame = getFrame(getBikeRS.getInt(3));
+    String name = getBikeRS.getString(4);
+    int serialNumber = getBikeRS.getInt(5);
+    double unitCost = getBikeRS.getDouble(6);
+    String brandName = getBikeRS.getString(7);
+    int stock = getBikeRS.getInt(8);
+
+    return new Bike(productId, wheels, frame, handleBar, name, serialNumber, brandName, stock);
+
+}
+
 //    Get Bike component
-    private static ArrayList<Wheels> getWheelsWhere(double diameter, Wheels.Style style, Wheels.BrakeType brakeSystem) throws SQLException {
+    private static Wheels getWheels(int productId) throws SQLException {
+
+        String getWheelSQL = "SELECT Wheels.diameter, Wheels.style, Wheels.brakeSystem, Product.productName, " +
+                "Product.serialNumber, Product.unitCost, Product.brandName, Product.Stock" +
+                " FROM (Product INNER JOIN Wheels ON Product.productID = Wheels.productID) " +
+                "WHERE Product.productID = ?";
+
+        PreparedStatement wheelStatement = DbConnection.getCon().prepareStatement(getWheelSQL);
+        wheelStatement.setInt(1, productId);
+
+        ResultSet getWheelRS = wheelStatement.executeQuery();
+        getWheelRS.next();
+
+        return new Wheels(productId, getWheelRS.getDouble(1),
+                getWheelRS.getString(2),
+                getWheelRS.getString(3),
+                getWheelRS.getString(4),
+                getWheelRS.getInt(5),
+                getWheelRS.getDouble(6),
+                getWheelRS.getString(7),
+                getWheelRS.getInt(8));
+    }
+    private static HandleBar getHandleBar(int productId) throws SQLException {
+
+        String getWheelSQL = "SELECT Handlebar.style, Product.productName, " +
+                "Product.serialNumber, Product.unitCost, Product.brandName, Product.Stock" +
+                " FROM (Product INNER JOIN Handlebar ON Product.productID = Handlebar.productID)" +
+                "WHERE Product.productID = ?";
+
+        PreparedStatement handleBarStatement = DbConnection.getCon().prepareStatement(getWheelSQL);
+        handleBarStatement.setInt(1, productId);
+
+        ResultSet handleBarRS = handleBarStatement.executeQuery();
+        handleBarRS.next();
+
+        return new HandleBar(productId, handleBarRS.getString(1),
+                handleBarRS.getString(2),
+                handleBarRS.getInt(3),
+                handleBarRS.getInt(4),
+                handleBarRS.getString(5),
+                handleBarRS.getInt(6));
+    }
+    private static Frame getFrame(int productId) throws SQLException {
+
+        String getFrameSQL = "SELECT FrameSet.frameSize, FrameSet.gears, FrameSet.shocks, Product.productName, " +
+                "Product.serialNumber, Product.unitCost, Product.brandName, Product.Stock" +
+                " FROM (Product INNER JOIN FrameSet ON Product.productID = FrameSet.productID)" +
+                "WHERE Product.productID = ?";
+
+        PreparedStatement frameStatement = DbConnection.getCon().prepareStatement(getFrameSQL);
+        frameStatement.setInt(1, productId);
+
+        ResultSet getFrameRS = frameStatement.executeQuery();
+        getFrameRS.next();
+
+        return new Frame(productId, getFrameRS.getInt(1),
+                getFrameRS.getString(2),
+                getFrameRS.getBoolean(3),
+                getFrameRS.getString(4),
+                getFrameRS.getInt(5),
+                getFrameRS.getInt(6),
+                getFrameRS.getString(7),
+                getFrameRS.getInt(8));
+    }
+    private static ArrayList<Wheels> getWheels(double diameter, Wheels.Style style, Wheels.BrakeType brakeSystem) throws SQLException {
 
         String wheelDiameter = "Wheels.diameter = ? AND ";
         String wheelStyle = "Wheels.style = ? AND ";
@@ -142,7 +358,7 @@ public class Queries {
         }
 
         String sql = "SELECT Wheels.diameter, Wheels.style, Wheels.brakeSystem, Product.productName, " +
-                "Product.serialNumber, Product.unitCost, Product.brandName, Product.Stock" +
+                "Product.serialNumber, Product.unitCost, Product.brandName, Product.Stock, Product.productID" +
                     " FROM (Product INNER JOIN Wheels ON Product.productID = Wheels.productID)" +
                 sqlWhere;
 
@@ -159,11 +375,10 @@ public class Queries {
         }
 
         ResultSet rs = statement.executeQuery();
-        System.out.println(statement);
 
         ArrayList<Wheels> wheels = new ArrayList<Wheels>();
         while (rs.next()) {
-            wheels.add(new Wheels(rs.getDouble(1),
+            wheels.add(new Wheels(rs.getInt(9), rs.getDouble(1),
                     rs.getString(2),
                     rs.getString(3),
                     rs.getString(4),
@@ -174,6 +389,36 @@ public class Queries {
         }
         rs.close();
         return wheels;
+    }
+    private static ArrayList<HandleBar> getHandleBar(HandleBar.Style style) throws SQLException {
+
+        String sqlWhere = "";
+        if (style != HandleBar.Style.ALL){
+            sqlWhere = " WHERE HandleBar.style = ?";
+        }
+
+        String sql = "SELECT HandleBar.style, Product.productName, " +
+                "Product.serialNumber, Product.unitCost, Product.brandName, Product.Stock, Product.productID" +
+                " FROM (Product INNER JOIN HandleBar ON Product.productID = HandleBar.productID)" +
+                sqlWhere;
+        PreparedStatement statement = DbConnection.getCon().prepareStatement(sql);
+
+        if (style != HandleBar.Style.ALL){
+            statement.setString(1, Utils.isAllEnum(style));
+        }
+
+        ResultSet rs = statement.executeQuery();
+        ArrayList<HandleBar> handleBars = new ArrayList<>();
+        while (rs.next()) {
+            handleBars.add(new HandleBar(rs.getInt(7), rs.getString(1),
+                    rs.getString(2),
+                    rs.getInt(3),
+                    rs.getInt(4),
+                    rs.getString(5),
+                    rs.getInt(6)));
+        }
+        rs.close();
+        return handleBars;
     }
     private static ArrayList<Frame> getFrame(int frameSize , String gears, String containsShocks) throws SQLException {
 
@@ -196,7 +441,7 @@ public class Queries {
         }
 
         String sql = "SELECT Frame.frameSize, Frame.gears, Frame.containsShocks, Product.productName, " +
-                "Product.serialNumber, Product.unitCost, Product.brandName, Product.Stock" +
+                "Product.serialNumber, Product.unitCost, Product.brandName, Product.Stock, Product.productID" +
                 " FROM (Product INNER JOIN FrameSet ON Product.productID = FrameSet.productID)" +
                 sqlWhere;
 
@@ -213,7 +458,7 @@ public class Queries {
         ResultSet rs = statement.executeQuery();
         ArrayList<Frame> frames = new ArrayList<Frame>();
         if (rs.next()) {
-            frames.add(new Frame(rs.getInt(1),
+            frames.add(new Frame(rs.getInt(9), rs.getInt(1),
                     rs.getString(2),
                     rs.getBoolean(3),
                     rs.getString(4),
@@ -224,37 +469,6 @@ public class Queries {
         }
         rs.close();
         return frames;
-    }
-    private static ArrayList<HandleBar> getHandleBar(HandleBar.Style style) throws SQLException {
-
-        String sqlWhere = "";
-        if (style != HandleBar.Style.ALL){
-            sqlWhere = " WHERE HandleBar.style = ?";
-        }
-
-        String sql = "SELECT HandleBar.style, Product.productName, " +
-                "Product.serialNumber, Product.unitCost, Product.brandName, Product.Stock" +
-                " FROM (Product INNER JOIN HandleBar ON Product.productID = HandleBar.productID)" +
-                sqlWhere;
-        PreparedStatement statement = DbConnection.getCon().prepareStatement(sql);
-
-        if (style != HandleBar.Style.ALL){
-            statement.setString(1, Utils.isAllEnum(style));
-        }
-
-        ResultSet rs = statement.executeQuery();
-        System.out.println(statement);
-        ArrayList<HandleBar> handleBars = new ArrayList<>();
-        while (rs.next()) {
-            handleBars.add(new HandleBar(rs.getString(1),
-                    rs.getString(2),
-                    rs.getInt(3),
-                    rs.getInt(4),
-                    rs.getString(5),
-                    rs.getInt(6)));
-        }
-        rs.close();
-        return handleBars;
     }
 
 //    Stock handler
@@ -273,54 +487,152 @@ public class Queries {
         statement.executeUpdate();
     }
 
-//    Initialising database
-    static void setDatabase() throws SQLException {
+//    Set users
+    public static void setUsers(){
+        return;
+    }
+
+//    Hash password
+    public static String hashPassword(String password){
+        return password;
+    }
+
+//    Order queries
+    public static void deleteOrder(int orderID) throws SQLException {
+        Connection con = DbConnection.getCon();
+        String sql = "DELETE FROM `team002`.`Order` WHERE Order.orderID = ? AND Order.orderStatus = ?";
+        PreparedStatement statement = con.prepareStatement(sql);
+        statement.setInt(1, orderID);
+        statement.setString(2, Order.Status.PENDING.name());
+        statement.executeUpdate();
+    }
+    public static Order updateOrderStatus(Order order, Order.Status status) throws SQLException {
+        String sql = "UPDATE `team002`.`Order` SET `orderStatus` = ? WHERE `orderID` = ?";
+        PreparedStatement statement = DbConnection.getCon().prepareStatement(sql);
+        statement.setString(1, status.name());
+        statement.setInt(2, order.getID());
+        statement.executeUpdate();
+        order.setStatus(status);
+        return order;
+    }
+
+//    Gets staff member from username
+    private static Staff getStaff(String staffUsername) throws SQLException {
+        String sql = "SELECT Staff.hash, Staff.salt FROM `team002`.`Staff` WHERE Staff.username = ?";
+        PreparedStatement statement = DbConnection.getCon().prepareStatement(sql);
+        statement.setString(1, staffUsername);
+        ResultSet rs = statement.executeQuery();
+
+        rs.next();
+        byte[] hash = rs.getBytes(1);
+        byte[] salt = rs.getBytes(2);
+        Staff staff = new Staff(staffUsername, hash, salt);
+        return staff;
+    }
+
+//    Update customer details
+    public static void updateCustomer(Customer customer) throws SQLException{
+
+
+//        Get connection, and set up transaction
+            Connection con = DbConnection.getCon();
+        try {
+            con.setAutoCommit(false);
+
+//        Create the SQL syntax
+            String addressUPDATE = "UPDATE `team002`.`Address` ";
+            String addressSET = "SET Address.houseNo = ?, Address.roadName = ?, Address.cityName = ?, Address.postCode = ? ";
+            String addressWHERE = "WHERE Address.addressID = ?; ";
+            String customerUPDATE = "UPDATE `team002`.`Customer` ";
+            String customerSET = "SET Customer.forename = ?, Customer.surname = ? ";
+            String customerWHERE = "WHERE Customer.customerID = ?; ";
+
+//        Create the prepared statements
+            PreparedStatement updateAddress = DbConnection.getCon().prepareStatement(addressUPDATE + addressSET + addressWHERE);
+            PreparedStatement updateCustomer = DbConnection.getCon().prepareStatement(customerUPDATE + customerSET + customerWHERE);
+
+//        Set the variables
+            Address address = customer.getAddress();
+            updateAddress.setInt(1, address.getHouseNo());
+            updateAddress.setString(2, address.getRoadName());
+            updateAddress.setString(3, address.getCityName());
+            updateAddress.setString(4, address.getPostCode());
+            updateAddress.setInt(5, address.getAddressId());
+            updateCustomer.setString(1, customer.getForename());
+            updateCustomer.setString(2, customer.getSurname());
+            updateCustomer.setInt(3, customer.getCustomerId());
+
+//        Execute the queries
+            updateAddress.executeUpdate();
+            updateCustomer.executeUpdate();
+
+//        Commit the queries
+            con.commit();
+        } catch (SQLException e){
+//            If commit fails, rollback
+            System.out.println(e);
+            DbConnection.rollback(con);
+        } finally{
+            con.setAutoCommit(true);
+        }
+    }
+
+//    Initialise database
+    private static void setDatabase() throws SQLException {
         deleteDatabase();
         populateDatabase();
     }
-    static void populateDatabase() throws SQLException {
+    private static void populateDatabase() throws SQLException {
 //        First insert all the components of a bike
-        int wheelID = insertWheel("xyz", 5.99, "brand123", 678, 1, 7, Wheels.Style.ROAD, Wheels.BrakeType.RIM);
-        int wheelID1 = insertWheel("fgh", 6.99, "brand1233", 978, 1, 8, Wheels.Style.MOUNTAIN, Wheels.BrakeType.DISKBRAKE);
-        int wheelID2 = insertWheel("bnm", 9.99, "brand1223", 688, 1, 6, Wheels.Style.HYBRID, Wheels.BrakeType.ALL);
-        int wheelID3 = insertWheel("rbm", 10.0, "brand1234", 888, 1, 8, Wheels.Style.HYBRID, Wheels.BrakeType.RIM);
+        Wheels wheels1 = new Wheels(5.99, Wheels.Style.ROAD, Wheels.BrakeType.RIM, "wheel1", 1, 6.88, "Brand1", 1);
+        Wheels wheels2 = new Wheels(5.99, Wheels.Style.ROAD, Wheels.BrakeType.RIM, "wheel2", 1, 6.88, "Brand1", 1);
+        Wheels wheels3 = new Wheels(5.99, Wheels.Style.ROAD, Wheels.BrakeType.RIM, "wheel3", 1, 6.88, "Brand1", 1);
+        Wheels wheels4 = new Wheels(5.99, Wheels.Style.ROAD, Wheels.BrakeType.RIM, "wheel4", 1, 6.88, "Brand1", 1);
 
-        int frameID = insertFrame("pqr", 9, "brand123", 789, 1, 10, "ABC", true);
-        int frameID1 = insertFrame("qsr", 10, "brand1234", 989, 1, 11, "ADC", false);
-        int frameID2 = insertFrame("rst", 8, "brand1233", 739, 1, 12, "AKD", true);
-        int frameID3 = insertFrame("ppt", 8, "brand1223", 659, 1, 12, "AVC", false);
+        Frame frame1 = new Frame(6, "Gears1", true, "Frame1", 69, 2.2, "BRandName", 42);
+        Frame frame2 = new Frame(6, "Gears2", true, "Frame1", 69, 2.2, "BRandName", 42);
+        Frame frame3 = new Frame(6, "Gears3", true, "Frame1", 69, 2.2, "BRandName", 42);
+        Frame frame4 = new Frame(6, "Gears4", true, "Frame1", 69, 2.2, "BRandName", 42);
 
-        int handleBarID = insertHandleBar("klm", 3, "brand123", 345, 2, HandleBar.Style.STRAIGHT);
-        int handleBarID1 = insertHandleBar("tgl", 4, "brand1523", 395, 1, HandleBar.Style.ALL);
-        int handleBarID2 = insertHandleBar("ssm", 2.99, "brand1243", 3445, 1, HandleBar.Style.DROPPED);
-        int handleBarID3 = insertHandleBar("prm", 3, "brand1234", 3455, 2, HandleBar.Style.HIGH);
-//        bike requires the ID's from each component
-        int bikeID = insertBike("pqraa", 30, "brand123",567, 1, wheelID,handleBarID,frameID);
-        int bikeID1 = insertBike("aaa", 31, "brand123",5679, 1, wheelID1,handleBarID1,frameID1);
-        int bikeID2 = insertBike("pqv", 40, "brand123",5657, 1, wheelID2,handleBarID2,frameID2);
-        int bikeID3 = insertBike("rav", 35, "brand123",5667, 1, wheelID3,handleBarID3,frameID3);
+        HandleBar handleBar1 = new HandleBar(HandleBar.Style.DROPPED, "HandleBar1", 621, 53.77, "Brand1", 6);
+        HandleBar handleBar2 = new HandleBar(HandleBar.Style.DROPPED, "HandleBar2", 621, 53.77, "Brand1", 6);
+        HandleBar handleBar3 = new HandleBar(HandleBar.Style.DROPPED, "HandleBar3", 621, 53.77, "Brand1", 6);
+        HandleBar handleBar4 = new HandleBar(HandleBar.Style.DROPPED, "HandleBar4", 621, 53.77, "Brand1", 6);
 
-//        Order requires customer ID, Customer requires the addressID
-        int addressID = insertAddress(45, "St-georges", "Sheffield", "S37HB");
-        int customerID = insertCustomer("abccc", "bcddd",addressID);
-        int addressID1 = insertAddress(777, "Hawkins-St", "Sheffield", "KL4MN");
-        int customerID1 = insertCustomer("qmn", "dfgh",addressID1);
-        int addressID2 = insertAddress(901, "West-St", "Sheffield", "A3BFG");
-        int customerID2 = insertCustomer("brp", "okd",addressID2);
-        int customerID3 = insertCustomer("klmn", "pqrs",addressID2);
+        Bike bike1 = new Bike(wheels1, frame1, handleBar1, "Bike1", 555, "brand1", 5);
+        Bike bike2 = new Bike(wheels2, frame2, handleBar2, "Bike2", 444, "brand2", 5);
+        Bike bike3 = new Bike(wheels3, frame3, handleBar3, "Bike3", 333, "brand3", 5);
+        Bike bike4 = new Bike(wheels4, frame4, handleBar4, "Bike4", 222, "brand4", 5);
 
-        insertOrder(Date.valueOf(LocalDate.now()), 69.99, Order.Status.PENDING, "Contains 1 Neon Pink Bike", customerID, bikeID);
-        insertOrder(Date.valueOf(LocalDate.now()), 59.99, Order.Status.CONFIRMED, "Contains 1 Azure Blue Bike", customerID1, bikeID1);
-        insertOrder(Date.valueOf(LocalDate.now()), 79.99, Order.Status.PENDING, "Contains 1 Vermilion Bike", customerID2, bikeID2);
-        insertOrder(Date.valueOf(LocalDate.now()), 66.99, Order.Status.FULFILLED, "Contains 1 golden Bike", customerID3, bikeID3);
-//        Inserts staff
+        Address address1 = new Address(10, "Roady", "Sheffield", "S10 4BY");
+        Address address2 = new Address(9, "Roady", "Sheffield", "S10 4BY");
+        Address address3 = new Address(8, "Roady", "Sheffield", "S10 4BY");
+        Address address4 = new Address(7, "Roady", "Sheffield", "S10 4BY");
 
-        insertStaff("aksb", "qbcnksx");
-        insertStaff("roronoa", "zoro");
-        insertStaff("bob", "marley");
-        insertStaff("vinsmoke", "sanji");
+        Customer customer1 = new Customer("Alex", "Surname", address1);
+        Customer customer2 = new Customer("Oscar", "Surname", address2);
+        Customer customer3 = new Customer("Tahir", "Surname", address3);
+        Customer customer4 = new Customer("Lea", "Surname", address4);
+
+        Order order1 = new Order(Date.valueOf(LocalDate.now()), Order.Status.PENDING, customer1, bike1);
+        Order order2 = new Order(Date.valueOf(LocalDate.now()), Order.Status.CONFIRMED, customer2, bike2);
+        Order order3 = new Order(Date.valueOf(LocalDate.now()), Order.Status.PENDING, customer3, bike3);
+        Order order4 = new Order(Date.valueOf(LocalDate.now()), Order.Status.PENDING, customer4, bike4);
+
+        insertOrder(order1);
+        insertOrder(order2);
+        insertOrder(order3);
+        insertOrder(order4);
+
+        //        Inserts staff
+        byte[][] salts = new byte[4][4];
+        Arrays.fill(salts, Password.getSalt());
+        insertStaffTable(new Staff("Staff1", Password.hashPassword("Hello", salts[0])[0], salts[0]));
+        insertStaffTable(new Staff("Staff2", Password.hashPassword("Hello", salts[0])[0], salts[0]));
+        insertStaffTable(new Staff("Staff3", Password.hashPassword("Hello", salts[0])[0], salts[0]));
+        insertStaffTable(new Staff("Staff4", Password.hashPassword("Hello", salts[0])[0], salts[0]));
     }
-    static void deleteDatabase() throws SQLException {
+    private static void deleteDatabase() throws SQLException {
         Connection con = DbConnection.getCon();
         con.prepareStatement("DELETE FROM `team002`.`Order`;").executeUpdate();
         con.prepareStatement("DELETE FROM `team002`.`Customer`;").executeUpdate();
@@ -334,16 +646,33 @@ public class Queries {
 
     }
 
-
+//    Main
     public static void main(String[] args) throws SQLException {
         System.out.println("Setting database...");
         setDatabase();
-        ArrayList<Wheels> wheels = getWheelsWhere(-1, Wheels.Style.ROAD, Wheels.BrakeType.RIM);
-        System.out.println(wheels);
-        System.out.println("Successfull");
+//        setDatabase();
+//        ArrayList<Wheels> wheels = getWheelsWhere(-1, Wheels.Style.ROAD, Wheels.BrakeType.RIM);
+//        System.out.println(wheels);
+
+//        Address address = new Address(81, 621, "ABC123", "Sheffield", "S37ABC");
+//        Customer customer = new Customer(105, "Alex", "Chapman", address);
+//        updateCustomer(customer);
+//        Staff staff = getStaff("aksb");
+//        Boolean isCorrect = Password.checkPassword(staff.getHash(), "Hello", staff.getSalt());
+        Order order = getOrder(-1);
+        if (order != null){
+            ArrayList<Order> order2 = getOrder(order.getCustomer().getForename(), order.getCustomer().getSurname(), order.getCustomer()
+                    .getAddress());
+            System.out.println(order2.get(0).getDate());
+        }
+        ArrayList<Order> order3 = getOrder(Order.Status.CONFIRMED);
+        System.out.println(order3);
+        updateOrderStatus(order3.get(0), Order.Status.FULFILLED);
+        order3 = getOrder(Order.Status.All);
+        for (Order odr: order3){
+            System.out.println(odr.getStatus());
+        }
     }
 }
-
-
 
 

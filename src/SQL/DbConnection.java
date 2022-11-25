@@ -59,10 +59,29 @@ public class DbConnection {
 
 
 //    Do transaction at the end
-//    public static ResultSet executeQuery(PreparedStatement query) throws SQLException {
-//
-//        Connection connection = getCon();
-//
-//        return results;
-//    }
+    public static ResultSet executeQuery(PreparedStatement statement) {
+        try{
+            return statement.executeQuery();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static PreparedStatement executeUpdate(PreparedStatement statement){
+        try{
+            statement.executeUpdate();
+            return statement;
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+    public static void setAutoCommit(Connection con, boolean isAutoCommit){
+        try{
+            con.setAutoCommit(isAutoCommit);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
 }

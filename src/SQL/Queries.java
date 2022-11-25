@@ -532,13 +532,14 @@ public class Queries {
         statement.setString(1, staffUsername);
         ResultSet rs = statement.executeQuery();
 
-        rs.next();
-        byte[] hash = rs.getBytes(1);
-        byte[] salt = rs.getBytes(2);
-        Staff staff = new Staff(staffUsername, hash, salt);
-        boolean isCorrect = Password.checkPassword(staff.getHash(), inputPassword, staff.getSalt());
-        if (isCorrect)
-            return staff;
+        if(rs.next()) {
+            byte[] hash = rs.getBytes(1);
+            byte[] salt = rs.getBytes(2);
+            Staff staff = new Staff(staffUsername, hash, salt);
+            boolean isCorrect = Password.checkPassword(staff.getHash(), inputPassword, staff.getSalt());
+            if (isCorrect)
+                return staff;
+        }
         return null;
     }
 

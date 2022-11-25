@@ -1,4 +1,5 @@
 import SQL.Utils;
+import gui.Frames.BaseFrame;
 
 import java.sql.*;
 

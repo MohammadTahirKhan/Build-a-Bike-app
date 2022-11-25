@@ -9,32 +9,42 @@ public class ProductPanel extends JPanel {
     private static final Font SEGOE_UI = new Font("Segoe UI", Font.PLAIN, 14);
     private final JLabel addToBikeLabel = new JLabel("Add to Bike");
 
+    private final Product product;
+
+    private final JLabel image = new JLabel();
+    private final JLabel displayName = new JLabel();
+    private final JLabel displayCost = new JLabel();
+    private final JCheckBox select = new JCheckBox();
+    private final JSeparator horizontalSeparator = new JSeparator();
+    private final JSeparator verticalSeparator = new JSeparator(SwingConstants.VERTICAL);
 
     public ProductPanel(Product product) {
+        this.product = product;
+        initComponents();
+    }
+
+    private void initComponents() {
         this.setBorder(BorderFactory.createEtchedBorder());
 
-        JLabel image = new JLabel();
+
         image.setHorizontalAlignment(SwingConstants.CENTER);
         image.setText("/IMAGE/");
 
-        JLabel displayName = new JLabel();
+
         displayName.setFont(SEGOE_UI); // NOI18N
         displayName.setText(product.getName());
 
-        JLabel displayCost = new JLabel();
         displayCost.setFont(SEGOE_UI); // NOI18N
         displayCost.setHorizontalAlignment(SwingConstants.CENTER);
         displayCost.setText("£" + product.getItemCost());
 
-        JCheckBox select = new JCheckBox();
         select.setHorizontalAlignment(SwingConstants.CENTER);
 
         addToBikeLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
         GroupLayout productPanel5Layout = new GroupLayout(this);
         this.setLayout(productPanel5Layout);
-        JSeparator horizontalSeparator = new JSeparator();
-        JSeparator verticalSeparator = new JSeparator(SwingConstants.VERTICAL);
+
         productPanel5Layout.setHorizontalGroup(
                 productPanel5Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                         .addGroup(productPanel5Layout.createSequentialGroup()

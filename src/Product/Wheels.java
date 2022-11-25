@@ -60,10 +60,9 @@ public class Wheels extends Product{
     }
 
 //    SQL Get wheels
+
 //    public static Wheels[] pullWheels(){
 //        return Queries.getWheels();
 //    }
-
-
 
 }

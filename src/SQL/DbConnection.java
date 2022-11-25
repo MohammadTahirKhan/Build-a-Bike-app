@@ -42,10 +42,6 @@ public class DbConnection {
         return pKey;
     }
 
-
-
-
-
 //    Do transaction at the end
 //    public static ResultSet executeQuery(PreparedStatement query) throws SQLException {
 //

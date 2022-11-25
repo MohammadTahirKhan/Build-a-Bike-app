@@ -6,16 +6,17 @@ public class HandleBar extends Product{
     public enum Style {
         STRAIGHT,
         HIGH,
-        DROPPED
+        DROPPED,
+        ALL
     }
 
 //    Declaring variable(s)
     protected Style style;
 
 //    Constructor
-    public HandleBar(String style, String name, int serialNumber, float itemCost, String brandName) {
+    public HandleBar(String style, String name, int serialNumber, double itemCost, String brandName, int stock) {
         setStyle(style);
-        this.setProductDetails(name, serialNumber, itemCost, brandName);
+        this.setProductDetails(name, serialNumber, itemCost, brandName, stock);
     }
 
 //    Getter

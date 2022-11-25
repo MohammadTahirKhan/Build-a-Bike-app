@@ -431,9 +431,9 @@ public class Queries {
     }
     public static ArrayList<Frame> getFrame(int frameSize , String gears, String containsShocks) throws SQLException {
 
-        String FrameFrameSize = "Frame.frameSize = ? AND ";
-        String FrameGears = "Frame.gears = ? AND ";
-        String FrameContainsShocks = "Frame.containsShocks = ? AND ";
+        String FrameFrameSize = "FrameSet.frameSize = ? AND ";
+        String FrameGears = "FrameSet.gears = ? AND ";
+        String FrameContainsShocks = "FrameSet.containsShocks = ? AND ";
         String whereString = " WHERE ";
 
         if (frameSize != -1){
@@ -449,7 +449,7 @@ public class Queries {
             sqlWhere = whereString.substring(0, whereString.length() - 5);
         }
 
-        String sql = "SELECT Frame.frameSize, Frame.gears, Frame.containsShocks, Product.productName, " +
+        String sql = "SELECT FrameSet.frameSize, FrameSet.gears, FrameSet.containsShocks, Product.productName, " +
                 "Product.serialNumber, Product.unitCost, Product.brandName, Product.Stock, Product.productID" +
                 " FROM (Product INNER JOIN FrameSet ON Product.productID = FrameSet.productID)" +
                 sqlWhere;
@@ -513,7 +513,10 @@ public class Queries {
         statement.setInt(1, product.getPKey());
         statement.executeUpdate();
     }
-    public static void setStock(int productID, int quantity) throws SQLException {
+    public static void setStock(Product product, int quantity) throws SQLException {
+        setStock(product.getPKey(), quantity);
+    }
+    private static void setStock(int productID, int quantity) throws SQLException {
         String sql = "UPDATE `team002`.`Product` SET `stock` = ? WHERE `productID` = ?;";
         PreparedStatement statement = DbConnection.getCon().prepareStatement(sql);
         statement.setInt(1, quantity);

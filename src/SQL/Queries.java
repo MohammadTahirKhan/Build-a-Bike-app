@@ -124,7 +124,7 @@ public class Queries {
     }
 
 //    Get order
-    private static Order getOrder(int orderId) throws SQLException {
+    public static Order getOrder(int orderId) throws SQLException {
 
         Connection con = DbConnection.getCon();
 
@@ -148,7 +148,7 @@ public class Queries {
 
 
     }
-    private static ArrayList<Order> getOrder(String forename, String surname, Address address) throws SQLException {
+    public static ArrayList<Order> getOrder(String forename, String surname, Address address) throws SQLException {
 
         String getOrderSQL = "SELECT team002.Order.orderID " +
                 "FROM (team002.Order INNER JOIN Customer ON team002.Order.customerID = Customer.customerID INNER JOIN Address ON Customer.addressID = Address.addressID) " +
@@ -172,7 +172,7 @@ public class Queries {
             return null;
         return orders;
     }
-    private static ArrayList<Order> getOrder(Order.Status orderStatus) throws SQLException {
+    public static ArrayList<Order> getOrder(Order.Status orderStatus) throws SQLException {
 
         String orderSQL = "";
         if (orderStatus != Order.Status.All){
@@ -197,7 +197,7 @@ public class Queries {
     }
 
 //    Insert order
-    private static Order insertOrder(Order order) throws SQLException {
+    public static Order insertOrder(Order order) throws SQLException {
         Connection con = DbConnection.getCon();
         try {
             con.setAutoCommit(false);
@@ -224,7 +224,7 @@ public class Queries {
     }
 
 //    Get Customer
-    private static Customer getCustomer(int customerID) throws SQLException {
+    public static Customer getCustomer(int customerID) throws SQLException {
 
         String getCustomerSQL = "SELECT Customer.forename, Customer.surname, Customer.addressID, Address.houseNo, " +
                 "Address.roadName, Address.cityName, Address.postCode " +
@@ -244,7 +244,7 @@ public class Queries {
     }
 
 //    Get Bike
-    private static Bike getBike(int productId) throws SQLException {
+    public static Bike getBike(int productId) throws SQLException {
 
     Connection con = DbConnection.getCon();
 
@@ -273,7 +273,7 @@ public class Queries {
 }
 
 //    Get Bike component
-    private static Wheels getWheels(int productId) throws SQLException {
+    public static Wheels getWheels(int productId) throws SQLException {
 
         String getWheelSQL = "SELECT Wheels.diameter, Wheels.style, Wheels.brakeSystem, Product.productName, " +
                 "Product.serialNumber, Product.unitCost, Product.brandName, Product.Stock" +
@@ -295,7 +295,7 @@ public class Queries {
                 getWheelRS.getString(7),
                 getWheelRS.getInt(8));
     }
-    private static HandleBar getHandleBar(int productId) throws SQLException {
+    public static HandleBar getHandleBar(int productId) throws SQLException {
 
         String getWheelSQL = "SELECT Handlebar.style, Product.productName, " +
                 "Product.serialNumber, Product.unitCost, Product.brandName, Product.Stock" +
@@ -315,7 +315,7 @@ public class Queries {
                 handleBarRS.getString(5),
                 handleBarRS.getInt(6));
     }
-    private static Frame getFrame(int productId) throws SQLException {
+    public static Frame getFrame(int productId) throws SQLException {
 
         String getFrameSQL = "SELECT FrameSet.frameSize, FrameSet.gears, FrameSet.shocks, Product.productName, " +
                 "Product.serialNumber, Product.unitCost, Product.brandName, Product.Stock" +
@@ -337,7 +337,16 @@ public class Queries {
                 getFrameRS.getString(7),
                 getFrameRS.getInt(8));
     }
-    private static ArrayList<Wheels> getWheels(double diameter, Wheels.Style style, Wheels.BrakeType brakeSystem) throws SQLException {
+    public static ArrayList<Wheels> getAllWheels() throws SQLException {
+        return getWheels(-1, Wheels.Style.ALL, Wheels.BrakeType.ALL);
+    }
+    public static ArrayList<HandleBar> getAllHandleBar() throws SQLException {
+        return getHandleBar(HandleBar.Style.ALL);
+    }
+    public static ArrayList<Frame> getAllFrame() throws SQLException {
+        return getFrame(-1, "ALL", "ALL");
+    }
+    public static ArrayList<Wheels> getWheels(double diameter, Wheels.Style style, Wheels.BrakeType brakeSystem) throws SQLException {
 
         String wheelDiameter = "Wheels.diameter = ? AND ";
         String wheelStyle = "Wheels.style = ? AND ";
@@ -390,7 +399,7 @@ public class Queries {
         rs.close();
         return wheels;
     }
-    private static ArrayList<HandleBar> getHandleBar(HandleBar.Style style) throws SQLException {
+    public static ArrayList<HandleBar> getHandleBar(HandleBar.Style style) throws SQLException {
 
         String sqlWhere = "";
         if (style != HandleBar.Style.ALL){
@@ -420,7 +429,7 @@ public class Queries {
         rs.close();
         return handleBars;
     }
-    private static ArrayList<Frame> getFrame(int frameSize , String gears, String containsShocks) throws SQLException {
+    public static ArrayList<Frame> getFrame(int frameSize , String gears, String containsShocks) throws SQLException {
 
         String FrameFrameSize = "Frame.frameSize = ? AND ";
         String FrameGears = "Frame.gears = ? AND ";
@@ -472,14 +481,14 @@ public class Queries {
     }
 
 //    Stock handler
-    private static void decrementStock(int productID) throws SQLException {
+    public static void decrementStock(int productID) throws SQLException {
 //        Have a decerement exception
         String sql = "UPDATE `team002`.`Product` SET `stock` = `stock` - 1 WHERE `productID` = ?;";
         PreparedStatement statement = DbConnection.getCon().prepareStatement(sql);
         statement.setInt(1, productID);
         statement.executeUpdate();
     }
-    private static void setStock(int productID, int quantity) throws SQLException {
+    public static void setStock(int productID, int quantity) throws SQLException {
         String sql = "UPDATE `team002`.`Product` SET `stock` = ? WHERE `productID` = ?;";
         PreparedStatement statement = DbConnection.getCon().prepareStatement(sql);
         statement.setInt(1, quantity);
@@ -517,7 +526,7 @@ public class Queries {
     }
 
 //    Gets staff member from username
-    private static Staff getStaff(String staffUsername) throws SQLException {
+    public static Staff getStaff(String staffUsername) throws SQLException {
         String sql = "SELECT Staff.hash, Staff.salt FROM `team002`.`Staff` WHERE Staff.username = ?";
         PreparedStatement statement = DbConnection.getCon().prepareStatement(sql);
         statement.setString(1, staffUsername);

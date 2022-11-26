@@ -5,6 +5,10 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class StaffLanding extends JPanel {
+    private final GroupLayout.Alignment LEADING = GroupLayout.Alignment.LEADING;
+    private final GroupLayout.Alignment TRAILING = GroupLayout.Alignment.TRAILING;
+    private final int PREFERRED = GroupLayout.PREFERRED_SIZE;
+    
     private JButton acceptPayment;
     private JButton assembleBike;
     private JButton manageStock;
@@ -36,31 +40,31 @@ public class StaffLanding extends JPanel {
         GroupLayout layout = new GroupLayout(this);
         setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGroup(GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            layout.createParallelGroup(LEADING)
+            .addGroup(TRAILING, layout.createSequentialGroup()
                 .addContainerGap(96, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(manageStock, GroupLayout.PREFERRED_SIZE, 333, GroupLayout.PREFERRED_SIZE)
+                        .addComponent(manageStock, PREFERRED, 333, PREFERRED)
                         .addGap(42, 42, 42)
-                        .addComponent(viewOrders, GroupLayout.PREFERRED_SIZE, 333, GroupLayout.PREFERRED_SIZE))
+                        .addComponent(viewOrders, PREFERRED, 333, PREFERRED))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(acceptPayment, GroupLayout.PREFERRED_SIZE, 333, GroupLayout.PREFERRED_SIZE)
+                        .addComponent(acceptPayment, PREFERRED, 333, PREFERRED)
                         .addGap(42, 42, 42)
-                        .addComponent(assembleBike, GroupLayout.PREFERRED_SIZE, 333, GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(assembleBike, PREFERRED, 333, PREFERRED)))
                 .addGap(96, 96, 96))
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+            layout.createParallelGroup(LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(76, 76, 76)
                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                    .addComponent(assembleBike, GroupLayout.PREFERRED_SIZE, 149, GroupLayout.PREFERRED_SIZE)
-                    .addComponent(acceptPayment, GroupLayout.PREFERRED_SIZE, 149, GroupLayout.PREFERRED_SIZE))
+                    .addComponent(assembleBike, PREFERRED, 149, PREFERRED)
+                    .addComponent(acceptPayment, PREFERRED, 149, PREFERRED))
                 .addGap(44, 44, 44)
                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                    .addComponent(viewOrders, GroupLayout.PREFERRED_SIZE, 149, GroupLayout.PREFERRED_SIZE)
-                    .addComponent(manageStock, GroupLayout.PREFERRED_SIZE, 149, GroupLayout.PREFERRED_SIZE))
+                    .addComponent(viewOrders, PREFERRED, 149, PREFERRED)
+                    .addComponent(manageStock, PREFERRED, 149, PREFERRED))
                 .addContainerGap(79, Short.MAX_VALUE))
         );
     }                       

@@ -3,6 +3,11 @@ package gui.Panels;
 import javax.swing.*;
 import java.awt.*;
 public class ForgottenOrderNumber extends JPanel {                
+    private final GroupLayout.Alignment LEADING = GroupLayout.Alignment.LEADING;
+    private final GroupLayout.Alignment TRAILING = GroupLayout.Alignment.TRAILING;
+    private final int DEFAULT = GroupLayout.DEFAULT_SIZE;
+    private final int PREFERRED = GroupLayout.PREFERRED_SIZE;
+    
     private Button findOrderButton;
     private TextField forenameField;
     private Label forenameLabel;
@@ -31,7 +36,7 @@ public class ForgottenOrderNumber extends JPanel {
         postcodeField = new TextField();
 
 
-        forgottenOrderTitle.setFont(new Font("Segoe UI", 1, 24)); // NOI18N
+        forgottenOrderTitle.setFont(new Font("Segoe UI", 1, 24));
         forgottenOrderTitle.setHorizontalAlignment(SwingConstants.CENTER);
         forgottenOrderTitle.setText("Forgotten Order Number");
 
@@ -42,7 +47,7 @@ public class ForgottenOrderNumber extends JPanel {
         surnameLabel.setText("Surname");
 
         forgottenOrderFormTitle.setAlignment(Label.CENTER);
-        forgottenOrderFormTitle.setFont(new Font("Dialog", 0, 18)); // NOI18N
+        forgottenOrderFormTitle.setFont(new Font("Dialog", 0, 18));
         forgottenOrderFormTitle.setText("Enter Your Details Below");
 
         findOrderButton.setLabel("Find My Order");
@@ -54,72 +59,72 @@ public class ForgottenOrderNumber extends JPanel {
         GroupLayout forgottenOrderFormLayout = new GroupLayout(forgottenOrderForm);
         forgottenOrderForm.setLayout(forgottenOrderFormLayout);
         forgottenOrderFormLayout.setHorizontalGroup(
-            forgottenOrderFormLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+            forgottenOrderFormLayout.createParallelGroup(LEADING)
             .addGroup(forgottenOrderFormLayout.createSequentialGroup()
-                .addGroup(forgottenOrderFormLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                .addGroup(forgottenOrderFormLayout.createParallelGroup(LEADING)
                     .addGroup(forgottenOrderFormLayout.createSequentialGroup()
                         .addGap(60, 60, 60)
-                        .addGroup(forgottenOrderFormLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                            .addComponent(forgottenOrderFormTitle, GroupLayout.PREFERRED_SIZE, 317, GroupLayout.PREFERRED_SIZE)
-                            .addComponent(surnameLabel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                            .addComponent(forenameLabel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                            .addComponent(textField2, GroupLayout.PREFERRED_SIZE, 317, GroupLayout.PREFERRED_SIZE)
-                            .addComponent(forenameField, GroupLayout.PREFERRED_SIZE, 317, GroupLayout.PREFERRED_SIZE)
-                            .addComponent(houseNumberLabel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                            .addComponent(houseNumberField, GroupLayout.PREFERRED_SIZE, 317, GroupLayout.PREFERRED_SIZE)
-                            .addComponent(postcodeLabel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                            .addComponent(postcodeField, GroupLayout.PREFERRED_SIZE, 317, GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(forgottenOrderFormLayout.createParallelGroup(LEADING)
+                            .addComponent(forgottenOrderFormTitle, PREFERRED, 317, PREFERRED)
+                            .addComponent(surnameLabel, PREFERRED, DEFAULT, PREFERRED)
+                            .addComponent(forenameLabel, PREFERRED, DEFAULT, PREFERRED)
+                            .addComponent(textField2, PREFERRED, 317, PREFERRED)
+                            .addComponent(forenameField, PREFERRED, 317, PREFERRED)
+                            .addComponent(houseNumberLabel, PREFERRED, DEFAULT, PREFERRED)
+                            .addComponent(houseNumberField, PREFERRED, 317, PREFERRED)
+                            .addComponent(postcodeLabel, PREFERRED, DEFAULT, PREFERRED)
+                            .addComponent(postcodeField, PREFERRED, 317, PREFERRED)))
                     .addGroup(forgottenOrderFormLayout.createSequentialGroup()
                         .addGap(166, 166, 166)
-                        .addComponent(findOrderButton, GroupLayout.PREFERRED_SIZE, 95, GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(findOrderButton, PREFERRED, 95, PREFERRED)))
                 .addContainerGap(61, Short.MAX_VALUE))
         );
         forgottenOrderFormLayout.setVerticalGroup(
-            forgottenOrderFormLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGroup(GroupLayout.Alignment.TRAILING, forgottenOrderFormLayout.createSequentialGroup()
+            forgottenOrderFormLayout.createParallelGroup(LEADING)
+            .addGroup(TRAILING, forgottenOrderFormLayout.createSequentialGroup()
                 .addGap(19, 19, 19)
-                .addComponent(forgottenOrderFormTitle, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addComponent(forgottenOrderFormTitle, PREFERRED, DEFAULT, PREFERRED)
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(forenameLabel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addComponent(forenameLabel, PREFERRED, DEFAULT, PREFERRED)
                 .addGap(0, 0, 0)
-                .addComponent(forenameField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addComponent(forenameField, PREFERRED, DEFAULT, PREFERRED)
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(surnameLabel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addComponent(surnameLabel, PREFERRED, DEFAULT, PREFERRED)
                 .addGap(0, 0, 0)
-                .addComponent(textField2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addComponent(textField2, PREFERRED, DEFAULT, PREFERRED)
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(houseNumberLabel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addComponent(houseNumberLabel, PREFERRED, DEFAULT, PREFERRED)
                 .addGap(0, 0, 0)
-                .addComponent(houseNumberField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addComponent(houseNumberField, PREFERRED, DEFAULT, PREFERRED)
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(postcodeLabel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addComponent(postcodeLabel, PREFERRED, DEFAULT, PREFERRED)
                 .addGap(0, 0, 0)
-                .addComponent(postcodeField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addComponent(postcodeField, PREFERRED, DEFAULT, PREFERRED)
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(findOrderButton, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addComponent(findOrderButton, PREFERRED, DEFAULT, PREFERRED)
                 .addContainerGap(19, Short.MAX_VALUE))
         );
 
         GroupLayout layout = new GroupLayout(this);
         setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGroup(GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            layout.createParallelGroup(LEADING)
+            .addGroup(TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(forgottenOrderTitle, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(forgottenOrderTitle, DEFAULT, DEFAULT, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGap(228, 228, 228)
-                .addComponent(forgottenOrderForm, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addComponent(forgottenOrderForm, PREFERRED, DEFAULT, PREFERRED)
                 .addContainerGap(230, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+            layout.createParallelGroup(LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(17, 17, 17)
-                .addComponent(forgottenOrderTitle, GroupLayout.PREFERRED_SIZE, 82, GroupLayout.PREFERRED_SIZE)
+                .addComponent(forgottenOrderTitle, PREFERRED, 82, PREFERRED)
                 .addGap(18, 18, 18)
-                .addComponent(forgottenOrderForm, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addComponent(forgottenOrderForm, PREFERRED, DEFAULT, PREFERRED)
                 .addGap(0, 76, Short.MAX_VALUE))
         );
     }            

@@ -3,6 +3,11 @@ import java.awt.*;
 import javax.swing.*;
 
 public class StaffLogin extends JPanel {
+    private final GroupLayout.Alignment LEADING = GroupLayout.Alignment.LEADING;
+    private final GroupLayout.Alignment TRAILING = GroupLayout.Alignment.TRAILING;
+    private final int DEFAULT = GroupLayout.DEFAULT_SIZE;
+    private final int PREFERRED = GroupLayout.PREFERRED_SIZE;
+    
     private Button loginButton;
     private JPanel loginForm;
     private Label loginFormTitle;
@@ -41,60 +46,60 @@ public class StaffLogin extends JPanel {
         GroupLayout loginFormLayout = new GroupLayout(loginForm);
         loginForm.setLayout(loginFormLayout);
         loginFormLayout.setHorizontalGroup(
-            loginFormLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+            loginFormLayout.createParallelGroup(LEADING)
             .addGroup(loginFormLayout.createSequentialGroup()
-                .addGroup(loginFormLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                .addGroup(loginFormLayout.createParallelGroup(LEADING)
                     .addGroup(loginFormLayout.createSequentialGroup()
                         .addGap(60, 60, 60)
-                        .addGroup(loginFormLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                            .addComponent(loginFormTitle, GroupLayout.PREFERRED_SIZE, 317, GroupLayout.PREFERRED_SIZE)
-                            .addComponent(passwordLabel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                            .addComponent(usernameLabel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                            .addComponent(passwordField, GroupLayout.PREFERRED_SIZE, 317, GroupLayout.PREFERRED_SIZE)
-                            .addComponent(usernameField, GroupLayout.PREFERRED_SIZE, 317, GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(loginFormLayout.createParallelGroup(LEADING)
+                            .addComponent(loginFormTitle, PREFERRED, 317, PREFERRED)
+                            .addComponent(passwordLabel, PREFERRED, DEFAULT, PREFERRED)
+                            .addComponent(usernameLabel, PREFERRED, DEFAULT, PREFERRED)
+                            .addComponent(passwordField, PREFERRED, 317, PREFERRED)
+                            .addComponent(usernameField, PREFERRED, 317, PREFERRED)))
                     .addGroup(loginFormLayout.createSequentialGroup()
                         .addGap(169, 169, 169)
-                        .addComponent(loginButton, GroupLayout.PREFERRED_SIZE, 95, GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(loginButton, PREFERRED, 95, PREFERRED)))
                 .addContainerGap(61, Short.MAX_VALUE))
         );
         loginFormLayout.setVerticalGroup(
-            loginFormLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGroup(GroupLayout.Alignment.TRAILING, loginFormLayout.createSequentialGroup()
+            loginFormLayout.createParallelGroup(LEADING)
+            .addGroup(TRAILING, loginFormLayout.createSequentialGroup()
                 .addGap(19, 19, 19)
-                .addComponent(loginFormTitle, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addComponent(loginFormTitle, PREFERRED, DEFAULT, PREFERRED)
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
-                .addComponent(usernameLabel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addComponent(usernameLabel, PREFERRED, DEFAULT, PREFERRED)
                 .addGap(0, 0, 0)
-                .addComponent(usernameField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addComponent(usernameField, PREFERRED, DEFAULT, PREFERRED)
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(passwordLabel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addComponent(passwordLabel, PREFERRED, DEFAULT, PREFERRED)
                 .addGap(0, 0, 0)
-                .addComponent(passwordField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addComponent(passwordField, PREFERRED, DEFAULT, PREFERRED)
                 .addGap(32, 32, 32)
-                .addComponent(loginButton, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addComponent(loginButton, PREFERRED, DEFAULT, PREFERRED)
                 .addGap(31, 31, 31))
         );
 
         GroupLayout layout = new GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGroup(GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            layout.createParallelGroup(LEADING)
+            .addGroup(TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(staffLogin, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(staffLogin, DEFAULT, DEFAULT, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGap(228, 228, 228)
-                .addComponent(loginForm, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addComponent(loginForm, PREFERRED, DEFAULT, PREFERRED)
                 .addContainerGap(230, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+            layout.createParallelGroup(LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(17, 17, 17)
-                .addComponent(staffLogin, GroupLayout.PREFERRED_SIZE, 82, GroupLayout.PREFERRED_SIZE)
+                .addComponent(staffLogin, PREFERRED, 82, PREFERRED)
                 .addGap(18, 18, 18)
-                .addComponent(loginForm, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addComponent(loginForm, PREFERRED, DEFAULT, PREFERRED)
                 .addGap(0, 131, Short.MAX_VALUE))
         );
     }                                         

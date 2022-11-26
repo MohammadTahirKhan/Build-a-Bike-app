@@ -5,6 +5,11 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class ReviewExistingOrder extends JPanel {                  
+    private final GroupLayout.Alignment LEADING = GroupLayout.Alignment.LEADING;
+    private final GroupLayout.Alignment TRAILING = GroupLayout.Alignment.TRAILING;
+    private final int DEFAULT = GroupLayout.DEFAULT_SIZE;
+    private final int PREFERRED = GroupLayout.PREFERRED_SIZE;
+    
     private Button findOrderButton;
     private Button forgottenOrderNumberButton;
     private JPanel orderFindForm;
@@ -20,17 +25,17 @@ public class ReviewExistingOrder extends JPanel {
         findOrderButton = new Button();
         forgottenOrderNumberButton = new Button();
 
-        yourSelection.setFont(new Font("Segoe UI", 1, 24)); // NOI18N
+        yourSelection.setFont(new Font("Segoe UI", 1, 24));
         yourSelection.setHorizontalAlignment(SwingConstants.CENTER);
         yourSelection.setText("Review Exisitng Order");
 
         orderFindForm.setBorder(BorderFactory.createEtchedBorder());
 
         orderFindFormTitle.setAlignment(Label.CENTER);
-        orderFindFormTitle.setFont(new Font("Dialog", 0, 18)); // NOI18N
+        orderFindFormTitle.setFont(new Font("Dialog", 0, 18));
         orderFindFormTitle.setText("Enter your order number below");
 
-        findOrderButton.setFont(new Font("Dialog", 1, 12)); // NOI18N
+        findOrderButton.setFont(new Font("Dialog", 1, 12));
         findOrderButton.setLabel("Find My Order");
         findOrderButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
@@ -48,53 +53,53 @@ public class ReviewExistingOrder extends JPanel {
         GroupLayout orderFindFormLayout = new GroupLayout(orderFindForm);
         orderFindForm.setLayout(orderFindFormLayout);
         orderFindFormLayout.setHorizontalGroup(
-            orderFindFormLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+            orderFindFormLayout.createParallelGroup(LEADING)
             .addGroup(orderFindFormLayout.createSequentialGroup()
                 .addGap(60, 60, 60)
-                .addGroup(orderFindFormLayout.createParallelGroup(GroupLayout.Alignment.TRAILING, false)
+                .addGroup(orderFindFormLayout.createParallelGroup(TRAILING, false)
                     .addGroup(orderFindFormLayout.createSequentialGroup()
-                        .addComponent(forgottenOrderNumberButton, GroupLayout.PREFERRED_SIZE, 156, GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(findOrderButton, GroupLayout.PREFERRED_SIZE, 156, GroupLayout.PREFERRED_SIZE))
-                    .addGroup(orderFindFormLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                        .addComponent(orderNumberField, GroupLayout.PREFERRED_SIZE, 317, GroupLayout.PREFERRED_SIZE)
-                        .addComponent(orderFindFormTitle, GroupLayout.PREFERRED_SIZE, 317, GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(forgottenOrderNumberButton, PREFERRED, 156, PREFERRED)
+                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, DEFAULT, Short.MAX_VALUE)
+                        .addComponent(findOrderButton, PREFERRED, 156, PREFERRED))
+                    .addGroup(orderFindFormLayout.createParallelGroup(LEADING)
+                        .addComponent(orderNumberField, PREFERRED, 317, PREFERRED)
+                        .addComponent(orderFindFormTitle, PREFERRED, 317, PREFERRED)))
                 .addContainerGap(61, Short.MAX_VALUE))
         );
         orderFindFormLayout.setVerticalGroup(
-            orderFindFormLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGroup(GroupLayout.Alignment.TRAILING, orderFindFormLayout.createSequentialGroup()
+            orderFindFormLayout.createParallelGroup(LEADING)
+            .addGroup(TRAILING, orderFindFormLayout.createSequentialGroup()
                 .addGap(19, 19, 19)
-                .addComponent(orderFindFormTitle, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addComponent(orderFindFormTitle, PREFERRED, DEFAULT, PREFERRED)
                 .addGap(25, 25, 25)
-                .addComponent(orderNumberField, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)
+                .addComponent(orderNumberField, PREFERRED, 33, PREFERRED)
                 .addGap(24, 24, 24)
-                .addGroup(orderFindFormLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-                    .addComponent(findOrderButton, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                    .addComponent(forgottenOrderNumberButton, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                .addGroup(orderFindFormLayout.createParallelGroup(TRAILING)
+                    .addComponent(findOrderButton, PREFERRED, DEFAULT, PREFERRED)
+                    .addComponent(forgottenOrderNumberButton, PREFERRED, DEFAULT, PREFERRED))
                 .addContainerGap(36, Short.MAX_VALUE))
         );
 
         GroupLayout reviewExisitngOrderLayout = new GroupLayout(this);
         setLayout(reviewExisitngOrderLayout);
         reviewExisitngOrderLayout.setHorizontalGroup(
-            reviewExisitngOrderLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGroup(GroupLayout.Alignment.TRAILING, reviewExisitngOrderLayout.createSequentialGroup()
+            reviewExisitngOrderLayout.createParallelGroup(LEADING)
+            .addGroup(TRAILING, reviewExisitngOrderLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(yourSelection, GroupLayout.DEFAULT_SIZE, 888, Short.MAX_VALUE)
+                .addComponent(yourSelection, DEFAULT, 888, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(reviewExisitngOrderLayout.createSequentialGroup()
                 .addGap(225, 225, 225)
-                .addComponent(orderFindForm, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(orderFindForm, PREFERRED, DEFAULT, PREFERRED)
+                .addContainerGap(DEFAULT, Short.MAX_VALUE))
         );
         reviewExisitngOrderLayout.setVerticalGroup(
-            reviewExisitngOrderLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+            reviewExisitngOrderLayout.createParallelGroup(LEADING)
             .addGroup(reviewExisitngOrderLayout.createSequentialGroup()
                 .addGap(17, 17, 17)
-                .addComponent(yourSelection, GroupLayout.PREFERRED_SIZE, 82, GroupLayout.PREFERRED_SIZE)
+                .addComponent(yourSelection, PREFERRED, 82, PREFERRED)
                 .addGap(53, 53, 53)
-                .addComponent(orderFindForm, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addComponent(orderFindForm, PREFERRED, DEFAULT, PREFERRED)
                 .addGap(0, 152, Short.MAX_VALUE))
         );
     }// </editor-fold>                        

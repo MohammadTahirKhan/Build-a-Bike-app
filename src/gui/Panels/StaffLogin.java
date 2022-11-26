@@ -27,7 +27,7 @@ public class StaffLogin extends JPanel {
         loginFormTitle = new Label();
         loginButton = new Button();
 
-        staffLogin.setFont(new Font("Segoe UI", 1, 24)); // NOI18N
+        staffLogin.setFont(new Font("Segoe UI", 1, 24));
         staffLogin.setHorizontalAlignment(SwingConstants.CENTER);
         staffLogin.setText("Staff Login");
 
@@ -38,7 +38,7 @@ public class StaffLogin extends JPanel {
         passwordLabel.setText("Password");
 
         loginFormTitle.setAlignment(SwingConstants.CENTER);
-        loginFormTitle.setFont(new Font("Dialog", 0, 18)); // NOI18N
+        loginFormTitle.setFont(new Font("Dialog", 0, 18));
         loginFormTitle.setText("Enter username and password below");
 
         loginButton.setLabel("Login");

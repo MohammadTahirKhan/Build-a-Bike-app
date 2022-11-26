@@ -1,7 +1,4 @@
 package gui.Frames;
-import gui.Panels.HeaderPanel;
-import gui.Panels.OrderNav;
-import gui.Panels.ProductList;
 
 import javax.swing.*;
 import java.awt.*;

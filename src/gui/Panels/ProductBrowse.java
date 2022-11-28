@@ -1,10 +1,9 @@
-package gui.Frames;
+package gui.Panels;
 
 import javax.swing.*;
-import javax.swing.GroupLayout.ParallelGroup;
-
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.util.ArrayList;
 
 public class ProductBrowse extends JPanel {
         private final GroupLayout.Alignment LEADING = GroupLayout.Alignment.LEADING;
@@ -27,6 +26,7 @@ public class ProductBrowse extends JPanel {
     private JMenu staffPortal;
     private JButton viewOrder;
 
+    private ArrayList<ProductPanel> productPanels = new ArrayList<>();
     public ProductBrowse() {
         productBrowseMain = new JPanel();
         orderNav = new JPanel();
@@ -43,11 +43,7 @@ public class ProductBrowse extends JPanel {
         orderNav.setBorder(BorderFactory.createEtchedBorder());
 
         selectWheels.setText("Select Wheels");
-        selectWheels.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                selectWheelsActionPerformed(evt);
-            }
-        });
+        selectWheels.addActionListener(this::selectWheelsActionPerformed);
 
         selectFrameSets.setText("Select Frame-Sets");
 
@@ -102,35 +98,28 @@ public class ProductBrowse extends JPanel {
 
         productView.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 
+
         GroupLayout allProductsLayout = new GroupLayout(allProducts);
+
+        GroupLayout.SequentialGroup allProductsSequentialGroup = allProductsLayout.createSequentialGroup().addContainerGap();
+        GroupLayout.ParallelGroup allProductsParallelGroup = allProductsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false);
+
+        for (JPanel productPanel : productPanels) {
+            allProductsSequentialGroup.addComponent(productPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+            allProductsSequentialGroup.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
+            allProductsParallelGroup.addComponent(productPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE);
+        }
+
         allProducts.setLayout(allProductsLayout);
-        ParallelGroup test = allProductsLayout.setHorizontalGroup(
+        allProductsLayout.setHorizontalGroup(
                 allProductsLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                        .addGroup(allProductsLayout.createSequentialGroup()))
-                                //.addContainerGap()
-                                // .addComponent(productPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                // .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                // .addComponent(productPanel1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                // .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                // .addComponent(productPanel2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                // .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                // .addComponent(productPanel3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                // .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                // .addComponent(productPanel4, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                // .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                // .addComponent(productPanel5, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                //.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(allProductsSequentialGroup));
+
         allProductsLayout.setVerticalGroup(
                 allProductsLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                         .addGroup(allProductsLayout.createSequentialGroup()
                                 .addContainerGap()
-                                .addGroup(allProductsLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(productPanel3, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(productPanel1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(productPanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(productPanel2, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(productPanel4, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(productPanel5, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGroup(allProductsParallelGroup)
                                 .addContainerGap(16, Short.MAX_VALUE))
         );
 

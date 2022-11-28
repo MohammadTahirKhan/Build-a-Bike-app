@@ -50,7 +50,7 @@ public class ViewOrder extends JPanel {
                 parGroup
         );
 
-        yourSelection.setFont(new Font("Segoe UI", 1, 24));
+        yourSelection.setFont(new Font("Segoe UI", Font.BOLD, 24));
         yourSelection.setHorizontalAlignment(SwingConstants.CENTER);
         yourSelection.setText("Your Selection");
 
@@ -65,7 +65,7 @@ public class ViewOrder extends JPanel {
         backToBrowseButton.setToolTipText("");
 
         placeOrderButton.setBackground(new Color(51, 51, 51));
-        placeOrderButton.setFont(new Font("Segoe UI", 1, 12));
+        placeOrderButton.setFont(new Font("Segoe UI", Font.BOLD, 12));
         placeOrderButton.setForeground(new Color(255, 255, 255));
         placeOrderButton.setText("Place Order");
         placeOrderButton.setToolTipText("");

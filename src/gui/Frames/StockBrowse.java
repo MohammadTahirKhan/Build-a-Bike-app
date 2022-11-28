@@ -3,22 +3,23 @@ package gui.Frames;
 import javax.swing.*;
 import javax.swing.border.*;
 public class StockBrowse extends JPanel {
+    private final GroupLayout.Alignment LEADING = GroupLayout.Alignment.LEADING;
+    private final GroupLayout.Alignment TRAILING = GroupLayout.Alignment.TRAILING;
+    private final int DEFAULT = GroupLayout.DEFAULT_SIZE;
+    private final int PREFERRED = GroupLayout.PREFERRED_SIZE;
+
     private JLabel brandName;
-    private JMenuBar header;
     private JLabel itemBrandName;
     private JLabel itemCost;
     private JLabel itemName;
     private JLabel itemSerialNumber;
-    private JPanel productItem;
     private JLabel productName;
     private JScrollPane productTable;
     private JPanel productTableItems;
-    private JMenu reviewExistingOrder;
     private JButton selectFrameSets;
     private JButton selectHandlebars;
     private JButton selectWheels;
     private JLabel serialNumber;
-    private JMenu staffPortal;
     private JPanel stockBrowseMain;
     private JPanel stockNav;
     private JPanel tableHeadingLabels;
@@ -38,54 +39,43 @@ public class StockBrowse extends JPanel {
         brandName = new JLabel();
         productTable = new JScrollPane();
         productTableItems = new JPanel();
-        productItem = new JPanel();
-        itemName = new JLabel();
-        itemCost = new JLabel();
-        itemBrandName = new JLabel();
-        itemSerialNumber = new JLabel();
-        header = new JMenuBar();
-        staffPortal = new JMenu();
-        reviewExistingOrder = new JMenu();
 
         stockNav.setBorder(BorderFactory.createEtchedBorder());
 
         selectWheels.setText("Wheels");
+        selectFrameSets.setText("Frame-Sets");
+        selectHandlebars.setText("Handlebars");
+        viewOrder.setText("Add New Stock");
         selectWheels.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 selectWheelsActionPerformed(evt);
             }
         });
 
-        selectFrameSets.setText("Frame-Sets");
-
-        selectHandlebars.setText("Handlebars");
-
-        viewOrder.setText("Add New Stock");
-
         GroupLayout stockNavLayout = new GroupLayout(stockNav);
         stockNav.setLayout(stockNavLayout);
         stockNavLayout.setHorizontalGroup(
-            stockNavLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+            stockNavLayout.createParallelGroup(LEADING)
             .addGroup(stockNavLayout.createSequentialGroup()
                 .addGap(16, 16, 16)
-                .addComponent(selectWheels, GroupLayout.PREFERRED_SIZE, 212, GroupLayout.PREFERRED_SIZE)
+                .addComponent(selectWheels, PREFERRED, 212, PREFERRED)
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(selectFrameSets, GroupLayout.PREFERRED_SIZE, 212, GroupLayout.PREFERRED_SIZE)
+                .addComponent(selectFrameSets, PREFERRED, 212, PREFERRED)
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(selectHandlebars, GroupLayout.PREFERRED_SIZE, 212, GroupLayout.PREFERRED_SIZE)
+                .addComponent(selectHandlebars, PREFERRED, 212, PREFERRED)
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(viewOrder, GroupLayout.PREFERRED_SIZE, 214, GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(viewOrder, PREFERRED, 214, PREFERRED)
+                .addContainerGap(DEFAULT, Short.MAX_VALUE))
         );
         stockNavLayout.setVerticalGroup(
-            stockNavLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGroup(GroupLayout.Alignment.TRAILING, stockNavLayout.createSequentialGroup()
+            stockNavLayout.createParallelGroup(LEADING)
+            .addGroup(TRAILING, stockNavLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(stockNavLayout.createParallelGroup(GroupLayout.Alignment.CENTER)
-                    .addComponent(selectWheels, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)
-                    .addComponent(selectFrameSets, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)
-                    .addComponent(selectHandlebars, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)
-                    .addComponent(viewOrder, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE))
+                    .addComponent(selectWheels, PREFERRED, 100, PREFERRED)
+                    .addComponent(selectFrameSets, PREFERRED, 100, PREFERRED)
+                    .addComponent(selectHandlebars, PREFERRED, 100, PREFERRED)
+                    .addComponent(viewOrder, PREFERRED, 100, PREFERRED))
                 .addContainerGap())
         );
 
@@ -100,21 +90,21 @@ public class StockBrowse extends JPanel {
         GroupLayout tableHeadingLabelsLayout = new GroupLayout(tableHeadingLabels);
         tableHeadingLabels.setLayout(tableHeadingLabelsLayout);
         tableHeadingLabelsLayout.setHorizontalGroup(
-            tableHeadingLabelsLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+            tableHeadingLabelsLayout.createParallelGroup(LEADING)
             .addGroup(tableHeadingLabelsLayout.createSequentialGroup()
                 .addGap(39, 39, 39)
-                .addComponent(productName, GroupLayout.PREFERRED_SIZE, 169, GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(unitCost, GroupLayout.PREFERRED_SIZE, 139, GroupLayout.PREFERRED_SIZE)
+                .addComponent(productName, PREFERRED, 169, PREFERRED)
+                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, DEFAULT, Short.MAX_VALUE)
+                .addComponent(unitCost, PREFERRED, 139, PREFERRED)
                 .addGap(50, 50, 50)
-                .addComponent(brandName, GroupLayout.PREFERRED_SIZE, 139, GroupLayout.PREFERRED_SIZE)
+                .addComponent(brandName, PREFERRED, 139, PREFERRED)
                 .addGap(36, 36, 36)
-                .addComponent(serialNumber, GroupLayout.PREFERRED_SIZE, 139, GroupLayout.PREFERRED_SIZE)
+                .addComponent(serialNumber, PREFERRED, 139, PREFERRED)
                 .addGap(38, 38, 38))
         );
         tableHeadingLabelsLayout.setVerticalGroup(
-            tableHeadingLabelsLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGroup(GroupLayout.Alignment.TRAILING, tableHeadingLabelsLayout.createSequentialGroup()
+            tableHeadingLabelsLayout.createParallelGroup(LEADING)
+            .addGroup(TRAILING, tableHeadingLabelsLayout.createSequentialGroup()
                 .addContainerGap(16, Short.MAX_VALUE)
                 .addGroup(tableHeadingLabelsLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                     .addComponent(productName)
@@ -129,8 +119,6 @@ public class StockBrowse extends JPanel {
         productTableItems.setMaximumSize(new java.awt.Dimension(900, 32767));
         productTableItems.setMinimumSize(new java.awt.Dimension(900, 100));
 
-        productItem.setBorder(new SoftBevelBorder(BevelBorder.RAISED));
-
         itemName.setText("insert dummy text here wowow");
 
         itemCost.setText("125.00");
@@ -139,45 +127,18 @@ public class StockBrowse extends JPanel {
 
         itemSerialNumber.setText("018274013");
 
-        GroupLayout productItemLayout = new GroupLayout(productItem);
-        productItem.setLayout(productItemLayout);
-        productItemLayout.setHorizontalGroup(
-            productItemLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGroup(productItemLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(itemName, GroupLayout.PREFERRED_SIZE, 278, GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32)
-                .addComponent(itemCost, GroupLayout.PREFERRED_SIZE, 159, GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34)
-                .addComponent(itemBrandName, GroupLayout.PREFERRED_SIZE, 138, GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36)
-                .addComponent(itemSerialNumber, GroupLayout.PREFERRED_SIZE, 113, GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(17, Short.MAX_VALUE))
-        );
-        productItemLayout.setVerticalGroup(
-            productItemLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGroup(productItemLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(productItemLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                    .addComponent(itemName)
-                    .addComponent(itemCost)
-                    .addComponent(itemBrandName)
-                    .addComponent(itemSerialNumber))
-                .addContainerGap(7, Short.MAX_VALUE))
-        );
-
         GroupLayout productTableItemsLayout = new GroupLayout(productTableItems);
         productTableItems.setLayout(productTableItemsLayout);
         productTableItemsLayout.setHorizontalGroup(
-            productTableItemsLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+            productTableItemsLayout.createParallelGroup(LEADING)
             .addGroup(productTableItemsLayout.createSequentialGroup()
-                .addComponent(productItem, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addComponent(productItem, PREFERRED, DEFAULT, PREFERRED)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         productTableItemsLayout.setVerticalGroup(
-            productTableItemsLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+            productTableItemsLayout.createParallelGroup(LEADING)
             .addGroup(productTableItemsLayout.createSequentialGroup()
-                .addComponent(productItem, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addComponent(productItem, PREFERRED, DEFAULT, PREFERRED)
                 .addGap(0, 485, Short.MAX_VALUE))
         );
 
@@ -186,37 +147,29 @@ public class StockBrowse extends JPanel {
         GroupLayout stockBrowseMainLayout = new GroupLayout(stockBrowseMain);
         stockBrowseMain.setLayout(stockBrowseMainLayout);
         stockBrowseMainLayout.setHorizontalGroup(
-            stockBrowseMainLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+            stockBrowseMainLayout.createParallelGroup(LEADING)
             .addGroup(stockBrowseMainLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(stockBrowseMainLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                    .addComponent(stockNav, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(tableHeadingLabels, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(stockBrowseMainLayout.createParallelGroup(LEADING)
+                    .addComponent(stockNav, TRAILING, DEFAULT, DEFAULT, Short.MAX_VALUE)
+                    .addComponent(tableHeadingLabels, DEFAULT, DEFAULT, Short.MAX_VALUE))
                 .addContainerGap())
-            .addGroup(GroupLayout.Alignment.TRAILING, stockBrowseMainLayout.createSequentialGroup()
-                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(productTable, GroupLayout.PREFERRED_SIZE, 819, GroupLayout.PREFERRED_SIZE)
+            .addGroup(TRAILING, stockBrowseMainLayout.createSequentialGroup()
+                .addContainerGap(DEFAULT, Short.MAX_VALUE)
+                .addComponent(productTable, PREFERRED, 819, PREFERRED)
                 .addGap(44, 44, 44))
         );
         stockBrowseMainLayout.setVerticalGroup(
-            stockBrowseMainLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+            stockBrowseMainLayout.createParallelGroup(LEADING)
             .addGroup(stockBrowseMainLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(stockNav, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addComponent(stockNav, PREFERRED, DEFAULT, PREFERRED)
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tableHeadingLabels, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(productTable, GroupLayout.PREFERRED_SIZE, 276, GroupLayout.PREFERRED_SIZE)
+                .addComponent(tableHeadingLabels, PREFERRED, DEFAULT, PREFERRED)
+                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, DEFAULT, Short.MAX_VALUE)
+                .addComponent(productTable, PREFERRED, 276, PREFERRED)
                 .addGap(41, 41, 41))
         );
-
-        staffPortal.setText("Staff Portal");
-        staffPortal.setHorizontalAlignment(SwingConstants.RIGHT);
-        header.add(staffPortal);
-
-        reviewExistingOrder.setText("Review Existing Order");
-        reviewExistingOrder.setHorizontalAlignment(SwingConstants.RIGHT);
-        header.add(reviewExistingOrder);
     }                    
 
     private void selectWheelsActionPerformed(java.awt.event.ActionEvent evt) {                                             

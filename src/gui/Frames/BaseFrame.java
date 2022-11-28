@@ -15,6 +15,7 @@ public class BaseFrame extends JFrame {
     private ReviewExistingOrder reviewExistingOrder;
     private ForgottenOrderNumber forgottenOrderNumber;
     private ViewOrder viewOrder;
+    private StockBrowse stockBrowse;
 
     public BaseFrame(){
         EventQueue.invokeLater(new Runnable() {
@@ -26,6 +27,7 @@ public class BaseFrame extends JFrame {
                 reviewExistingOrder = new ReviewExistingOrder();
                 forgottenOrderNumber = new ForgottenOrderNumber();
                 viewOrder = new ViewOrder();
+                stockBrowse = new StockBrowse();
 
                 setDefaultCloseOperation(EXIT_ON_CLOSE);
                 setTitle("Bikes Ltd.");
@@ -37,8 +39,9 @@ public class BaseFrame extends JFrame {
                 //displayPanel(staffLogin, "Back to Browse", null);
                 //displayPanel(staffLanding, "Logout", null);
                 //displayPanel(reviewExistingOrder, "Back to Browse", null);
-                displayPanel(forgottenOrderNumber, "Back to Browse", null);
+                //displayPanel(forgottenOrderNumber, "Back to Browse", null);
                 //displayPanel(viewOrder, "Review Existing Order", null);
+                displayPanel(stockBrowse, "Staff Portal", "Review Existing Order");
             }
         });
     }
@@ -72,7 +75,6 @@ public class BaseFrame extends JFrame {
                 .addComponent(panel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
-
         pack();
     }
 

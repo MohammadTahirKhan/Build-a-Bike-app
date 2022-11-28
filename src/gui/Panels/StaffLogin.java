@@ -1,5 +1,7 @@
 package gui.Panels;
 
+import gui.Frames.BaseFrame;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -9,7 +11,7 @@ public class StaffLogin extends JPanel {
     private final GroupLayout.Alignment TRAILING = GroupLayout.Alignment.TRAILING;
     private final int DEFAULT = GroupLayout.DEFAULT_SIZE;
     private final int PREFERRED = GroupLayout.PREFERRED_SIZE;
-    
+
     private Button loginButton;
     private JPanel loginForm;
     private Label loginFormTitle;
@@ -17,9 +19,12 @@ public class StaffLogin extends JPanel {
     private Label passwordLabel;
     private JLabel staffLogin;
     private TextField usernameField;
-    private Label usernameLabel;  
+    private Label usernameLabel;
 
-    public StaffLogin() {
+    private BaseFrame parentFrame;
+
+    public StaffLogin(BaseFrame parentFrame) {
+        this.parentFrame = parentFrame;
         staffLogin = new JLabel();
         loginForm = new JPanel();
         usernameField = new TextField();

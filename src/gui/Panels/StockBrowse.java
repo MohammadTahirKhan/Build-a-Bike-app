@@ -1,5 +1,7 @@
 package gui.Panels;
 
+import gui.Frames.BaseFrame;
+
 import javax.swing.*;
 import java.util.ArrayList;
 
@@ -28,8 +30,11 @@ public class StockBrowse extends JPanel {
     private JButton viewOrder;
 
     private ArrayList<TableItem> productItems = new ArrayList<>();
+    private BaseFrame baseFrame;
 
-    public StockBrowse() {
+
+    public StockBrowse(BaseFrame baseFrame) {
+        this.baseFrame = baseFrame;
         stockNav = new JPanel();
         selectWheels = new JButton();
         selectFrameSets = new JButton();
@@ -49,11 +54,7 @@ public class StockBrowse extends JPanel {
         selectFrameSets.setText("Frame-Sets");
         selectHandlebars.setText("Handlebars");
         viewOrder.setText("Add New Stock");
-        selectWheels.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                selectWheelsActionPerformed(evt);
-            }
-        });
+        selectWheels.addActionListener(this::selectWheelsActionPerformed);
 
         GroupLayout stockNavLayout = new GroupLayout(stockNav);
         stockNav.setLayout(stockNavLayout);

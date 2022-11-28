@@ -1,5 +1,7 @@
 package gui.Panels;
 
+import gui.Frames.BaseFrame;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -9,13 +11,16 @@ public class StaffLanding extends JPanel {
     private final GroupLayout.Alignment LEADING = GroupLayout.Alignment.LEADING;
     private final GroupLayout.Alignment TRAILING = GroupLayout.Alignment.TRAILING;
     private final int PREFERRED = GroupLayout.PREFERRED_SIZE;
-    
+
     private JButton acceptPayment;
     private JButton assembleBike;
     private JButton manageStock;
     private JButton viewOrders;
 
-    public StaffLanding() {
+    BaseFrame parentFrame;
+
+    public StaffLanding(BaseFrame parentFrame) {
+        this.parentFrame = parentFrame;
         assembleBike = new JButton();
         acceptPayment = new JButton();
         manageStock = new JButton();

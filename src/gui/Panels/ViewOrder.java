@@ -1,5 +1,7 @@
 package gui.Panels;
 
+import gui.Frames.BaseFrame;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
@@ -20,8 +22,11 @@ public class ViewOrder extends JPanel {
 
     private ArrayList<ProductPanel> productPanels = new ArrayList<>(3);
 
+    private BaseFrame parentFrame;
 
-    public ViewOrder() {
+    public ViewOrder(BaseFrame parentFrame) {
+        this.parentFrame = parentFrame;
+
         itemsSelected = new JPanel();
         yourSelection = new JLabel();
         orderOptions = new JPanel();

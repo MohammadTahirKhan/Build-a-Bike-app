@@ -1,15 +1,18 @@
 package gui.Panels;
 
+import gui.Frames.BaseFrame;
+
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class ReviewExistingOrder extends JPanel {                  
     private final GroupLayout.Alignment LEADING = GroupLayout.Alignment.LEADING;
     private final GroupLayout.Alignment TRAILING = GroupLayout.Alignment.TRAILING;
     private final int DEFAULT = GroupLayout.DEFAULT_SIZE;
     private final int PREFERRED = GroupLayout.PREFERRED_SIZE;
-    
+
     private Button findOrderButton;
     private Button forgottenOrderNumberButton;
     private JPanel orderFindForm;
@@ -17,7 +20,10 @@ public class ReviewExistingOrder extends JPanel {
     private TextField orderNumberField;
     private JLabel yourSelection;
 
-    public ReviewExistingOrder() {
+    private BaseFrame parentFrame;
+
+    public ReviewExistingOrder(BaseFrame parentFrame) {
+        this.parentFrame = parentFrame;
         yourSelection = new JLabel();
         orderFindForm = new JPanel();
         orderNumberField = new TextField();

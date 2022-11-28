@@ -1,7 +1,8 @@
 package gui.Panels;
 
 import javax.swing.*;
-import javax.swing.border.*;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.SoftBevelBorder;
 
 public class TableItem extends JPanel {
     private JLabel name;
@@ -10,6 +11,8 @@ public class TableItem extends JPanel {
     private JLabel serialNumber;
 
     public TableItem(String n, Double c, String b, String s) {
+
+
         name = new JLabel(n);
         cost = new JLabel("£" + c.toString());
         brandName = new JLabel(b);

@@ -1,5 +1,7 @@
 package gui.Panels;
 
+import gui.Frames.BaseFrame;
+
 import javax.swing.*;
 import java.awt.*;
 public class ForgottenOrderNumber extends JPanel {                
@@ -19,9 +21,12 @@ public class ForgottenOrderNumber extends JPanel {
     private TextField postcodeField;
     private Label postcodeLabel;
     private Label surnameLabel;
-    private TextField textField2;  
+    private TextField textField2;
 
-    public ForgottenOrderNumber() {
+    private BaseFrame parentFrame;
+
+    public ForgottenOrderNumber(BaseFrame parentFrame) {
+        this.parentFrame = parentFrame;
         forgottenOrderTitle = new JLabel();
         forgottenOrderForm = new JPanel();
         forenameField = new TextField();

@@ -1,5 +1,7 @@
 package gui.Panels;
 
+import gui.Frames.BaseFrame;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -17,29 +19,32 @@ public class ProductBrowse extends JPanel {
 	private JPanel orderNav;
 	private JPanel productBrowseMain;
 	private JPanel productFilters;
-	private JScrollPane productView;
-	private JMenu reviewExistingOrder;
-	private JButton selectFrameSets;
-	private JButton selectHandlebars;
-	private JButton selectWheels;
-	private Choice sortBy;
-	private Label sortByLabel;
-	private JMenu staffPortal;
-	private JButton viewOrder;
+    private JScrollPane productView;
+    private JMenu reviewExistingOrder;
+    private JButton selectFrameSets;
+    private JButton selectHandlebars;
+    private JButton selectWheels;
+    private Choice sortBy;
+    private Label sortByLabel;
+    private JMenu staffPortal;
+    private JButton viewOrder;
 
-	private ArrayList<ProductPanel> productPanels = new ArrayList<>();
+    private BaseFrame parentFrame;
 
-	public ProductBrowse() {
-		productBrowseMain = new JPanel();
-		orderNav = new JPanel();
-		selectWheels = new JButton();
-		selectFrameSets = new JButton();
-		selectHandlebars = new JButton();
-		viewOrder = new JButton();
-		productFilters = new JPanel();
-		sortBy = new Choice();
-		sortByLabel = new Label();
-		productView = new JScrollPane();
+    private ArrayList<ProductPanel> productPanels = new ArrayList<>();
+
+    public ProductBrowse(BaseFrame parentFrame) {
+        this.parentFrame = parentFrame;
+        productBrowseMain = new JPanel();
+        orderNav = new JPanel();
+        selectWheels = new JButton();
+        selectFrameSets = new JButton();
+        selectHandlebars = new JButton();
+        viewOrder = new JButton();
+        productFilters = new JPanel();
+        sortBy = new Choice();
+        sortByLabel = new Label();
+        productView = new JScrollPane();
 		allProducts = new JPanel();
 
 		orderNav.setBorder(BorderFactory.createEtchedBorder());

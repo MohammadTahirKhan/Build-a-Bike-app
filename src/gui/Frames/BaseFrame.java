@@ -10,24 +10,28 @@ public class BaseFrame extends JFrame {
     private JMenuBar header;
     private JMenu menuItem1;
     private JMenu menuItem2;
+
     private StaffLogin staffLogin;
     private StaffLanding staffLanding;
     private ReviewExistingOrder reviewExistingOrder;
     private ForgottenOrderNumber forgottenOrderNumber;
     private ViewOrder viewOrder;
     private StockBrowse stockBrowse;
+    private ProductBrowse productBrowse;
 
     public BaseFrame(){
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 header = new JMenuBar();
                 menuItem1 = new JMenu();
+                menuItem2 = new JMenu();
                 staffLogin = new StaffLogin();
                 staffLanding = new StaffLanding();
                 reviewExistingOrder = new ReviewExistingOrder();
                 forgottenOrderNumber = new ForgottenOrderNumber();
                 viewOrder = new ViewOrder();
                 stockBrowse = new StockBrowse();
+                productBrowse = new ProductBrowse();
 
                 setDefaultCloseOperation(EXIT_ON_CLOSE);
                 setTitle("Bikes Ltd.");
@@ -41,7 +45,8 @@ public class BaseFrame extends JFrame {
                 //displayPanel(reviewExistingOrder, "Back to Browse", null);
                 //displayPanel(forgottenOrderNumber, "Back to Browse", null);
                 //displayPanel(viewOrder, "Review Existing Order", null);
-                displayPanel(stockBrowse, "Staff Portal", "Review Existing Order");
+                //displayPanel(stockBrowse, "Staff Portal", "Review Existing Order");
+                displayPanel(productBrowse, "Staff Portal", "Review Existing Order");
             }
         });
     }

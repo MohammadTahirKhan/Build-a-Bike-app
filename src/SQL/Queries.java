@@ -326,7 +326,7 @@ public class Queries {
     }
 
 //    Get Customer
-    public static Customer getCustomer(int customerID) throws SQLException {
+    public static Customer getCustomer(int customerID) {
 
         Connection con = DbConnection.getCon();
         assert con != null;

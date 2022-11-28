@@ -13,24 +13,19 @@ public class ProductBrowse extends JPanel {
 	private final int PREFERRED = GroupLayout.PREFERRED_SIZE;
 
 	private JPanel allProducts;
-	private JMenuBar header;
 	private JPanel orderNav;
-	private JPanel productBrowseMain;
 	private JPanel productFilters;
 	private JScrollPane productView;
-	private JMenu reviewExistingOrder;
 	private JButton selectFrameSets;
 	private JButton selectHandlebars;
 	private JButton selectWheels;
 	private Choice sortBy;
 	private Label sortByLabel;
-	private JMenu staffPortal;
 	private JButton viewOrder;
 
 	private ArrayList<ProductPanel> productPanels = new ArrayList<>();
 
 	public ProductBrowse() {
-		productBrowseMain = new JPanel();
 		orderNav = new JPanel();
 		selectWheels = new JButton();
 		selectFrameSets = new JButton();
@@ -134,13 +129,13 @@ public class ProductBrowse extends JPanel {
 
 		productView.setViewportView(allProducts);
 
-		GroupLayout productBrowseMainLayout = new GroupLayout(productBrowseMain);
-		productBrowseMain.setLayout(productBrowseMainLayout);
-		productBrowseMainLayout.setHorizontalGroup(
-				productBrowseMainLayout.createParallelGroup(LEADING)
-						.addGroup(productBrowseMainLayout.createSequentialGroup()
+		GroupLayout layout = new GroupLayout(this);
+		this.setLayout(layout);
+		layout.setHorizontalGroup(
+			layout.createParallelGroup(LEADING)
+						.addGroup(layout.createSequentialGroup()
 								.addContainerGap()
-								.addGroup(productBrowseMainLayout
+								.addGroup(layout
 										.createParallelGroup(LEADING)
 										.addComponent(orderNav, DEFAULT,
 												DEFAULT,
@@ -151,9 +146,9 @@ public class ProductBrowse extends JPanel {
 										.addComponent(productView, PREFERRED, 0,
 												Short.MAX_VALUE))
 								.addContainerGap()));
-		productBrowseMainLayout.setVerticalGroup(
-				productBrowseMainLayout.createParallelGroup(LEADING)
-						.addGroup(productBrowseMainLayout.createSequentialGroup()
+								layout.setVerticalGroup(
+									layout.createParallelGroup(LEADING)
+						.addGroup(layout.createSequentialGroup()
 								.addContainerGap()
 								.addComponent(orderNav, PREFERRED, DEFAULT, PREFERRED)
 								.addPreferredGap(RELATED)
@@ -163,14 +158,6 @@ public class ProductBrowse extends JPanel {
 								.addComponent(productView, DEFAULT, 318,
 										Short.MAX_VALUE)
 								.addContainerGap()));
-
-		staffPortal.setText("Staff Portal");
-		staffPortal.setHorizontalAlignment(SwingConstants.RIGHT);
-		header.add(staffPortal);
-
-		reviewExistingOrder.setText("Review Existing Order");
-		reviewExistingOrder.setHorizontalAlignment(SwingConstants.RIGHT);
-		header.add(reviewExistingOrder);
 	}
 
 	private void selectWheelsActionPerformed(ActionEvent evt) {

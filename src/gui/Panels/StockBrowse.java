@@ -10,10 +10,6 @@ public class StockBrowse extends JPanel {
     private final int PREFERRED = GroupLayout.PREFERRED_SIZE;
 
     private JLabel brandName;
-    private JLabel itemBrandName;
-    private JLabel itemCost;
-    private JLabel itemName;
-    private JLabel itemSerialNumber;
     private JLabel productName;
     private JScrollPane productTable;
     private JPanel productTableItems;
@@ -21,7 +17,6 @@ public class StockBrowse extends JPanel {
     private JButton selectHandlebars;
     private JButton selectWheels;
     private JLabel serialNumber;
-    private JPanel stockBrowseMain;
     private JPanel stockNav;
     private JPanel tableHeadingLabels;
     private JLabel unitCost;
@@ -122,14 +117,6 @@ public class StockBrowse extends JPanel {
         productTableItems.setMaximumSize(new java.awt.Dimension(900, 32767));
         productTableItems.setMinimumSize(new java.awt.Dimension(900, 100));
 
-        itemName.setText("insert dummy text here wowow");
-
-        itemCost.setText("125.00");
-
-        itemBrandName.setText("lorem mf ipsum");
-
-        itemSerialNumber.setText("018274013");
-
         GroupLayout productTableItemsLayout = new GroupLayout(productTableItems);
 
         GroupLayout.SequentialGroup sequentialGroup = productTableItemsLayout.createSequentialGroup();
@@ -150,24 +137,24 @@ public class StockBrowse extends JPanel {
 
         productTable.setViewportView(productTableItems);
 
-        GroupLayout stockBrowseMainLayout = new GroupLayout(stockBrowseMain);
-        stockBrowseMain.setLayout(stockBrowseMainLayout);
-        stockBrowseMainLayout.setHorizontalGroup(
-            stockBrowseMainLayout.createParallelGroup(LEADING)
-            .addGroup(stockBrowseMainLayout.createSequentialGroup()
+        GroupLayout layout = new GroupLayout(this);
+        setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(LEADING)
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(stockBrowseMainLayout.createParallelGroup(LEADING)
+                .addGroup(layout.createParallelGroup(LEADING)
                     .addComponent(stockNav, TRAILING, DEFAULT, DEFAULT, Short.MAX_VALUE)
                     .addComponent(tableHeadingLabels, DEFAULT, DEFAULT, Short.MAX_VALUE))
                 .addContainerGap())
-            .addGroup(TRAILING, stockBrowseMainLayout.createSequentialGroup()
+            .addGroup(TRAILING, layout.createSequentialGroup()
                 .addContainerGap(DEFAULT, Short.MAX_VALUE)
                 .addComponent(productTable, PREFERRED, 819, PREFERRED)
                 .addGap(44, 44, 44))
         );
-        stockBrowseMainLayout.setVerticalGroup(
-            stockBrowseMainLayout.createParallelGroup(LEADING)
-            .addGroup(stockBrowseMainLayout.createSequentialGroup()
+        layout.setVerticalGroup(
+            layout.createParallelGroup(LEADING)
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(stockNav, PREFERRED, DEFAULT, PREFERRED)
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)

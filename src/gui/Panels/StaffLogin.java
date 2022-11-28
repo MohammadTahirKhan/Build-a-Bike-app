@@ -1,8 +1,10 @@
 package gui.Panels;
-import java.awt.*;
+
 import javax.swing.*;
+import java.awt.*;
 
 public class StaffLogin extends JPanel {
+    public static final Font SEGOE_UI = new Font("Segoe UI", Font.BOLD, 24);
     private final GroupLayout.Alignment LEADING = GroupLayout.Alignment.LEADING;
     private final GroupLayout.Alignment TRAILING = GroupLayout.Alignment.TRAILING;
     private final int DEFAULT = GroupLayout.DEFAULT_SIZE;
@@ -27,7 +29,7 @@ public class StaffLogin extends JPanel {
         loginFormTitle = new Label();
         loginButton = new Button();
 
-        staffLogin.setFont(new Font("Segoe UI", 1, 24));
+        staffLogin.setFont(SEGOE_UI);
         staffLogin.setHorizontalAlignment(SwingConstants.CENTER);
         staffLogin.setText("Staff Login");
 
@@ -37,8 +39,8 @@ public class StaffLogin extends JPanel {
 
         passwordLabel.setText("Password");
 
-        loginFormTitle.setAlignment(SwingConstants.CENTER);
-        loginFormTitle.setFont(new Font("Dialog", 0, 18));
+        loginFormTitle.setAlignment(Label.LEFT);
+        loginFormTitle.setFont(SEGOE_UI.deriveFont(Font.PLAIN, 18));
         loginFormTitle.setText("Enter username and password below");
 
         loginButton.setLabel("Login");
@@ -46,19 +48,19 @@ public class StaffLogin extends JPanel {
         GroupLayout loginFormLayout = new GroupLayout(loginForm);
         loginForm.setLayout(loginFormLayout);
         loginFormLayout.setHorizontalGroup(
-            loginFormLayout.createParallelGroup(LEADING)
-            .addGroup(loginFormLayout.createSequentialGroup()
-                .addGroup(loginFormLayout.createParallelGroup(LEADING)
-                    .addGroup(loginFormLayout.createSequentialGroup()
-                        .addGap(60, 60, 60)
-                        .addGroup(loginFormLayout.createParallelGroup(LEADING)
-                            .addComponent(loginFormTitle, PREFERRED, 317, PREFERRED)
-                            .addComponent(passwordLabel, PREFERRED, DEFAULT, PREFERRED)
-                            .addComponent(usernameLabel, PREFERRED, DEFAULT, PREFERRED)
-                            .addComponent(passwordField, PREFERRED, 317, PREFERRED)
-                            .addComponent(usernameField, PREFERRED, 317, PREFERRED)))
-                    .addGroup(loginFormLayout.createSequentialGroup()
-                        .addGap(169, 169, 169)
+                loginFormLayout.createParallelGroup(LEADING)
+                        .addGroup(loginFormLayout.createSequentialGroup()
+                                .addGroup(loginFormLayout.createParallelGroup(LEADING)
+                                        .addGroup(loginFormLayout.createSequentialGroup()
+                                                .addGap(60, 60, 60)
+                                                .addGroup(loginFormLayout.createParallelGroup(LEADING)
+                                                        .addComponent(loginFormTitle, PREFERRED, 317, PREFERRED)
+                                                        .addComponent(passwordLabel, PREFERRED, DEFAULT, PREFERRED)
+                                                        .addComponent(usernameLabel, PREFERRED, DEFAULT, PREFERRED)
+                                                        .addComponent(passwordField, PREFERRED, 317, PREFERRED)
+                                                        .addComponent(usernameField, PREFERRED, 317, PREFERRED)))
+                                        .addGroup(loginFormLayout.createSequentialGroup()
+                                                .addGap(169, 169, 169)
                         .addComponent(loginButton, PREFERRED, 95, PREFERRED)))
                 .addContainerGap(61, Short.MAX_VALUE))
         );

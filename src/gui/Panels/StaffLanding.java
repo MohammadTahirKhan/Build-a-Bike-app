@@ -2,9 +2,10 @@ package gui.Panels;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
 
 public class StaffLanding extends JPanel {
+    public static final Font SEGOE_UI = new Font("Segoe UI", Font.BOLD, 14);
     private final GroupLayout.Alignment LEADING = GroupLayout.Alignment.LEADING;
     private final GroupLayout.Alignment TRAILING = GroupLayout.Alignment.TRAILING;
     private final int PREFERRED = GroupLayout.PREFERRED_SIZE;
@@ -20,21 +21,17 @@ public class StaffLanding extends JPanel {
         manageStock = new JButton();
         viewOrders = new JButton();
 
-        assembleBike.setFont(new Font("Segoe UI", 1, 14));
+        assembleBike.setFont(SEGOE_UI);
         assembleBike.setText("Assemble Bike");
 
-        acceptPayment.setFont(new Font("Segoe UI", 1, 14));
+        acceptPayment.setFont(SEGOE_UI);
         acceptPayment.setText("Accept Payment");
-        acceptPayment.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                acceptPaymentActionPerformed(evt);
-            }
-        });
+        acceptPayment.addActionListener(this::acceptPaymentActionPerformed);
 
-        manageStock.setFont(new Font("Segoe UI", 1, 14));
+        manageStock.setFont(SEGOE_UI);
         manageStock.setText("Manage Stock");
 
-        viewOrders.setFont(new Font("Segoe UI", 1, 14));
+        viewOrders.setFont(SEGOE_UI);
         viewOrders.setText("View Orders");
 
         GroupLayout layout = new GroupLayout(this);
@@ -67,7 +64,7 @@ public class StaffLanding extends JPanel {
                     .addComponent(manageStock, PREFERRED, 149, PREFERRED))
                 .addContainerGap(79, Short.MAX_VALUE))
         );
-    }                       
+    }
 
     private void acceptPaymentActionPerformed(ActionEvent evt) {                                              
         // TODO add your handling code here:

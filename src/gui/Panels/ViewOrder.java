@@ -1,8 +1,9 @@
 package gui.Panels;
 
 import javax.swing.*;
-
 import java.awt.*;
+import java.util.ArrayList;
+
 public class ViewOrder extends JPanel {
     private final GroupLayout.Alignment LEADING = GroupLayout.Alignment.LEADING;
     private final GroupLayout.Alignment TRAILING = GroupLayout.Alignment.TRAILING;
@@ -10,18 +11,16 @@ public class ViewOrder extends JPanel {
     private final int PREFERRED = GroupLayout.PREFERRED_SIZE;
 
     private JButton backToBrowseButton;
-    private JPanel itemsSelected;
+    private final JPanel itemsSelected;
 
     private JPanel orderOptions;
     private JButton placeOrderButton;
     private JButton restartButton;
     private JLabel yourSelection;
 
-    //** TEMP FOR DESIGN */
-    private ItemTile item1;
-    private ItemTile item2;
-    private ItemTile item3;
-                  
+    private ArrayList<ProductPanel> productPanels = new ArrayList<>(3);
+
+
     public ViewOrder() {
         itemsSelected = new JPanel();
         yourSelection = new JLabel();
@@ -30,29 +29,25 @@ public class ViewOrder extends JPanel {
         backToBrowseButton = new JButton();
         placeOrderButton = new JButton();
 
-        //**TEMP */
-        item1 = new ItemTile(false);
-        item2 = new ItemTile(false);
-        item3 = new ItemTile(false);
-
         GroupLayout itemsSelectedLayout = new GroupLayout(itemsSelected);
+        GroupLayout.SequentialGroup seqGroup = itemsSelectedLayout.createSequentialGroup();
+        GroupLayout.ParallelGroup parGroup = itemsSelectedLayout.createParallelGroup(LEADING);
+
+        for (ProductPanel productPanel : productPanels) {
+            seqGroup.addGap(29, 29, 29)
+                    .addComponent(productPanel, PREFERRED, DEFAULT, PREFERRED);
+            parGroup.addComponent(productPanel, DEFAULT, DEFAULT, Short.MAX_VALUE);
+        }
+        seqGroup.addContainerGap(29, Short.MAX_VALUE);
+
+
         itemsSelected.setLayout(itemsSelectedLayout);
         itemsSelectedLayout.setHorizontalGroup(
-            itemsSelectedLayout.createParallelGroup(LEADING)
-            .addGroup(itemsSelectedLayout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addComponent(item1, PREFERRED, DEFAULT, PREFERRED)
-                .addGap(29, 29, 29)
-                .addComponent(item2, PREFERRED, DEFAULT, PREFERRED) //todo still
-                .addGap(29, 29, 29)
-                .addComponent(item3, PREFERRED, DEFAULT, PREFERRED)
-                .addContainerGap(29, Short.MAX_VALUE))
+                itemsSelectedLayout.createParallelGroup(LEADING)
+                        .addGroup(seqGroup)
         );
         itemsSelectedLayout.setVerticalGroup(
-            itemsSelectedLayout.createParallelGroup(LEADING)
-            .addComponent(item1, DEFAULT, DEFAULT, Short.MAX_VALUE)
-            .addComponent(item2, DEFAULT, DEFAULT, Short.MAX_VALUE)
-            .addComponent(item3, DEFAULT, DEFAULT, Short.MAX_VALUE)
+                parGroup
         );
 
         yourSelection.setFont(new Font("Segoe UI", 1, 24));

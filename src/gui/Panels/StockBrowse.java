@@ -1,7 +1,8 @@
-package gui.Frames;
+package gui.Panels;
 
 import javax.swing.*;
-import javax.swing.border.*;
+import java.util.ArrayList;
+
 public class StockBrowse extends JPanel {
     private final GroupLayout.Alignment LEADING = GroupLayout.Alignment.LEADING;
     private final GroupLayout.Alignment TRAILING = GroupLayout.Alignment.TRAILING;
@@ -25,6 +26,8 @@ public class StockBrowse extends JPanel {
     private JPanel tableHeadingLabels;
     private JLabel unitCost;
     private JButton viewOrder;
+
+    private ArrayList<TableItem> productItems = new ArrayList<>();
 
     public StockBrowse() {
         stockNav = new JPanel();
@@ -128,18 +131,21 @@ public class StockBrowse extends JPanel {
         itemSerialNumber.setText("018274013");
 
         GroupLayout productTableItemsLayout = new GroupLayout(productTableItems);
+
+        GroupLayout.SequentialGroup sequentialGroup = productTableItemsLayout.createSequentialGroup();
+
+        for (TableItem item : productItems) {
+            sequentialGroup.addComponent(item, PREFERRED, DEFAULT, PREFERRED).addGap(0, 0, Short.MAX_VALUE);
+        }
+
         productTableItems.setLayout(productTableItemsLayout);
         productTableItemsLayout.setHorizontalGroup(
-            productTableItemsLayout.createParallelGroup(LEADING)
-            .addGroup(productTableItemsLayout.createSequentialGroup()
-                .addComponent(productItem, PREFERRED, DEFAULT, PREFERRED)
-                .addGap(0, 0, Short.MAX_VALUE))
+                productTableItemsLayout.createParallelGroup(LEADING)
+                        .addGroup(sequentialGroup)
         );
         productTableItemsLayout.setVerticalGroup(
-            productTableItemsLayout.createParallelGroup(LEADING)
-            .addGroup(productTableItemsLayout.createSequentialGroup()
-                .addComponent(productItem, PREFERRED, DEFAULT, PREFERRED)
-                .addGap(0, 485, Short.MAX_VALUE))
+                productTableItemsLayout.createParallelGroup(LEADING)
+                        .addGroup(sequentialGroup)
         );
 
         productTable.setViewportView(productTableItems);

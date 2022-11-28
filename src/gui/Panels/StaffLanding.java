@@ -69,7 +69,7 @@ public class StaffLanding extends JPanel {
         );
     }                       
 
-    private void acceptPaymentActionPerformed(java.awt.event.ActionEvent evt) {                                              
+    private void acceptPaymentActionPerformed(ActionEvent evt) {                                              
         // TODO add your handling code here:
     }                                             
 }

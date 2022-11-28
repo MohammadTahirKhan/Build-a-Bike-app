@@ -31,9 +31,9 @@ public class ViewOrder extends JPanel {
         placeOrderButton = new JButton();
 
         //**TEMP */
-        item1 = new ItemTile();
-        item2 = new ItemTile();
-        item3 = new ItemTile();
+        item1 = new ItemTile(false);
+        item2 = new ItemTile(false);
+        item3 = new ItemTile(false);
 
         GroupLayout itemsSelectedLayout = new GroupLayout(itemsSelected);
         itemsSelected.setLayout(itemsSelectedLayout);

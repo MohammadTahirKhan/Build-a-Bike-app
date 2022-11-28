@@ -17,23 +17,6 @@ public class BaseFrame extends JFrame {
     private ViewOrder viewOrder;
 
     public BaseFrame(){
-        /**try {
-            for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(BaseFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            Logger.getLogger(BaseFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            Logger.getLogger(BaseFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            Logger.getLogger(BaseFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } **/
-
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 header = new JMenuBar();
@@ -51,14 +34,11 @@ public class BaseFrame extends JFrame {
                 setSize(new Dimension(900, 500));
                 setVisible(true);
 
-                //goToStaffLogin();
-                //goToStaffLanding();
-                //goToReviewExistingOrder();
                 //displayPanel(staffLogin, "Back to Browse", null);
                 //displayPanel(staffLanding, "Logout", null);
                 //displayPanel(reviewExistingOrder, "Back to Browse", null);
-                //displayPanel(forgottenOrderNumber, "Back to Browse", null);
-                displayPanel(viewOrder, "Review Existing Order", null);
+                displayPanel(forgottenOrderNumber, "Back to Browse", null);
+                //displayPanel(viewOrder, "Review Existing Order", null);
             }
         });
     }

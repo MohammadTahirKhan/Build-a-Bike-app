@@ -1,6 +1,7 @@
 package gui.Frames;
 
 import gui.Panels.*;
+
 import javax.swing.*;
 import java.awt.*;
 // import java.util.*;
@@ -19,19 +20,21 @@ public class BaseFrame extends JFrame {
     private StockBrowse stockBrowse;
     private ProductBrowse productBrowse;
 
-    public BaseFrame(){
+    public BaseFrame() {
+        BaseFrame frame = this;
+
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 header = new JMenuBar();
                 menuItem1 = new JMenu();
                 menuItem2 = new JMenu();
-                staffLogin = new StaffLogin();
-                staffLanding = new StaffLanding();
-                reviewExistingOrder = new ReviewExistingOrder();
-                forgottenOrderNumber = new ForgottenOrderNumber();
-                viewOrder = new ViewOrder();
-                stockBrowse = new StockBrowse();
-                productBrowse = new ProductBrowse();
+                staffLogin = new StaffLogin(frame);
+                staffLanding = new StaffLanding(frame);
+                reviewExistingOrder = new ReviewExistingOrder(frame);
+                forgottenOrderNumber = new ForgottenOrderNumber(frame);
+                viewOrder = new ViewOrder(frame);
+                stockBrowse = new StockBrowse(frame);
+                productBrowse = new ProductBrowse(frame);
 
                 setDefaultCloseOperation(EXIT_ON_CLOSE);
                 setTitle("Bikes Ltd.");

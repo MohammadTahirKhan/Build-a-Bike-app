@@ -44,6 +44,7 @@ public class ForgottenOrderNumber extends JPanel {
 
 
         forgottenOrderTitle.setFont(new Font("Segoe UI", 1, 24));
+
         forgottenOrderTitle.setHorizontalAlignment(SwingConstants.CENTER);
         forgottenOrderTitle.setText("Forgotten Order Number");
 
@@ -54,11 +55,13 @@ public class ForgottenOrderNumber extends JPanel {
         surnameLabel.setText("Surname");
 
         forgottenOrderFormTitle.setAlignment(Label.CENTER);
+
         forgottenOrderFormTitle.setFont(new Font("Dialog", 0, 18));
         forgottenOrderFormTitle.setText("Enter Your Details Below");
 
         findOrderButton.setLabel("Find My Order");
         findOrderButton.addActionListener(this::findOrderButtonActionPerformed);
+
 
         houseNumberLabel.setText("House Number");
 

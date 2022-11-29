@@ -1,6 +1,6 @@
 package gui.Frames;
 
-import gui.Panels.*;
+import gui.Panels.ReviewExistingOrder;
 
 import javax.swing.*;
 import java.awt.*;
@@ -52,6 +52,7 @@ public class BaseFrame extends JFrame {
                 displayPanel(productBrowse, "Staff Portal", "Review Existing Order");
             }
         });
+
     }
 
     public void setHeader(String item1, String item2) {

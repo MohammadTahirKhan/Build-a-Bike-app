@@ -4,12 +4,14 @@ import gui.Frames.BaseFrame;
 
 import javax.swing.*;
 import java.awt.*;
-public class ForgottenOrderNumber extends JPanel {                
+import java.awt.event.ActionEvent;
+
+public class ForgottenOrderNumber extends JPanel {
     private final GroupLayout.Alignment LEADING = GroupLayout.Alignment.LEADING;
     private final GroupLayout.Alignment TRAILING = GroupLayout.Alignment.TRAILING;
     private final int DEFAULT = GroupLayout.DEFAULT_SIZE;
     private final int PREFERRED = GroupLayout.PREFERRED_SIZE;
-    
+
     private Button findOrderButton;
     private TextField forenameField;
     private Label forenameLabel;
@@ -56,6 +58,7 @@ public class ForgottenOrderNumber extends JPanel {
         forgottenOrderFormTitle.setText("Enter Your Details Below");
 
         findOrderButton.setLabel("Find My Order");
+        findOrderButton.addActionListener(this::findOrderButtonActionPerformed);
 
         houseNumberLabel.setText("House Number");
 
@@ -124,13 +127,17 @@ public class ForgottenOrderNumber extends JPanel {
                 .addContainerGap(230, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addComponent(forgottenOrderTitle, PREFERRED, 82, PREFERRED)
-                .addGap(18, 18, 18)
-                .addComponent(forgottenOrderForm, PREFERRED, DEFAULT, PREFERRED)
-                .addGap(0, 76, Short.MAX_VALUE))
+                layout.createParallelGroup(LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addGap(17, 17, 17)
+                                .addComponent(forgottenOrderTitle, PREFERRED, 82, PREFERRED)
+                                .addGap(18, 18, 18)
+                                .addComponent(forgottenOrderForm, PREFERRED, DEFAULT, PREFERRED)
+                                .addGap(0, 76, Short.MAX_VALUE))
         );
-    }            
+    }
+
+    private void findOrderButtonActionPerformed(ActionEvent evt) {
+
+    }
 }

@@ -1,95 +1,77 @@
 package gui.Panels;
 
+import gui.Frames.BaseFrame;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 
 public class StaffLanding extends JPanel {
-    private final JFrame frame;
-    private final JButton assembleBike = new JButton();
-    private final JButton acceptPayment = new JButton();
-    private final JButton manageStock = new JButton();
-    private final JButton viewOrders = new JButton();
-    private final JMenuBar header = new JMenuBar();
-    private final JMenu jMenu1 = new JMenu();
+    public static final Font SEGOE_UI = new Font("Segoe UI", Font.BOLD, 14);
+    private final GroupLayout.Alignment LEADING = GroupLayout.Alignment.LEADING;
+    private final GroupLayout.Alignment TRAILING = GroupLayout.Alignment.TRAILING;
+    private final int PREFERRED = GroupLayout.PREFERRED_SIZE;
 
-    public StaffLanding(JFrame _frame) {
-        frame = _frame;
+    private JButton acceptPayment;
+    private JButton assembleBike;
+    private JButton manageStock;
+    private JButton viewOrders;
 
-        initComponents();
-    }
+    BaseFrame parentFrame;
 
-    private void initComponents() {
-        frame.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        frame.setTitle("Bikes Ltd.");
-        setMinimumSize(new java.awt.Dimension(900, 500));
-        setSize(new java.awt.Dimension(900, 500));
+    public StaffLanding(BaseFrame parentFrame) {
+        this.parentFrame = parentFrame;
+        assembleBike = new JButton();
+        acceptPayment = new JButton();
+        manageStock = new JButton();
+        viewOrders = new JButton();
 
-        assembleBike.setFont(new java.awt.Font("Segoe UI", Font.BOLD, 14)); // NOI18N
+        assembleBike.setFont(SEGOE_UI);
         assembleBike.setText("Assemble Bike");
 
-        acceptPayment.setFont(new java.awt.Font("Segoe UI", Font.BOLD, 14)); // NOI18N
+        acceptPayment.setFont(SEGOE_UI);
         acceptPayment.setText("Accept Payment");
         acceptPayment.addActionListener(this::acceptPaymentActionPerformed);
 
-        manageStock.setFont(new java.awt.Font("Segoe UI", Font.BOLD, 14)); // NOI18N
+        manageStock.setFont(SEGOE_UI);
         manageStock.setText("Manage Stock");
 
-        viewOrders.setFont(new java.awt.Font("Segoe UI", Font.BOLD, 14)); // NOI18N
+        viewOrders.setFont(SEGOE_UI);
         viewOrders.setText("View Orders");
 
-        javax.swing.GroupLayout staffLandingMainLayout = new javax.swing.GroupLayout(this);
-        this.setLayout(staffLandingMainLayout);
-        staffLandingMainLayout.setHorizontalGroup(
-                staffLandingMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, staffLandingMainLayout.createSequentialGroup()
-                                .addContainerGap(96, Short.MAX_VALUE)
-                                .addGroup(staffLandingMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(staffLandingMainLayout.createSequentialGroup()
-                                                .addComponent(manageStock, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(42, 42, 42)
-                                                .addComponent(viewOrders, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(staffLandingMainLayout.createSequentialGroup()
-                                                .addComponent(acceptPayment, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(42, 42, 42)
-                                                .addComponent(assembleBike, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(96, 96, 96))
-        );
-        staffLandingMainLayout.setVerticalGroup(
-                staffLandingMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(staffLandingMainLayout.createSequentialGroup()
-                                .addGap(76, 76, 76)
-                                .addGroup(staffLandingMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(assembleBike, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(acceptPayment, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(44, 44, 44)
-                                .addGroup(staffLandingMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(viewOrders, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(manageStock, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addContainerGap(79, Short.MAX_VALUE))
-        );
-
-        jMenu1.setText("Logout");
-        header.add(jMenu1);
-
-        frame.setJMenuBar(header);
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(frame.getContentPane());
-        frame.getContentPane().setLayout(layout);
+        GroupLayout layout = new GroupLayout(this);
+        setLayout(layout);
         layout.setHorizontalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(this, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            layout.createParallelGroup(LEADING)
+            .addGroup(TRAILING, layout.createSequentialGroup()
+                .addContainerGap(96, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(manageStock, PREFERRED, 333, PREFERRED)
+                        .addGap(42, 42, 42)
+                        .addComponent(viewOrders, PREFERRED, 333, PREFERRED))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(acceptPayment, PREFERRED, 333, PREFERRED)
+                        .addGap(42, 42, 42)
+                        .addComponent(assembleBike, PREFERRED, 333, PREFERRED)))
+                .addGap(96, 96, 96))
         );
         layout.setVerticalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                                .addComponent(this, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
+            layout.createParallelGroup(LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(76, 76, 76)
+                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                    .addComponent(assembleBike, PREFERRED, 149, PREFERRED)
+                    .addComponent(acceptPayment, PREFERRED, 149, PREFERRED))
+                .addGap(44, 44, 44)
+                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                    .addComponent(viewOrders, PREFERRED, 149, PREFERRED)
+                    .addComponent(manageStock, PREFERRED, 149, PREFERRED))
+                .addContainerGap(79, Short.MAX_VALUE))
         );
-
-        frame.pack();
     }
 
-    private void acceptPaymentActionPerformed(java.awt.event.ActionEvent evt) {
+    private void acceptPaymentActionPerformed(ActionEvent evt) {                                              
         // TODO add your handling code here:
-    }
+    }                                             
 }

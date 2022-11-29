@@ -96,4 +96,6 @@ public class ProductPanel extends JPanel {
     public void setSelectLabel(String label) {
         this.addToBikeLabel.setText(label);
     }
+
 }
+

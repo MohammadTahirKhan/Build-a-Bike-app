@@ -1,191 +1,175 @@
 package gui.Panels;
 
-import Product.Product;
+
+import gui.Frames.BaseFrame;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 
 public class ProductBrowse extends JPanel {
-    private final JFrame frame;
-    private final JPanel orderNav = new JPanel();
-    private final JButton selectWheels = new JButton();
-    private final JButton selectHandlebars = new JButton();
-    private final JButton selectFrameSets = new JButton();
-    private final JButton viewOrder = new JButton();
-    private final JPanel productFilters = new JPanel();
-    private final Choice sortBy = new Choice();
-    private final Label sortByLabel = new Label();
-    private final JScrollPane productView = new JScrollPane();
-    private final JPanel allProducts = new JPanel();
-    private final JMenuBar header = new JMenuBar();
-    private final JMenu staffPortal = new JMenu();
-    private final JMenu reviewExistingOrder = new JMenu();
-    private ArrayList<JPanel> productPanels;
+	private final GroupLayout.Alignment LEADING = GroupLayout.Alignment.LEADING;
+	private final GroupLayout.Alignment TRAILING = GroupLayout.Alignment.TRAILING;
+	private final LayoutStyle.ComponentPlacement RELATED = LayoutStyle.ComponentPlacement.RELATED;
+	private final int DEFAULT = GroupLayout.DEFAULT_SIZE;
+	private final int PREFERRED = GroupLayout.PREFERRED_SIZE;
 
-    public void clearProductPanels() {
-        this.productPanels.clear();
-    }
+	private JPanel allProducts;
+	private JMenuBar header;
+	private JPanel orderNav;
+	private JPanel productBrowseMain;
+	private JPanel productFilters;
+    private JScrollPane productView;
+    private  JButton selectFrameSets;
+    private JButton selectHandlebars;
+    private JButton selectWheels;
+    private Choice sortBy;
+    private Label sortByLabel;
 
-    public ProductBrowse(JFrame _frame) {
-        frame = _frame;
-        initComponents();
-    }
+    private JButton viewOrder;
 
-    private void selectWheelsActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
+    private BaseFrame parentFrame;
 
-    public ProductBrowse(JFrame _frame, ArrayList<Product> products) {
-        frame = _frame;
-        for (Product product : products) {
-            addProductPanel(product);
-        }
-        initComponents();
-    }
+    private ArrayList<ProductPanel> productPanels = new ArrayList<>();
 
-    public void addProductPanel(Product product) {
-        this.productPanels.add(new ProductPanel(product));
-    }
+	public ProductBrowse(BaseFrame parentFrame) {
+        this.parentFrame = parentFrame;
+		orderNav = new JPanel();
+		selectWheels = new JButton();
+		selectFrameSets = new JButton();
+		selectHandlebars = new JButton();
+		viewOrder = new JButton();
+		productFilters = new JPanel();
+		sortBy = new Choice();
+		sortByLabel = new Label();
+		productView = new JScrollPane();
+		allProducts = new JPanel();
 
-    private void initComponents() {
+		orderNav.setBorder(BorderFactory.createEtchedBorder());
 
-        frame.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        frame.setTitle("Bikes Ltd.");
+		selectWheels.setText("Select Wheels");
+		selectWheels.addActionListener(this::selectWheelsActionPerformed);
 
-        orderNav.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+		selectFrameSets.setText("Select Frame-Sets");
 
-        selectWheels.setText("Select Wheels");
-        selectWheels.addActionListener(this::selectWheelsActionPerformed);
+		selectHandlebars.setText("Select Handlebars");
 
-        selectFrameSets.setText("Select Frame-Sets");
+		viewOrder.setText("View Order");
 
-        selectHandlebars.setText("Select Handlebars");
+		GroupLayout orderNavLayout = new GroupLayout(orderNav);
+		orderNav.setLayout(orderNavLayout);
+		orderNavLayout.setHorizontalGroup(
+				orderNavLayout.createParallelGroup(LEADING)
+						.addGroup(orderNavLayout.createSequentialGroup()
+								.addGap(16, 16, 16)
+								.addComponent(selectWheels, PREFERRED, 212, PREFERRED)
+								.addPreferredGap(RELATED)
+								.addComponent(selectFrameSets, PREFERRED, 212,
+										PREFERRED)
+								.addPreferredGap(RELATED)
+								.addComponent(selectHandlebars, PREFERRED, 212,
+										PREFERRED)
+								.addPreferredGap(RELATED)
+								.addComponent(viewOrder, PREFERRED, 214, PREFERRED)
+								.addContainerGap(DEFAULT, Short.MAX_VALUE)));
+		orderNavLayout.setVerticalGroup(
+				orderNavLayout.createParallelGroup(LEADING)
+						.addGroup(TRAILING, orderNavLayout.createSequentialGroup()
+								.addContainerGap()
+								.addGroup(orderNavLayout.createParallelGroup(
+										GroupLayout.Alignment.CENTER)
+										.addComponent(selectWheels, PREFERRED,
+												100, PREFERRED)
+										.addComponent(selectFrameSets,
+												PREFERRED, 100,
+												PREFERRED)
+										.addComponent(selectHandlebars,
+												PREFERRED, 100,
+												PREFERRED)
+										.addComponent(viewOrder, PREFERRED, 100,
+												PREFERRED))
+								.addContainerGap()));
 
-        viewOrder.setText("View Order");
+		sortByLabel.setText("Sort by:");
 
-        javax.swing.GroupLayout orderNavLayout = new javax.swing.GroupLayout(orderNav);
-        orderNav.setLayout(orderNavLayout);
-        orderNavLayout.setHorizontalGroup(
-                orderNavLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(orderNavLayout.createSequentialGroup()
-                                .addGap(16, 16, 16)
-                                .addComponent(selectWheels, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(selectFrameSets, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(selectHandlebars, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(viewOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        orderNavLayout.setVerticalGroup(
-                orderNavLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, orderNavLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(orderNavLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                                        .addComponent(selectWheels, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(selectFrameSets, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(selectHandlebars, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(viewOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addContainerGap())
-        );
+		GroupLayout productFiltersLayout = new GroupLayout(productFilters);
+		productFilters.setLayout(productFiltersLayout);
+		productFiltersLayout.setHorizontalGroup(
+				productFiltersLayout.createParallelGroup(LEADING)
+						.addGroup(TRAILING, productFiltersLayout.createSequentialGroup()
+								.addContainerGap(DEFAULT, Short.MAX_VALUE)
+								.addComponent(sortByLabel, PREFERRED, DEFAULT,
+										PREFERRED)
+								.addPreferredGap(RELATED)
+								.addComponent(sortBy, PREFERRED, 162, PREFERRED)
+								.addGap(20, 20, 20)));
+		productFiltersLayout.setVerticalGroup(
+				productFiltersLayout.createParallelGroup(LEADING)
+						.addComponent(sortBy, DEFAULT, 30, Short.MAX_VALUE)
+						.addComponent(sortByLabel, DEFAULT, DEFAULT, Short.MAX_VALUE));
 
-        sortByLabel.setText("Sort by:");
+		productView.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 
-        javax.swing.GroupLayout productFiltersLayout = new javax.swing.GroupLayout(productFilters);
-        productFilters.setLayout(productFiltersLayout);
-        productFiltersLayout.setHorizontalGroup(
-                productFiltersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, productFiltersLayout.createSequentialGroup()
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(sortByLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(sortBy, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(20, 20, 20))
-        );
-        productFiltersLayout.setVerticalGroup(
-                productFiltersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(sortBy, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
-                        .addComponent(sortByLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
+		GroupLayout allProductsLayout = new GroupLayout(allProducts);
 
-        productView.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+		GroupLayout.SequentialGroup allProductsSequentialGroup = allProductsLayout.createSequentialGroup()
+				.addContainerGap();
+		GroupLayout.ParallelGroup allProductsParallelGroup = allProductsLayout.createParallelGroup(LEADING,
+				false);
 
+		for (JPanel productPanel : productPanels) {
+			allProductsSequentialGroup.addComponent(productPanel, PREFERRED, DEFAULT, PREFERRED);
+			allProductsSequentialGroup.addPreferredGap(RELATED);
+			allProductsParallelGroup.addComponent(productPanel, DEFAULT, DEFAULT, Short.MAX_VALUE);
+		}
 
-        javax.swing.GroupLayout allProductsLayout = new javax.swing.GroupLayout(allProducts);
-        allProducts.setLayout(allProductsLayout);
+		allProducts.setLayout(allProductsLayout);
+		allProductsLayout.setHorizontalGroup(
+				allProductsLayout.createParallelGroup(LEADING)
+						.addGroup(allProductsSequentialGroup));
 
-        GroupLayout.SequentialGroup allProductsSequentialGroup = allProductsLayout.createSequentialGroup().addContainerGap();
-        GroupLayout.ParallelGroup allProductsParallelGroup = allProductsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false);
+		allProductsLayout.setVerticalGroup(
+				allProductsLayout.createParallelGroup(LEADING)
+						.addGroup(allProductsLayout.createSequentialGroup()
+								.addContainerGap()
+								.addGroup(allProductsParallelGroup)
+								.addContainerGap(16, Short.MAX_VALUE)));
 
-        for (JPanel productPanel : productPanels) {
-            allProductsSequentialGroup.addComponent(productPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
-            allProductsSequentialGroup.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
-            allProductsParallelGroup.addComponent(productPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE);
-        }
+		productView.setViewportView(allProducts);
 
-        allProductsSequentialGroup.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE);
+		GroupLayout layout = new GroupLayout(this);
+		this.setLayout(layout);
+		layout.setHorizontalGroup(
+			layout.createParallelGroup(LEADING)
+						.addGroup(layout.createSequentialGroup()
+								.addContainerGap()
+								.addGroup(layout
+										.createParallelGroup(LEADING)
+										.addComponent(orderNav, DEFAULT,
+												DEFAULT,
+												Short.MAX_VALUE)
+										.addComponent(productFilters, DEFAULT,
+												DEFAULT,
+												Short.MAX_VALUE)
+										.addComponent(productView, PREFERRED, 0,
+												Short.MAX_VALUE))
+								.addContainerGap()));
+								layout.setVerticalGroup(
+									layout.createParallelGroup(LEADING)
+						.addGroup(layout.createSequentialGroup()
+								.addContainerGap()
+								.addComponent(orderNav, PREFERRED, DEFAULT, PREFERRED)
+								.addPreferredGap(RELATED)
+								.addComponent(productFilters, PREFERRED, DEFAULT,
+										PREFERRED)
+								.addPreferredGap(RELATED)
+								.addComponent(productView, DEFAULT, 318,
+										Short.MAX_VALUE)
+								.addContainerGap()));
+	}
 
-        allProductsLayout.setHorizontalGroup(
-                allProductsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(allProductsSequentialGroup)
-        );
-        allProductsLayout.setVerticalGroup(
-                allProductsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(allProductsLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(allProductsParallelGroup)
-                                .addContainerGap(16, Short.MAX_VALUE))
-        );
-
-        productView.setViewportView(allProducts);
-
-        javax.swing.GroupLayout productBrowseMainLayout = new javax.swing.GroupLayout(this);
-        this.setLayout(productBrowseMainLayout);
-        productBrowseMainLayout.setHorizontalGroup(
-                productBrowseMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(productBrowseMainLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(productBrowseMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(orderNav, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(productFilters, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(productView, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                                .addContainerGap())
-        );
-        productBrowseMainLayout.setVerticalGroup(
-                productBrowseMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(productBrowseMainLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(orderNav, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(productFilters, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(productView, javax.swing.GroupLayout.DEFAULT_SIZE, 318, Short.MAX_VALUE)
-                                .addContainerGap())
-        );
-
-        staffPortal.setText("Staff Portal");
-        staffPortal.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        header.add(staffPortal);
-
-        reviewExistingOrder.setText("Review Existing Order");
-        reviewExistingOrder.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        header.add(reviewExistingOrder);
-
-        frame.setJMenuBar(header);
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(frame.getContentPane());
-        frame.getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(this, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(this, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-
-        frame.pack();
-    }
+	private void selectWheelsActionPerformed(ActionEvent evt) {
+		// TODO add your handling code here:
+	}
 }

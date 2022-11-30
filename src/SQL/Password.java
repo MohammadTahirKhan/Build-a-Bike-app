@@ -8,6 +8,13 @@ import java.util.Arrays;
 
 public class Password {
 
+    /**
+     *
+     * @param hash
+     * @param inputPassword
+     * @param salt
+     * @return
+     */
     public static boolean checkPassword(byte[] hash, String inputPassword, byte[] salt){
         try {
             byte[][] inputHashSalt = hashPassword(inputPassword, salt);

@@ -5,27 +5,27 @@ import gui.Frames.BaseFrame;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-
+import java.awt.event.ActionListener;
 public class ForgottenOrderNumber extends JPanel {
     private final GroupLayout.Alignment LEADING = GroupLayout.Alignment.LEADING;
     private final GroupLayout.Alignment TRAILING = GroupLayout.Alignment.TRAILING;
     private final int DEFAULT = GroupLayout.DEFAULT_SIZE;
     private final int PREFERRED = GroupLayout.PREFERRED_SIZE;
 
-    private Button findOrderButton;
-    private TextField forenameField;
-    private Label forenameLabel;
-    private JPanel forgottenOrderForm;
-    private Label forgottenOrderFormTitle;
-    private JLabel forgottenOrderTitle;
-    private TextField houseNumberField;
-    private Label houseNumberLabel;
-    private TextField postcodeField;
-    private Label postcodeLabel;
-    private Label surnameLabel;
-    private TextField textField2;
+    private final Button findOrderButton;
+    private final TextField forenameField;
+    private final Label forenameLabel;
+    private final JPanel forgottenOrderForm;
+    private final Label forgottenOrderFormTitle;
+    private final JLabel forgottenOrderTitle;
+    private final TextField houseNumberField;
+    private final Label houseNumberLabel;
+    private final TextField postcodeField;
+    private final Label postcodeLabel;
+    private final Label surnameLabel;
+    private final TextField textField2;
 
-    private BaseFrame parentFrame;
+    private final BaseFrame parentFrame;
 
     public ForgottenOrderNumber(BaseFrame parentFrame) {
         this.parentFrame = parentFrame;
@@ -48,6 +48,8 @@ public class ForgottenOrderNumber extends JPanel {
         forgottenOrderTitle.setHorizontalAlignment(SwingConstants.CENTER);
         forgottenOrderTitle.setText("Forgotten Order Number");
 
+        initializeButtons();
+
         forgottenOrderForm.setBorder(BorderFactory.createEtchedBorder());
 
         forenameLabel.setText("Forename");
@@ -58,10 +60,6 @@ public class ForgottenOrderNumber extends JPanel {
 
         forgottenOrderFormTitle.setFont(new Font("Dialog", 0, 18));
         forgottenOrderFormTitle.setText("Enter Your Details Below");
-
-        findOrderButton.setLabel("Find My Order");
-        findOrderButton.addActionListener(this::findOrderButtonActionPerformed);
-
 
         houseNumberLabel.setText("House Number");
 
@@ -138,9 +136,17 @@ public class ForgottenOrderNumber extends JPanel {
                                 .addComponent(forgottenOrderForm, PREFERRED, DEFAULT, PREFERRED)
                                 .addGap(0, 76, Short.MAX_VALUE))
         );
-    }
-
-    private void findOrderButtonActionPerformed(ActionEvent evt) {
-
-    }
+    } 
+    
+    private void initializeButtons() {
+        findOrderButton.setLabel("Find My Order");
+        findOrderButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO: link to back
+                System.out.println("find my order selected");
+                parentFrame.displayPanel(parentFrame.viewOrder, true, false, false, false, false);
+			}
+		});
+	}                 
 }

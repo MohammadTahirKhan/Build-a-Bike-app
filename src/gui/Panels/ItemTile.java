@@ -9,16 +9,16 @@ public class ItemTile extends JPanel {
     private final int DEFAULT = GroupLayout.DEFAULT_SIZE;
     private final int PREFERRED = GroupLayout.PREFERRED_SIZE;
 
-    private JLabel image;
-    private JLabel itemDisplayCost;
-    private JLabel itemDisplayName;
-    private JLabel checkboxLabel;
+    private final JLabel image;
+    private final JLabel itemDisplayCost;
+    private final JLabel itemDisplayName;
+    private final JLabel checkboxLabel;
 
-    private JSeparator separator;
-    private JSeparator separator1;
-    private JSeparator separator2;
-    
-    private JCheckBox addToBike;
+    private final JSeparator separator;
+    private final JSeparator separator1;
+    private final JSeparator separator2;
+
+    private final JCheckBox addToBike;
 
     public ItemTile(Boolean checkbox) {
         separator1 = new JSeparator();
@@ -38,17 +38,17 @@ public class ItemTile extends JPanel {
         itemDisplayCost.setFont(new Font("Segoe UI", 0, 14));
         itemDisplayCost.setHorizontalAlignment(SwingConstants.CENTER);
 
-        if (checkbox == false) {
+        if (!checkbox) {
             GroupLayout layout = new GroupLayout(this);
             setLayout(layout);
             layout.setHorizontalGroup(
-                layout.createParallelGroup(LEADING)
-                .addGroup(TRAILING, layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addGroup(layout.createParallelGroup(TRAILING)
-                        .addComponent(itemDisplayCost, DEFAULT, DEFAULT, Short.MAX_VALUE)
-                        .addComponent(separator)
-                        .addComponent(image, LEADING, DEFAULT, DEFAULT, Short.MAX_VALUE)
+                    layout.createParallelGroup(LEADING)
+                            .addGroup(TRAILING, layout.createSequentialGroup()
+                                    .addContainerGap()
+                                    .addGroup(layout.createParallelGroup(TRAILING)
+                                            .addComponent(itemDisplayCost, DEFAULT, DEFAULT, Short.MAX_VALUE)
+                                            .addComponent(separator)
+                                            .addComponent(image, LEADING, DEFAULT, DEFAULT, Short.MAX_VALUE)
                         .addComponent(separator1, LEADING)
                         .addGroup(LEADING, layout.createSequentialGroup()
                             .addGap(6, 6, 6)

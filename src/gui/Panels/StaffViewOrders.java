@@ -1,47 +1,42 @@
 package gui.Panels;
 
-import gui.Frames.BaseFrame;
-
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-public class StockBrowse extends JPanel {
+public class StaffViewOrders extends JPanel {
     private final GroupLayout.Alignment LEADING = GroupLayout.Alignment.LEADING;
     private final GroupLayout.Alignment TRAILING = GroupLayout.Alignment.TRAILING;
     private final int DEFAULT = GroupLayout.DEFAULT_SIZE;
     private final int PREFERRED = GroupLayout.PREFERRED_SIZE;
 
-    private final JLabel brandName;
-    private final JLabel productName;
+    private final JLabel status;
+    private final JLabel orderNumber;
     private final JScrollPane productTable;
     private final JPanel productTableItems;
-    private final JButton selectFrameSets;
-    private final JButton selectHandlebars;
-    private final JButton selectWheels;
+    private final JButton confirmed;
+    private final JButton fulfilled;
+    private final JButton pending;
     private final JLabel serialNumber;
     private final JPanel stockNav;
     private final JPanel tableHeadingLabels;
-    private final JLabel unitCost;
-    private final JButton addStock;
+    private final JLabel cost;
+    private final JButton all;
 
-    private final ArrayList<TableItem> productItems = new ArrayList<>();
-    private final BaseFrame parentFrame;
+    private final ArrayList<TableItem> orders = new ArrayList<>();
 
-
-    public StockBrowse(BaseFrame baseFrame) {
-        this.parentFrame = baseFrame;
+    public StaffViewOrders() {
         stockNav = new JPanel();
-        selectWheels = new JButton();
-        selectFrameSets = new JButton();
-        selectHandlebars = new JButton();
-        addStock = new JButton();
+        pending = new JButton();
+        confirmed = new JButton();
+        fulfilled = new JButton();
+        all = new JButton();
         tableHeadingLabels = new JPanel();
-        productName = new JLabel();
+        orderNumber = new JLabel();
         serialNumber = new JLabel();
-        unitCost = new JLabel();
-        brandName = new JLabel();
+        cost = new JLabel();
+        status = new JLabel();
         productTable = new JScrollPane();
         productTableItems = new JPanel();
 
@@ -55,13 +50,13 @@ public class StockBrowse extends JPanel {
             stockNavLayout.createParallelGroup(LEADING)
             .addGroup(stockNavLayout.createSequentialGroup()
                 .addGap(16, 16, 16)
-                .addComponent(selectWheels, PREFERRED, 212, PREFERRED)
+                .addComponent(pending, PREFERRED, 212, PREFERRED)
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(selectFrameSets, PREFERRED, 212, PREFERRED)
+                .addComponent(confirmed, PREFERRED, 212, PREFERRED)
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(selectHandlebars, PREFERRED, 212, PREFERRED)
+                .addComponent(fulfilled, PREFERRED, 212, PREFERRED)
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(addStock, PREFERRED, 214, PREFERRED)
+                .addComponent(all, PREFERRED, 214, PREFERRED)
                 .addContainerGap(DEFAULT, Short.MAX_VALUE))
         );
         stockNavLayout.setVerticalGroup(
@@ -69,20 +64,20 @@ public class StockBrowse extends JPanel {
             .addGroup(TRAILING, stockNavLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(stockNavLayout.createParallelGroup(GroupLayout.Alignment.CENTER)
-                    .addComponent(selectWheels, PREFERRED, 100, PREFERRED)
-                    .addComponent(selectFrameSets, PREFERRED, 100, PREFERRED)
-                    .addComponent(selectHandlebars, PREFERRED, 100, PREFERRED)
-                    .addComponent(addStock, PREFERRED, 100, PREFERRED))
+                    .addComponent(pending, PREFERRED, 100, PREFERRED)
+                    .addComponent(confirmed, PREFERRED, 100, PREFERRED)
+                    .addComponent(fulfilled, PREFERRED, 100, PREFERRED)
+                    .addComponent(all, PREFERRED, 100, PREFERRED))
                 .addContainerGap())
         );
 
-        productName.setText("Product Name");
+        orderNumber.setText("Order Number");
 
-        serialNumber.setText("Serial Number");
+        serialNumber.setText("Status");
 
-        unitCost.setText("Unit Cost");
+        cost.setText("Cost");
 
-        brandName.setText("Brand Name");
+        status.setText("Status");
 
         GroupLayout tableHeadingLabelsLayout = new GroupLayout(tableHeadingLabels);
         tableHeadingLabels.setLayout(tableHeadingLabelsLayout);
@@ -90,11 +85,11 @@ public class StockBrowse extends JPanel {
             tableHeadingLabelsLayout.createParallelGroup(LEADING)
             .addGroup(tableHeadingLabelsLayout.createSequentialGroup()
                 .addGap(39, 39, 39)
-                .addComponent(productName, PREFERRED, 169, PREFERRED)
+                .addComponent(orderNumber, PREFERRED, 169, PREFERRED)
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, DEFAULT, Short.MAX_VALUE)
-                .addComponent(unitCost, PREFERRED, 139, PREFERRED)
+                .addComponent(cost, PREFERRED, 139, PREFERRED)
                 .addGap(50, 50, 50)
-                .addComponent(brandName, PREFERRED, 139, PREFERRED)
+                .addComponent(status, PREFERRED, 139, PREFERRED)
                 .addGap(36, 36, 36)
                 .addComponent(serialNumber, PREFERRED, 139, PREFERRED)
                 .addGap(38, 38, 38))
@@ -104,10 +99,10 @@ public class StockBrowse extends JPanel {
             .addGroup(TRAILING, tableHeadingLabelsLayout.createSequentialGroup()
                 .addContainerGap(16, Short.MAX_VALUE)
                 .addGroup(tableHeadingLabelsLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                    .addComponent(productName)
+                    .addComponent(orderNumber)
                     .addComponent(serialNumber)
-                    .addComponent(unitCost)
-                    .addComponent(brandName))
+                    .addComponent(cost)
+                    .addComponent(status))
                 .addContainerGap())
         );
 
@@ -120,7 +115,7 @@ public class StockBrowse extends JPanel {
 
         GroupLayout.SequentialGroup sequentialGroup = productTableItemsLayout.createSequentialGroup();
 
-        for (TableItem item : productItems) {
+        for (TableItem item : orders) {
             sequentialGroup.addComponent(item, PREFERRED, DEFAULT, PREFERRED).addGap(0, 0, Short.MAX_VALUE);
         }
 
@@ -165,41 +160,41 @@ public class StockBrowse extends JPanel {
     }                    
 
     private void initializeButtons() {
-        selectWheels.setText("Wheels");
-        selectFrameSets.setText("Frame-Sets");
-        selectHandlebars.setText("Handlebars");
-        addStock.setText("Add New Stock");
-        selectWheels.addActionListener(new ActionListener() {
+        pending.setText("Pending");
+        confirmed.setText("Confirmed");
+        fulfilled.setText("Fulfilled");
+        all.setText("All");
+
+        pending.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO: link to back
-                System.out.println("wheels selected");
+                System.out.println("pending selected");
 			}
 		});
 
-        selectFrameSets.addActionListener(new ActionListener() {
+        confirmed.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO: link to back
-                System.out.println("framesets selected");
+                System.out.println("confirmed selected");
 			}
 		});
 
-        selectHandlebars.addActionListener(new ActionListener() {
+        fulfilled.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO: link to back
-                System.out.println("handlebars selected");
+                System.out.println("fulfilled selected");
 			}
 		});
 
-        addStock.addActionListener(new ActionListener() {
+        all.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-                System.out.println("add stock selected");
-                parentFrame.displayPanel(parentFrame.addStock, false, false, false, true, true);	
+                // TODO: link to back
+                System.out.println("all selected");
 			}
 		});
 	}                                                     
 }
-

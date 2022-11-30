@@ -1,45 +1,48 @@
 package gui.Panels;
 
 
+import Product.Frame;
+import Product.HandleBar;
+import Product.Product;
+import Product.Wheels;
 import gui.Frames.BaseFrame;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 
+import static SQL.Queries.*;
+
 public class ProductBrowse extends JPanel {
-	private final GroupLayout.Alignment LEADING = GroupLayout.Alignment.LEADING;
-	private final GroupLayout.Alignment TRAILING = GroupLayout.Alignment.TRAILING;
-	private final LayoutStyle.ComponentPlacement RELATED = LayoutStyle.ComponentPlacement.RELATED;
-	private final int DEFAULT = GroupLayout.DEFAULT_SIZE;
-	private final int PREFERRED = GroupLayout.PREFERRED_SIZE;
+    private final GroupLayout.Alignment LEADING = GroupLayout.Alignment.LEADING;
+    private final GroupLayout.Alignment TRAILING = GroupLayout.Alignment.TRAILING;
+    private final LayoutStyle.ComponentPlacement RELATED = LayoutStyle.ComponentPlacement.RELATED;
+    private final int DEFAULT = GroupLayout.DEFAULT_SIZE;
+    private final int PREFERRED = GroupLayout.PREFERRED_SIZE;
 
-	private JPanel allProducts;
-	private JMenuBar header;
-	private JPanel orderNav;
-	private JPanel productBrowseMain;
-	private JPanel productFilters;
-    private JScrollPane productView;
-    private  JButton selectFrameSets;
-    private JButton selectHandlebars;
-    private JButton selectWheels;
-    private Choice sortBy;
-    private Label sortByLabel;
+    private final BaseFrame parentFrame;
+    private final JPanel allProducts;
+    private final JPanel orderNav;
+    private final JPanel productFilters;
+    private final JScrollPane productView;
 
-    private JButton viewOrder;
+    private final JButton selectFrameSets;
+    private final JButton selectHandlebars;
+    private final JButton selectWheels;
+    private final JButton viewOrder;
 
-    private BaseFrame parentFrame;
+    private final Choice sortBy;
+    private final Label sortByLabel;
 
-    private ArrayList<ProductPanel> productPanels = new ArrayList<>();
+    private final ArrayList<ProductPanel> productPanels = new ArrayList<>();
 
-	public ProductBrowse(BaseFrame parentFrame) {
+    public ProductBrowse(BaseFrame parentFrame) {
         this.parentFrame = parentFrame;
-		orderNav = new JPanel();
-		selectWheels = new JButton();
-		selectFrameSets = new JButton();
-		selectHandlebars = new JButton();
-		viewOrder = new JButton();
+        orderNav = new JPanel();
+        selectWheels = new JButton();
+        selectFrameSets = new JButton();
+        selectHandlebars = new JButton();
+        viewOrder = new JButton();
 		productFilters = new JPanel();
 		sortBy = new Choice();
 		sortByLabel = new Label();
@@ -48,14 +51,7 @@ public class ProductBrowse extends JPanel {
 
 		orderNav.setBorder(BorderFactory.createEtchedBorder());
 
-		selectWheels.setText("Select Wheels");
-		selectWheels.addActionListener(this::selectWheelsActionPerformed);
-
-		selectFrameSets.setText("Select Frame-Sets");
-
-		selectHandlebars.setText("Select Handlebars");
-
-		viewOrder.setText("View Order");
+		initializeButtons();
 
 		GroupLayout orderNavLayout = new GroupLayout(orderNav);
 		orderNav.setLayout(orderNavLayout);
@@ -169,7 +165,39 @@ public class ProductBrowse extends JPanel {
 								.addContainerGap()));
 	}
 
-	private void selectWheelsActionPerformed(ActionEvent evt) {
-		// TODO add your handling code here:
-	}
+	private void initializeButtons() {
+        selectWheels.setText("Select Wheels");
+        selectFrameSets.setText("Select Frame-Sets");
+        selectHandlebars.setText("Select Handlebars");
+        viewOrder.setText("View Order");
+
+        selectWheels.addActionListener(e -> populateProductPanels(Product.Products.WHEELS));
+
+        selectFrameSets.addActionListener(e -> populateProductPanels(Product.Products.FRAME));
+
+        selectHandlebars.addActionListener(e -> populateProductPanels(Product.Products.HANDLEBAR));
+
+        viewOrder.addActionListener(e -> parentFrame.displayPanel(parentFrame.viewOrder, false, false, true, false, false));
+    }
+
+    private void populateProductPanels(Product.Products productType) {
+        ArrayList<Product> products = new ArrayList<>();
+        switch (productType) {
+            case WHEELS:
+                ArrayList<Wheels> wheels = getAllWheels();
+                products.addAll(wheels);
+                break;
+            case FRAME:
+                ArrayList<Frame> frames = getAllFrame();
+                products.addAll(frames);
+                break;
+            case HANDLEBAR:
+                ArrayList<HandleBar> handlebars = getAllHandleBar();
+                products.addAll(handlebars);
+                break;
+        }
+        productPanels.clear();
+        products.forEach(product -> productPanels.add(new ProductPanel(product)));
+        this.repaint();
+    }
 }

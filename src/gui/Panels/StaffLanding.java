@@ -5,6 +5,7 @@ import gui.Frames.BaseFrame;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class StaffLanding extends JPanel {
     public static final Font SEGOE_UI = new Font("Segoe UI", Font.BOLD, 14);
@@ -12,10 +13,10 @@ public class StaffLanding extends JPanel {
     private final GroupLayout.Alignment TRAILING = GroupLayout.Alignment.TRAILING;
     private final int PREFERRED = GroupLayout.PREFERRED_SIZE;
 
-    private JButton acceptPayment;
-    private JButton assembleBike;
-    private JButton manageStock;
-    private JButton viewOrders;
+    private final JButton acceptPayment;
+    private final JButton assembleBike;
+    private final JButton manageStock;
+    private final JButton viewOrders;
 
     BaseFrame parentFrame;
 
@@ -26,18 +27,7 @@ public class StaffLanding extends JPanel {
         manageStock = new JButton();
         viewOrders = new JButton();
 
-        assembleBike.setFont(SEGOE_UI);
-        assembleBike.setText("Assemble Bike");
-
-        acceptPayment.setFont(SEGOE_UI);
-        acceptPayment.setText("Accept Payment");
-        acceptPayment.addActionListener(this::acceptPaymentActionPerformed);
-
-        manageStock.setFont(SEGOE_UI);
-        manageStock.setText("Manage Stock");
-
-        viewOrders.setFont(SEGOE_UI);
-        viewOrders.setText("View Orders");
+        initializeButtons();
 
         GroupLayout layout = new GroupLayout(this);
         setLayout(layout);
@@ -71,7 +61,44 @@ public class StaffLanding extends JPanel {
         );
     }
 
-    private void acceptPaymentActionPerformed(ActionEvent evt) {                                              
-        // TODO add your handling code here:
-    }                                             
+    private void initializeButtons() {
+		assembleBike.setFont(SEGOE_UI);
+        assembleBike.setText("Assemble Bike");
+        acceptPayment.setFont(SEGOE_UI);
+        acceptPayment.setText("Accept Payment");
+        manageStock.setFont(SEGOE_UI);
+        manageStock.setText("Manage Stock");
+        viewOrders.setFont(SEGOE_UI);
+        viewOrders.setText("View Orders");
+
+        assembleBike.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				parentFrame.displayPanel(parentFrame.staffFindOrder, false, false, false, true, true);
+			}
+		});
+
+        acceptPayment.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO: link to back
+				System.out.println("accept payment selected");
+			}
+		});
+
+        manageStock.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+                parentFrame.displayPanel(parentFrame.stockBrowse, false, false, false, true, true);	
+			}
+		});
+
+        viewOrders.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO: link to back
+				parentFrame.displayPanel(parentFrame.staffViewOrders, false, false, false, true, true);
+			}
+		});
+	}                                          
 }

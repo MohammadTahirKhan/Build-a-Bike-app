@@ -3,15 +3,12 @@ import gui.Frames.BaseFrame;
 
 import java.sql.*;
 
-//public class main {
-//    public static void main(String[] args) throws SQLException {
-//        System.out.println("Connecting to database...");
-//        Connection con = Utils.connect();
-//        System.out.println("Connected!");
-//        System.out.println(con.getSchema());
-//        Utils.closeConnection(con);
-//    }
-//}
+public class main {
+    public static void main(String[] args)  {
+        BaseFrame baseFrame = new BaseFrame();
+        baseFrame.setVisible(true);
+    }
+}
 
 
 

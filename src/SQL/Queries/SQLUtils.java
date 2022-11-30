@@ -64,14 +64,14 @@ public class SQLUtils {
         HandleBar handleBar7 = insertHandleBar(new HandleBar(HandleBar.Style.STRAIGHT, "Descendant Riser", 7, 75.00, "Truvative", 64));
         HandleBar handleBar8 = insertHandleBar(new HandleBar(HandleBar.Style.DROPPED, "Course 80 Ergonomic", 8, 60.00, "ZIPP", 28));
 
-        Bike bike1 = new Bike(wheels1, frame3, handleBar4, "Bike1", 555, "brand1", 5);
-        Bike bike2 = new Bike(wheels6, frame5, handleBar2, "Bike2", 444, "brand2", 5);
-        Bike bike3 = new Bike(wheels1, frame4, handleBar1, "Bike3", 333, "brand3", 5);
-        Bike bike4 = new Bike(wheels5, frame2, handleBar6, "Bike4", 222, "brand4", 5);
-        Bike bike5 = new Bike(wheels5, frame3, handleBar5, "Bike4", 222, "brand4", 5);
-        Bike bike6 = new Bike(wheels3, frame6, handleBar8, "Bike4", 222, "brand4", 5);
-        Bike bike7 = new Bike(wheels8, frame1, handleBar3, "Bike4", 222, "brand4", 5);
-        Bike bike8 = new Bike(wheels2, frame4, handleBar2, "Bike4", 222, "brand4", 5);
+        Bike bike1 = new Bike(wheels1, frame3, handleBar4);
+        Bike bike2 = new Bike(wheels6, frame5, handleBar2);
+        Bike bike3 = new Bike(wheels1, frame4, handleBar1);
+        Bike bike4 = new Bike(wheels5, frame2, handleBar6);
+        Bike bike5 = new Bike(wheels5, frame3, handleBar5);
+        Bike bike6 = new Bike(wheels3, frame6, handleBar8);
+        Bike bike7 = new Bike(wheels8, frame1, handleBar3);
+        Bike bike8 = new Bike(wheels2, frame4, handleBar2);
 
 
         Address address1 = new Address(14, "Mappin Steet", "Sheffield", "S1 4DT");

@@ -76,7 +76,7 @@ public class SQLBike {
             String brandName = getBikeRS.getString(7);
             int stock = getBikeRS.getInt(8);
 
-            return new Bike(productId, wheels, frame, handleBar, name, serialNumber, brandName, stock);
+            return new Bike(productId, wheels, frame, handleBar, name, serialNumber, unitCost, brandName, stock);
         }catch (SQLException e){
             e.printStackTrace();
         }

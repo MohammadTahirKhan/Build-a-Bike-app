@@ -21,24 +21,20 @@ public class Bike extends Product{
      * @param stock Stock available
      */
     //    itemCost is calculated automatically
-    public Bike(int pKey, Wheels wheels, Frame frame, HandleBar handleBar, String name, int serialNumber,double unitCost , String brandName, int stock) {
+    public Bike(int pKey, Wheels wheels, Frame frame, HandleBar handleBar, String name, int serialNumber, double unitCost, String brandName, int stock) {
         this.wheels = wheels;
         this.frame = frame;
         this.handleBar = handleBar;
         this.setProductDetails(pKey, name, serialNumber, unitCost, brandName, stock);
     }
 
-    public Bike(Wheels wheels, Frame frame, HandleBar handleBar, String name, int serialNumber,double unitCost , String brandName, int stock) {
-        this.wheels = wheels;
-        this.frame = frame;
-        this.handleBar = handleBar;
-        this.setProductDetails(-1, name, serialNumber, unitCost, brandName, stock);
-    }
+
 
     public Bike(Wheels wheels, Frame frame, HandleBar handleBar) {
         this.wheels = wheels;
         this.frame = frame;
         this.handleBar = handleBar;
+        this.setValues();
     }
 
     public Bike(){

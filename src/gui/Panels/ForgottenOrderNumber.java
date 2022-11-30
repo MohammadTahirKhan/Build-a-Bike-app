@@ -11,7 +11,7 @@ public class ForgottenOrderNumber extends JPanel {
     private final GroupLayout.Alignment TRAILING = GroupLayout.Alignment.TRAILING;
     private final int DEFAULT = GroupLayout.DEFAULT_SIZE;
     private final int PREFERRED = GroupLayout.PREFERRED_SIZE;
-    
+
     private Button findOrderButton;
     private TextField forenameField;
     private Label forenameLabel;
@@ -44,6 +44,7 @@ public class ForgottenOrderNumber extends JPanel {
 
 
         forgottenOrderTitle.setFont(new Font("Segoe UI", 1, 24));
+
         forgottenOrderTitle.setHorizontalAlignment(SwingConstants.CENTER);
         forgottenOrderTitle.setText("Forgotten Order Number");
 
@@ -56,6 +57,7 @@ public class ForgottenOrderNumber extends JPanel {
         surnameLabel.setText("Surname");
 
         forgottenOrderFormTitle.setAlignment(Label.CENTER);
+
         forgottenOrderFormTitle.setFont(new Font("Dialog", 0, 18));
         forgottenOrderFormTitle.setText("Enter Your Details Below");
 
@@ -126,13 +128,13 @@ public class ForgottenOrderNumber extends JPanel {
                 .addContainerGap(230, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addComponent(forgottenOrderTitle, PREFERRED, 82, PREFERRED)
-                .addGap(18, 18, 18)
-                .addComponent(forgottenOrderForm, PREFERRED, DEFAULT, PREFERRED)
-                .addGap(0, 76, Short.MAX_VALUE))
+                layout.createParallelGroup(LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addGap(17, 17, 17)
+                                .addComponent(forgottenOrderTitle, PREFERRED, 82, PREFERRED)
+                                .addGap(18, 18, 18)
+                                .addComponent(forgottenOrderForm, PREFERRED, DEFAULT, PREFERRED)
+                                .addGap(0, 76, Short.MAX_VALUE))
         );
     } 
     

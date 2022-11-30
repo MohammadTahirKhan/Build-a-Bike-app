@@ -102,4 +102,3 @@ public class StaffLanding extends JPanel {
 		});
 	}                                          
 }
-

@@ -2,23 +2,42 @@ package Product;
 
 public class Bike extends Product{
 
-//    Declaring Variables
-    protected final int ASSEMBLYCOST = 10;
-    protected Wheels wheels;
-    protected Frame frame;
-    protected HandleBar handleBar;
+//    Constants
+    private final double ASSEMBLY_COST = 10;
 
-//    Constructor
-//    itemCost is calculated automatically
-    public Bike(Wheels wheels, Frame frame, HandleBar handleBar, String name, int serialNumber, String brandName) {
+//    Declaring Variables
+    private Wheels wheels;
+    private Frame frame;
+    private HandleBar handleBar;
+
+    /**
+     * Constructor for a Bike
+     * @param wheels Selected wheels
+     * @param frame Selected frame
+     * @param handleBar Selected handlebar
+     * @param name Name of the Bike
+     * @param serialNumber Serial number of the Bike
+     * @param brandName Brand name
+     * @param stock Stock available
+     */
+    //    itemCost is calculated automatically
+    public Bike(int pKey, Wheels wheels, Frame frame, HandleBar handleBar, String name, int serialNumber, String brandName, int stock) {
         this.wheels = wheels;
         this.frame = frame;
         this.handleBar = handleBar;
-        float bikePrice = wheels.getItemCost() + frame.getItemCost() + handleBar.getItemCost() + ASSEMBLYCOST;
-        this.setProductDetails(name, serialNumber, bikePrice, brandName);
+        double unitCost = wheels.getItemCost() + frame.getItemCost() + handleBar.getItemCost() + ASSEMBLY_COST;
+        this.setProductDetails(pKey, name, serialNumber, unitCost, brandName, stock);
+    }
+    public Bike(Wheels wheels, Frame frame, HandleBar handleBar, String name, int serialNumber, String brandName, int stock) {
+        this.wheels = wheels;
+        this.frame = frame;
+        this.handleBar = handleBar;
+        double unitCost = wheels.getItemCost() + frame.getItemCost() + handleBar.getItemCost() + ASSEMBLY_COST;
+        this.setProductDetails(-1, name, serialNumber, unitCost, brandName, stock);
     }
 
 //    Getters
+
     public Wheels getWheels() {
         return wheels;
     }
@@ -28,5 +47,16 @@ public class Bike extends Product{
     public HandleBar getHandleBar() {
         return handleBar;
     }
-
+    public void setWheels(Wheels wheels) {
+        this.wheels = wheels;
+    }
+    public void setFrame(Frame frame) {
+        this.frame = frame;
+    }
+    public void setHandleBar(HandleBar handleBar) {
+        this.handleBar = handleBar;
+    }
 }
+
+
+

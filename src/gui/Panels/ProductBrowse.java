@@ -1,5 +1,6 @@
 package gui.Panels;
 
+
 import gui.Frames.BaseFrame;
 
 import javax.swing.*;

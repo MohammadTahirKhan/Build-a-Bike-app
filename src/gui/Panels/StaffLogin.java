@@ -1,13 +1,13 @@
 package gui.Panels;
 
 import gui.Frames.BaseFrame;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class StaffLogin extends JPanel {
+
     public static final Font SEGOE_UI = new Font("Segoe UI", Font.BOLD, 24);
     private final GroupLayout.Alignment LEADING = GroupLayout.Alignment.LEADING;
     private final GroupLayout.Alignment TRAILING = GroupLayout.Alignment.TRAILING;

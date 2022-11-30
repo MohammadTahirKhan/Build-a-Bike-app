@@ -116,9 +116,9 @@ public class SQLHandleBar {
                 sqlWhere = " WHERE HandleBar.style = ?";
             }
 
-            String sql = "SELECT HandleBar.style, Product.productName, " +
+            String sql = "SELECT Handlebar.style, Product.productName, " +
                     "Product.serialNumber, Product.unitCost, Product.brandName, Product.Stock, Product.productID" +
-                    " FROM (Product INNER JOIN HandleBar ON Product.productID = HandleBar.productID)" +
+                    " FROM (Product INNER JOIN Handlebar ON Product.productID = Handlebar.productID)" +
                     sqlWhere;
             PreparedStatement statement = con.prepareStatement(sql);
 

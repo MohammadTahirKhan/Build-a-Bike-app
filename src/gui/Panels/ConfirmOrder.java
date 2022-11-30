@@ -8,33 +8,27 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-public class ViewOrder extends JPanel {
+public class ConfirmOrder extends JPanel {
     private final GroupLayout.Alignment LEADING = GroupLayout.Alignment.LEADING;
     private final GroupLayout.Alignment TRAILING = GroupLayout.Alignment.TRAILING;
     private final int DEFAULT = GroupLayout.DEFAULT_SIZE;
     private final int PREFERRED = GroupLayout.PREFERRED_SIZE;
 
-    private JButton backToBrowseButton;
     private final JPanel itemsSelected;
-
     private JPanel orderOptions;
-    private JButton placeOrderButton;
-    private JButton restartButton;
+    private JButton backToBrowseButton;
     private JLabel yourSelection;
-
     private ArrayList<ProductPanel> productPanels = new ArrayList<>(3);
 
     private BaseFrame parentFrame;
 
-    public ViewOrder(BaseFrame parentFrame) {
+    public ConfirmOrder(BaseFrame parentFrame) {
         this.parentFrame = parentFrame;
 
         itemsSelected = new JPanel();
-        yourSelection = new JLabel();
         orderOptions = new JPanel();
-        restartButton = new JButton();
+        yourSelection = new JLabel();
         backToBrowseButton = new JButton();
-        placeOrderButton = new JButton();
 
         initializeButtons();
 
@@ -61,19 +55,15 @@ public class ViewOrder extends JPanel {
 
         yourSelection.setFont(new Font("Segoe UI", Font.BOLD, 24));
         yourSelection.setHorizontalAlignment(SwingConstants.CENTER);
-        yourSelection.setText("Your Selection");
+        yourSelection.setText("Order Placed! : #" + "ORDERNUMBER");
 
         GroupLayout orderOptionsLayout = new GroupLayout(orderOptions);
         orderOptions.setLayout(orderOptionsLayout);
         orderOptionsLayout.setHorizontalGroup(
             orderOptionsLayout.createParallelGroup(LEADING)
             .addGroup(orderOptionsLayout.createSequentialGroup()
-                .addGap(256, 256, 256)
-                .addComponent(restartButton, PREFERRED, 118, PREFERRED)
-                .addGap(18, 18, 18)
+                .addGap(350, 350, 350)
                 .addComponent(backToBrowseButton, PREFERRED, 118, PREFERRED)
-                .addGap(18, 18, 18)
-                .addComponent(placeOrderButton, PREFERRED, 118, PREFERRED)
                 .addContainerGap(DEFAULT, Short.MAX_VALUE))
         );
         orderOptionsLayout.setVerticalGroup(
@@ -81,8 +71,6 @@ public class ViewOrder extends JPanel {
             .addGroup(orderOptionsLayout.createSequentialGroup()
                 .addGap(10, 10, 10)
                 .addGroup(orderOptionsLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                    .addComponent(placeOrderButton, PREFERRED, 45, PREFERRED)
-                    .addComponent(restartButton, PREFERRED, 45, PREFERRED)
                     .addComponent(backToBrowseButton, PREFERRED, 45, PREFERRED))
                 .addContainerGap(14, Short.MAX_VALUE))
         );
@@ -113,45 +101,17 @@ public class ViewOrder extends JPanel {
     }  
     
     private void initializeButtons() {
-		restartButton.setBackground(new Color(51, 51, 51));
-        restartButton.setForeground(new Color(255, 255, 255));
-        restartButton.setText("Restart");
-        restartButton.setToolTipText("");
-
         backToBrowseButton.setBackground(new Color(51, 51, 51));
         backToBrowseButton.setForeground(new Color(255, 255, 255));
         backToBrowseButton.setText("Back To Browse");
         backToBrowseButton.setToolTipText("");
-
-        placeOrderButton.setBackground(new Color(51, 51, 51));
-        placeOrderButton.setFont(new Font("Segoe UI", Font.BOLD, 12));
-        placeOrderButton.setForeground(new Color(255, 255, 255));
-        placeOrderButton.setText("Place Order");
-        placeOrderButton.setToolTipText("");
-
-        restartButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO: link to back
-				System.out.println("restart selected");
-                parentFrame.displayPanel(parentFrame.productBrowse, false, true, true, false, false);	
-			}
-		});
-
         backToBrowseButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
                 parentFrame.displayPanel(parentFrame.productBrowse, false, true, true, false, false);	
 			}
 		});
-
-        placeOrderButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-                //TODO: link to back
-                parentFrame.displayPanel(parentFrame.confirmOrder, false, true, true, false, false);	
-			}
-		});
 	}
 }
+
 

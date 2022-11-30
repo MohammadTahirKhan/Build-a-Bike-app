@@ -4,6 +4,8 @@ import gui.Frames.BaseFrame;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class StaffLogin extends JPanel {
     public static final Font SEGOE_UI = new Font("Segoe UI", Font.BOLD, 24);
@@ -41,14 +43,13 @@ public class StaffLogin extends JPanel {
         loginForm.setBorder(BorderFactory.createEtchedBorder());
 
         usernameLabel.setText("Username");
-
         passwordLabel.setText("Password");
 
         loginFormTitle.setAlignment(Label.LEFT);
         loginFormTitle.setFont(SEGOE_UI.deriveFont(Font.PLAIN, 18));
         loginFormTitle.setText("Enter username and password below");
 
-        loginButton.setLabel("Login");
+        initializeButtons();
 
         GroupLayout loginFormLayout = new GroupLayout(loginForm);
         loginForm.setLayout(loginFormLayout);
@@ -109,5 +110,16 @@ public class StaffLogin extends JPanel {
                 .addComponent(loginForm, PREFERRED, DEFAULT, PREFERRED)
                 .addGap(0, 131, Short.MAX_VALUE))
         );
-    }                                         
+    }
+    
+    private void initializeButtons() {
+		loginButton.setLabel("Login");
+        loginButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO: link to back
+                parentFrame.displayPanel(parentFrame.staffLanding, false, false, false, true, false);	
+			}
+		});
+	}
 }

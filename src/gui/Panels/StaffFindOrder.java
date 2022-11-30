@@ -7,14 +7,13 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class ReviewExistingOrder extends JPanel {                  
+public class StaffFindOrder extends JPanel {                  
     private final GroupLayout.Alignment LEADING = GroupLayout.Alignment.LEADING;
     private final GroupLayout.Alignment TRAILING = GroupLayout.Alignment.TRAILING;
     private final int DEFAULT = GroupLayout.DEFAULT_SIZE;
     private final int PREFERRED = GroupLayout.PREFERRED_SIZE;
 
     private Button findOrderButton;
-    private Button forgottenOrderNumberButton;
     private JPanel orderFindForm;
     private Label orderFindFormTitle;
     private TextField orderNumberField;
@@ -22,24 +21,23 @@ public class ReviewExistingOrder extends JPanel {
 
     private BaseFrame parentFrame;
 
-    public ReviewExistingOrder(BaseFrame parentFrame) {
+    public StaffFindOrder(BaseFrame parentFrame) {
         this.parentFrame = parentFrame;
         yourSelection = new JLabel();
         orderFindForm = new JPanel();
         orderNumberField = new TextField();
         orderFindFormTitle = new Label();
         findOrderButton = new Button();
-        forgottenOrderNumberButton = new Button();
 
         yourSelection.setFont(new Font("Segoe UI", 1, 24));
         yourSelection.setHorizontalAlignment(SwingConstants.CENTER);
-        yourSelection.setText("Review Exisitng Order");
+        yourSelection.setText("Assemble Bike");
 
         orderFindForm.setBorder(BorderFactory.createEtchedBorder());
 
         orderFindFormTitle.setAlignment(Label.CENTER);
         orderFindFormTitle.setFont(new Font("Dialog", 0, 18));
-        orderFindFormTitle.setText("Enter your order number below");
+        orderFindFormTitle.setText("Enter order number below");
 
         initializeButtons();
 
@@ -51,8 +49,8 @@ public class ReviewExistingOrder extends JPanel {
                 .addGap(60, 60, 60)
                 .addGroup(orderFindFormLayout.createParallelGroup(TRAILING, false)
                     .addGroup(orderFindFormLayout.createSequentialGroup()
-                        .addComponent(forgottenOrderNumberButton, PREFERRED, 156, PREFERRED)
-                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, DEFAULT, Short.MAX_VALUE)
+                        // .addComponent(forgottenOrderNumberButton, PREFERRED, 156, PREFERRED)
+                        // .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, DEFAULT, Short.MAX_VALUE)
                         .addComponent(findOrderButton, PREFERRED, 156, PREFERRED))
                     .addGroup(orderFindFormLayout.createParallelGroup(LEADING)
                         .addComponent(orderNumberField, PREFERRED, 317, PREFERRED)
@@ -69,7 +67,8 @@ public class ReviewExistingOrder extends JPanel {
                 .addGap(24, 24, 24)
                 .addGroup(orderFindFormLayout.createParallelGroup(TRAILING)
                     .addComponent(findOrderButton, PREFERRED, DEFAULT, PREFERRED)
-                    .addComponent(forgottenOrderNumberButton, PREFERRED, DEFAULT, PREFERRED))
+                    // .addComponent(forgottenOrderNumberButton, PREFERRED, DEFAULT, PREFERRED)
+                    )
                 .addContainerGap(36, Short.MAX_VALUE))
         );
 
@@ -99,22 +98,13 @@ public class ReviewExistingOrder extends JPanel {
     
     private void initializeButtons() {
         findOrderButton.setFont(new Font("Dialog", 1, 12));
-        findOrderButton.setLabel("Find My Order");
+        findOrderButton.setLabel("Find Order");
 
-        forgottenOrderNumberButton.setFont(new Font("Dialog", 1, 12));
-        forgottenOrderNumberButton.setLabel("Forgotten My Order Number"); 
         findOrderButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO: link to back
-                parentFrame.displayPanel(parentFrame.viewOrder, true, false, false, false, false);
-			}
-		});
-
-        forgottenOrderNumberButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-                parentFrame.displayPanel(parentFrame.forgottenOrderNumber, true, false, false, false, false);
+                parentFrame.displayPanel(parentFrame.staffAssembleOrder, false, false, false, true, true);
 			}
 		});
 	}        

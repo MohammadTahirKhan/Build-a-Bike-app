@@ -5,6 +5,7 @@ import gui.Frames.BaseFrame;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class ProductBrowse extends JPanel {
@@ -14,21 +15,19 @@ public class ProductBrowse extends JPanel {
 	private final int DEFAULT = GroupLayout.DEFAULT_SIZE;
 	private final int PREFERRED = GroupLayout.PREFERRED_SIZE;
 
+	private BaseFrame parentFrame;
 	private JPanel allProducts;
-	private JMenuBar header;
 	private JPanel orderNav;
-	private JPanel productBrowseMain;
 	private JPanel productFilters;
     private JScrollPane productView;
-    private  JButton selectFrameSets;
+
+    private JButton selectFrameSets;
     private JButton selectHandlebars;
     private JButton selectWheels;
+	private JButton viewOrder;
+
     private Choice sortBy;
     private Label sortByLabel;
-
-    private JButton viewOrder;
-
-    private BaseFrame parentFrame;
 
     private ArrayList<ProductPanel> productPanels = new ArrayList<>();
 
@@ -47,14 +46,7 @@ public class ProductBrowse extends JPanel {
 
 		orderNav.setBorder(BorderFactory.createEtchedBorder());
 
-		selectWheels.setText("Select Wheels");
-		selectWheels.addActionListener(this::selectWheelsActionPerformed);
-
-		selectFrameSets.setText("Select Frame-Sets");
-
-		selectHandlebars.setText("Select Handlebars");
-
-		viewOrder.setText("View Order");
+		initializeButtons();
 
 		GroupLayout orderNavLayout = new GroupLayout(orderNav);
 		orderNav.setLayout(orderNavLayout);
@@ -168,7 +160,40 @@ public class ProductBrowse extends JPanel {
 								.addContainerGap()));
 	}
 
-	private void selectWheelsActionPerformed(ActionEvent evt) {
-		// TODO add your handling code here:
+	private void initializeButtons() {
+		selectWheels.setText("Select Wheels");
+		selectFrameSets.setText("Select Frame-Sets");
+		selectHandlebars.setText("Select Handlebars");
+		viewOrder.setText("View Order");
+
+		selectWheels.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO: link to back
+				System.out.println("wheels selected");	
+			}
+		});
+
+		selectFrameSets.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("framesets selected");			
+			}
+		});
+
+		selectHandlebars.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO: link to back	
+				System.out.println("handlebars selected");	
+			}
+		});
+
+		viewOrder.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				parentFrame.displayPanel(parentFrame.viewOrder, false, false, true, false, false);	
+			}
+		});
 	}
 }

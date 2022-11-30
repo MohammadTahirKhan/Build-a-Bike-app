@@ -1,75 +1,74 @@
 package gui.Frames;
 
 import gui.Panels.*;
-
 import javax.swing.*;
 import java.awt.*;
-// import java.util.*;
-// import java.util.logging.Logger;
+import java.awt.event.*;
 
 public class BaseFrame extends JFrame {
     private JMenuBar header;
-    private JMenu menuItem1;
-    private JMenu menuItem2;
+    private JMenu backToBrowse;
+    private JMenu toStaffPortal;
+    private JMenu toReviewOrder;
+    private JMenu logout;
+    private JMenu backToLanding;
 
-    private StaffLogin staffLogin;
-    private StaffLanding staffLanding;
-    private ReviewExistingOrder reviewExistingOrder;
-    private ForgottenOrderNumber forgottenOrderNumber;
-    private ViewOrder viewOrder;
-    private StockBrowse stockBrowse;
-    private ProductBrowse productBrowse;
+    public StaffLogin staffLogin; //
+    public StaffLanding staffLanding; //
+    public ReviewExistingOrder reviewExistingOrder; //
+    public ForgottenOrderNumber forgottenOrderNumber; //
+    public ViewOrder viewOrder; //
+    public StockBrowse stockBrowse; //
+    public ProductBrowse productBrowse; //
+    public ConfirmOrder confirmOrder; //
+    public AddStock addStock; //
+    public StaffFindOrder staffFindOrder;
+    public StaffAssembleOrder staffAssembleOrder;
+    public StaffViewOrders staffViewOrders;
 
-    public BaseFrame() {
-        BaseFrame frame = this;
+    private BaseFrame thisFrame = this;
 
+    public BaseFrame(){
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 header = new JMenuBar();
-                menuItem1 = new JMenu();
-                menuItem2 = new JMenu();
-                staffLogin = new StaffLogin(frame);
-                staffLanding = new StaffLanding(frame);
-                reviewExistingOrder = new ReviewExistingOrder(frame);
-                forgottenOrderNumber = new ForgottenOrderNumber(frame);
-                viewOrder = new ViewOrder(frame);
-                stockBrowse = new StockBrowse(frame);
-                productBrowse = new ProductBrowse(frame);
+                backToBrowse = new JMenu();
+                toStaffPortal = new JMenu();
+                toReviewOrder = new JMenu();
+                logout = new JMenu();
+                backToLanding = new JMenu();
+
+                staffLogin = new StaffLogin(thisFrame);
+                staffLanding = new StaffLanding(thisFrame);
+                reviewExistingOrder = new ReviewExistingOrder(thisFrame);
+                forgottenOrderNumber = new ForgottenOrderNumber(thisFrame);
+                viewOrder = new ViewOrder(thisFrame);
+                stockBrowse = new StockBrowse(thisFrame);
+                productBrowse = new ProductBrowse(thisFrame);
+                confirmOrder = new ConfirmOrder(thisFrame);
+                addStock = new AddStock(thisFrame);
+                staffFindOrder = new StaffFindOrder(thisFrame);
+                staffAssembleOrder = new StaffAssembleOrder(thisFrame);
+                staffViewOrders = new StaffViewOrders();
 
                 setDefaultCloseOperation(EXIT_ON_CLOSE);
                 setTitle("Bikes Ltd.");
+                initializeHeader();
+                //1000x575
                 setMinimumSize(new Dimension(900, 500));
                 setPreferredSize(new Dimension(900, 500));
                 setSize(new Dimension(900, 500));
                 setVisible(true);
 
-                //displayPanel(staffLogin, "Back to Browse", null);
-                //displayPanel(staffLanding, "Logout", null);
-                //displayPanel(reviewExistingOrder, "Back to Browse", null);
-                //displayPanel(forgottenOrderNumber, "Back to Browse", null);
-                //displayPanel(viewOrder, "Review Existing Order", null);
-                //displayPanel(stockBrowse, "Staff Portal", "Review Existing Order");
-                displayPanel(productBrowse, "Staff Portal", "Review Existing Order");
+                displayPanel(productBrowse, false, true, true, false, false);
             }
         });
     }
 
-    public void setHeader(String item1, String item2) {
-        if (item1 != null) {
-            menuItem1.setText(item1);
-            header.add(menuItem1);
-        }
-        if (item2 != null) {
-            menuItem2.setText(item2);
-            header.add(menuItem2);
-        }
-        setJMenuBar(header);
-    }
-
-    public void displayPanel(JPanel panel, String menuItem1, String menuItem2) {
+    public void displayPanel(JPanel panel, Boolean btb, Boolean tsp, Boolean tro, Boolean log, Boolean bts) {
         getContentPane().removeAll();
         getContentPane().add(panel);
-        setHeader(menuItem1, menuItem2);
+        setHeader(btb, tsp, tro, log, bts);
 
         GroupLayout layout = new GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -86,4 +85,82 @@ public class BaseFrame extends JFrame {
         pack();
     }
 
+    public void initializeHeader() {
+        backToBrowse.setText("Back To Browse");
+        toStaffPortal.setText("Staff Portal");
+        toReviewOrder.setText("Review Existing Order");
+        logout.setText("Logout");
+        backToLanding.setText("Back To Staff Landing");
+        setHeaderActions(backToBrowse);
+        setHeaderActions(toStaffPortal);
+        setHeaderActions(toReviewOrder);
+        setHeaderActions(logout);
+        setHeaderActions(backToLanding);
+    }
+
+    public void setHeader(Boolean btb, Boolean tsp, Boolean tro, Boolean log, Boolean bts) {
+        if (btb == true) { 
+            header.add(backToBrowse); 
+        } else {
+            header.remove(backToBrowse);
+        } 
+
+        if (tsp == true) {
+            header.add(toStaffPortal);
+        } else {
+            header.remove(toStaffPortal);
+        }
+
+        if (tro == true) {
+            header.add(toReviewOrder);
+        } else {
+            header.remove(toReviewOrder);
+        }
+
+        if (log == true) {
+            header.add(logout);
+        } else {
+            header.remove(logout);
+        }
+
+        if (bts == true) {
+            header.add(backToLanding);
+        } else {
+            header.remove(backToLanding);
+        }
+        setJMenuBar(header);
+    }
+
+    public void setHeaderActions(JMenu item) {
+        item.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (item.getText() == "Logout") {
+                    //TODO: link to back
+                    displayPanel(productBrowse, false, true, true, false, false);
+                } 
+                if (item.getText() == "Back To Browse") {
+                    displayPanel(productBrowse, false, true, true, false, false);
+                } 
+                if (item.getText() == "Review Existing Order") {
+                    displayPanel(reviewExistingOrder, true, false, false, false, false);
+                } 
+                if (item.getText() == "Staff Portal") {
+                    displayPanel(staffLogin, true, false, false, false, false);
+                }
+                if (item.getText() == "Back To Staff Landing") {
+                    displayPanel(staffLanding, false, false, false, true, false);
+                }
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {}
+            @Override
+            public void mouseReleased(MouseEvent e) {}
+            @Override
+            public void mouseEntered(MouseEvent e) {}
+            @Override
+            public void mouseExited(MouseEvent e) {}
+        }); 
+    }
 }

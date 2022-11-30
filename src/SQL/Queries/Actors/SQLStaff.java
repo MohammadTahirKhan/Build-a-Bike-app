@@ -48,7 +48,7 @@ public class SQLStaff {
                 byte[] hash = rs.getBytes(1);
                 byte[] salt = rs.getBytes(2);
                 Staff staff = new Staff(staffUsername, hash, salt);
-                boolean isCorrect = Password.checkPassword(staff.getHash(), inputPassword, staff.getSalt());
+                boolean isCorrect = Password.checkPassword(inputPassword, staff.getSalt(), staff.getHash());
                 if (isCorrect)
                     return staff;
             }

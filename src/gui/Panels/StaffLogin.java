@@ -4,8 +4,8 @@ import gui.Frames.BaseFrame;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+
+import static SQL.Queries.Actors.SQLStaff.getStaff;
 
 public class StaffLogin extends JPanel {
 
@@ -114,13 +114,15 @@ public class StaffLogin extends JPanel {
     }
     
     private void initializeButtons() {
-		loginButton.setLabel("Login");
-        loginButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO: link to back
-                parentFrame.displayPanel(parentFrame.staffLanding, false, false, false, true, false);	
-			}
-		});
-	}
+        loginButton.setLabel("Login");
+        loginButton.addActionListener(e -> {
+            String username = usernameField.getText().trim();
+            String password = passwordField.getText().trim();
+            if (getStaff(username, password) != null) {
+                parentFrame.displayPanel(parentFrame.staffLanding, false, false, false, true, false);
+            } else {
+                JOptionPane.showMessageDialog(this, "Invalid username or password");
+            }
+        });
+    }
 }

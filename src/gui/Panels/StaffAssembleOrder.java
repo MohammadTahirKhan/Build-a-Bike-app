@@ -14,16 +14,16 @@ public class StaffAssembleOrder extends JPanel {
     private final int DEFAULT = GroupLayout.DEFAULT_SIZE;
     private final int PREFERRED = GroupLayout.PREFERRED_SIZE;
 
-    private JButton cancelButton;
+    private final JButton cancelButton;
     private final JPanel itemsSelected;
 
-    private JPanel orderOptions;
-    private JButton confirmButton;
-    private JLabel yourSelection;
+    private final JPanel orderOptions;
+    private final JButton confirmButton;
+    private final JLabel yourSelection;
 
-    private ArrayList<ProductPanel> productPanels = new ArrayList<>(3);
+    private final ArrayList<ProductPanel> productPanels = new ArrayList<>(3);
 
-    private BaseFrame parentFrame;
+    private final BaseFrame parentFrame;
 
     public StaffAssembleOrder(BaseFrame parentFrame) {
         this.parentFrame = parentFrame;

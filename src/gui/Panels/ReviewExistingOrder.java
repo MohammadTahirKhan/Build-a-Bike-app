@@ -7,20 +7,20 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class ReviewExistingOrder extends JPanel {                  
+public class ReviewExistingOrder extends JPanel {
     private final GroupLayout.Alignment LEADING = GroupLayout.Alignment.LEADING;
     private final GroupLayout.Alignment TRAILING = GroupLayout.Alignment.TRAILING;
     private final int DEFAULT = GroupLayout.DEFAULT_SIZE;
     private final int PREFERRED = GroupLayout.PREFERRED_SIZE;
 
-    private Button findOrderButton;
-    private Button forgottenOrderNumberButton;
-    private JPanel orderFindForm;
-    private Label orderFindFormTitle;
-    private TextField orderNumberField;
-    private JLabel yourSelection;
+    private final Button findOrderButton;
+    private final Button forgottenOrderNumberButton;
+    private final JPanel orderFindForm;
+    private final Label orderFindFormTitle;
+    private final TextField orderNumberField;
+    private final JLabel yourSelection;
 
-    private BaseFrame parentFrame;
+    private final BaseFrame parentFrame;
 
     public ReviewExistingOrder(BaseFrame parentFrame) {
         this.parentFrame = parentFrame;

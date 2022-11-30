@@ -10,35 +10,35 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class ProductBrowse extends JPanel {
-	private final GroupLayout.Alignment LEADING = GroupLayout.Alignment.LEADING;
-	private final GroupLayout.Alignment TRAILING = GroupLayout.Alignment.TRAILING;
-	private final LayoutStyle.ComponentPlacement RELATED = LayoutStyle.ComponentPlacement.RELATED;
-	private final int DEFAULT = GroupLayout.DEFAULT_SIZE;
-	private final int PREFERRED = GroupLayout.PREFERRED_SIZE;
+    private final GroupLayout.Alignment LEADING = GroupLayout.Alignment.LEADING;
+    private final GroupLayout.Alignment TRAILING = GroupLayout.Alignment.TRAILING;
+    private final LayoutStyle.ComponentPlacement RELATED = LayoutStyle.ComponentPlacement.RELATED;
+    private final int DEFAULT = GroupLayout.DEFAULT_SIZE;
+    private final int PREFERRED = GroupLayout.PREFERRED_SIZE;
 
-	private BaseFrame parentFrame;
-	private JPanel allProducts;
-	private JPanel orderNav;
-	private JPanel productFilters;
-    private JScrollPane productView;
+    private final BaseFrame parentFrame;
+    private final JPanel allProducts;
+    private final JPanel orderNav;
+    private final JPanel productFilters;
+    private final JScrollPane productView;
 
-    private JButton selectFrameSets;
-    private JButton selectHandlebars;
-    private JButton selectWheels;
-	private JButton viewOrder;
+    private final JButton selectFrameSets;
+    private final JButton selectHandlebars;
+    private final JButton selectWheels;
+    private final JButton viewOrder;
 
-    private Choice sortBy;
-    private Label sortByLabel;
+    private final Choice sortBy;
+    private final Label sortByLabel;
 
-    private ArrayList<ProductPanel> productPanels = new ArrayList<>();
+    private final ArrayList<ProductPanel> productPanels = new ArrayList<>();
 
-	public ProductBrowse(BaseFrame parentFrame) {
+    public ProductBrowse(BaseFrame parentFrame) {
         this.parentFrame = parentFrame;
-		orderNav = new JPanel();
-		selectWheels = new JButton();
-		selectFrameSets = new JButton();
-		selectHandlebars = new JButton();
-		viewOrder = new JButton();
+        orderNav = new JPanel();
+        selectWheels = new JButton();
+        selectFrameSets = new JButton();
+        selectHandlebars = new JButton();
+        viewOrder = new JButton();
 		productFilters = new JPanel();
 		sortBy = new Choice();
 		sortByLabel = new Label();

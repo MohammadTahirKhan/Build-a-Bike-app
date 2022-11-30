@@ -1,7 +1,6 @@
 package gui.Panels;
 
 import javax.swing.*;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -12,20 +11,20 @@ public class StaffViewOrders extends JPanel {
     private final int DEFAULT = GroupLayout.DEFAULT_SIZE;
     private final int PREFERRED = GroupLayout.PREFERRED_SIZE;
 
-    private JLabel status;
-    private JLabel orderNumber;
-    private JScrollPane productTable;
-    private JPanel productTableItems;
-    private JButton confirmed;
-    private JButton fulfilled;
-    private JButton pending;
-    private JLabel serialNumber;
-    private JPanel stockNav;
-    private JPanel tableHeadingLabels;
-    private JLabel cost;
-    private JButton all;
+    private final JLabel status;
+    private final JLabel orderNumber;
+    private final JScrollPane productTable;
+    private final JPanel productTableItems;
+    private final JButton confirmed;
+    private final JButton fulfilled;
+    private final JButton pending;
+    private final JLabel serialNumber;
+    private final JPanel stockNav;
+    private final JPanel tableHeadingLabels;
+    private final JLabel cost;
+    private final JButton all;
 
-    private ArrayList<TableItem> orders = new ArrayList<>();
+    private final ArrayList<TableItem> orders = new ArrayList<>();
 
     public StaffViewOrders() {
         stockNav = new JPanel();

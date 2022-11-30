@@ -7,19 +7,19 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class StaffFindOrder extends JPanel {                  
+public class StaffFindOrder extends JPanel {
     private final GroupLayout.Alignment LEADING = GroupLayout.Alignment.LEADING;
     private final GroupLayout.Alignment TRAILING = GroupLayout.Alignment.TRAILING;
     private final int DEFAULT = GroupLayout.DEFAULT_SIZE;
     private final int PREFERRED = GroupLayout.PREFERRED_SIZE;
 
-    private Button findOrderButton;
-    private JPanel orderFindForm;
-    private Label orderFindFormTitle;
-    private TextField orderNumberField;
-    private JLabel yourSelection;
+    private final Button findOrderButton;
+    private final JPanel orderFindForm;
+    private final Label orderFindFormTitle;
+    private final TextField orderNumberField;
+    private final JLabel yourSelection;
 
-    private BaseFrame parentFrame;
+    private final BaseFrame parentFrame;
 
     public StaffFindOrder(BaseFrame parentFrame) {
         this.parentFrame = parentFrame;

@@ -15,17 +15,17 @@ public class ViewOrder extends JPanel {
     private final int DEFAULT = GroupLayout.DEFAULT_SIZE;
     private final int PREFERRED = GroupLayout.PREFERRED_SIZE;
 
-    private JButton backToBrowseButton;
+    private final JButton backToBrowseButton;
     private final JPanel itemsSelected;
 
-    private JPanel orderOptions;
-    private JButton placeOrderButton;
-    private JButton restartButton;
-    private JLabel yourSelection;
+    private final JPanel orderOptions;
+    private final JButton placeOrderButton;
+    private final JButton restartButton;
+    private final JLabel yourSelection;
 
-    private ArrayList<ProductPanel> productPanels = new ArrayList<>(3);
+    private final ArrayList<ProductPanel> productPanels = new ArrayList<>(3);
 
-    private BaseFrame parentFrame;
+    private final BaseFrame parentFrame;
 
     public ViewOrder(BaseFrame parentFrame) {
         this.parentFrame = parentFrame;

@@ -1,12 +1,11 @@
 package gui.Panels;
 
+import gui.Frames.BaseFrame;
+
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-import javax.swing.*;
-
-import gui.Frames.BaseFrame;
 
 public class AddStock extends JPanel {
     private final GroupLayout.Alignment LEADING = GroupLayout.Alignment.LEADING;
@@ -14,18 +13,17 @@ public class AddStock extends JPanel {
     private final int DEFAULT = GroupLayout.DEFAULT_SIZE;
     private final int PREFERRED = GroupLayout.PREFERRED_SIZE;
 
-    private JButton addStock;
-    private BaseFrame parentFrame;
-   
-    private JPanel form;
-    private JLabel addStockTitle;
-    private Label formTitle;
-    private Label quantityLabel; 
-    private Label serialNumberLabel;
-    private TextField quantityField;
-    private TextField serialNumberField;
+    private final JButton addStock;
+    private final BaseFrame parentFrame;
 
-    
+    private final JPanel form;
+    private final JLabel addStockTitle;
+    private final Label formTitle;
+    private final Label quantityLabel;
+    private final Label serialNumberLabel;
+    private final TextField quantityField;
+    private final TextField serialNumberField;
+
 
     public AddStock(BaseFrame baseFrame) {
         parentFrame = baseFrame;

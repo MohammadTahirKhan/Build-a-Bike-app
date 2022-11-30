@@ -1,9 +1,12 @@
 package gui.Frames;
 
 import gui.Panels.*;
+
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.util.Objects;
 
 public class BaseFrame extends JFrame {
     private JMenuBar header;
@@ -26,7 +29,7 @@ public class BaseFrame extends JFrame {
     public StaffAssembleOrder staffAssembleOrder;
     public StaffViewOrders staffViewOrders;
 
-    private BaseFrame thisFrame = this;
+    private final BaseFrame thisFrame = this;
 
     public BaseFrame(){
         EventQueue.invokeLater(new Runnable() {
@@ -99,31 +102,31 @@ public class BaseFrame extends JFrame {
     }
 
     public void setHeader(Boolean btb, Boolean tsp, Boolean tro, Boolean log, Boolean bts) {
-        if (btb == true) { 
-            header.add(backToBrowse); 
+        if (btb) {
+            header.add(backToBrowse);
         } else {
             header.remove(backToBrowse);
-        } 
+        }
 
-        if (tsp == true) {
+        if (tsp) {
             header.add(toStaffPortal);
         } else {
             header.remove(toStaffPortal);
         }
 
-        if (tro == true) {
+        if (tro) {
             header.add(toReviewOrder);
         } else {
             header.remove(toReviewOrder);
         }
 
-        if (log == true) {
+        if (log) {
             header.add(logout);
         } else {
             header.remove(logout);
         }
 
-        if (bts == true) {
+        if (bts) {
             header.add(backToLanding);
         } else {
             header.remove(backToLanding);
@@ -135,20 +138,20 @@ public class BaseFrame extends JFrame {
         item.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                if (item.getText() == "Logout") {
+                if (Objects.equals(item.getText(), "Logout")) {
                     //TODO: link to back
                     displayPanel(productBrowse, false, true, true, false, false);
-                } 
-                if (item.getText() == "Back To Browse") {
+                }
+                if (Objects.equals(item.getText(), "Back To Browse")) {
                     displayPanel(productBrowse, false, true, true, false, false);
-                } 
-                if (item.getText() == "Review Existing Order") {
+                }
+                if (Objects.equals(item.getText(), "Review Existing Order")) {
                     displayPanel(reviewExistingOrder, true, false, false, false, false);
-                } 
-                if (item.getText() == "Staff Portal") {
+                }
+                if (Objects.equals(item.getText(), "Staff Portal")) {
                     displayPanel(staffLogin, true, false, false, false, false);
                 }
-                if (item.getText() == "Back To Staff Landing") {
+                if (Objects.equals(item.getText(), "Back To Staff Landing")) {
                     displayPanel(staffLanding, false, false, false, true, false);
                 }
             }

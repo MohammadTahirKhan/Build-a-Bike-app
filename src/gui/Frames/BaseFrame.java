@@ -16,15 +16,15 @@ public class BaseFrame extends JFrame {
     private JMenu logout;
     private JMenu backToLanding;
 
-    public StaffLogin staffLogin; //
-    public StaffLanding staffLanding; //
-    public ReviewExistingOrder reviewExistingOrder; //
-    public ForgottenOrderNumber forgottenOrderNumber; //
-    public ViewOrder viewOrder; //
-    public StockBrowse stockBrowse; //
-    public ProductBrowse productBrowse; //
-    public ConfirmOrder confirmOrder; //
-    public AddStock addStock; //
+    public StaffLogin staffLogin;
+    public StaffLanding staffLanding;
+    public ReviewExistingOrder reviewExistingOrder; 
+    public ForgottenOrderNumber forgottenOrderNumber;
+    public ViewOrder viewOrder;
+    public StockBrowse stockBrowse;
+    public ProductBrowse productBrowse;
+    public ConfirmOrder confirmOrder; 
+    public AddStock addStock; 
     public StaffFindOrder staffFindOrder;
     public StaffAssembleOrder staffAssembleOrder;
     public StaffViewOrders staffViewOrders;

@@ -13,17 +13,20 @@ public class AddStock extends JPanel {
     private final int DEFAULT = GroupLayout.DEFAULT_SIZE;
     private final int PREFERRED = GroupLayout.PREFERRED_SIZE;
 
-    private final JButton addStock;
-    private final BaseFrame parentFrame;
+    private JButton addStock;
+    private BaseFrame parentFrame;
+   
+    private JPanel form;
+    private JLabel addStockTitle;
+    private Label formTitle;
+    private Label quantityLabel; 
+    private Label serialNumberLabel;
+    private Label brandNameLabel;
+    private TextField quantityField;
+    private TextField serialNumberField;
+    private TextField brandNameField;
 
-    private final JPanel form;
-    private final JLabel addStockTitle;
-    private final Label formTitle;
-    private final Label quantityLabel;
-    private final Label serialNumberLabel;
-    private final TextField quantityField;
-    private final TextField serialNumberField;
-
+    
 
     public AddStock(BaseFrame baseFrame) {
         parentFrame = baseFrame;
@@ -32,6 +35,8 @@ public class AddStock extends JPanel {
 
         serialNumberLabel = new Label();
         serialNumberField = new TextField();
+        brandNameLabel = new Label();
+        brandNameField = new TextField();
         quantityLabel = new Label();
         quantityField = new TextField();
 
@@ -50,6 +55,8 @@ public class AddStock extends JPanel {
 
         quantityLabel.setText("Quantity");
 
+        brandNameLabel.setText("Brand Name");
+
         formTitle.setAlignment(Label.CENTER);
         formTitle.setFont(new Font("Dialog", 0, 18)); // NOI18N
         formTitle.setText("Enter Details Below");
@@ -66,6 +73,8 @@ public class AddStock extends JPanel {
                             .addComponent(formTitle, PREFERRED, 317, PREFERRED)
                             .addComponent(quantityLabel, PREFERRED, DEFAULT, PREFERRED)
                             .addComponent(serialNumberLabel, PREFERRED, DEFAULT, PREFERRED)
+                            .addComponent(brandNameLabel, PREFERRED, DEFAULT, PREFERRED)
+                            .addComponent(brandNameField, PREFERRED, 317, PREFERRED)
                             .addComponent(quantityField, PREFERRED, 317, PREFERRED)
                             .addComponent(serialNumberField, PREFERRED, 317, PREFERRED)))
                     .addGroup(formLayout.createSequentialGroup()
@@ -82,6 +91,10 @@ public class AddStock extends JPanel {
                 .addComponent(serialNumberLabel, PREFERRED, DEFAULT, PREFERRED)
                 .addGap(0, 0, 0)
                 .addComponent(serialNumberField, PREFERRED, DEFAULT, PREFERRED)
+                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(brandNameLabel, PREFERRED, DEFAULT, PREFERRED)
+                .addGap(0, 0, 0)
+                .addComponent(brandNameField, PREFERRED, DEFAULT, PREFERRED)
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(quantityLabel, PREFERRED, DEFAULT, PREFERRED)
                 .addGap(0, 0, 0)

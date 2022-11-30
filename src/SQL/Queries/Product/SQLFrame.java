@@ -99,7 +99,7 @@ public class SQLFrame {
      * @return Arraylist of frames
      */
     public static ArrayList<Frame> getAllFrame() {
-        return getFrame(-1, "ALL", "ALL");
+        return getFrame(-1, -1, "ALL");
     }
 
     /**
@@ -109,7 +109,7 @@ public class SQLFrame {
      * @param containsShocks if ALL, gets all, else, get boolean shocks
      * @return Arraylist of all the frames where the filter(s) are true
      */
-    public static ArrayList<Frame> getFrame(int frameSize , String gears, String containsShocks) {
+    public static ArrayList<Frame> getFrame(int frameSize , int gears, String containsShocks) {
 
         Connection con = DbConnection.getCon();
         assert con != null;
@@ -124,7 +124,7 @@ public class SQLFrame {
             if (frameSize != -1) {
                 whereString += FrameFrameSize;
             }
-            if (!gears.equals("ALL")) {
+            if (gears != -1) {
                 whereString += FrameGears;
             }
             if (!containsShocks.equals("ALL")) {
@@ -146,8 +146,8 @@ public class SQLFrame {
             if (frameSize != -1) {
                 statement.setInt(currentParameter, frameSize);
             }
-            if (!gears.equals("ALL")) {
-                statement.setString(currentParameter, gears);
+            if (gears != -1) {
+                statement.setInt(currentParameter, gears);
             }
             if (!containsShocks.equals("ALL")) {
                 statement.setBoolean(currentParameter, Boolean.getBoolean(containsShocks));
@@ -155,7 +155,7 @@ public class SQLFrame {
 
             ResultSet rs = statement.executeQuery();
             ArrayList<Frame> frames = new ArrayList<Frame>();
-            if (rs.next()) {
+            while (rs.next()) {
                 frames.add(new Frame(rs.getInt(9), rs.getInt(1),
                         rs.getInt(2),
                         rs.getBoolean(3),

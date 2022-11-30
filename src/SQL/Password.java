@@ -9,22 +9,24 @@ import java.util.Arrays;
 public class Password {
 
     /**
-     *
-     * @param hash
-     * @param inputPassword
-     * @param salt
-     * @return
+     * Checks password inputted by user
+     * @param hash hash from the database
+     * @param inputPassword password entered in GUI
+     * @param salt salt from database
+     * @return returns a boolean if the passwords match
      */
-    public static boolean checkPassword(byte[] hash, String inputPassword, byte[] salt){
+    public static boolean checkPassword(String inputPassword, byte[] salt, byte[] hash){
         try {
             byte[][] inputHashSalt = hashPassword(inputPassword, salt);
-            return Arrays.equals(inputHashSalt[0], hash);
+            if (inputHashSalt != null) {
+                return Arrays.equals(inputHashSalt[0], hash);
+            }
+            return false;
         } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
     }
-
 
     public static byte[][] hashPassword(String password, byte[] salt) {
         try {
@@ -37,7 +39,6 @@ public class Password {
             return null;
         }
     }
-
 
     public static byte[] getSalt(){
         SecureRandom random = new SecureRandom();

@@ -1,5 +1,6 @@
 package gui.Frames;
 
+import Order.Order;
 import gui.Panels.*;
 
 import javax.swing.*;
@@ -31,8 +32,11 @@ public class BaseFrame extends JFrame {
     public EnterCustomerDetails enterCustomerDetails;
 
     private final BaseFrame thisFrame = this;
+    public static Order currentOrder = null;
 
     public BaseFrame(){
+
+
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 header = new JMenuBar();

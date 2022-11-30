@@ -42,33 +42,6 @@ public class SQLProduct {
 }
 
 
-    private static int getProductPKey(int serialNumber, String brandName){
-
-        Connection con = DbConnection.getCon();
-        assert con != null;
-
-        try {
-
-            String sql = "SELECT Product.productID FROM Product WHERE Product.serialNumber = ? AND Product.brandName = ?";
-
-            PreparedStatement statement = con.prepareStatement(sql);
-
-            statement.setInt(1, serialNumber);
-            statement.setString(2, brandName);
-
-            ResultSet rs = statement.executeQuery();
-
-            if (rs.next()) {
-                return rs.getInt(1);
-            }
-            rs.close();
-
-        }catch (SQLException e){
-            e.printStackTrace();
-        }
-        return -1;
-    }
-
 
 //    Handling stock
     /**
@@ -130,11 +103,28 @@ public class SQLProduct {
         setStock(product.getPKey(), quantity);
     }
 
+    /**
+     * Sets the stock to a specific ammount based on serial number and brandName
+     * @param serialNumber serialNumber of product
+     * @param brandName brandName of product
+     * @param stockNumber number of stock
+     */
+    public static void addStock(int serialNumber, String brandName, int stockNumber) {
 
-    public static void setStock(int serialNumber, String brandName, int stockNumber) {
+//        Have a decrement exception
+        Connection con = DbConnection.getCon();
+        assert con != null;
 
-        int pKey = getProductPKey(serialNumber, brandName);
-        setStock(pKey, stockNumber);
+        try {
+            String sql = "UPDATE Product SET stock = stock + ? WHERE serialNumber = ? AND brandName = ?";
+            PreparedStatement statement = con.prepareStatement(sql);
+            statement.setInt(1, stockNumber);
+            statement.setInt(2, serialNumber);
+            statement.setString(3, brandName);
+            statement.executeUpdate();
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
     }
 
     /**

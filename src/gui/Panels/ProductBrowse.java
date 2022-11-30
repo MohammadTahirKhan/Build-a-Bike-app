@@ -1,13 +1,17 @@
 package gui.Panels;
 
 
+import Product.Frame;
+import Product.HandleBar;
+import Product.Product;
+import Product.Wheels;
 import gui.Frames.BaseFrame;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
+
+import static SQL.Queries.*;
 
 public class ProductBrowse extends JPanel {
     private final GroupLayout.Alignment LEADING = GroupLayout.Alignment.LEADING;
@@ -162,39 +166,38 @@ public class ProductBrowse extends JPanel {
 	}
 
 	private void initializeButtons() {
-		selectWheels.setText("Select Wheels");
-		selectFrameSets.setText("Select Frame-Sets");
-		selectHandlebars.setText("Select Handlebars");
-		viewOrder.setText("View Order");
+        selectWheels.setText("Select Wheels");
+        selectFrameSets.setText("Select Frame-Sets");
+        selectHandlebars.setText("Select Handlebars");
+        viewOrder.setText("View Order");
 
-		selectWheels.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO: link to back
-				System.out.println("wheels selected");	
-			}
-		});
+        selectWheels.addActionListener(e -> populateProductPanels(Product.Products.WHEELS));
 
-		selectFrameSets.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				System.out.println("framesets selected");			
-			}
-		});
+        selectFrameSets.addActionListener(e -> populateProductPanels(Product.Products.FRAME));
 
-		selectHandlebars.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO: link to back	
-				System.out.println("handlebars selected");	
-			}
-		});
+        selectHandlebars.addActionListener(e -> populateProductPanels(Product.Products.HANDLEBAR));
 
-		viewOrder.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				parentFrame.displayPanel(parentFrame.viewOrder, false, false, true, false, false);	
-			}
-		});
-	}
+        viewOrder.addActionListener(e -> parentFrame.displayPanel(parentFrame.viewOrder, false, false, true, false, false));
+    }
+
+    private void populateProductPanels(Product.Products productType) {
+        ArrayList<Product> products = new ArrayList<>();
+        switch (productType) {
+            case WHEELS:
+                ArrayList<Wheels> wheels = getAllWheels();
+                products.addAll(wheels);
+                break;
+            case FRAME:
+                ArrayList<Frame> frames = getAllFrame();
+                products.addAll(frames);
+                break;
+            case HANDLEBAR:
+                ArrayList<HandleBar> handlebars = getAllHandleBar();
+                products.addAll(handlebars);
+                break;
+        }
+        productPanels.clear();
+        products.forEach(product -> productPanels.add(new ProductPanel(product)));
+        this.repaint();
+    }
 }

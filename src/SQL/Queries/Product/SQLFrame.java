@@ -136,7 +136,7 @@ public class SQLFrame {
                 sqlWhere = whereString.substring(0, whereString.length() - 5);
             }
 
-            String sql = "SELECT FrameSet.frameSize, FrameSet.gears, FrameSet.containsShocks, Product.productName, " +
+            String sql = "SELECT FrameSet.frameSize, FrameSet.gears, FrameSet.shocks, Product.productName, " +
                     "Product.serialNumber, Product.unitCost, Product.brandName, Product.Stock, Product.productID" +
                     " FROM (Product INNER JOIN FrameSet ON Product.productID = FrameSet.productID)" +
                     sqlWhere;
@@ -172,6 +172,4 @@ public class SQLFrame {
         }
         return null;
     }
-
-
 }

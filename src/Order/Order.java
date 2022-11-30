@@ -44,6 +44,10 @@ public class Order {
         this.customer = orderCustomer;
         this.bike = orderBike;
     }
+    public Order() {
+        this.ID = -1;
+        this.status = Status.PENDING;
+    }
 
 
 //    Getters

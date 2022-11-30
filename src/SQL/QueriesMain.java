@@ -6,6 +6,7 @@ import Actors.Staff;
 import Order.Order;
 import Product.*;
 import SQL.Queries.Product.SQLFrame;
+import SQL.Queries.Product.SQLProduct;
 
 import java.sql.*;
 import java.time.LocalDate;
@@ -38,6 +39,8 @@ public class QueriesMain {
         System.out.println(order3.get(0).getBike().getWheels().getStock());
 
         System.out.println(SQLFrame.getAllFrame());
+
+        SQLProduct.setStock(1, "Schwalbe", 1);
 
     }
 }

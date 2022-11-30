@@ -113,9 +113,9 @@ public class SQLUtils {
         //        Inserts staff
         byte[][] salts = new byte[4][4];
         Arrays.fill(salts, Password.getSalt());
-        insertStaffTable(new Staff("Staff1", Password.hashPassword("Password", salts[0])[0], salts[0]));
-        insertStaffTable(new Staff("Staff2", Password.hashPassword("RockYou", salts[1])[0], salts[1]));
-        insertStaffTable(new Staff("Staff3", Password.hashPassword("Hello", salts[2])[0], salts[2]));
+        insertStaffTable(new Staff("Staff1", Password.hashPassword("d1Z2n2^0hT0x", salts[0])[0], salts[0]));
+        insertStaffTable(new Staff("Staff2", Password.hashPassword("5tG57O&c&j1z", salts[1])[0], salts[1]));
+        insertStaffTable(new Staff("Staff3", Password.hashPassword("s45M6!JswuVG", salts[2])[0], salts[2]));
         insertStaffTable(new Staff("test", Password.hashPassword("test", salts[3])[0], salts[3]));
     }
     private static void deleteDatabase() throws SQLException {

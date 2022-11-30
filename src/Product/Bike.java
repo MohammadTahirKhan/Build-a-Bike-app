@@ -21,23 +21,31 @@ public class Bike extends Product{
      * @param stock Stock available
      */
     //    itemCost is calculated automatically
-    public Bike(int pKey, Wheels wheels, Frame frame, HandleBar handleBar, String name, int serialNumber, String brandName, int stock) {
+    public Bike(int pKey, Wheels wheels, Frame frame, HandleBar handleBar, String name, int serialNumber,double unitCost , String brandName, int stock) {
         this.wheels = wheels;
         this.frame = frame;
         this.handleBar = handleBar;
-        double unitCost = wheels.getItemCost() + frame.getItemCost() + handleBar.getItemCost() + ASSEMBLY_COST;
         this.setProductDetails(pKey, name, serialNumber, unitCost, brandName, stock);
     }
-    public Bike(Wheels wheels, Frame frame, HandleBar handleBar, String name, int serialNumber, String brandName, int stock) {
+
+    public Bike(Wheels wheels, Frame frame, HandleBar handleBar, String name, int serialNumber,double unitCost , String brandName, int stock) {
         this.wheels = wheels;
         this.frame = frame;
         this.handleBar = handleBar;
-        double unitCost = wheels.getItemCost() + frame.getItemCost() + handleBar.getItemCost() + ASSEMBLY_COST;
         this.setProductDetails(-1, name, serialNumber, unitCost, brandName, stock);
     }
 
-//    Getters
+    public Bike(Wheels wheels, Frame frame, HandleBar handleBar) {
+        this.wheels = wheels;
+        this.frame = frame;
+        this.handleBar = handleBar;
+    }
 
+    public Bike(){
+
+    }
+
+//    Getters
     public Wheels getWheels() {
         return wheels;
     }
@@ -47,6 +55,8 @@ public class Bike extends Product{
     public HandleBar getHandleBar() {
         return handleBar;
     }
+
+//    Setters
     public void setWheels(Wheels wheels) {
         this.wheels = wheels;
     }
@@ -55,6 +65,12 @@ public class Bike extends Product{
     }
     public void setHandleBar(HandleBar handleBar) {
         this.handleBar = handleBar;
+    }
+
+//    Sets all the values
+    public void setValues(){
+        int serialNumber = Integer.getInteger(this.wheels.getSerialNumber() + "" + this.frame.getSerialNumber() + "" + this.handleBar.getSerialNumber());
+        this.setProductDetails(-1, "", serialNumber, 0, frame.getBrandName(), 1);
     }
 }
 

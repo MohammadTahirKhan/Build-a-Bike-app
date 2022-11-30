@@ -11,7 +11,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
-import static SQL.Queries.*;
+import static SQL.Queries.Product.SQLFrame.getAllFrame;
+import static SQL.Queries.Product.SQLHandleBar.getAllHandleBar;
+import static SQL.Queries.Product.SQLWheels.getAllWheels;
 
 public class ProductBrowse extends JPanel {
     private final GroupLayout.Alignment LEADING = GroupLayout.Alignment.LEADING;
@@ -21,7 +23,7 @@ public class ProductBrowse extends JPanel {
     private final int PREFERRED = GroupLayout.PREFERRED_SIZE;
 
     private final BaseFrame parentFrame;
-    private final JPanel allProducts;
+    private JPanel allProducts;
     private final JPanel orderNav;
     private final JPanel productFilters;
     private final JScrollPane productView;
@@ -47,7 +49,7 @@ public class ProductBrowse extends JPanel {
 		sortBy = new Choice();
 		sortByLabel = new Label();
 		productView = new JScrollPane();
-		allProducts = new JPanel();
+
 
 		orderNav.setBorder(BorderFactory.createEtchedBorder());
 
@@ -107,32 +109,7 @@ public class ProductBrowse extends JPanel {
 
 		productView.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 
-		GroupLayout allProductsLayout = new GroupLayout(allProducts);
-
-		GroupLayout.SequentialGroup allProductsSequentialGroup = allProductsLayout.createSequentialGroup()
-				.addContainerGap();
-		GroupLayout.ParallelGroup allProductsParallelGroup = allProductsLayout.createParallelGroup(LEADING,
-				false);
-
-		for (JPanel productPanel : productPanels) {
-			allProductsSequentialGroup.addComponent(productPanel, PREFERRED, DEFAULT, PREFERRED);
-			allProductsSequentialGroup.addPreferredGap(RELATED);
-			allProductsParallelGroup.addComponent(productPanel, DEFAULT, DEFAULT, Short.MAX_VALUE);
-		}
-
-		allProducts.setLayout(allProductsLayout);
-		allProductsLayout.setHorizontalGroup(
-				allProductsLayout.createParallelGroup(LEADING)
-						.addGroup(allProductsSequentialGroup));
-
-		allProductsLayout.setVerticalGroup(
-				allProductsLayout.createParallelGroup(LEADING)
-						.addGroup(allProductsLayout.createSequentialGroup()
-								.addContainerGap()
-								.addGroup(allProductsParallelGroup)
-								.addContainerGap(16, Short.MAX_VALUE)));
-
-		productView.setViewportView(allProducts);
+        drawProductPanels();
 
 		GroupLayout layout = new GroupLayout(this);
 		this.setLayout(layout);
@@ -154,18 +131,49 @@ public class ProductBrowse extends JPanel {
 								layout.setVerticalGroup(
 									layout.createParallelGroup(LEADING)
 						.addGroup(layout.createSequentialGroup()
-								.addContainerGap()
-								.addComponent(orderNav, PREFERRED, DEFAULT, PREFERRED)
-								.addPreferredGap(RELATED)
-								.addComponent(productFilters, PREFERRED, DEFAULT,
-										PREFERRED)
-								.addPreferredGap(RELATED)
-								.addComponent(productView, DEFAULT, 318,
-										Short.MAX_VALUE)
-								.addContainerGap()));
-	}
+                                .addContainerGap()
+                                .addComponent(orderNav, PREFERRED, DEFAULT, PREFERRED)
+                                .addPreferredGap(RELATED)
+                                .addComponent(productFilters, PREFERRED, DEFAULT,
+                                        PREFERRED)
+                                .addPreferredGap(RELATED)
+                                .addComponent(productView, DEFAULT, 318,
+                                        Short.MAX_VALUE)
+                                .addContainerGap()));
+    }
 
-	private void initializeButtons() {
+    private void drawProductPanels() {
+        allProducts = new JPanel();
+
+        GroupLayout allProductsLayout = new GroupLayout(allProducts);
+
+        GroupLayout.SequentialGroup allProductsSequentialGroup = allProductsLayout.createSequentialGroup()
+                .addContainerGap();
+        GroupLayout.ParallelGroup allProductsParallelGroup = allProductsLayout.createParallelGroup(LEADING,
+                false);
+
+        for (JPanel productPanel : productPanels) {
+            allProductsSequentialGroup.addComponent(productPanel, PREFERRED, DEFAULT, PREFERRED);
+            allProductsSequentialGroup.addPreferredGap(RELATED);
+            allProductsParallelGroup.addComponent(productPanel, DEFAULT, DEFAULT, Short.MAX_VALUE);
+        }
+
+        allProducts.setLayout(allProductsLayout);
+        allProductsLayout.setHorizontalGroup(
+                allProductsLayout.createParallelGroup(LEADING)
+                        .addGroup(allProductsSequentialGroup));
+
+        allProductsLayout.setVerticalGroup(
+                allProductsLayout.createParallelGroup(LEADING)
+                        .addGroup(allProductsLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(allProductsParallelGroup)
+                                .addContainerGap(16, Short.MAX_VALUE)));
+
+        productView.setViewportView(allProducts);
+    }
+
+    private void initializeButtons() {
         selectWheels.setText("Select Wheels");
         selectFrameSets.setText("Select Frame-Sets");
         selectHandlebars.setText("Select Handlebars");
@@ -198,6 +206,6 @@ public class ProductBrowse extends JPanel {
         }
         productPanels.clear();
         products.forEach(product -> productPanels.add(new ProductPanel(product)));
-        this.repaint();
+        drawProductPanels();
     }
 }

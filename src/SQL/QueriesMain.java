@@ -40,7 +40,7 @@ public class QueriesMain {
 
         System.out.println(SQLFrame.getAllFrame());
 
-        SQLProduct.setStock(1, "Schwalbe", 1);
+        SQLProduct.addStock(1, "Schwalbe", 1);
 
     }
 }

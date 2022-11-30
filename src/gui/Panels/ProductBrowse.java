@@ -10,6 +10,8 @@ import gui.Frames.BaseFrame;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import static SQL.Queries.Product.SQLFrame.getAllFrame;
 import static SQL.Queries.Product.SQLHandleBar.getAllHandleBar;
@@ -188,7 +190,30 @@ public class ProductBrowse extends JPanel {
         viewOrder.addActionListener(e -> parentFrame.displayPanel(parentFrame.viewOrder, false, false, true, false, false));
     }
 
+    private boolean checkProductPanels() {
+        List<ProductPanel> filteredPanels = productPanels.stream().filter(ProductPanel::isSelected).collect(Collectors.toList());
+        if (filteredPanels.size() == 1) {
+            ProductPanel panel = filteredPanels.get(0);
+            if (panel.product instanceof Frame) {
+                BaseFrame.currentOrder.getBike().setFrame((Frame) panel.product);
+            } else if (panel.product instanceof Wheels) {
+                BaseFrame.currentOrder.getBike().setWheels((Wheels) panel.product);
+            } else if (panel.product instanceof HandleBar) {
+                BaseFrame.currentOrder.getBike().setHandleBar((HandleBar) panel.product);
+            }
+            return true;
+        } else if (filteredPanels.size() > 1) {
+            JOptionPane.showMessageDialog(this, "Please select only one product");
+            return false;
+        }
+        return true;
+    }
+
     private void populateProductPanels(Product.Products productType) {
+        if (!checkProductPanels()) {
+            return;
+        }
+
         ArrayList<Product> products = new ArrayList<>();
         switch (productType) {
             case WHEELS:

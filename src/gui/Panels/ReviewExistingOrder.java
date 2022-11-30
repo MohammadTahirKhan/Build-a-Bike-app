@@ -7,6 +7,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import static SQL.Queries.Order.SQLOrder.getOrder;
+
 public class ReviewExistingOrder extends JPanel {
     private final GroupLayout.Alignment LEADING = GroupLayout.Alignment.LEADING;
     private final GroupLayout.Alignment TRAILING = GroupLayout.Alignment.TRAILING;
@@ -106,9 +108,14 @@ public class ReviewExistingOrder extends JPanel {
         findOrderButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO: link to back
-                parentFrame.displayPanel(parentFrame.viewOrder, true, false, false, false, false);
-			}
+                Order.Order order = getOrder(Integer.parseInt(orderNumberField.getText().trim()));
+                if (order != null) {
+                    BaseFrame.currentOrder = order;
+                    parentFrame.displayPanel(parentFrame.viewOrder, true, false, false, false, false);
+                } else {
+                    JOptionPane.showMessageDialog(parentFrame, "Order not found");
+                }
+            }
 		});
 
         forgottenOrderNumberButton.addActionListener(new ActionListener() {

@@ -1,11 +1,16 @@
 package gui.Panels;
 
+import Order.Order;
 import gui.Frames.BaseFrame;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+
+import static SQL.Queries.Order.SQLOrder.getOrder;
+
 public class ForgottenOrderNumber extends JPanel {
     private final GroupLayout.Alignment LEADING = GroupLayout.Alignment.LEADING;
     private final GroupLayout.Alignment TRAILING = GroupLayout.Alignment.TRAILING;
@@ -143,10 +148,17 @@ public class ForgottenOrderNumber extends JPanel {
         findOrderButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO: link to back
-                System.out.println("find my order selected");
+                ArrayList<Order> order = getOrder(forenameField.getText().trim(), textField2.getText().trim(), Integer.parseInt(houseNumberField.getText().trim()), postcodeField.getText().trim());
+                if (order == null) {
+                    JOptionPane.showMessageDialog(parentFrame, "Order not found");
+                } else if (order.size() == 1) {
+                    BaseFrame.currentOrder = order.get(0);
+                    parentFrame.displayPanel(parentFrame.viewOrder, true, false, false, false, false);
+                } else {
+                    JOptionPane.showMessageDialog(parentFrame, "multiple orders found");
+                }
                 parentFrame.displayPanel(parentFrame.viewOrder, true, false, false, false, false);
-			}
+            }
 		});
 	}                 
 }

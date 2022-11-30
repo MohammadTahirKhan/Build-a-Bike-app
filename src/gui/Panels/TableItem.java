@@ -1,5 +1,7 @@
 package gui.Panels;
 
+import Product.Product;
+
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.SoftBevelBorder;
@@ -10,23 +12,23 @@ public class TableItem extends JPanel {
     private final JLabel brandName;
     private final JLabel serialNumber;
 
-    public TableItem(String n, Double c, String b, String s) {
+    public TableItem(Product product) {
 
 
-        name = new JLabel(n);
-        cost = new JLabel("£" + c.toString());
-        brandName = new JLabel(b);
-        serialNumber = new JLabel(s);
+        name = new JLabel(product.getName());
+        cost = new JLabel("£" + product.getItemCost());
+        brandName = new JLabel(product.getBrandName());
+        serialNumber = new JLabel(String.valueOf(product.getSerialNumber()));
 
         setBorder(new SoftBevelBorder(BevelBorder.RAISED));
 
         GroupLayout layout = new GroupLayout(this);
         setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(name, GroupLayout.PREFERRED_SIZE, 278, GroupLayout.PREFERRED_SIZE)
+                layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(name, GroupLayout.PREFERRED_SIZE, 278, GroupLayout.PREFERRED_SIZE)
                 .addGap(32, 32, 32)
                 .addComponent(cost, GroupLayout.PREFERRED_SIZE, 159, GroupLayout.PREFERRED_SIZE)
                 .addGap(34, 34, 34)

@@ -134,8 +134,7 @@ public class AddStock extends JPanel {
         addStock.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO: link to back
-				System.out.println("add stock selected");
+				
                 parentFrame.displayPanel(parentFrame.stockBrowse, false, false, false, false, true);	
 			}
 		});

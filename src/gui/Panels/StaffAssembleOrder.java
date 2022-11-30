@@ -129,7 +129,7 @@ public class StaffAssembleOrder extends JPanel {
         confirmButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-                //TODO: link to back
+
                 parentFrame.displayPanel(parentFrame.staffFindOrder, false, false, false, true, true);	
 			}
 		});

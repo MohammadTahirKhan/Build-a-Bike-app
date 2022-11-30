@@ -32,7 +32,7 @@ public class SQLFrame {
             statement.setInt(1, productID);
             statement.setInt(2, frame.getFrameSize());
             statement.setBoolean(3, frame.isContainsShocks());
-            statement.setString(4, frame.getGears());
+            statement.setInt(4, frame.getGears());
             statement.executeUpdate();
             frame.setPKey(productID);
             con.commit();
@@ -81,7 +81,7 @@ public class SQLFrame {
             getFrameRS.next();
 
             return new Frame(productId, getFrameRS.getInt(1),
-                    getFrameRS.getString(2),
+                    getFrameRS.getInt(2),
                     getFrameRS.getBoolean(3),
                     getFrameRS.getString(4),
                     getFrameRS.getInt(5),
@@ -157,7 +157,7 @@ public class SQLFrame {
             ArrayList<Frame> frames = new ArrayList<Frame>();
             if (rs.next()) {
                 frames.add(new Frame(rs.getInt(9), rs.getInt(1),
-                        rs.getString(2),
+                        rs.getInt(2),
                         rs.getBoolean(3),
                         rs.getString(4),
                         rs.getInt(5),

@@ -3,8 +3,10 @@ package SQL.Queries.Product;
 import Order.Order;
 import Product.Product;
 import SQL.DbConnection;
+import SQL.Utils;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 public class SQLProduct {
 
@@ -39,6 +41,33 @@ public class SQLProduct {
     return null;
 }
 
+
+    private static int getProductPKey(int serialNumber, String brandName){
+
+        Connection con = DbConnection.getCon();
+        assert con != null;
+
+        try {
+
+            String sql = "SELECT Product.productID FROM Product WHERE Product.serialNumber = ? AND Product.brandName = ?";
+
+            PreparedStatement statement = con.prepareStatement(sql);
+
+            statement.setInt(1, serialNumber);
+            statement.setString(2, brandName);
+
+            ResultSet rs = statement.executeQuery();
+
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+            rs.close();
+
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return -1;
+    }
 
 
 //    Handling stock
@@ -101,6 +130,13 @@ public class SQLProduct {
         setStock(product.getPKey(), quantity);
     }
 
+
+    public static void setStock(int serialNumber, String brandName, int stockNumber) {
+
+        int pKey = getProductPKey(serialNumber, brandName);
+        setStock(pKey, stockNumber);
+    }
+
     /**
      * Used by backend to set the stock of a specific product
      * @param productID  the productID of the product
@@ -120,6 +156,4 @@ public class SQLProduct {
             e.printStackTrace();
         }
     }
-
-
 }

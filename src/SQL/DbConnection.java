@@ -4,10 +4,14 @@ import java.sql.*;
 
 public class DbConnection {
 
-//    Declaring variable(s)
+//    Declaring Connection
     private static Connection con;
 
-//    Returns a database connection with the credentials inputted
+    /**
+     * Constructor for DBConnection
+     * generates a connection when initiating class
+     * @throws SQLException Exception if getting conenction
+     */
     public DbConnection() throws SQLException {
         Connection con = null; // a Connection object
         try {
@@ -18,13 +22,19 @@ public class DbConnection {
         }
     }
 
-    //    Closes database connection
+    /**
+     * Used to close the connection
+     * @throws SQLException Exception if cannot close conncetion
+     */
     public static void closeConnection() throws SQLException {
         if (con != null)
             con.close();
     }
 
-//    getter(s) and setter(s)
+    /**
+     * Gets the connection, if there is none, it makes one
+     * @return Connection object
+     */
     public static Connection getCon(){
         try{
             if (con == null){
@@ -38,6 +48,12 @@ public class DbConnection {
         return null;
     }
 
+    /**
+     * Used to get the primary key of a table where you have a statement
+     * @param statement Insert statement where you want the primary key
+     * @return primary key
+     * @throws SQLException If it is unable to get the primary key
+     */
     public static int getPrimaryKey(Statement statement) throws SQLException {
         int pKey = 0;
         ResultSet rs = statement.getGeneratedKeys();
@@ -47,6 +63,10 @@ public class DbConnection {
         return pKey;
     }
 
+    /**
+     * Rolls back the transaction if there is an issue with the Insert or update statement
+     * @param con Current connection
+     */
     public static void rollback(Connection con){
         try {
             System.err.print("Transaction is being rolled back\n");
@@ -57,17 +77,11 @@ public class DbConnection {
     }
 
 
-
-//    Do transaction at the end
-    public static ResultSet executeQuery(PreparedStatement statement) {
-        try{
-            return statement.executeQuery();
-        } catch (Exception e){
-            e.printStackTrace();
-        }
-        return null;
-    }
-
+    /**
+     * USed to execute update in database
+     * @param statement statement where update is taking place
+     * @return  The prepared statement of the update
+     */
     public static PreparedStatement executeUpdate(PreparedStatement statement){
         try{
             statement.executeUpdate();
@@ -77,6 +91,12 @@ public class DbConnection {
         }
         return null;
     }
+
+    /**
+     * Used to set the boolean value of autocommit in the connection
+     * @param con Current connection
+     * @param isAutoCommit boolean value of autoCommit
+     */
     public static void setAutoCommit(Connection con, boolean isAutoCommit){
         try{
             con.setAutoCommit(isAutoCommit);

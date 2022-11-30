@@ -28,6 +28,7 @@ public class BaseFrame extends JFrame {
     public StaffFindOrder staffFindOrder;
     public StaffAssembleOrder staffAssembleOrder;
     public StaffViewOrders staffViewOrders;
+    public EnterCustomerDetails enterCustomerDetails;
 
     private final BaseFrame thisFrame = this;
 
@@ -53,14 +54,15 @@ public class BaseFrame extends JFrame {
                 staffFindOrder = new StaffFindOrder(thisFrame);
                 staffAssembleOrder = new StaffAssembleOrder(thisFrame);
                 staffViewOrders = new StaffViewOrders();
+                enterCustomerDetails = new EnterCustomerDetails(thisFrame);
 
                 setDefaultCloseOperation(EXIT_ON_CLOSE);
                 setTitle("Bikes Ltd.");
                 initializeHeader();
                 //1000x575
-                setMinimumSize(new Dimension(900, 500));
-                setPreferredSize(new Dimension(900, 500));
-                setSize(new Dimension(900, 500));
+                setMinimumSize(new Dimension(900, 600));
+                setPreferredSize(new Dimension(900, 600));
+                setSize(new Dimension(900, 600));
                 setVisible(true);
 
                 displayPanel(productBrowse, false, true, true, false, false);

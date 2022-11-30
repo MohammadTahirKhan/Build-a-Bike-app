@@ -3,7 +3,6 @@ package gui.Panels;
 import gui.Frames.BaseFrame;
 
 import javax.swing.*;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -14,21 +13,21 @@ public class StockBrowse extends JPanel {
     private final int DEFAULT = GroupLayout.DEFAULT_SIZE;
     private final int PREFERRED = GroupLayout.PREFERRED_SIZE;
 
-    private JLabel brandName;
-    private JLabel productName;
-    private JScrollPane productTable;
-    private JPanel productTableItems;
-    private JButton selectFrameSets;
-    private JButton selectHandlebars;
-    private JButton selectWheels;
-    private JLabel serialNumber;
-    private JPanel stockNav;
-    private JPanel tableHeadingLabels;
-    private JLabel unitCost;
-    private JButton addStock;
+    private final JLabel brandName;
+    private final JLabel productName;
+    private final JScrollPane productTable;
+    private final JPanel productTableItems;
+    private final JButton selectFrameSets;
+    private final JButton selectHandlebars;
+    private final JButton selectWheels;
+    private final JLabel serialNumber;
+    private final JPanel stockNav;
+    private final JPanel tableHeadingLabels;
+    private final JLabel unitCost;
+    private final JButton addStock;
 
-    private ArrayList<TableItem> productItems = new ArrayList<>();
-    private BaseFrame parentFrame;
+    private final ArrayList<TableItem> productItems = new ArrayList<>();
+    private final BaseFrame parentFrame;
 
 
     public StockBrowse(BaseFrame baseFrame) {

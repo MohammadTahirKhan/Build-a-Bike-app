@@ -13,10 +13,10 @@ public class StaffLanding extends JPanel {
     private final GroupLayout.Alignment TRAILING = GroupLayout.Alignment.TRAILING;
     private final int PREFERRED = GroupLayout.PREFERRED_SIZE;
 
-    private JButton acceptPayment;
-    private JButton assembleBike;
-    private JButton manageStock;
-    private JButton viewOrders;
+    private final JButton acceptPayment;
+    private final JButton assembleBike;
+    private final JButton manageStock;
+    private final JButton viewOrders;
 
     BaseFrame parentFrame;
 

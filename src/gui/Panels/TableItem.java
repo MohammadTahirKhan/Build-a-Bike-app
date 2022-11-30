@@ -5,10 +5,10 @@ import javax.swing.border.BevelBorder;
 import javax.swing.border.SoftBevelBorder;
 
 public class TableItem extends JPanel {
-    private JLabel name;
-    private JLabel cost;
-    private JLabel brandName;
-    private JLabel serialNumber;
+    private final JLabel name;
+    private final JLabel cost;
+    private final JLabel brandName;
+    private final JLabel serialNumber;
 
     public TableItem(String n, Double c, String b, String s) {
 

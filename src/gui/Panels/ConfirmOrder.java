@@ -15,12 +15,12 @@ public class ConfirmOrder extends JPanel {
     private final int PREFERRED = GroupLayout.PREFERRED_SIZE;
 
     private final JPanel itemsSelected;
-    private JPanel orderOptions;
-    private JButton backToBrowseButton;
-    private JLabel yourSelection;
-    private ArrayList<ProductPanel> productPanels = new ArrayList<>(3);
+    private final JPanel orderOptions;
+    private final JButton backToBrowseButton;
+    private final JLabel yourSelection;
+    private final ArrayList<ProductPanel> productPanels = new ArrayList<>(3);
 
-    private BaseFrame parentFrame;
+    private final BaseFrame parentFrame;
 
     public ConfirmOrder(BaseFrame parentFrame) {
         this.parentFrame = parentFrame;

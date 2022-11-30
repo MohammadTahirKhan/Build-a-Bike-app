@@ -1,12 +1,11 @@
 package gui.Panels;
 
+import gui.Frames.BaseFrame;
+
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-import javax.swing.*;
-
-import gui.Frames.BaseFrame;
 
 public class AddStock extends JPanel {
     private final GroupLayout.Alignment LEADING = GroupLayout.Alignment.LEADING;

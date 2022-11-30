@@ -6,26 +6,26 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-public class ForgottenOrderNumber extends JPanel {                
+public class ForgottenOrderNumber extends JPanel {
     private final GroupLayout.Alignment LEADING = GroupLayout.Alignment.LEADING;
     private final GroupLayout.Alignment TRAILING = GroupLayout.Alignment.TRAILING;
     private final int DEFAULT = GroupLayout.DEFAULT_SIZE;
     private final int PREFERRED = GroupLayout.PREFERRED_SIZE;
 
-    private Button findOrderButton;
-    private TextField forenameField;
-    private Label forenameLabel;
-    private JPanel forgottenOrderForm;
-    private Label forgottenOrderFormTitle;
-    private JLabel forgottenOrderTitle;
-    private TextField houseNumberField;
-    private Label houseNumberLabel;
-    private TextField postcodeField;
-    private Label postcodeLabel;
-    private Label surnameLabel;
-    private TextField textField2;
+    private final Button findOrderButton;
+    private final TextField forenameField;
+    private final Label forenameLabel;
+    private final JPanel forgottenOrderForm;
+    private final Label forgottenOrderFormTitle;
+    private final JLabel forgottenOrderTitle;
+    private final TextField houseNumberField;
+    private final Label houseNumberLabel;
+    private final TextField postcodeField;
+    private final Label postcodeLabel;
+    private final Label surnameLabel;
+    private final TextField textField2;
 
-    private BaseFrame parentFrame;
+    private final BaseFrame parentFrame;
 
     public ForgottenOrderNumber(BaseFrame parentFrame) {
         this.parentFrame = parentFrame;

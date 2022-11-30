@@ -39,7 +39,7 @@ public class Utils {
     }
 
 
-    static String isAllEnum(Enum enumValue){
+    public static String isAllEnum(Enum enumValue){
         if (enumValue.name().equals("ALL"))
             return "*";
         else

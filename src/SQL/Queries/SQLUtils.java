@@ -48,12 +48,12 @@ public class SQLUtils {
         Wheels wheels7 = insertWheels(new Wheels(18, Wheels.Style.HYBRID, Wheels.BrakeType.RIM, "Essentials Kids", 7, 12.00, "Halfords", 14));
         Wheels wheels8 = insertWheels(new Wheels(16, Wheels.Style.ROAD, Wheels.BrakeType.DISKBRAKE, "Marathon Plus", 8, 32.65, "Schwalbe", 23));
 
-        Frame frame1 = insertFrame(new Frame(160, "Speed Disc Brake", false, "Superstar Caliper", 1, 1398.99, "Cinelli", 4));
-        Frame frame2 = insertFrame(new Frame(166, "Hard Mountain brakes", true, "Mega 290 Carbon Mountain", 2, 1889.99, "Nukeproof", 1));
-        Frame frame3 = insertFrame(new Frame(166, "Hard Mountain brakes", false, "Scout 290 Alloy MTB", 4, 349.99, "Nukeproof", 36));
-        Frame frame4 = insertFrame(new Frame(155, "High quality road brakes", false, "Vitesse EVO", 5, 999.99, "Vitus", 17));
-        Frame frame5 = insertFrame(new Frame(172, "Medium mountain brakes", true, "Giga 290 Carbon Frame", 6, 2799.99, "Nukeproof", 5));
-        Frame frame6 = insertFrame(new Frame(172, "Medium road Brakes", false, "Mmmbop Hardtail", 7, 209.99, "Ragley", 89));
+        Frame frame1 = insertFrame(new Frame(160, 2, false, "Superstar Caliper", 1, 1398.99, "Cinelli", 4));
+        Frame frame2 = insertFrame(new Frame(166, 5, true, "Mega 290 Carbon Mountain", 2, 1889.99, "Nukeproof", 1));
+        Frame frame3 = insertFrame(new Frame(166, 1, false, "Scout 290 Alloy MTB", 4, 349.99, "Nukeproof", 36));
+        Frame frame4 = insertFrame(new Frame(155, 3, false, "Vitesse EVO", 5, 999.99, "Vitus", 17));
+        Frame frame5 = insertFrame(new Frame(172, 7, true, "Giga 290 Carbon Frame", 6, 2799.99, "Nukeproof", 5));
+        Frame frame6 = insertFrame(new Frame(172, 2, false, "Mmmbop Hardtail", 7, 209.99, "Ragley", 89));
 
         HandleBar handleBar1 = insertHandleBar(new HandleBar(HandleBar.Style.STRAIGHT, "HB-M11 Pro Riser-Bar", 1, 26.43, "XLC", 120));
         HandleBar handleBar2 = insertHandleBar(new HandleBar(HandleBar.Style.HIGH, "HB-C08 Comp Ergo-Bar", 2, 18.00, "XLC", 74));

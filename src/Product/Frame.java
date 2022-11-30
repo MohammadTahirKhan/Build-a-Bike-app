@@ -4,7 +4,7 @@ public class Frame extends Product{
 
 //    Declaring variable(s)
     protected int frameSize;
-    protected String gears;
+    protected int gears;
     protected boolean containsShocks;
 
     /**
@@ -18,13 +18,13 @@ public class Frame extends Product{
      * @param brandName Brand name
      * @param stock Stock available
      */
-    public Frame(int pKey, int frameSize, String gears, boolean containsShocks, String name, int serialNumber, double itemCost, String brandName, int stock){
+    public Frame(int pKey, int frameSize, int gears, boolean containsShocks, String name, int serialNumber, double itemCost, String brandName, int stock){
         this.frameSize = frameSize;
         this.gears = gears;
         this.containsShocks = containsShocks;
         this.setProductDetails(pKey, name, serialNumber, itemCost, brandName, stock);
     }
-    public Frame(int frameSize, String gears, boolean containsShocks, String name, int serialNumber, double itemCost, String brandName, int stock){
+    public Frame(int frameSize, int gears, boolean containsShocks, String name, int serialNumber, double itemCost, String brandName, int stock){
         this.frameSize = frameSize;
         this.gears = gears;
         this.containsShocks = containsShocks;
@@ -40,11 +40,11 @@ public class Frame extends Product{
         this.frameSize = frameSize;
     }
 
-    public String getGears() {
+    public int getGears() {
         return gears;
     }
 
-    public void setGears(String gears) {
+    public void setGears(int gears) {
         this.gears = gears;
     }
 

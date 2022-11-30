@@ -1,11 +1,17 @@
 package gui.Panels;
 
+import Product.Frame;
+import Product.HandleBar;
+import Product.Product;
+import Product.Wheels;
 import gui.Frames.BaseFrame;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
+
+import static SQL.Queries.Product.SQLFrame.getAllFrame;
+import static SQL.Queries.Product.SQLHandleBar.getAllHandleBar;
+import static SQL.Queries.Product.SQLWheels.getAllWheels;
 
 public class StockBrowse extends JPanel {
     private final GroupLayout.Alignment LEADING = GroupLayout.Alignment.LEADING;
@@ -113,28 +119,8 @@ public class StockBrowse extends JPanel {
 
         productTable.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
-        productTableItems.setMaximumSize(new java.awt.Dimension(900, 32767));
-        productTableItems.setMinimumSize(new java.awt.Dimension(900, 100));
+        populateTable();
 
-        GroupLayout productTableItemsLayout = new GroupLayout(productTableItems);
-
-        GroupLayout.SequentialGroup sequentialGroup = productTableItemsLayout.createSequentialGroup();
-
-        for (TableItem item : productItems) {
-            sequentialGroup.addComponent(item, PREFERRED, DEFAULT, PREFERRED).addGap(0, 0, Short.MAX_VALUE);
-        }
-
-        productTableItems.setLayout(productTableItemsLayout);
-        productTableItemsLayout.setHorizontalGroup(
-                productTableItemsLayout.createParallelGroup(LEADING)
-                        .addGroup(sequentialGroup)
-        );
-        productTableItemsLayout.setVerticalGroup(
-                productTableItemsLayout.createParallelGroup(LEADING)
-                        .addGroup(sequentialGroup)
-        );
-
-        productTable.setViewportView(productTableItems);
 
         GroupLayout layout = new GroupLayout(this);
         setLayout(layout);
@@ -152,54 +138,81 @@ public class StockBrowse extends JPanel {
                 .addGap(44, 44, 44))
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(stockNav, PREFERRED, DEFAULT, PREFERRED)
-                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tableHeadingLabels, PREFERRED, DEFAULT, PREFERRED)
-                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, DEFAULT, Short.MAX_VALUE)
-                .addComponent(productTable, PREFERRED, 276, PREFERRED)
-                .addGap(41, 41, 41))
+                layout.createParallelGroup(LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(stockNav, PREFERRED, DEFAULT, PREFERRED)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(tableHeadingLabels, PREFERRED, DEFAULT, PREFERRED)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, DEFAULT, Short.MAX_VALUE)
+                                .addComponent(productTable, PREFERRED, 276, PREFERRED)
+                                .addGap(41, 41, 41))
         );
-    }                    
+        productTable.setViewportView(productTableItems);
+    }
+
+    private void populateTable() {
+        productTableItems.removeAll();
+
+
+        productTableItems.setMaximumSize(new java.awt.Dimension(900, 32767));
+        productTableItems.setMinimumSize(new java.awt.Dimension(900, 100));
+        GroupLayout productTableItemsLayout = new GroupLayout(productTableItems);
+
+        GroupLayout.ParallelGroup parallelGroup = productTableItemsLayout.createParallelGroup();
+        GroupLayout.SequentialGroup sequentialGroup = productTableItemsLayout.createSequentialGroup();
+
+
+        for (TableItem item : productItems) {
+            parallelGroup.addComponent(item, PREFERRED, DEFAULT, PREFERRED);
+            sequentialGroup.addComponent(item, PREFERRED, DEFAULT, PREFERRED).addPreferredGap(LayoutStyle.ComponentPlacement.RELATED);
+        }
+
+        productTableItems.setLayout(productTableItemsLayout);
+        productTableItemsLayout.setHorizontalGroup(
+                productTableItemsLayout.createParallelGroup(LEADING)
+                        .addGroup(parallelGroup)
+                        .addGap(0, 81, Short.MAX_VALUE)
+        );
+        productTableItemsLayout.setVerticalGroup(
+                productTableItemsLayout.createParallelGroup(LEADING)
+                        .addGroup(sequentialGroup)
+        );
+    }
 
     private void initializeButtons() {
         selectWheels.setText("Wheels");
         selectFrameSets.setText("Frame-Sets");
         selectHandlebars.setText("Handlebars");
         addStock.setText("Add New Stock");
-        selectWheels.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO: link to back
-                System.out.println("wheels selected");
-			}
-		});
+        selectWheels.addActionListener(e -> populateTableItems(Product.Products.WHEELS));
 
-        selectFrameSets.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO: link to back
-                System.out.println("framesets selected");
-			}
-		});
+        selectFrameSets.addActionListener(e -> populateTableItems(Product.Products.FRAME));
 
-        selectHandlebars.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO: link to back
-                System.out.println("handlebars selected");
-			}
-		});
+        selectHandlebars.addActionListener(e -> populateTableItems(Product.Products.HANDLEBAR));
 
-        addStock.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-                System.out.println("add stock selected");
-                parentFrame.displayPanel(parentFrame.addStock, false, false, false, true, true);	
-			}
-		});
-	}                                                     
+        addStock.addActionListener(e -> parentFrame.displayPanel(parentFrame.addStock, false, false, false, true, true));
+    }
+
+    private void populateTableItems(Product.Products productType) {
+        ArrayList<Product> products = new ArrayList<>();
+        switch (productType) {
+            case WHEELS:
+                ArrayList<Wheels> wheels = getAllWheels();
+                products.addAll(wheels);
+                break;
+            case FRAME:
+                ArrayList<Frame> frames = getAllFrame();
+                products.addAll(frames);
+                break;
+            case HANDLEBAR:
+                ArrayList<HandleBar> handlebars = getAllHandleBar();
+                products.addAll(handlebars);
+                break;
+        }
+        productItems.clear();
+        products.forEach(product -> productItems.add(new TableItem(product)));
+        populateTable();
+    }
 }
 

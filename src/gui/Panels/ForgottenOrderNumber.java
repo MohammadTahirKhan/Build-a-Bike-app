@@ -153,12 +153,14 @@ public class ForgottenOrderNumber extends JPanel {
                     JOptionPane.showMessageDialog(parentFrame, "Order not found");
                 } else if (order.size() == 1) {
                     BaseFrame.currentOrder = order.get(0);
+                    parentFrame.viewOrder.initPanels();
                     parentFrame.displayPanel(parentFrame.viewOrder, true, false, false, false, false);
                 } else {
                     JOptionPane.showMessageDialog(parentFrame, "Multiple orders found");
-                    parentFrame.displayPanel(parentFrame.forgottenFindOrder, true,false,false,false,false);
+                    parentFrame.forgottenFindOrder.generateOrders(order);
+                    parentFrame.displayPanel(parentFrame.forgottenFindOrder, true, false, false, false, false);
                 }
-                parentFrame.displayPanel(parentFrame.viewOrder, true, false, false, false, false);
+                //parentFrame.displayPanel(parentFrame.viewOrder, true, false, false, false, false);
             }
 		});
 	}                 

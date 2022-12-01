@@ -1,5 +1,7 @@
 package gui.Panels;
 
+import Order.Order;
+
 import javax.swing.*;
 
 public class OrderTableItem extends JPanel {
@@ -8,19 +10,22 @@ public class OrderTableItem extends JPanel {
     private JLabel frameName;
     private JLabel wheelsName;
     private JLabel bikeSerialNumber;
+    private Order order;
 
-    public OrderTableItem() {
+    public OrderTableItem(Order order) {
+        this.order = order;
+
         bikeName = new JLabel();
         bikeSerialNumber = new JLabel();
         handleBarName = new JLabel();
         frameName = new JLabel();
         wheelsName = new JLabel();
 
-        bikeName.setText("name");
-        bikeSerialNumber.setText("98374");
-        handleBarName.setText("handlebor");
-        frameName.setText("frames");
-        wheelsName.setText("wheelz");
+        bikeName.setText(order.getBike().getName());
+        bikeSerialNumber.setText(String.valueOf(order.getBike().getSerialNumber()));
+        handleBarName.setText(order.getBike().getHandleBar().getName());
+        frameName.setText(order.getBike().getFrame().getName());
+        wheelsName.setText(order.getBike().getWheels().getName());
 
         GroupLayout productItemLayout = new GroupLayout(this);
         this.setLayout(productItemLayout);

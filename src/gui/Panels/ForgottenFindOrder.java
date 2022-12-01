@@ -3,6 +3,7 @@ package gui.Panels;
 import Order.Order;
 
 import javax.swing.*;
+import java.util.ArrayList;
 
 public class ForgottenFindOrder extends JPanel {
     private JLabel brandName;
@@ -14,6 +15,8 @@ public class ForgottenFindOrder extends JPanel {
     private JLabel staffLogin;
     private JPanel tableHeadingLabels;
     private JLabel unitCost;
+
+    private ArrayList<OrderTableItem> orderTableItems = new ArrayList<>();
 
     public ForgottenFindOrder() {
         tableHeadingLabels = new JPanel();
@@ -66,29 +69,7 @@ public class ForgottenFindOrder extends JPanel {
                                 .addContainerGap())
         );
 
-        productTable.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-
-        productTableItems.setMaximumSize(new java.awt.Dimension(900, 32767));
-        productTableItems.setMinimumSize(new java.awt.Dimension(900, 100));
-
-        //pls make integrated :D
-        OrderTableItem orderItem = new OrderTableItem();
-        GroupLayout productTableItemsLayout = new GroupLayout(productTableItems);
-        productTableItems.setLayout(productTableItemsLayout);
-        productTableItemsLayout.setHorizontalGroup(
-                productTableItemsLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                        .addGroup(productTableItemsLayout.createSequentialGroup()
-                                .addComponent(orderItem, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 82, Short.MAX_VALUE))
-        );
-        productTableItemsLayout.setVerticalGroup(
-                productTableItemsLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                        .addGroup(productTableItemsLayout.createSequentialGroup()
-                                .addComponent(orderItem, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 515, Short.MAX_VALUE))
-        );
-
-        productTable.setViewportView(productTableItems);
+        generateOrders(new ArrayList<Order>());
 
         staffLogin.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         staffLogin.setHorizontalAlignment(SwingConstants.CENTER);
@@ -128,5 +109,36 @@ public class ForgottenFindOrder extends JPanel {
 //        header.add(reviewExistingOrder);
 //
 //        setJMenuBar(header);
+    }
+
+    public void generateOrders(ArrayList<Order> orders) {
+        productTable.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+
+        productTableItems.setMaximumSize(new java.awt.Dimension(900, 32767));
+        productTableItems.setMinimumSize(new java.awt.Dimension(900, 100));
+
+        GroupLayout productTableItemsLayout = new GroupLayout(productTableItems);
+        productTableItems.setLayout(productTableItemsLayout);
+
+        GroupLayout.ParallelGroup parallelGroup = productTableItemsLayout.createParallelGroup();
+        GroupLayout.SequentialGroup sequentialGroup = productTableItemsLayout.createSequentialGroup();
+
+        for (Order order : orders) {
+            OrderTableItem orderTableItem = new OrderTableItem(order);
+            orderTableItems.add(orderTableItem);
+            parallelGroup.addComponent(orderTableItem, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE).addGap(0, 82, Short.MAX_VALUE);
+            sequentialGroup.addComponent(orderTableItem, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE).addPreferredGap(LayoutStyle.ComponentPlacement.RELATED).addGap(0, 515, Short.MAX_VALUE);
+        }
+
+        productTableItemsLayout.setHorizontalGroup(
+                productTableItemsLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addGroup(parallelGroup)
+        );
+        productTableItemsLayout.setVerticalGroup(
+                productTableItemsLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addGroup(sequentialGroup)
+        );
+
+        productTable.setViewportView(productTableItems);
     }
 }

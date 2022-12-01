@@ -65,7 +65,9 @@ public class Bike extends Product{
         String fSerial = String.valueOf(this.frame.getSerialNumber());
         String hSerial = String.valueOf(this.handleBar.getSerialNumber());
         int serialNumber = Integer.parseInt(wSerial + fSerial + hSerial);
-        this.setProductDetails(-1, "", serialNumber, 0, frame.getBrandName(), 1);
+        double totalCost = this.wheels.getItemCost() + this.frame.getItemCost() + this.handleBar.getItemCost() + ASSEMBLY_COST;
+        this.setProductDetails(-1, (frame.getBrandName() + " " + serialNumber), serialNumber, totalCost, frame.getBrandName(), 1);
+//        this.setProductDetails(-1, (frame.getBrandName() + " " + serialNumber), serialNumber, ASSEMBLY_COST, frame.getBrandName(), 1);
     }
 }
 

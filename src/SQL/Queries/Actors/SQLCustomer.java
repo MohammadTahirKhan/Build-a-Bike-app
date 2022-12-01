@@ -23,7 +23,7 @@ public class SQLCustomer {
 
         Customer retrievedCustomer = getCustomer(customer);
         if (retrievedCustomer != null){
-            return customer;
+            return retrievedCustomer;
         }
 
         try{
@@ -41,6 +41,7 @@ public class SQLCustomer {
         }
         return null;
     }
+
 
 //    Getter(s)
     /**
@@ -79,6 +80,11 @@ public class SQLCustomer {
         return null;
     }
 
+    /**
+     * Checks if a customer exists, if it does it returns them, if not, it returns null
+     * @param customer input customer
+     * @return customer or null
+     */
     public static Customer getCustomer(Customer customer){
 
         Connection con = DbConnection.getCon();
@@ -112,6 +118,7 @@ public class SQLCustomer {
         }
         return null;
     }
+
 
 //    Update Customer
     /**

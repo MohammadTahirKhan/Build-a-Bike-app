@@ -42,6 +42,11 @@ public class SQLAddress {
         return null;
     }
 
+    /**
+     * gets the address if it is in the database, if it isn't in the database, it returns null
+     * @param address address input
+     * @return address or null
+     */
     public static Address getAddress(Address address){
         Connection con = DbConnection.getCon();
         assert con != null;
@@ -71,6 +76,4 @@ public class SQLAddress {
         }
         return null;
     }
-
-
 }

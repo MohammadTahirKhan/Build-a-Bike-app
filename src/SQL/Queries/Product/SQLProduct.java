@@ -40,7 +40,6 @@ public class SQLProduct {
 }
 
 
-
 //    Handling stock
     /**
      * Subtracts 1 from the stock of all components in a bikes

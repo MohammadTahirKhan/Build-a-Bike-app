@@ -4,7 +4,7 @@ import java.sql.*;
 
 public class DbConnection {
 
-//    Declaring Connection
+//    Declaring variable
     private static Connection con;
 
     /**
@@ -74,7 +74,6 @@ public class DbConnection {
             System.out.println(e);
         }
     }
-
 
     /**
      * USed to execute update in database

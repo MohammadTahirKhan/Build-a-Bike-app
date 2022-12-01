@@ -1,7 +1,6 @@
 package gui.Panels;
 
 import Order.Order;
-
 import javax.swing.*;
 
 public class OrderTableItem extends JPanel {
@@ -58,6 +57,5 @@ public class OrderTableItem extends JPanel {
                                         .addComponent(bikeSerialNumber))
                                 .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-
     }
 }

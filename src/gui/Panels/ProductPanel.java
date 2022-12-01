@@ -25,7 +25,7 @@ public class ProductPanel extends JPanel {
     public ProductPanel(Product product, String checkboxLabel) {
         this.product = product;
         this.setBorder(BorderFactory.createEtchedBorder());
-        addToBikeLabel.setText(checkboxLabel);
+
         image.setHorizontalAlignment(SwingConstants.CENTER);
         image.setText("/IMAGE/");
 

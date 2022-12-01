@@ -1,6 +1,7 @@
 package gui.Panels;
 
 
+import Order.Order;
 import Product.Product;
 import gui.Frames.BaseFrame;
 
@@ -156,8 +157,7 @@ public class ViewOrder extends JPanel {
         restartButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO: link to back
-				System.out.println("restart selected");
+				BaseFrame.currentOrder = new Order();
                 parentFrame.displayPanel(parentFrame.productBrowse, false, true, true, false, false);	
 			}
 		});

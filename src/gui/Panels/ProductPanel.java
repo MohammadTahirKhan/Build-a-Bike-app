@@ -11,7 +11,7 @@ import java.awt.*;
 
 public class ProductPanel extends JPanel {
     private static final Font SEGOE_UI = new Font("Segoe UI", Font.PLAIN, 14);
-    private final JLabel addToBikeLabel = new JLabel("Add to Bike");
+    private JLabel addToBikeLabel;// = new JLabel("Add to Bike");
 
     final Product product;
 
@@ -22,15 +22,10 @@ public class ProductPanel extends JPanel {
     private final JSeparator horizontalSeparator = new JSeparator();
     private final JSeparator verticalSeparator = new JSeparator(SwingConstants.VERTICAL);
 
-    public ProductPanel(Product product) {
+    public ProductPanel(Product product, String checkboxLabel) {
         this.product = product;
-        initComponents();
-    }
-
-    private void initComponents() {
         this.setBorder(BorderFactory.createEtchedBorder());
-
-
+        addToBikeLabel.setText(checkboxLabel);
         image.setHorizontalAlignment(SwingConstants.CENTER);
         image.setText("/IMAGE/");
 
@@ -116,11 +111,6 @@ public class ProductPanel extends JPanel {
                                                 .addGap(15, 15, 15))))
         );
     }
-
-    public void setSelectLabel(String label) {
-        this.addToBikeLabel.setText(label);
-    }
-
 
     public boolean isSelected() {
         return select.isSelected();

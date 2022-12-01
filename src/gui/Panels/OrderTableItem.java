@@ -27,6 +27,8 @@ public class OrderTableItem extends JPanel {
         frameName.setText(order.getBike().getFrame().getName());
         wheelsName.setText(order.getBike().getWheels().getName());
 
+        setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
         GroupLayout productItemLayout = new GroupLayout(this);
         this.setLayout(productItemLayout);
         productItemLayout.setHorizontalGroup(

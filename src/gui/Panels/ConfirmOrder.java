@@ -97,9 +97,9 @@ public class ConfirmOrder extends JPanel {
             wheels = BaseFrame.currentOrder.getBike().getWheels();
         }
 
-        if (handleBar != null) productPanels.add(new ProductPanel(handleBar));
-        if (frame != null) productPanels.add(new ProductPanel(frame));
-        if (wheels != null) productPanels.add(new ProductPanel(wheels));
+        if (handleBar != null) productPanels.add(new ProductPanel(handleBar, "Delete"));
+        if (frame != null) productPanels.add(new ProductPanel(frame, "Delete"));
+        if (wheels != null) productPanels.add(new ProductPanel(wheels, "Delete"));
 
         yourSelection.setText("Order Placed! : #" + BaseFrame.currentOrder.getID());
 

@@ -29,7 +29,7 @@ public class StockBrowse extends JPanel {
     private final JLabel serialNumber;
     private final JPanel stockNav;
     private final JPanel tableHeadingLabels;
-    private final JLabel unitCost;
+    private final JLabel stockAmount;
     private final JButton addStock;
 
     private final ArrayList<TableItem> productItems = new ArrayList<>();
@@ -46,7 +46,7 @@ public class StockBrowse extends JPanel {
         tableHeadingLabels = new JPanel();
         productName = new JLabel();
         serialNumber = new JLabel();
-        unitCost = new JLabel();
+        stockAmount = new JLabel();
         brandName = new JLabel();
         productTable = new JScrollPane();
         productTableItems = new JPanel();
@@ -86,9 +86,9 @@ public class StockBrowse extends JPanel {
 
         serialNumber.setText("Serial Number");
 
-        unitCost.setText("Unit Cost");
-
         brandName.setText("Brand Name");
+
+        stockAmount.setText("Stock");
 
         GroupLayout tableHeadingLabelsLayout = new GroupLayout(tableHeadingLabels);
         tableHeadingLabels.setLayout(tableHeadingLabelsLayout);
@@ -98,11 +98,11 @@ public class StockBrowse extends JPanel {
                 .addGap(39, 39, 39)
                 .addComponent(productName, PREFERRED, 169, PREFERRED)
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, DEFAULT, Short.MAX_VALUE)
-                .addComponent(unitCost, PREFERRED, 139, PREFERRED)
+                .addComponent(serialNumber, PREFERRED, 139, PREFERRED)
                 .addGap(50, 50, 50)
                 .addComponent(brandName, PREFERRED, 139, PREFERRED)
                 .addGap(36, 36, 36)
-                .addComponent(serialNumber, PREFERRED, 139, PREFERRED)
+                .addComponent(stockAmount, PREFERRED, 139, PREFERRED)
                 .addGap(38, 38, 38))
         );
         tableHeadingLabelsLayout.setVerticalGroup(
@@ -112,8 +112,8 @@ public class StockBrowse extends JPanel {
                 .addGroup(tableHeadingLabelsLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                     .addComponent(productName)
                     .addComponent(serialNumber)
-                    .addComponent(unitCost)
-                    .addComponent(brandName))
+                    .addComponent(brandName)
+                    .addComponent(stockAmount))
                 .addContainerGap())
         );
 

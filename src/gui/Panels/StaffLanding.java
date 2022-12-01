@@ -1,6 +1,8 @@
 package gui.Panels;
 
+import Order.Order;
 import gui.Frames.BaseFrame;
+import SQL.Queries.Order.SQLOrder;
 
 import javax.swing.*;
 import java.awt.*;
@@ -72,14 +74,24 @@ public class StaffLanding extends JPanel {
         assembleBike.addActionListener(e -> parentFrame.displayPanel(parentFrame.staffFindOrder, false, false, false, true, true));
 
         acceptPayment.addActionListener(e -> {
-            // TODO: link to back
-            System.out.println("accept payment selected");
+            String orderNum = JOptionPane.showInputDialog("Enter Order Number:");
+            Order order = SQLOrder.getOrder(Integer.parseInt(orderNum));
+            if (order != null) {
+                Object[] options = {"Cancel", "Confirm Payment Received"};
+                int n = JOptionPane.showOptionDialog(this, "Follow instructions on visa system.", "Confirm Payment", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
+                if (n == 1) {
+                    SQLOrder.updateOrderStatus(order, Order.Status.FULFILLED);
+              } else {
+                    JOptionPane.showMessageDialog(this,"Cancelled.");
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Invalid Order Number.");
+            }
         });
 
         manageStock.addActionListener(e -> parentFrame.displayPanel(parentFrame.stockBrowse, false, false, false, true, true));
 
         viewOrders.addActionListener(e -> {
-            // TODO: link to back
             parentFrame.displayPanel(parentFrame.staffViewOrders, false, false, false, true, true);
         });
     }

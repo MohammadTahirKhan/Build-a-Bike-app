@@ -29,14 +29,14 @@ public class StaffFindOrder extends JPanel {
         orderFindFormTitle = new Label();
         findOrderButton = new Button();
 
-        yourSelection.setFont(new Font("Segoe UI", 1, 24));
+        yourSelection.setFont(new Font("Segoe UI", Font.BOLD, 24));
         yourSelection.setHorizontalAlignment(SwingConstants.CENTER);
         yourSelection.setText("Assemble Bike");
 
         orderFindForm.setBorder(BorderFactory.createEtchedBorder());
 
         orderFindFormTitle.setAlignment(Label.CENTER);
-        orderFindFormTitle.setFont(new Font("Dialog", 0, 18));
+        orderFindFormTitle.setFont(new Font("Dialog", Font.PLAIN, 18));
         orderFindFormTitle.setText("Enter order number below");
 
         initializeButtons();
@@ -97,7 +97,7 @@ public class StaffFindOrder extends JPanel {
     }
     
     private void initializeButtons() {
-        findOrderButton.setFont(new Font("Dialog", 1, 12));
+        findOrderButton.setFont(new Font("Dialog", Font.BOLD, 12));
         findOrderButton.setLabel("Find Order");
 
         findOrderButton.addActionListener(e -> {

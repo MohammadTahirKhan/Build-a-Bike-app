@@ -6,6 +6,8 @@ import SQL.DbConnection;
 
 import java.sql.*;
 
+import static SQL.Queries.Actors.SQLAddress.getAddress;
+
 public class SQLCustomer {
 
 //    Insert(s)
@@ -15,9 +17,18 @@ public class SQLCustomer {
      * @return  customer object with primary key set
      */
     public static Customer insertCustomerTable(Customer customer) {
+
+        Connection con = DbConnection.getCon();
+        assert con != null;
+
+        Customer retrievedCustomer = getCustomer(customer);
+        if (retrievedCustomer != null){
+            return customer;
+        }
+
         try{
             String sql = "INSERT INTO `team002`.`Customer` (`forename`, `surname`, `addressID`) VALUES (?, ?, ?);";
-            PreparedStatement statement = DbConnection.getCon().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement statement = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             statement.setString(1, customer.getForename());
             statement.setString(2, customer.getSurname());
             statement.setInt(3, customer.getAddress().getAddressId());
@@ -64,6 +75,40 @@ public class SQLCustomer {
             DbConnection.rollback(con);
         } finally{
             DbConnection.setAutoCommit(con, true);
+        }
+        return null;
+    }
+
+    public static Customer getCustomer(Customer customer){
+
+        Connection con = DbConnection.getCon();
+        assert con != null;
+
+        try{
+            String getCustomerSQL = "SELECT Customer.forename, Customer.surname, Customer.addressID, Address.houseNo, " +
+                    "Address.roadName, Address.cityName, Address.postCode, Customer.customerID " +
+                    "FROM (Customer INNER JOIN Address ON Address.addressID = Customer.addressID) " +
+                    "WHERE Customer.forename = ? AND Customer.surname = ? AND Customer.addressID = ?";
+
+            PreparedStatement customerStatement = DbConnection.getCon().prepareStatement(getCustomerSQL);
+            customerStatement.setString(1, customer.getForename());
+            customerStatement.setString(2, customer.getSurname());
+            customerStatement.setInt(3, customer.getAddress().getAddressId());
+
+            ResultSet getCustomerRS = customerStatement.executeQuery();
+            if (getCustomerRS.next()){
+                Address address = new Address(getCustomerRS.getInt(3), getCustomerRS.getInt(4),
+                        getCustomerRS.getString(5), getCustomerRS.getString(6),
+                        getCustomerRS.getString(7));
+                return new Customer(getCustomerRS.getInt(8), getCustomerRS.getString(1), getCustomerRS.getString(2), address);
+            } else{
+                return null;
+            }
+
+        } catch (SQLException e){
+//            If commit fails, rollback
+            e.printStackTrace();
+            DbConnection.rollback(con);
         }
         return null;
     }

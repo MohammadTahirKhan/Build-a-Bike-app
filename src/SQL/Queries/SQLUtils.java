@@ -27,6 +27,7 @@ public class SQLUtils {
 
 //    Populating database utils
     public static void setDatabase() throws SQLException {
+        DbConnection.setAutoCommit(DbConnection.getCon(), false);
         deleteDatabase();
         populateDatabase();
     }
@@ -66,7 +67,6 @@ public class SQLUtils {
         Bike bike7 = new Bike(wheels8, frame1, handleBar3);
         Bike bike8 = new Bike(wheels2, frame4, handleBar2);
 
-
         Address address1 = new Address(14, "Mappin Steet", "Sheffield", "S1 4DT");
         Address address2 = new Address(6, "Blundell Road", "Hightown", "L38 9EQ");
         Address address3 = new Address(468, "Aberford Road", "Stanley", "WF3 4AG");
@@ -78,7 +78,7 @@ public class SQLUtils {
 
         Customer customer1 = new Customer("Alex", "Surname", address1);
         Customer customer2 = new Customer("Oscar", "Surname", address2);
-        Customer customer3 = new Customer("Tahir", "Surname", address3);
+        Customer customer3 = new Customer("Tahir", "Surname", address1);
         Customer customer4 = new Customer("Bryon", "Gallacher", address4);
         Customer customer5 = new Customer("Margot ", "Niles", address5);
         Customer customer6 = new Customer("Rachael ", "Marshall", address6);
@@ -124,6 +124,4 @@ public class SQLUtils {
         con.prepareStatement("DELETE FROM `team002`.`Staff`;").executeUpdate();
 
     }
-
-
 }

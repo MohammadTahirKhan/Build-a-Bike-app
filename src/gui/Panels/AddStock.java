@@ -5,8 +5,6 @@ import gui.Frames.BaseFrame;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class AddStock extends JPanel {
     private final GroupLayout.Alignment LEADING = GroupLayout.Alignment.LEADING;
@@ -43,7 +41,7 @@ public class AddStock extends JPanel {
         formTitle = new Label();
         addStock = new JButton();
 
-        addStockTitle.setFont(new Font("Segoe UI", 1, 24));
+        addStockTitle.setFont(new Font("Segoe UI", Font.BOLD, 24));
         addStockTitle.setHorizontalAlignment(SwingConstants.CENTER);
         addStockTitle.setText("Add Stock");
 
@@ -58,7 +56,7 @@ public class AddStock extends JPanel {
         brandNameLabel.setText("Brand Name");
 
         formTitle.setAlignment(Label.CENTER);
-        formTitle.setFont(new Font("Dialog", 0, 18)); // NOI18N
+        formTitle.setFont(new Font("Dialog", Font.PLAIN, 18)); // NOI18N
         formTitle.setText("Enter Details Below");
 
         GroupLayout formLayout = new GroupLayout(form);
@@ -131,16 +129,13 @@ public class AddStock extends JPanel {
     private void initializeButtons() {
         addStock.setText("Add Stock");
 
-        addStock.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-                SQLProduct.addStock(
-                        Integer.parseInt(serialNumberField.getText().trim()),
-                        brandNameField.getText().trim(),
-                        Integer.parseInt(quantityField.getText().trim())
-                );
-                parentFrame.displayPanel(parentFrame.stockBrowse, false, false, false, false, true);
-            }
-		});
-	}                            
+        addStock.addActionListener(e -> {
+            SQLProduct.addStock(
+                    Integer.parseInt(serialNumberField.getText().trim()),
+                    brandNameField.getText().trim(),
+                    Integer.parseInt(quantityField.getText().trim())
+            );
+            parentFrame.displayPanel(parentFrame.stockBrowse, false, false, false, false, true);
+        });
+    }
 }

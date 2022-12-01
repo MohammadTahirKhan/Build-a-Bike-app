@@ -4,8 +4,6 @@ import gui.Frames.BaseFrame;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class StaffLanding extends JPanel {
     public static final Font SEGOE_UI = new Font("Segoe UI", Font.BOLD, 14);
@@ -71,34 +69,18 @@ public class StaffLanding extends JPanel {
         viewOrders.setFont(SEGOE_UI);
         viewOrders.setText("View Orders");
 
-        assembleBike.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				parentFrame.displayPanel(parentFrame.staffFindOrder, false, false, false, true, true);
-			}
-		});
+        assembleBike.addActionListener(e -> parentFrame.displayPanel(parentFrame.staffFindOrder, false, false, false, true, true));
 
-        acceptPayment.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO: link to back
-				System.out.println("accept payment selected");
-			}
-		});
+        acceptPayment.addActionListener(e -> {
+            // TODO: link to back
+            System.out.println("accept payment selected");
+        });
 
-        manageStock.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-                parentFrame.displayPanel(parentFrame.stockBrowse, false, false, false, true, true);	
-			}
-		});
+        manageStock.addActionListener(e -> parentFrame.displayPanel(parentFrame.stockBrowse, false, false, false, true, true));
 
-        viewOrders.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO: link to back
-				parentFrame.displayPanel(parentFrame.staffViewOrders, false, false, false, true, true);
-			}
-		});
-	}                                          
+        viewOrders.addActionListener(e -> {
+            // TODO: link to back
+            parentFrame.displayPanel(parentFrame.staffViewOrders, false, false, false, true, true);
+        });
+    }
 }

@@ -5,8 +5,6 @@ import gui.Frames.BaseFrame;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class ConfirmOrder extends JPanel {
@@ -132,12 +130,7 @@ public class ConfirmOrder extends JPanel {
         backToBrowseButton.setForeground(new Color(255, 255, 255));
         backToBrowseButton.setText("Back To Browse");
         backToBrowseButton.setToolTipText("");
-        backToBrowseButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                parentFrame.displayPanel(parentFrame.productBrowse, false, true, true, false, false);	
-			}
-		});
+        backToBrowseButton.addActionListener(e -> parentFrame.displayPanel(parentFrame.productBrowse, false, true, true, false, false));
 	}
 }
 

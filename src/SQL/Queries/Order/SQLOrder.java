@@ -65,9 +65,8 @@ public class SQLOrder {
 //            If commit fails, rollback
             System.out.println(e);
             DbConnection.rollback(con);
-        } finally{
-            DbConnection.setAutoCommit(con, true);
         }
+        DbConnection.setAutoCommit(con, true);
         return null;
     }
 
@@ -148,6 +147,7 @@ public class SQLOrder {
      * @param orderStatus   if status is ALL, gets all, else, gets where filter is true
      * @return  Arraylist of Orders
      */
+    @SuppressWarnings("JpaQueryApiInspection")
     public static ArrayList<Order> getOrder(Order.Status orderStatus) {
 
         Connection con = DbConnection.getCon();
@@ -181,7 +181,6 @@ public class SQLOrder {
     }
 
 
-
 //    Deleting order
     /**
      * used to delete an order from the database via order ID
@@ -201,7 +200,6 @@ public class SQLOrder {
         }
 
     }
-
 
 
 //    Updating Order

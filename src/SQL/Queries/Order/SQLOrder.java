@@ -207,25 +207,23 @@ public class SQLOrder {
 //    Updating Order
     /**
      * Used to update the order status of an order
-     * @param order order where the status needs changing
-     * @param status  new status of order
-     * @return  Order object with status updated
+     *
+     * @param order  order where the status needs changing
+     * @param status new status of order
      */
-    public static Order updateOrderStatus(Order order, Order.Status status) {
+    public static void updateOrderStatus(Order order, Order.Status status) {
         Connection con = DbConnection.getCon();
         assert con != null;
 
-        try{
+        try {
             String sql = "UPDATE `team002`.`Order` SET `orderStatus` = ? WHERE `orderID` = ?";
             PreparedStatement statement = DbConnection.getCon().prepareStatement(sql);
             statement.setString(1, status.name());
             statement.setInt(2, order.getID());
             statement.executeUpdate();
             order.setStatus(status);
-            return order;
         } catch (SQLException e){
             e.printStackTrace();
         }
-        return null;
     }
 }

@@ -5,12 +5,12 @@ import Order.Order;
 import javax.swing.*;
 
 public class OrderTableItem extends JPanel {
-    private JLabel bikeName;
-    private JLabel handleBarName;
-    private JLabel frameName;
-    private JLabel wheelsName;
-    private JLabel bikeSerialNumber;
-    private Order order;
+    private final JLabel bikeName;
+    private final JLabel handleBarName;
+    private final JLabel frameName;
+    private final JLabel wheelsName;
+    private final JLabel bikeSerialNumber;
+    private final Order order;
 
     public OrderTableItem(Order order) {
         this.order = order;

@@ -18,7 +18,7 @@ public class StaffLanding extends JPanel {
     private final JButton manageStock;
     private final JButton viewOrders;
 
-    BaseFrame parentFrame;
+    final BaseFrame parentFrame;
 
     public StaffLanding(BaseFrame parentFrame) {
         this.parentFrame = parentFrame;

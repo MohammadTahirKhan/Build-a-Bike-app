@@ -7,33 +7,35 @@ import gui.Frames.BaseFrame;
 
 import javax.swing.*;
 import java.awt.*;
+import java.sql.Date;
+import java.time.LocalDate;
 
 import static SQL.Queries.Order.SQLOrder.insertOrder;
 
-public class EnterCustomerDetails extends JPanel {  
+public class EnterCustomerDetails extends JPanel {
     private final GroupLayout.Alignment LEADING = GroupLayout.Alignment.LEADING;
     private final GroupLayout.Alignment TRAILING = GroupLayout.Alignment.TRAILING;
     private final int DEFAULT = GroupLayout.DEFAULT_SIZE;
     private final int PREFERRED = GroupLayout.PREFERRED_SIZE;
-                  
-    private Button nextButton;
-    private TextField forenameField;
-    private Label forenameLabel;
-    private JPanel forgottenOrderForm;
-    private Label forgottenOrderFormTitle;
-    private TextField houseNumberField;
-    private TextField roadNameField;
-    private TextField cityField;
-    private Label houseNumberLabel;
-    private Label roadNameLabel;
-    private Label cityLabel;
-    private TextField postcodeField;
-    private Label postcodeLabel;
-    private Label surnameLabel;
-    private TextField surnameField;
 
-    private BaseFrame parentFrame;
-  
+    private final Button nextButton;
+    private final TextField forenameField;
+    private final Label forenameLabel;
+    private final JPanel forgottenOrderForm;
+    private final Label forgottenOrderFormTitle;
+    private final TextField houseNumberField;
+    private final TextField roadNameField;
+    private final TextField cityField;
+    private final Label houseNumberLabel;
+    private final Label roadNameLabel;
+    private final Label cityLabel;
+    private final TextField postcodeField;
+    private final Label postcodeLabel;
+    private final Label surnameLabel;
+    private final TextField surnameField;
+
+    private final BaseFrame parentFrame;
+
     public EnterCustomerDetails(BaseFrame baseFrame) {
         parentFrame = baseFrame;
         forgottenOrderForm = new JPanel();
@@ -167,7 +169,9 @@ public class EnterCustomerDetails extends JPanel {
                 Customer customer = new Customer(forename, surname, address);
                 BaseFrame.currentOrder.setCustomer(customer);
                 BaseFrame.currentOrder.setStatus(Order.Status.PENDING);
+                BaseFrame.currentOrder.setDate((Date.valueOf(LocalDate.now())));
                 BaseFrame.currentOrder = insertOrder(BaseFrame.currentOrder);
+
                 parentFrame.confirmOrder.initPanels();
                 parentFrame.displayPanel(parentFrame.confirmOrder, true, false, true, false, false);
             }

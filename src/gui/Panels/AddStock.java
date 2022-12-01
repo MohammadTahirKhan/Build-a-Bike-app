@@ -14,20 +14,19 @@ public class AddStock extends JPanel {
     private final int DEFAULT = GroupLayout.DEFAULT_SIZE;
     private final int PREFERRED = GroupLayout.PREFERRED_SIZE;
 
-    private JButton addStock;
-    private BaseFrame parentFrame;
-   
-    private JPanel form;
-    private JLabel addStockTitle;
-    private Label formTitle;
-    private Label quantityLabel; 
-    private Label serialNumberLabel;
-    private Label brandNameLabel;
-    private TextField quantityField;
-    private TextField serialNumberField;
-    private TextField brandNameField;
+    private final JButton addStock;
+    private final BaseFrame parentFrame;
 
-    
+    private final JPanel form;
+    private final JLabel addStockTitle;
+    private final Label formTitle;
+    private final Label quantityLabel;
+    private final Label serialNumberLabel;
+    private final Label brandNameLabel;
+    private final TextField quantityField;
+    private final TextField serialNumberField;
+    private final TextField brandNameField;
+
 
     public AddStock(BaseFrame baseFrame) {
         parentFrame = baseFrame;

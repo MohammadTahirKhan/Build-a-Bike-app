@@ -10,14 +10,12 @@ public class DbConnection {
     /**
      * Constructor for DBConnection
      * generates a connection when initiating class
-     * @throws SQLException Exception if getting conenction
      */
-    public DbConnection() throws SQLException {
+    public DbConnection() {
         Connection con = null; // a Connection object
         try {
             getCon();
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
     }

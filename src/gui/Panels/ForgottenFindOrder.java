@@ -6,17 +6,17 @@ import javax.swing.*;
 import java.util.ArrayList;
 
 public class ForgottenFindOrder extends JPanel {
-    private JLabel brandName;
-    private JLabel productName;
-    private JScrollPane productTable;
-    private JPanel productTableItems;
-    private JLabel serialNumber;
-    private JLabel serialNumber1;
-    private JLabel staffLogin;
-    private JPanel tableHeadingLabels;
-    private JLabel unitCost;
+    private final JLabel brandName;
+    private final JLabel productName;
+    private final JScrollPane productTable;
+    private final JPanel productTableItems;
+    private final JLabel serialNumber;
+    private final JLabel serialNumber1;
+    private final JLabel staffLogin;
+    private final JPanel tableHeadingLabels;
+    private final JLabel unitCost;
 
-    private ArrayList<OrderTableItem> orderTableItems = new ArrayList<>();
+    private final ArrayList<OrderTableItem> orderTableItems = new ArrayList<>();
 
     public ForgottenFindOrder() {
         tableHeadingLabels = new JPanel();

@@ -11,22 +11,20 @@ public class SQLStaff {
 //    Insert(s)
     /**
      * Used by backend to insert directly into Staff table
+     *
      * @param staff staff object
-     * @return  staff object with primary key set
      */
-    public static Staff insertStaffTable(Staff staff) {
-        try{
+    public static void insertStaffTable(Staff staff) {
+        try {
             String sql = "INSERT INTO `team002`.`Staff` (`username`, `hash`, `salt`) VALUES (?, ?, ?);";
             PreparedStatement statement = DbConnection.getCon().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             statement.setString(1, staff.getUsername());
             statement.setBytes(2, staff.getHash());
             statement.setBytes(3, staff.getSalt());
             statement.executeUpdate();
-            return staff;
-        } catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
-        return null;
     }
 
 //    Getter(s)

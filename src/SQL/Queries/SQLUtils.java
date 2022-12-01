@@ -16,6 +16,7 @@ import java.sql.Date;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.Arrays;
+import java.util.Objects;
 
 import static SQL.Queries.Actors.SQLStaff.insertStaffTable;
 import static SQL.Queries.Order.SQLOrder.insertOrder;
@@ -27,7 +28,6 @@ public class SQLUtils {
 
 //    Sets autocommit to false then deletes and populates the database
     public static void setDatabase() throws SQLException {
-        DbConnection.setAutoCommit(DbConnection.getCon(), false);
         deleteDatabase();
         populateDatabase();
     }
@@ -108,13 +108,13 @@ public class SQLUtils {
         insertOrder(order7);
         insertOrder(order8);
 
-        //        Inserts staff
+//        Inserts staff
         byte[][] salts = new byte[4][4];
         Arrays.fill(salts, Password.getSalt());
-        insertStaffTable(new Staff("Staff1", Password.hashPassword("d1Z2n2^0hT0x", salts[0])[0], salts[0]));
-        insertStaffTable(new Staff("Staff2", Password.hashPassword("5tG57O&c&j1z", salts[1])[0], salts[1]));
-        insertStaffTable(new Staff("Staff3", Password.hashPassword("s45M6!JswuVG", salts[2])[0], salts[2]));
-        insertStaffTable(new Staff("test", Password.hashPassword("test", salts[3])[0], salts[3]));
+        insertStaffTable(new Staff("Staff1", Objects.requireNonNull(Password.hashPassword("d1Z2n2^0hT0x", salts[0]))[0], salts[0]));
+        insertStaffTable(new Staff("Staff2", Objects.requireNonNull(Password.hashPassword("5tG57O&c&j1z", salts[1]))[0], salts[1]));
+        insertStaffTable(new Staff("Staff3", Objects.requireNonNull(Password.hashPassword("s45M6!JswuVG", salts[2]))[0], salts[2]));
+        insertStaffTable(new Staff("test", Objects.requireNonNull(Password.hashPassword("test", salts[3]))[0], salts[3]));
     }
 
     /**

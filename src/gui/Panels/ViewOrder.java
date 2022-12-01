@@ -150,7 +150,7 @@ public class ViewOrder extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
                 //TODO: link to back
-                parentFrame.displayPanel(parentFrame.confirmOrder, false, true, true, false, false);	
+                parentFrame.displayPanel(parentFrame.enterCustomerDetails, true, true, true, false, false);	
 			}
 		});
 	}

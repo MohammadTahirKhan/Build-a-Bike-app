@@ -154,7 +154,7 @@ public class SQLFrame {
             }
 
             ResultSet rs = statement.executeQuery();
-            ArrayList<Frame> frames = new ArrayList<Frame>();
+            ArrayList<Frame> frames = new ArrayList<>();
             while (rs.next()) {
                 frames.add(new Frame(rs.getInt(9), rs.getInt(1),
                         rs.getInt(2),

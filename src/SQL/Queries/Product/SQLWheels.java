@@ -2,8 +2,6 @@ package SQL.Queries.Product;
 
 import Product.Wheels;
 import SQL.DbConnection;
-import SQL.Queries.SQLUtils;
-import SQL.Utils;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -160,7 +158,7 @@ public class SQLWheels {
 
             ResultSet rs = statement.executeQuery();
 
-            ArrayList<Wheels> wheels = new ArrayList<Wheels>();
+            ArrayList<Wheels> wheels = new ArrayList<>();
             while (rs.next()) {
                 wheels.add(new Wheels(rs.getInt(9), rs.getDouble(1),
                         rs.getString(2),

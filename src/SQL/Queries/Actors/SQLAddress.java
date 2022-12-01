@@ -1,11 +1,11 @@
 package SQL.Queries.Actors;
 
 import Actors.Address;
+import Order.Order;
 import SQL.DbConnection;
 
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
+import java.util.ArrayList;
 
 public class SQLAddress {
 
@@ -16,9 +16,18 @@ public class SQLAddress {
      * @return address object with primary key set
      */
     public static Address insertAddressTable(Address address) {
+
+        Connection con = DbConnection.getCon();
+        assert con != null;
+
+        Address retrievedAddress = getAddress(address);
+        if (retrievedAddress != null){
+            return retrievedAddress;
+        }
+
         try{
             String sql = "INSERT INTO `team002`.`Address`(`houseNo`, `roadName`, `cityName`, `postCode`) VALUES (?, ?, ?, ?);";
-            PreparedStatement statement = DbConnection.getCon().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement statement = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             statement.setInt(1, address.getHouseNo());
             statement.setString(2, address.getRoadName());
             statement.setString(3, address.getCityName());
@@ -27,6 +36,36 @@ public class SQLAddress {
             int key = DbConnection.getPrimaryKey(statement);
             address.setAddressId(key);
             return address;
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static Address getAddress(Address address){
+        Connection con = DbConnection.getCon();
+        assert con != null;
+        try{
+            String getOrderSQL = "SELECT addressID, houseNo, roadName, cityName, postCode " +
+                    "FROM Address WHERE Address.houseNo = ? AND Address.roadName = ? AND Address.cityName = ? AND Address.postCode = ?";
+
+            PreparedStatement customerStatement = con.prepareStatement(getOrderSQL);
+            customerStatement.setInt(1, address.getHouseNo());
+            customerStatement.setString(2, address.getRoadName());
+            customerStatement.setString(3, address.getCityName());
+            customerStatement.setString(4, address.getPostCode());
+
+            ResultSet getAddressRS = customerStatement.executeQuery();
+
+            Address RSAddress = null ;
+            if (getAddressRS.next()){
+                RSAddress = new Address(getAddressRS.getInt(1),
+                        getAddressRS.getInt(2),
+                        getAddressRS.getString(3),
+                        getAddressRS.getString(4),
+                        getAddressRS.getString(5));
+            }
+            return RSAddress;
         } catch (SQLException e){
             e.printStackTrace();
         }

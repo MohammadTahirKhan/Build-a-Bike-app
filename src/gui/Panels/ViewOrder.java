@@ -7,8 +7,6 @@ import gui.Frames.BaseFrame;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class ViewOrder extends JPanel {
@@ -154,28 +152,17 @@ public class ViewOrder extends JPanel {
         placeOrderButton.setText("Place Order");
         placeOrderButton.setToolTipText("");
 
-        restartButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				BaseFrame.currentOrder = new Order();
-                parentFrame.displayPanel(parentFrame.productBrowse, false, true, true, false, false);	
-			}
-		});
+        restartButton.addActionListener(e -> {
+            BaseFrame.currentOrder = new Order();
+            parentFrame.displayPanel(parentFrame.productBrowse, false, true, true, false, false);
+        });
 
-        backToBrowseButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-                parentFrame.displayPanel(parentFrame.productBrowse, false, true, true, false, false);	
-			}
-		});
+        backToBrowseButton.addActionListener(e -> parentFrame.displayPanel(parentFrame.productBrowse, false, true, true, false, false));
 
-        placeOrderButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-                parentFrame.confirmOrder.initPanels();
-                parentFrame.displayPanel(parentFrame.enterCustomerDetails, true, true, true, false, false);
-            }
-		});
-	}
+        placeOrderButton.addActionListener(e -> {
+            parentFrame.confirmOrder.initPanels();
+            parentFrame.displayPanel(parentFrame.enterCustomerDetails, false, true, true, false, false);
+        });
+    }
 }
 

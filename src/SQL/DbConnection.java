@@ -67,6 +67,7 @@ public class DbConnection {
      */
     public static void rollback(Connection con){
         try {
+            DbConnection.setAutoCommit(con, false);
             System.err.print("Transaction is being rolled back\n");
             con.rollback();
         } catch (SQLException e) {

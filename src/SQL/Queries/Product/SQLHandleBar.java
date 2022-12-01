@@ -2,7 +2,6 @@ package SQL.Queries.Product;
 
 import Product.HandleBar;
 import SQL.DbConnection;
-import SQL.Utils;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -105,6 +104,7 @@ public class SQLHandleBar {
      * @param style if Style is ALL, then gets all, else, gets specific style
      * @return Arraylist of HandleBars
      */
+    @SuppressWarnings("JpaQueryApiInspection")
     public static ArrayList<HandleBar> getHandleBar(HandleBar.Style style) {
 
         Connection con = DbConnection.getCon();

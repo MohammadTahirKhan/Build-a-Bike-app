@@ -9,6 +9,7 @@ import java.sql.Statement;
 
 public class SQLAddress {
 
+//    Insert(s)
     /**
      * Used by backend to insert directly into Address table
      * @param address address object being inserted

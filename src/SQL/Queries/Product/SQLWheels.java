@@ -151,11 +151,11 @@ public class SQLWheels {
                 currentParameter++;
             }
             if (!style.equals(Wheels.Style.ALL)) {
-                statement.setString(currentParameter, Utils.isAllEnum(style));
+                statement.setString(currentParameter, style.name());
                 currentParameter++;
             }
             if (!brakeSystem.equals(Wheels.BrakeType.ALL)) {
-                statement.setString(currentParameter, Utils.isAllEnum(brakeSystem));
+                statement.setString(currentParameter, brakeSystem.name());
             }
 
             ResultSet rs = statement.executeQuery();
@@ -178,5 +178,4 @@ public class SQLWheels {
         }
         return null;
     }
-
 }

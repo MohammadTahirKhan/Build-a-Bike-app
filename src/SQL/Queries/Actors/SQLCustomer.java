@@ -8,6 +8,7 @@ import java.sql.*;
 
 public class SQLCustomer {
 
+//    Insert(s)
     /**
      * Used by backend to insert directly into Customer table
      * @param customer customer object
@@ -30,6 +31,7 @@ public class SQLCustomer {
         return null;
     }
 
+//    Getter(s)
     /**
      * Get a customer by customerID
      * @param customerID customer ID of customer
@@ -66,6 +68,7 @@ public class SQLCustomer {
         return null;
     }
 
+//    Update Customer
     /**
      * Used to update the customer in the database
      * @param customer Customer object that is being set into the database

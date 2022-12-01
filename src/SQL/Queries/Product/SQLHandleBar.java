@@ -123,7 +123,7 @@ public class SQLHandleBar {
             PreparedStatement statement = con.prepareStatement(sql);
 
             if (style != HandleBar.Style.ALL) {
-                statement.setString(1, Utils.isAllEnum(style));
+                statement.setString(1, style.name());
             }
 
             ResultSet rs = statement.executeQuery();
@@ -143,7 +143,5 @@ public class SQLHandleBar {
         }
         return null;
     }
-
-
 
 }

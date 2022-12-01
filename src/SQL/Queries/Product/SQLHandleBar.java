@@ -13,7 +13,6 @@ import static SQL.Queries.Product.SQLProduct.insertProductTable;
 
 public class SQLHandleBar {
 
-
 //    Inserting handlebars
     /**
      * Used by backend to insert directly into Wheels table

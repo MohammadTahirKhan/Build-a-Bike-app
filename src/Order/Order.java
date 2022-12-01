@@ -99,4 +99,12 @@ public class Order {
     public void setBike(Bike bike) {
         this.bike = bike;
     }
+
+//    Set Cost
+    public void setCost(){
+        Bike bike = this.getBike();
+        double totalCost = bike.getWheels().getItemCost() + bike.getFrame().getItemCost() + bike.getHandleBar().getItemCost();
+        totalCost += bike.getItemCost();
+        this.setCost(totalCost);
+    }
 }

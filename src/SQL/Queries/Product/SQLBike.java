@@ -25,6 +25,7 @@ public class SQLBike {
      * @return bike object but with the primary key set
      */
     public static Bike insertBikeTable(Bike bike){
+        bike.setValues();
         try{
             int productID = insertProductTable(bike.getProduct()).getPKey();
             String sql = "INSERT INTO `team002`.`Bike` (`productID`, `wheelsID`, `handleBarID`, `frameSetID`) VALUES (?, ?, ?, ?);";

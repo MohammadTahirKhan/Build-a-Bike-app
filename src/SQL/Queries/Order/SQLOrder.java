@@ -24,6 +24,7 @@ public class SQLOrder {
      * @return order object with primary key set
      */
     private static Order insertOrderTable(Order order) {
+        order.setCost();
         try{
             String sql = "INSERT INTO `team002`.`Order` (`orderDate`, `orderCost`, `orderStatus`, `customerID`, `productID`) VALUES (?, ?, ?, ?, ?);";
             PreparedStatement statement = Objects.requireNonNull(DbConnection.getCon()).prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -69,7 +70,6 @@ public class SQLOrder {
         DbConnection.setAutoCommit(con, true);
         return null;
     }
-
 
 
 //    Getting order

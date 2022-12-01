@@ -25,13 +25,18 @@ import static SQL.Queries.Product.SQLWheels.insertWheels;
 
 public class SQLUtils {
 
-//    Populating database utils
+//    Sets autocommit to false then deletes and populates the database
     public static void setDatabase() throws SQLException {
         DbConnection.setAutoCommit(DbConnection.getCon(), false);
         deleteDatabase();
         populateDatabase();
     }
+
+    /**
+     * Populates the database
+     */
     private static void populateDatabase() {
+
 //        First insert all the components of a bike
         Wheels wheels1 = insertWheels(new Wheels(24, Wheels.Style.HYBRID, Wheels.BrakeType.RIM, "HS127", 1, 21.49, "Schwalbe", 61));
         Wheels wheels2 = insertWheels(new Wheels(24, Wheels.Style.MOUNTAIN, Wheels.BrakeType.DISKBRAKE, "Land Cruiser", 2, 19.99, "Schwalbe", 12));
@@ -111,6 +116,11 @@ public class SQLUtils {
         insertStaffTable(new Staff("Staff3", Password.hashPassword("s45M6!JswuVG", salts[2])[0], salts[2]));
         insertStaffTable(new Staff("test", Password.hashPassword("test", salts[3])[0], salts[3]));
     }
+
+    /**
+     * Deletes the database
+     * @throws SQLException Exception being unable to delete data from table
+     */
     private static void deleteDatabase() throws SQLException {
         Connection con = DbConnection.getCon();
         con.prepareStatement("DELETE FROM `team002`.`Order`;").executeUpdate();

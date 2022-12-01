@@ -5,8 +5,6 @@ import gui.Frames.BaseFrame;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import static SQL.Queries.Order.SQLOrder.getOrder;
@@ -48,7 +46,7 @@ public class ForgottenOrderNumber extends JPanel {
         postcodeField = new TextField();
 
 
-        forgottenOrderTitle.setFont(new Font("Segoe UI", 1, 24));
+        forgottenOrderTitle.setFont(new Font("Segoe UI", Font.BOLD, 24));
 
         forgottenOrderTitle.setHorizontalAlignment(SwingConstants.CENTER);
         forgottenOrderTitle.setText("Forgotten Order Number");
@@ -63,7 +61,7 @@ public class ForgottenOrderNumber extends JPanel {
 
         forgottenOrderFormTitle.setAlignment(Label.CENTER);
 
-        forgottenOrderFormTitle.setFont(new Font("Dialog", 0, 18));
+        forgottenOrderFormTitle.setFont(new Font("Dialog", Font.PLAIN, 18));
         forgottenOrderFormTitle.setText("Enter Your Details Below");
 
         houseNumberLabel.setText("House Number");
@@ -145,23 +143,20 @@ public class ForgottenOrderNumber extends JPanel {
     
     private void initializeButtons() {
         findOrderButton.setLabel("Find My Order");
-        findOrderButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-                ArrayList<Order> order = getOrder(forenameField.getText().trim(), textField2.getText().trim(), Integer.parseInt(houseNumberField.getText().trim()), postcodeField.getText().trim());
-                if (order == null) {
-                    JOptionPane.showMessageDialog(parentFrame, "Order not found");
-                } else if (order.size() == 1) {
-                    BaseFrame.currentOrder = order.get(0);
-                    parentFrame.viewOrder.initPanels();
-                    parentFrame.displayPanel(parentFrame.viewOrder, true, false, false, false, false);
-                } else {
-                    JOptionPane.showMessageDialog(parentFrame, "Multiple orders found");
-                    parentFrame.forgottenFindOrder.generateOrders(order);
-                    parentFrame.displayPanel(parentFrame.forgottenFindOrder, true, false, false, false, false);
-                }
-                //parentFrame.displayPanel(parentFrame.viewOrder, true, false, false, false, false);
+        findOrderButton.addActionListener(e -> {
+            ArrayList<Order> order = getOrder(forenameField.getText().trim(), textField2.getText().trim(), Integer.parseInt(houseNumberField.getText().trim()), postcodeField.getText().trim());
+            if (order == null) {
+                JOptionPane.showMessageDialog(parentFrame, "Order not found");
+            } else if (order.size() == 1) {
+                BaseFrame.currentOrder = order.get(0);
+                parentFrame.viewOrder.initPanels();
+                parentFrame.displayPanel(parentFrame.viewOrder, true, false, false, false, false);
+            } else {
+                JOptionPane.showMessageDialog(parentFrame, "Multiple orders found");
+                parentFrame.forgottenFindOrder.generateOrders(order);
+                parentFrame.displayPanel(parentFrame.forgottenFindOrder, true, false, false, false, false);
             }
-		});
-	}                 
+//parentFrame.displayPanel(parentFrame.viewOrder, true, false, false, false, false);
+        });
+    }
 }

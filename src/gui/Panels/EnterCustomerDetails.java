@@ -63,7 +63,7 @@ public class EnterCustomerDetails extends JPanel {
         surnameLabel.setText("Surname");
 
         forgottenOrderFormTitle.setAlignment(Label.CENTER);
-        forgottenOrderFormTitle.setFont(new Font("Dialog", 0, 18)); // NOI18N
+        forgottenOrderFormTitle.setFont(new Font("Dialog", Font.PLAIN, 18)); // NOI18N
         forgottenOrderFormTitle.setText("Enter Your Details Below");
 
         houseNumberLabel.setText("House Number");

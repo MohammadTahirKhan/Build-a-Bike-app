@@ -3,10 +3,8 @@ package SQL.Queries.Product;
 import Order.Order;
 import Product.Product;
 import SQL.DbConnection;
-import SQL.Utils;
 
 import java.sql.*;
-import java.util.ArrayList;
 
 public class SQLProduct {
 

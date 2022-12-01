@@ -3,7 +3,7 @@ package gui.Panels;
 import Order.Order;
 
 import javax.swing.*;
-import java.security.acl.Group;
+import java.awt.*;
 import java.util.ArrayList;
 
 public class ForgottenFindOrder extends JPanel {
@@ -70,9 +70,9 @@ public class ForgottenFindOrder extends JPanel {
                                 .addContainerGap())
         );
 
-        generateOrders(new ArrayList<Order>());
+        generateOrders(new ArrayList<>());
 
-        staffLogin.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        staffLogin.setFont(new java.awt.Font("Segoe UI", Font.BOLD, 24)); // NOI18N
         staffLogin.setHorizontalAlignment(SwingConstants.CENTER);
         staffLogin.setText("Find Order");
 

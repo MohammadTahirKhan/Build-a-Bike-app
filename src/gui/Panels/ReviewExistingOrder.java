@@ -4,8 +4,6 @@ import gui.Frames.BaseFrame;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import static SQL.Queries.Order.SQLOrder.getOrder;
 
@@ -33,14 +31,14 @@ public class ReviewExistingOrder extends JPanel {
         findOrderButton = new Button();
         forgottenOrderNumberButton = new Button();
 
-        yourSelection.setFont(new Font("Segoe UI", 1, 24));
+        yourSelection.setFont(new Font("Segoe UI", Font.BOLD, 24));
         yourSelection.setHorizontalAlignment(SwingConstants.CENTER);
         yourSelection.setText("Review Exisitng Order");
 
         orderFindForm.setBorder(BorderFactory.createEtchedBorder());
 
         orderFindFormTitle.setAlignment(Label.CENTER);
-        orderFindFormTitle.setFont(new Font("Dialog", 0, 18));
+        orderFindFormTitle.setFont(new Font("Dialog", Font.PLAIN, 18));
         orderFindFormTitle.setText("Enter your order number below");
 
         initializeButtons();
@@ -100,30 +98,22 @@ public class ReviewExistingOrder extends JPanel {
     }
     
     private void initializeButtons() {
-        findOrderButton.setFont(new Font("Dialog", 1, 12));
+        findOrderButton.setFont(new Font("Dialog", Font.BOLD, 12));
         findOrderButton.setLabel("Find My Order");
 
-        forgottenOrderNumberButton.setFont(new Font("Dialog", 1, 12));
-        forgottenOrderNumberButton.setLabel("Forgotten My Order Number"); 
-        findOrderButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-                Order.Order order = getOrder(Integer.parseInt(orderNumberField.getText().trim()));
-                if (order != null) {
-                    BaseFrame.currentOrder = order;
-                    parentFrame.viewOrder.initPanels();
-                    parentFrame.displayPanel(parentFrame.viewOrder, true, false, false, false, false);
-                } else {
-                    JOptionPane.showMessageDialog(parentFrame, "Order not found");
-                }
+        forgottenOrderNumberButton.setFont(new Font("Dialog", Font.BOLD, 12));
+        forgottenOrderNumberButton.setLabel("Forgotten My Order Number");
+        findOrderButton.addActionListener(e -> {
+            Order.Order order = getOrder(Integer.parseInt(orderNumberField.getText().trim()));
+            if (order != null) {
+                BaseFrame.currentOrder = order;
+                parentFrame.viewOrder.initPanels();
+                parentFrame.displayPanel(parentFrame.viewOrder, true, false, false, false, false);
+            } else {
+                JOptionPane.showMessageDialog(parentFrame, "Order not found");
             }
-		});
+        });
 
-        forgottenOrderNumberButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-                parentFrame.displayPanel(parentFrame.forgottenOrderNumber, true, false, false, false, false);
-			}
-		});
-	}        
+        forgottenOrderNumberButton.addActionListener(e -> parentFrame.displayPanel(parentFrame.forgottenOrderNumber, true, false, false, false, false));
+    }
 }

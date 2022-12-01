@@ -1,8 +1,6 @@
 package gui.Panels;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class StaffViewOrders extends JPanel {
@@ -165,36 +163,24 @@ public class StaffViewOrders extends JPanel {
         fulfilled.setText("Fulfilled");
         all.setText("All");
 
-        pending.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO: link to back
-                System.out.println("pending selected");
-			}
-		});
+        pending.addActionListener(e -> {
+            // TODO: link to back
+            System.out.println("pending selected");
+        });
 
-        confirmed.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO: link to back
-                System.out.println("confirmed selected");
-			}
-		});
+        confirmed.addActionListener(e -> {
+            // TODO: link to back
+            System.out.println("confirmed selected");
+        });
 
-        fulfilled.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO: link to back
-                System.out.println("fulfilled selected");
-			}
-		});
+        fulfilled.addActionListener(e -> {
+            // TODO: link to back
+            System.out.println("fulfilled selected");
+        });
 
-        all.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-                // TODO: link to back
-                System.out.println("all selected");
-			}
-		});
-	}                                                     
+        all.addActionListener(e -> {
+// TODO: link to back
+            System.out.println("all selected");
+        });
+    }
 }

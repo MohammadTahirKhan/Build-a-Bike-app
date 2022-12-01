@@ -39,41 +39,39 @@ public class BaseFrame extends JFrame {
     public BaseFrame(){
 
 
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                header = new JMenuBar();
-                backToBrowse = new JMenu();
-                toStaffPortal = new JMenu();
-                toReviewOrder = new JMenu();
-                logout = new JMenu();
-                backToLanding = new JMenu();
+        EventQueue.invokeLater(() -> {
+            header = new JMenuBar();
+            backToBrowse = new JMenu();
+            toStaffPortal = new JMenu();
+            toReviewOrder = new JMenu();
+            logout = new JMenu();
+            backToLanding = new JMenu();
 
-                staffLogin = new StaffLogin(thisFrame);
-                staffLanding = new StaffLanding(thisFrame);
-                reviewExistingOrder = new ReviewExistingOrder(thisFrame);
-                forgottenOrderNumber = new ForgottenOrderNumber(thisFrame);
-                viewOrder = new ViewOrder(thisFrame);
-                stockBrowse = new StockBrowse(thisFrame);
-                productBrowse = new ProductBrowse(thisFrame);
-                confirmOrder = new ConfirmOrder(thisFrame);
-                addStock = new AddStock(thisFrame);
-                staffFindOrder = new StaffFindOrder(thisFrame);
-                staffAssembleOrder = new StaffAssembleOrder(thisFrame);
-                staffViewOrders = new StaffViewOrders();
-                enterCustomerDetails = new EnterCustomerDetails(thisFrame);
-                forgottenFindOrder = new ForgottenFindOrder();
+            staffLogin = new StaffLogin(thisFrame);
+            staffLanding = new StaffLanding(thisFrame);
+            reviewExistingOrder = new ReviewExistingOrder(thisFrame);
+            forgottenOrderNumber = new ForgottenOrderNumber(thisFrame);
+            viewOrder = new ViewOrder(thisFrame);
+            stockBrowse = new StockBrowse(thisFrame);
+            productBrowse = new ProductBrowse(thisFrame);
+            confirmOrder = new ConfirmOrder(thisFrame);
+            addStock = new AddStock(thisFrame);
+            staffFindOrder = new StaffFindOrder(thisFrame);
+            staffAssembleOrder = new StaffAssembleOrder(thisFrame);
+            staffViewOrders = new StaffViewOrders();
+            enterCustomerDetails = new EnterCustomerDetails(thisFrame);
+            forgottenFindOrder = new ForgottenFindOrder();
 
-                setDefaultCloseOperation(EXIT_ON_CLOSE);
-                setTitle("Bikes Ltd.");
-                initializeHeader();
-                //1000x575
-                setMinimumSize(new Dimension(900, 640));
-                setPreferredSize(new Dimension(900, 640));
-                setSize(new Dimension(900, 640));
-                setVisible(true);
+            setDefaultCloseOperation(EXIT_ON_CLOSE);
+            setTitle("Bikes Ltd.");
+            initializeHeader();
+            //1000x575
+            setMinimumSize(new Dimension(900, 640));
+            setPreferredSize(new Dimension(900, 640));
+            setSize(new Dimension(900, 640));
+            setVisible(true);
 
-                displayPanel(productBrowse, false, true, true, false, false);
-            }
+            displayPanel(productBrowse, false, true, true, false, false);
         });
     }
 

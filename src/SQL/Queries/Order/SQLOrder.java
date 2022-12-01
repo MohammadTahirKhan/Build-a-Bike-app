@@ -148,6 +148,7 @@ public class SQLOrder {
      * @param orderStatus   if status is ALL, gets all, else, gets where filter is true
      * @return  Arraylist of Orders
      */
+    @SuppressWarnings("JpaQueryApiInspection")
     public static ArrayList<Order> getOrder(Order.Status orderStatus) {
 
         Connection con = DbConnection.getCon();

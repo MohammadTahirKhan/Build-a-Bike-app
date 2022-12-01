@@ -104,6 +104,7 @@ public class StaffFindOrder extends JPanel {
             Order.Order order = getOrder(Integer.parseInt(orderNumberField.getText().trim()));
             if (order != null) {
                 BaseFrame.currentOrder = order;
+                parentFrame.staffAssembleOrder.drawPanels();
                 parentFrame.displayPanel(parentFrame.staffAssembleOrder, false, false, false, true, true);
             } else {
                 JOptionPane.showMessageDialog(parentFrame, "Order not found");

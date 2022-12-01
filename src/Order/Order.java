@@ -2,6 +2,7 @@ package Order;
 
 import Actors.Customer;
 import Product.Bike;
+
 import java.util.Date;
 
 public class Order {
@@ -47,6 +48,7 @@ public class Order {
     public Order() {
         this.ID = -1;
         this.status = Status.PENDING;
+        this.bike = new Bike();
     }
 
 

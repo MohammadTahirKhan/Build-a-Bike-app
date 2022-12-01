@@ -1,5 +1,6 @@
 package gui.Panels;
 
+import Product.Product;
 import gui.Frames.BaseFrame;
 
 import javax.swing.*;
@@ -25,6 +26,7 @@ public class ConfirmOrder extends JPanel {
     public ConfirmOrder(BaseFrame parentFrame) {
         this.parentFrame = parentFrame;
 
+
         itemsSelected = new JPanel();
         orderOptions = new JPanel();
         yourSelection = new JLabel();
@@ -32,30 +34,11 @@ public class ConfirmOrder extends JPanel {
 
         initializeButtons();
 
-        GroupLayout itemsSelectedLayout = new GroupLayout(itemsSelected);
-        GroupLayout.SequentialGroup seqGroup = itemsSelectedLayout.createSequentialGroup();
-        GroupLayout.ParallelGroup parGroup = itemsSelectedLayout.createParallelGroup(LEADING);
-
-        for (ProductPanel productPanel : productPanels) {
-            seqGroup.addGap(29, 29, 29)
-                    .addComponent(productPanel, PREFERRED, DEFAULT, PREFERRED);
-            parGroup.addComponent(productPanel, DEFAULT, DEFAULT, Short.MAX_VALUE);
-        }
-        seqGroup.addContainerGap(29, Short.MAX_VALUE);
-
-
-        itemsSelected.setLayout(itemsSelectedLayout);
-        itemsSelectedLayout.setHorizontalGroup(
-                itemsSelectedLayout.createParallelGroup(LEADING)
-                        .addGroup(seqGroup)
-        );
-        itemsSelectedLayout.setVerticalGroup(
-                parGroup
-        );
+        initPanels();
 
         yourSelection.setFont(new Font("Segoe UI", Font.BOLD, 24));
         yourSelection.setHorizontalAlignment(SwingConstants.CENTER);
-        yourSelection.setText("Order Placed! : #" + "ORDERNUMBER");
+        yourSelection.setText("Order Placed! : #" + BaseFrame.currentOrder.getID());
 
         GroupLayout orderOptionsLayout = new GroupLayout(orderOptions);
         orderOptions.setLayout(orderOptionsLayout);
@@ -88,26 +71,70 @@ public class ConfirmOrder extends JPanel {
                 .addContainerGap())
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(yourSelection, PREFERRED, 82, PREFERRED)
-                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(itemsSelected, PREFERRED, DEFAULT, PREFERRED)
-                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(orderOptions, PREFERRED, DEFAULT, PREFERRED)
-                .addContainerGap())
+                layout.createParallelGroup(LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(yourSelection, PREFERRED, 82, PREFERRED)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(itemsSelected, PREFERRED, DEFAULT, PREFERRED)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(orderOptions, PREFERRED, DEFAULT, PREFERRED)
+                                .addContainerGap())
         );
-    }  
-    
+    }
+
+    void initPanels() {
+        itemsSelected.removeAll();
+        productPanels.clear();
+
+        Product handleBar = null;
+        Product frame = null;
+        Product wheels = null;
+
+        if (BaseFrame.currentOrder.getBike() != null) {
+            handleBar = BaseFrame.currentOrder.getBike().getHandleBar();
+            frame = BaseFrame.currentOrder.getBike().getFrame();
+            wheels = BaseFrame.currentOrder.getBike().getWheels();
+        }
+
+        if (handleBar != null) productPanels.add(new ProductPanel(handleBar));
+        if (frame != null) productPanels.add(new ProductPanel(frame));
+        if (wheels != null) productPanels.add(new ProductPanel(wheels));
+
+        yourSelection.setText("Order Placed! : #" + BaseFrame.currentOrder.getID());
+
+
+        GroupLayout itemsSelectedLayout = new GroupLayout(itemsSelected);
+        GroupLayout.SequentialGroup seqGroup = itemsSelectedLayout.createSequentialGroup();
+        GroupLayout.ParallelGroup parGroup = itemsSelectedLayout.createParallelGroup(LEADING);
+
+        for (ProductPanel productPanel : productPanels) {
+            seqGroup.addGap(29, 29, 29)
+                    .addComponent(productPanel, PREFERRED, DEFAULT, PREFERRED);
+            parGroup.addComponent(productPanel, DEFAULT, DEFAULT, Short.MAX_VALUE);
+        }
+        seqGroup.addContainerGap(29, Short.MAX_VALUE);
+
+
+        itemsSelected.setLayout(itemsSelectedLayout);
+        itemsSelectedLayout.setHorizontalGroup(
+                itemsSelectedLayout.createParallelGroup(LEADING)
+                        .addGroup(seqGroup)
+        );
+        itemsSelectedLayout.setVerticalGroup(
+                parGroup
+        );
+    }
+
+
     private void initializeButtons() {
         backToBrowseButton.setBackground(new Color(51, 51, 51));
         backToBrowseButton.setForeground(new Color(255, 255, 255));
         backToBrowseButton.setText("Back To Browse");
         backToBrowseButton.setToolTipText("");
         backToBrowseButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
+            @Override
+            public void actionPerformed(ActionEvent e) {
                 parentFrame.displayPanel(parentFrame.productBrowse, false, true, true, false, false);	
 			}
 		});

@@ -111,6 +111,7 @@ public class ReviewExistingOrder extends JPanel {
                 Order.Order order = getOrder(Integer.parseInt(orderNumberField.getText().trim()));
                 if (order != null) {
                     BaseFrame.currentOrder = order;
+                    parentFrame.viewOrder.initPanels();
                     parentFrame.displayPanel(parentFrame.viewOrder, true, false, false, false, false);
                 } else {
                     JOptionPane.showMessageDialog(parentFrame, "Order not found");

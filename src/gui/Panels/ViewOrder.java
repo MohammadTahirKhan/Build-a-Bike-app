@@ -1,6 +1,7 @@
 package gui.Panels;
 
 
+import Order.Order;
 import Product.Product;
 import gui.Frames.BaseFrame;
 
@@ -110,9 +111,9 @@ public class ViewOrder extends JPanel {
             wheels = BaseFrame.currentOrder.getBike().getWheels();
         }
 
-        if (handleBar != null) productPanels.add(new ProductPanel(handleBar, "Add to Bike"));
-        if (frame != null) productPanels.add(new ProductPanel(frame, "Add to Bike"));
-        if (wheels != null) productPanels.add(new ProductPanel(wheels, "Add to Bike"));
+        if (handleBar != null) productPanels.add(new ProductPanel(handleBar));
+        if (frame != null) productPanels.add(new ProductPanel(frame));
+        if (wheels != null) productPanels.add(new ProductPanel(wheels));
 
         GroupLayout itemsSelectedLayout = new GroupLayout(itemsSelected);
         GroupLayout.SequentialGroup seqGroup = itemsSelectedLayout.createSequentialGroup();
@@ -156,8 +157,7 @@ public class ViewOrder extends JPanel {
         restartButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO: link to back
-				System.out.println("restart selected");
+				BaseFrame.currentOrder = new Order();
                 parentFrame.displayPanel(parentFrame.productBrowse, false, true, true, false, false);	
 			}
 		});

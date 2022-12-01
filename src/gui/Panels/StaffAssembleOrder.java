@@ -105,9 +105,9 @@ public class StaffAssembleOrder extends JPanel {
             wheels = BaseFrame.currentOrder.getBike().getWheels();
         }
 
-        if (handleBar != null) productPanels.add(new ProductPanel(handleBar, "Add to Bike"));
-        if (frame != null) productPanels.add(new ProductPanel(frame, "Add to Bike"));
-        if (wheels != null) productPanels.add(new ProductPanel(wheels, "Add to Bike"));
+        if (handleBar != null) productPanels.add(new ProductPanel(handleBar));
+        if (frame != null) productPanels.add(new ProductPanel(frame));
+        if (wheels != null) productPanels.add(new ProductPanel(wheels));
 
         GroupLayout itemsSelectedLayout = new GroupLayout(itemsSelected);
         GroupLayout.SequentialGroup seqGroup = itemsSelectedLayout.createSequentialGroup();

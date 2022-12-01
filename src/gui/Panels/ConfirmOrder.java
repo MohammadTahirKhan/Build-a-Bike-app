@@ -125,7 +125,7 @@ public class ConfirmOrder extends JPanel {
         if (BaseFrame.currentOrder.getID() != -1) {
             BaseFrame.currentOrder.setCost();
             String sb = "Order Placed! : #" + BaseFrame.currentOrder.getID() + "\n" +
-                    "Total Price: " + BaseFrame.currentOrder.getCost() + "\n";
+                    "Total Price: £" + BaseFrame.currentOrder.getCost() + "\n";
             JOptionPane.showMessageDialog(this, sb);
         }
 

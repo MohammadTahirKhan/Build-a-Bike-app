@@ -44,16 +44,19 @@ public class ViewOrder extends JPanel {
         yourSelection.setFont(new Font("Segoe UI", Font.BOLD, 24));
         yourSelection.setHorizontalAlignment(SwingConstants.CENTER);
         yourSelection.setText("Your Selection");
+        if (BaseFrame.currentOrder.getStatus() == Order.Status.FULFILLED || BaseFrame.currentOrder.getStatus() == Order.Status.PENDING || BaseFrame.currentOrder.getStatus() == Order.Status.CONFIRMED) {
+            yourSelection.setText("Order Placed! : #" + BaseFrame.currentOrder.getID() + " (" + BaseFrame.currentOrder.getStatus() + ")");
+        }
 
         GroupLayout orderOptionsLayout = new GroupLayout(orderOptions);
         orderOptions.setLayout(orderOptionsLayout);
         orderOptionsLayout.setHorizontalGroup(
-            orderOptionsLayout.createParallelGroup(LEADING)
-            .addGroup(orderOptionsLayout.createSequentialGroup()
-                .addGap(256, 256, 256)
-                .addComponent(restartButton, PREFERRED, 118, PREFERRED)
-                .addGap(18, 18, 18)
-                .addComponent(backToBrowseButton, PREFERRED, 118, PREFERRED)
+                orderOptionsLayout.createParallelGroup(LEADING)
+                        .addGroup(orderOptionsLayout.createSequentialGroup()
+                                .addGap(256, 256, 256)
+                                .addComponent(restartButton, PREFERRED, 118, PREFERRED)
+                                .addGap(18, 18, 18)
+                                .addComponent(backToBrowseButton, PREFERRED, 118, PREFERRED)
                 .addGap(18, 18, 18)
                 .addComponent(placeOrderButton, PREFERRED, 118, PREFERRED)
                 .addContainerGap(DEFAULT, Short.MAX_VALUE))
@@ -133,6 +136,9 @@ public class ViewOrder extends JPanel {
         itemsSelectedLayout.setVerticalGroup(
                 parGroup
         );
+        if (BaseFrame.currentOrder.getStatus() == Order.Status.FULFILLED || BaseFrame.currentOrder.getStatus() == Order.Status.PENDING || BaseFrame.currentOrder.getStatus() == Order.Status.CONFIRMED) {
+            yourSelection.setText("Order Placed! : #" + BaseFrame.currentOrder.getID() + " (" + BaseFrame.currentOrder.getStatus() + ")");
+        }
     }
 
     private void initializeButtons() {

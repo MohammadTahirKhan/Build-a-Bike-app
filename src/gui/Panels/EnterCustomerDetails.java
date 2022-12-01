@@ -1,10 +1,14 @@
 package gui.Panels;
 
-import javax.swing.*;
-
+import Actors.Address;
+import Actors.Customer;
+import Order.Order;
 import gui.Frames.BaseFrame;
 
+import javax.swing.*;
 import java.awt.*;
+
+import static SQL.Queries.Order.SQLOrder.insertOrder;
 
 public class EnterCustomerDetails extends JPanel {  
     private final GroupLayout.Alignment LEADING = GroupLayout.Alignment.LEADING;
@@ -149,6 +153,25 @@ public class EnterCustomerDetails extends JPanel {
     
     private void initializeButtons() {
         nextButton.setLabel("Next");
-        nextButton.addActionListener(e -> parentFrame.displayPanel(parentFrame.confirmOrder, true, false, true, false, false));
+        nextButton.addActionListener(e -> {
+            if (forenameField.getText().isEmpty() || surnameField.getText().isEmpty() || houseNumberField.getText().isEmpty() || roadNameField.getText().isEmpty() || cityField.getText().isEmpty() || postcodeField.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Please fill in all fields");
+            } else {
+                String forename = forenameField.getText();
+                String surname = surnameField.getText();
+                int houseNumber = Integer.parseInt(houseNumberField.getText());
+                String roadName = roadNameField.getText();
+                String city = cityField.getText();
+                String postcode = postcodeField.getText();
+                Address address = new Address(houseNumber, roadName, city, postcode);
+                Customer customer = new Customer(forename, surname, address);
+                BaseFrame.currentOrder.setCustomer(customer);
+                BaseFrame.currentOrder.setStatus(Order.Status.PENDING);
+                BaseFrame.currentOrder = insertOrder(BaseFrame.currentOrder);
+                parentFrame.confirmOrder.initPanels();
+                parentFrame.displayPanel(parentFrame.confirmOrder, true, false, true, false, false);
+            }
+        });
     }
+
 }

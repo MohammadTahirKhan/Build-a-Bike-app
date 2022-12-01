@@ -172,9 +172,8 @@ public class ViewOrder extends JPanel {
         placeOrderButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-                //TODO: link to back
                 parentFrame.confirmOrder.initPanels();
-                parentFrame.displayPanel(parentFrame.confirmOrder, false, true, true, false, false);
+                parentFrame.displayPanel(parentFrame.enterCustomerDetails, false, true, true, false, false);
             }
 		});
 	}

@@ -93,21 +93,21 @@ public class ProductBrowse extends JPanel {
 
 		sortByLabel.setText("Sort by:");
 
-		GroupLayout productFiltersLayout = new GroupLayout(productFilters);
-		productFilters.setLayout(productFiltersLayout);
-		productFiltersLayout.setHorizontalGroup(
-				productFiltersLayout.createParallelGroup(LEADING)
-						.addGroup(TRAILING, productFiltersLayout.createSequentialGroup()
-								.addContainerGap(DEFAULT, Short.MAX_VALUE)
-								.addComponent(sortByLabel, PREFERRED, DEFAULT,
-										PREFERRED)
-								.addPreferredGap(RELATED)
-								.addComponent(sortBy, PREFERRED, 162, PREFERRED)
-								.addGap(20, 20, 20)));
-		productFiltersLayout.setVerticalGroup(
-				productFiltersLayout.createParallelGroup(LEADING)
-						.addComponent(sortBy, DEFAULT, 30, Short.MAX_VALUE)
-						.addComponent(sortByLabel, DEFAULT, DEFAULT, Short.MAX_VALUE));
+//		GroupLayout productFiltersLayout = new GroupLayout(productFilters);
+//		productFilters.setLayout(productFiltersLayout);
+//		productFiltersLayout.setHorizontalGroup(
+//				productFiltersLayout.createParallelGroup(LEADING)
+//						.addGroup(TRAILING, productFiltersLayout.createSequentialGroup()
+//								.addContainerGap(DEFAULT, Short.MAX_VALUE)
+//								.addComponent(sortByLabel, PREFERRED, DEFAULT,
+//										PREFERRED)
+//								.addPreferredGap(RELATED)
+//								.addComponent(sortBy, PREFERRED, 162, PREFERRED)
+//								.addGap(20, 20, 20)));
+//		productFiltersLayout.setVerticalGroup(
+//				productFiltersLayout.createParallelGroup(LEADING)
+//						.addComponent(sortBy, DEFAULT, 30, Short.MAX_VALUE)
+//						.addComponent(sortByLabel, DEFAULT, DEFAULT, Short.MAX_VALUE));
 
 		productView.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 
@@ -124,9 +124,9 @@ public class ProductBrowse extends JPanel {
 										.addComponent(orderNav, DEFAULT,
 												DEFAULT,
 												Short.MAX_VALUE)
-										.addComponent(productFilters, DEFAULT,
-												DEFAULT,
-												Short.MAX_VALUE)
+//										.addComponent(productFilters, DEFAULT,
+//												DEFAULT,
+//												Short.MAX_VALUE)
 										.addComponent(productView, PREFERRED, 0,
 												Short.MAX_VALUE))
 								.addContainerGap()));
@@ -136,9 +136,9 @@ public class ProductBrowse extends JPanel {
                                 .addContainerGap()
                                 .addComponent(orderNav, PREFERRED, DEFAULT, PREFERRED)
                                 .addPreferredGap(RELATED)
-                                .addComponent(productFilters, PREFERRED, DEFAULT,
-                                        PREFERRED)
-                                .addPreferredGap(RELATED)
+//                                .addComponent(productFilters, PREFERRED, DEFAULT,
+//                                        PREFERRED)
+//                                .addPreferredGap(RELATED)
                                 .addComponent(productView, 370, 370,
                                         370)
                                 .addContainerGap()));

@@ -22,9 +22,10 @@ public class ProductPanel extends JPanel {
     private final JSeparator horizontalSeparator = new JSeparator();
     private final JSeparator verticalSeparator = new JSeparator(SwingConstants.VERTICAL);
 
-    public ProductPanel(Product product) {
+    public ProductPanel(Product product, String checkboxLabel) {
         this.product = product;
         this.setBorder(BorderFactory.createEtchedBorder());
+
         image.setHorizontalAlignment(SwingConstants.CENTER);
         image.setText("/IMAGE/");
 

@@ -7,6 +7,7 @@ public class Frame extends Product{
     protected int gears;
     protected boolean containsShocks;
 
+//    Constructor
     /**
      * Constructor for a Frame
      * @param frameSize Size of the frame
@@ -31,27 +32,24 @@ public class Frame extends Product{
         this.setProductDetails(-1, name, serialNumber, itemCost, brandName, stock);
     }
 
-
+//    Getters
     public int getFrameSize() {
         return frameSize;
     }
-
-    public void setFrameSize(int frameSize) {
-        this.frameSize = frameSize;
-    }
-
     public int getGears() {
         return gears;
     }
-
-    public void setGears(int gears) {
-        this.gears = gears;
-    }
-
     public boolean isContainsShocks() {
         return containsShocks;
     }
 
+//    Setters
+    public void setFrameSize(int frameSize) {
+        this.frameSize = frameSize;
+    }
+    public void setGears(int gears) {
+        this.gears = gears;
+    }
     public void setContainsShocks(boolean containsShocks) {
         this.containsShocks = containsShocks;
     }

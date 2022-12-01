@@ -80,7 +80,7 @@ public class SQLHandleBar {
             ResultSet handleBarRS = handleBarStatement.executeQuery();
             handleBarRS.next();
 
-            return new HandleBar(productId, handleBarRS.getString(1),
+            return new HandleBar(productId, HandleBar.Style.valueOf(handleBarRS.getString(1)),
                     handleBarRS.getString(2),
                     handleBarRS.getInt(3),
                     handleBarRS.getInt(4),
@@ -129,7 +129,7 @@ public class SQLHandleBar {
             ResultSet rs = statement.executeQuery();
             ArrayList<HandleBar> handleBars = new ArrayList<>();
             while (rs.next()) {
-                handleBars.add(new HandleBar(rs.getInt(7), rs.getString(1),
+                handleBars.add(new HandleBar(rs.getInt(7), HandleBar.Style.valueOf(rs.getString(1)),
                         rs.getString(2),
                         rs.getInt(3),
                         rs.getInt(4),

@@ -16,6 +16,7 @@ import java.util.Arrays;
 import static SQL.Queries.Order.SQLOrder.getOrder;
 import static SQL.Queries.Product.SQLProduct.decrementStock;
 import static SQL.Queries.Product.SQLFrame.*;
+import static SQL.Queries.SQLUtils.setDatabase;
 
 
 public class QueriesMain {
@@ -23,7 +24,9 @@ public class QueriesMain {
 //    Main
     public static void main(String[] args) throws SQLException {
         System.out.println("Setting database...");
-//        setDatabase();
+
+
+        setDatabase();
         Order order = getOrder(-1);
         if (order != null){
             ArrayList<Order> order2 = getOrder(order.getCustomer().getForename(), order.getCustomer().getSurname(), order.getCustomer()

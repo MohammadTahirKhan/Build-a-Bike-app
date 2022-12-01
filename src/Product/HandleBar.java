@@ -22,13 +22,9 @@ public class HandleBar extends Product{
      * @param brandName Brand name
      * @param stock Stock available
      */
-    public HandleBar(int pKey, String style, String name, int serialNumber, double itemCost, String brandName, int stock) {
+    public HandleBar(int pKey, Style style, String name, int serialNumber, double itemCost, String brandName, int stock) {
         setStyle(style);
         this.setProductDetails(pKey, name, serialNumber, itemCost, brandName, stock);
-    }
-    public HandleBar(String style, String name, int serialNumber, double itemCost, String brandName, int stock) {
-        setStyle(style);
-        this.setProductDetails(-1, name, serialNumber, itemCost, brandName, stock);
     }
     public HandleBar(Style style, String name, int serialNumber, double itemCost, String brandName, int stock) {
         setStyle(style);
@@ -43,8 +39,5 @@ public class HandleBar extends Product{
 //    Private Setters
     public void setStyle(Style style) {
         this.style = style;
-    }
-    public void setStyle(String style) {
-        this.style = Style.valueOf(style);
     }
 }

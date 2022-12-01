@@ -7,6 +7,7 @@ import SQL.DbConnection;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Objects;
 
 import static SQL.Queries.Actors.SQLAddress.insertAddressTable;
 import static SQL.Queries.Actors.SQLCustomer.getCustomer;
@@ -16,7 +17,7 @@ import static SQL.Queries.Product.SQLBike.insertBikeTable;
 
 public class SQLOrder {
 
-//    Inserting order
+//    Inserts into Database
     /**
      * Used by backend to insert directly into Order table
      * @param order Order object being inserted
@@ -25,7 +26,7 @@ public class SQLOrder {
     private static Order insertOrderTable(Order order) {
         try{
             String sql = "INSERT INTO `team002`.`Order` (`orderDate`, `orderCost`, `orderStatus`, `customerID`, `productID`) VALUES (?, ?, ?, ?, ?);";
-            PreparedStatement statement = DbConnection.getCon().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement statement = Objects.requireNonNull(DbConnection.getCon()).prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             statement.setDate(1, (Date) order.getDate());
             statement.setDouble(2, order.getCost());
             statement.setString(3, order.getStatus().name());

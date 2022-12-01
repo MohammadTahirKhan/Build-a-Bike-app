@@ -25,6 +25,7 @@ public class Order {
     private Bike bike;
 
 
+//    Constructors
     public Order(int orderNumber, Date orderDate, Status orderStatus,
                  Customer orderCustomer, Bike orderBike) {
         this.ID = orderNumber;
@@ -74,6 +75,7 @@ public class Order {
     public Bike getBike() {
         return bike;
     }
+
 
 //    Setters
     public void setID(int ID) {

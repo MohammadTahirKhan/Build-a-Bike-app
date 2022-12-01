@@ -18,6 +18,7 @@ public abstract class Product {
     private String brandName;
     private int stock;
 
+//    Constructor
     /**
      * Constructor for a Product
      * @param name Name of the Product

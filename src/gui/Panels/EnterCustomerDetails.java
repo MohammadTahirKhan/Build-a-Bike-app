@@ -7,7 +7,7 @@ import gui.Frames.BaseFrame;
 import java.awt.*;
 
 public class EnterCustomerDetails extends JPanel {  
-     private final GroupLayout.Alignment LEADING = GroupLayout.Alignment.LEADING;
+    private final GroupLayout.Alignment LEADING = GroupLayout.Alignment.LEADING;
     private final GroupLayout.Alignment TRAILING = GroupLayout.Alignment.TRAILING;
     private final int DEFAULT = GroupLayout.DEFAULT_SIZE;
     private final int PREFERRED = GroupLayout.PREFERRED_SIZE;
@@ -18,15 +18,15 @@ public class EnterCustomerDetails extends JPanel {
     private JPanel forgottenOrderForm;
     private Label forgottenOrderFormTitle;
     private TextField houseNumberField;
-    private TextField houseNumberField1;
-    private TextField houseNumberField2;
+    private TextField roadNameField;
+    private TextField cityField;
     private Label houseNumberLabel;
-    private Label houseNumberLabel1;
-    private Label houseNumberLabel2;
+    private Label roadNameLabel;
+    private Label cityLabel;
     private TextField postcodeField;
     private Label postcodeLabel;
     private Label surnameLabel;
-    private TextField textField2;
+    private TextField surnameField;
 
     private BaseFrame parentFrame;
   
@@ -34,7 +34,7 @@ public class EnterCustomerDetails extends JPanel {
         parentFrame = baseFrame;
         forgottenOrderForm = new JPanel();
         forenameField = new TextField();
-        textField2 = new TextField();
+        surnameField = new TextField();
         forenameLabel = new Label();
         surnameLabel = new Label();
         forgottenOrderFormTitle = new Label();
@@ -43,10 +43,10 @@ public class EnterCustomerDetails extends JPanel {
         houseNumberLabel = new Label();
         postcodeLabel = new Label();
         postcodeField = new TextField();
-        houseNumberLabel1 = new Label();
-        houseNumberField1 = new TextField();
-        houseNumberLabel2 = new Label();
-        houseNumberField2 = new TextField();
+        roadNameLabel = new Label();
+        roadNameField = new TextField();
+        cityLabel = new Label();
+        cityField = new TextField();
 
         forgottenOrderForm.setBorder(BorderFactory.createEtchedBorder());
 
@@ -64,9 +64,9 @@ public class EnterCustomerDetails extends JPanel {
 
         postcodeLabel.setText("Postcode");
 
-        houseNumberLabel1.setText("Road Name");
+        roadNameLabel.setText("Road Name");
 
-        houseNumberLabel2.setText("City");
+        cityLabel.setText("City");
 
         GroupLayout forgottenOrderFormLayout = new GroupLayout(forgottenOrderForm);
         forgottenOrderForm.setLayout(forgottenOrderFormLayout);
@@ -80,16 +80,16 @@ public class EnterCustomerDetails extends JPanel {
                             .addComponent(forgottenOrderFormTitle, PREFERRED, 317, PREFERRED)
                             .addComponent(surnameLabel, PREFERRED, DEFAULT, PREFERRED)
                             .addComponent(forenameLabel, PREFERRED, DEFAULT, PREFERRED)
-                            .addComponent(textField2, PREFERRED, 317, PREFERRED)
+                            .addComponent(surnameField, PREFERRED, 317, PREFERRED)
                             .addComponent(forenameField, PREFERRED, 317, PREFERRED)
                             .addComponent(houseNumberLabel, PREFERRED, DEFAULT, PREFERRED)
                             .addComponent(houseNumberField, PREFERRED, 317, PREFERRED)
                             .addComponent(postcodeLabel, PREFERRED, DEFAULT, PREFERRED)
                             .addComponent(postcodeField, PREFERRED, 317, PREFERRED)
-                            .addComponent(houseNumberLabel1, PREFERRED, DEFAULT, PREFERRED)
-                            .addComponent(houseNumberField1, PREFERRED, 317, PREFERRED)
-                            .addComponent(houseNumberLabel2, PREFERRED, DEFAULT, PREFERRED)
-                            .addComponent(houseNumberField2, PREFERRED, 317, PREFERRED)))
+                            .addComponent(roadNameLabel, PREFERRED, DEFAULT, PREFERRED)
+                            .addComponent(roadNameField, PREFERRED, 317, PREFERRED)
+                            .addComponent(cityLabel, PREFERRED, DEFAULT, PREFERRED)
+                            .addComponent(cityField, PREFERRED, 317, PREFERRED)))
                     .addGroup(forgottenOrderFormLayout.createSequentialGroup()
                         .addGap(162, 162, 162)
                         .addComponent(nextButton, PREFERRED, 95, PREFERRED)))
@@ -107,19 +107,19 @@ public class EnterCustomerDetails extends JPanel {
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(surnameLabel, PREFERRED, DEFAULT, PREFERRED)
                 .addGap(0, 0, 0)
-                .addComponent(textField2, PREFERRED, DEFAULT, PREFERRED)
+                .addComponent(surnameField, PREFERRED, DEFAULT, PREFERRED)
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(houseNumberLabel, PREFERRED, DEFAULT, PREFERRED)
                 .addGap(0, 0, 0)
                 .addComponent(houseNumberField, PREFERRED, DEFAULT, PREFERRED)
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(houseNumberLabel1, PREFERRED, DEFAULT, PREFERRED)
+                .addComponent(roadNameLabel, PREFERRED, DEFAULT, PREFERRED)
                 .addGap(0, 0, 0)
-                .addComponent(houseNumberField1, PREFERRED, DEFAULT, PREFERRED)
+                .addComponent(roadNameField, PREFERRED, DEFAULT, PREFERRED)
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(houseNumberLabel2, PREFERRED, DEFAULT, PREFERRED)
+                .addComponent(cityLabel, PREFERRED, DEFAULT, PREFERRED)
                 .addGap(0, 0, 0)
-                .addComponent(houseNumberField2, PREFERRED, DEFAULT, PREFERRED)
+                .addComponent(cityField, PREFERRED, DEFAULT, PREFERRED)
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(postcodeLabel, PREFERRED, DEFAULT, PREFERRED)
                 .addGap(0, 0, 0)
@@ -128,8 +128,6 @@ public class EnterCustomerDetails extends JPanel {
                 .addComponent(nextButton, PREFERRED, DEFAULT, PREFERRED)
                 .addContainerGap(DEFAULT, Short.MAX_VALUE))
         );
-
-        houseNumberLabel2.getAccessibleContext().setAccessibleName("City");
 
         GroupLayout layout = new GroupLayout(this);
         this.setLayout(layout);

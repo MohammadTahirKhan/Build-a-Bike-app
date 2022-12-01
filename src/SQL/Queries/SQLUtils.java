@@ -25,13 +25,6 @@ import static SQL.Queries.Product.SQLWheels.insertWheels;
 
 public class SQLUtils {
 
-    public static void isValidPrimaryKey(int pKey, String tableName) throws InvalidPrimaryKeyException {
-        if (pKey < 0){
-            throw new InvalidPrimaryKeyException(tableName + ": " + pKey);
-        }
-    }
-
-
 //    Populating database utils
     public static void setDatabase() throws SQLException {
         deleteDatabase();
@@ -93,7 +86,7 @@ public class SQLUtils {
         Customer customer8 = new Customer("Josephine ", "Tyler", address8);
 
         Order order1 = new Order(Date.valueOf(LocalDate.now()), Order.Status.PENDING, customer1, bike1);
-        Order order2 = new Order(Date.valueOf(LocalDate.now()), Order.Status.CONFIRMED, customer2, bike2);
+        Order order2 = new Order(Date.valueOf(LocalDate.now()), Order.Status.CONFIRMED, customer1, bike2);
         Order order3 = new Order(Date.valueOf(LocalDate.now()), Order.Status.PENDING, customer3, bike3);
         Order order4 = new Order(Date.valueOf(LocalDate.now()), Order.Status.PENDING, customer4, bike4);
         Order order5 = new Order(Date.valueOf(LocalDate.now()), Order.Status.PENDING, customer5, bike5);

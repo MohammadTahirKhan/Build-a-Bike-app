@@ -3,6 +3,7 @@ package gui.Panels;
 import Order.Order;
 
 import javax.swing.*;
+import java.security.acl.Group;
 import java.util.ArrayList;
 
 public class ForgottenFindOrder extends JPanel {
@@ -59,7 +60,7 @@ public class ForgottenFindOrder extends JPanel {
         tableHeadingLabelsLayout.setVerticalGroup(
                 tableHeadingLabelsLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                         .addGroup(GroupLayout.Alignment.TRAILING, tableHeadingLabelsLayout.createSequentialGroup()
-                                .addContainerGap(16, Short.MAX_VALUE)
+                                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(tableHeadingLabelsLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                                         .addComponent(productName)
                                         .addComponent(serialNumber)
@@ -100,15 +101,6 @@ public class ForgottenFindOrder extends JPanel {
                                 .addComponent(productTable, GroupLayout.PREFERRED_SIZE, 320, GroupLayout.PREFERRED_SIZE)
                                 .addGap(51, 51, 51))
         );
-//        staffPortal.setText("Back To Browse");
-//        staffPortal.setHorizontalAlignment(SwingConstants.RIGHT);
-//        header.add(staffPortal);
-//
-//        reviewExistingOrder.setText("Staff Portal");
-//        reviewExistingOrder.setHorizontalAlignment(SwingConstants.RIGHT);
-//        header.add(reviewExistingOrder);
-//
-//        setJMenuBar(header);
     }
 
     public void generateOrders(ArrayList<Order> orders) {
@@ -120,23 +112,25 @@ public class ForgottenFindOrder extends JPanel {
         GroupLayout productTableItemsLayout = new GroupLayout(productTableItems);
         productTableItems.setLayout(productTableItemsLayout);
 
-        GroupLayout.ParallelGroup parallelGroup = productTableItemsLayout.createParallelGroup();
-        GroupLayout.SequentialGroup sequentialGroup = productTableItemsLayout.createSequentialGroup();
+        GroupLayout.ParallelGroup horzGroup = productTableItemsLayout.createParallelGroup();
+        GroupLayout.SequentialGroup vertGroup = productTableItemsLayout.createSequentialGroup();
 
         for (Order order : orders) {
             OrderTableItem orderTableItem = new OrderTableItem(order);
             orderTableItems.add(orderTableItem);
-            parallelGroup.addComponent(orderTableItem, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE).addGap(0, 82, Short.MAX_VALUE);
-            sequentialGroup.addComponent(orderTableItem, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE).addPreferredGap(LayoutStyle.ComponentPlacement.RELATED).addGap(0, 515, Short.MAX_VALUE);
+            horzGroup.addComponent(orderTableItem, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE);
+            vertGroup.addComponent(orderTableItem, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE).addPreferredGap(LayoutStyle.ComponentPlacement.RELATED);//.addGap(0, 0, Short.MAX_VALUE);
         }
 
         productTableItemsLayout.setHorizontalGroup(
                 productTableItemsLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                        .addGroup(parallelGroup)
+                        .addGroup(productTableItemsLayout.createSequentialGroup()
+                        .addGroup(horzGroup)
+                        .addGap(0,82,Short.MAX_VALUE))
         );
         productTableItemsLayout.setVerticalGroup(
                 productTableItemsLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                        .addGroup(sequentialGroup)
+                        .addGroup(vertGroup).addGap(0,0,Short.MAX_VALUE)
         );
 
         productTable.setViewportView(productTableItems);

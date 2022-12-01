@@ -137,8 +137,8 @@ public class ProductBrowse extends JPanel {
                                 .addComponent(productFilters, PREFERRED, DEFAULT,
                                         PREFERRED)
                                 .addPreferredGap(RELATED)
-                                .addComponent(productView, DEFAULT, 318,
-                                        Short.MAX_VALUE)
+                                .addComponent(productView, 370, 370,
+                                        370)
                                 .addContainerGap()));
     }
 

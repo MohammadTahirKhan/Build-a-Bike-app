@@ -155,7 +155,8 @@ public class ForgottenOrderNumber extends JPanel {
                     BaseFrame.currentOrder = order.get(0);
                     parentFrame.displayPanel(parentFrame.viewOrder, true, false, false, false, false);
                 } else {
-                    JOptionPane.showMessageDialog(parentFrame, "multiple orders found");
+                    JOptionPane.showMessageDialog(parentFrame, "Multiple orders found");
+                    parentFrame.displayPanel(parentFrame.forgottenFindOrder, true,false,false,false,false);
                 }
                 parentFrame.displayPanel(parentFrame.viewOrder, true, false, false, false, false);
             }

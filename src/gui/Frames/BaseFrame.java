@@ -31,6 +31,8 @@ public class BaseFrame extends JFrame {
     public StaffViewOrders staffViewOrders;
     public EnterCustomerDetails enterCustomerDetails;
 
+    public ForgottenFindOrder forgottenFindOrder;
+
     private final BaseFrame thisFrame = this;
     public static Order currentOrder = new Order();
 
@@ -59,6 +61,7 @@ public class BaseFrame extends JFrame {
                 staffAssembleOrder = new StaffAssembleOrder(thisFrame);
                 staffViewOrders = new StaffViewOrders();
                 enterCustomerDetails = new EnterCustomerDetails(thisFrame);
+                forgottenFindOrder = new ForgottenFindOrder();
 
                 setDefaultCloseOperation(EXIT_ON_CLOSE);
                 setTitle("Bikes Ltd.");

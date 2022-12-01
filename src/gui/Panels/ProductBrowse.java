@@ -187,7 +187,12 @@ public class ProductBrowse extends JPanel {
 
         selectHandlebars.addActionListener(e -> populateProductPanels(Product.Products.HANDLEBAR));
 
-        viewOrder.addActionListener(e -> parentFrame.displayPanel(parentFrame.viewOrder, true, false, true, false, false));
+        viewOrder.addActionListener(e ->
+                {
+                    parentFrame.viewOrder.initPanels();
+                    parentFrame.displayPanel(parentFrame.viewOrder, true, false, true, false, false);
+                }
+        );
     }
 
     private boolean checkProductPanels() {

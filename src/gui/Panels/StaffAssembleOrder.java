@@ -1,12 +1,15 @@
 package gui.Panels;
 
+import Order.Order;
+import Product.Product;
 import gui.Frames.BaseFrame;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
+
+import static SQL.Queries.Order.SQLOrder.deleteOrder;
+import static SQL.Queries.Order.SQLOrder.updateOrderStatus;
 
 public class StaffAssembleOrder extends JPanel {
     private final GroupLayout.Alignment LEADING = GroupLayout.Alignment.LEADING;
@@ -36,30 +39,11 @@ public class StaffAssembleOrder extends JPanel {
 
         initializeButtons();
 
-        GroupLayout itemsSelectedLayout = new GroupLayout(itemsSelected);
-        GroupLayout.SequentialGroup seqGroup = itemsSelectedLayout.createSequentialGroup();
-        GroupLayout.ParallelGroup parGroup = itemsSelectedLayout.createParallelGroup(LEADING);
-
-        for (ProductPanel productPanel : productPanels) {
-            seqGroup.addGap(29, 29, 29)
-                    .addComponent(productPanel, PREFERRED, DEFAULT, PREFERRED);
-            parGroup.addComponent(productPanel, DEFAULT, DEFAULT, Short.MAX_VALUE);
-        }
-        seqGroup.addContainerGap(29, Short.MAX_VALUE);
-
-
-        itemsSelected.setLayout(itemsSelectedLayout);
-        itemsSelectedLayout.setHorizontalGroup(
-                itemsSelectedLayout.createParallelGroup(LEADING)
-                        .addGroup(seqGroup)
-        );
-        itemsSelectedLayout.setVerticalGroup(
-                parGroup
-        );
+        drawPanels();
 
         yourSelection.setFont(new Font("Segoe UI", Font.BOLD, 24));
         yourSelection.setHorizontalAlignment(SwingConstants.CENTER);
-        yourSelection.setText("Order #" + 2348537);
+        yourSelection.setText("Order #" + BaseFrame.currentOrder.getID());
 
         GroupLayout orderOptionsLayout = new GroupLayout(orderOptions);
         orderOptions.setLayout(orderOptionsLayout);
@@ -95,18 +79,59 @@ public class StaffAssembleOrder extends JPanel {
                 .addContainerGap())
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(yourSelection, PREFERRED, 82, PREFERRED)
-                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(itemsSelected, PREFERRED, DEFAULT, PREFERRED)
-                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(orderOptions, PREFERRED, DEFAULT, PREFERRED)
-                .addContainerGap())
+                layout.createParallelGroup(LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(yourSelection, PREFERRED, 82, PREFERRED)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(itemsSelected, PREFERRED, DEFAULT, PREFERRED)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(orderOptions, PREFERRED, DEFAULT, PREFERRED)
+                                .addContainerGap())
         );
-    }  
-    
+    }
+
+    public void drawPanels() {
+        itemsSelected.removeAll();
+        productPanels.clear();
+
+        Product handleBar = null;
+        Product frame = null;
+        Product wheels = null;
+
+        if (BaseFrame.currentOrder.getBike() != null) {
+            handleBar = BaseFrame.currentOrder.getBike().getHandleBar();
+            frame = BaseFrame.currentOrder.getBike().getFrame();
+            wheels = BaseFrame.currentOrder.getBike().getWheels();
+        }
+
+        if (handleBar != null) productPanels.add(new ProductPanel(handleBar));
+        if (frame != null) productPanels.add(new ProductPanel(frame));
+        if (wheels != null) productPanels.add(new ProductPanel(wheels));
+
+        GroupLayout itemsSelectedLayout = new GroupLayout(itemsSelected);
+        GroupLayout.SequentialGroup seqGroup = itemsSelectedLayout.createSequentialGroup();
+        GroupLayout.ParallelGroup parGroup = itemsSelectedLayout.createParallelGroup(LEADING);
+
+        for (ProductPanel productPanel : productPanels) {
+            seqGroup.addGap(29, 29, 29)
+                    .addComponent(productPanel, PREFERRED, DEFAULT, PREFERRED);
+            parGroup.addComponent(productPanel, DEFAULT, DEFAULT, Short.MAX_VALUE);
+        }
+        seqGroup.addContainerGap(29, Short.MAX_VALUE);
+
+
+        itemsSelected.setLayout(itemsSelectedLayout);
+        itemsSelectedLayout.setHorizontalGroup(
+                itemsSelectedLayout.createParallelGroup(LEADING)
+                        .addGroup(seqGroup)
+        );
+        itemsSelectedLayout.setVerticalGroup(
+                parGroup
+        );
+        yourSelection.setText("Order #" + BaseFrame.currentOrder.getID());
+    }
+
     private void initializeButtons() {
         cancelButton.setBackground(new Color(51, 51, 51));
         cancelButton.setForeground(new Color(255, 255, 255));
@@ -119,19 +144,14 @@ public class StaffAssembleOrder extends JPanel {
         confirmButton.setText("Confirm Assembly");
         confirmButton.setToolTipText("");
 
-        cancelButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-                parentFrame.displayPanel(parentFrame.staffFindOrder, false, false, false, true, true);	
-			}
-		});
+        cancelButton.addActionListener(e -> {
+            deleteOrder(BaseFrame.currentOrder.getID());
+            parentFrame.displayPanel(parentFrame.staffFindOrder, false, false, false, true, true);
+        });
 
-        confirmButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-
-                parentFrame.displayPanel(parentFrame.staffFindOrder, false, false, false, true, true);	
-			}
-		});
-	}
+        confirmButton.addActionListener(e -> {
+            updateOrderStatus(BaseFrame.currentOrder, Order.Status.FULFILLED);
+            parentFrame.displayPanel(parentFrame.staffFindOrder, false, false, false, true, true);
+        });
+    }
 }

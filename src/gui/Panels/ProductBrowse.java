@@ -235,7 +235,17 @@ public class ProductBrowse extends JPanel {
                 break;
         }
         productPanels.clear();
-        products.forEach(product -> productPanels.add(new ProductPanel(product, "Add to Bike")));
+        products.forEach(product -> {
+            ProductPanel panel = new ProductPanel(product, "Add to Bike");
+            if (product instanceof Frame) {
+                panel.isSelected(BaseFrame.currentOrder.getBike().getFrame() != null && BaseFrame.currentOrder.getBike().getFrame().equals(product));
+            } else if (product instanceof Wheels) {
+                panel.isSelected(BaseFrame.currentOrder.getBike().getWheels() != null && BaseFrame.currentOrder.getBike().getWheels().equals(product));
+            } else if (product instanceof HandleBar) {
+                panel.isSelected(BaseFrame.currentOrder.getBike().getHandleBar() != null && BaseFrame.currentOrder.getBike().getHandleBar().equals(product));
+            }
+            productPanels.add(panel);
+        });
         drawProductPanels();
     }
 }

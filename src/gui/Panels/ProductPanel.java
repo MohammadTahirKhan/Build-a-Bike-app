@@ -11,7 +11,7 @@ import java.awt.*;
 
 public class ProductPanel extends JPanel {
     private static final Font SEGOE_UI = new Font("Segoe UI", Font.PLAIN, 14);
-    private JLabel addToBikeLabel;// = new JLabel("Add to Bike");
+    private JLabel addToBikeLabel = new JLabel("Add to Bike");
 
     final Product product;
 
@@ -114,6 +114,13 @@ public class ProductPanel extends JPanel {
 
     public boolean isSelected() {
         return select.isSelected();
+    }
+
+    public void isSelected(boolean selected) {
+        if (selected != isSelected()) {
+            select.doClick();
+        }
+        select.isSelected();
     }
 }
 

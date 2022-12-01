@@ -165,22 +165,18 @@ public class StaffViewOrders extends JPanel {
 
         pending.addActionListener(e -> {
             // TODO: link to back
-            System.out.println("pending selected");
         });
 
         confirmed.addActionListener(e -> {
             // TODO: link to back
-            System.out.println("confirmed selected");
         });
 
         fulfilled.addActionListener(e -> {
             // TODO: link to back
-            System.out.println("fulfilled selected");
         });
 
         all.addActionListener(e -> {
-// TODO: link to back
-            System.out.println("all selected");
+            // TODO: link to back
         });
     }
 }

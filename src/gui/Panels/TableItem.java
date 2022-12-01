@@ -8,17 +8,17 @@ import javax.swing.border.SoftBevelBorder;
 
 public class TableItem extends JPanel {
     private final JLabel name;
-    private final JLabel cost;
-    private final JLabel brandName;
     private final JLabel serialNumber;
+    private final JLabel brandName;
+    private final JLabel stock;
 
     public TableItem(Product product) {
 
 
         name = new JLabel(product.getName());
-        cost = new JLabel("£" + product.getItemCost());
-        brandName = new JLabel(product.getBrandName());
         serialNumber = new JLabel(String.valueOf(product.getSerialNumber()));
+        brandName = new JLabel(product.getBrandName());
+        stock = new JLabel(String.valueOf(product.getStock()));
 
         setBorder(new SoftBevelBorder(BevelBorder.RAISED));
 
@@ -30,11 +30,11 @@ public class TableItem extends JPanel {
                                 .addContainerGap()
                                 .addComponent(name, GroupLayout.PREFERRED_SIZE, 278, GroupLayout.PREFERRED_SIZE)
                 .addGap(32, 32, 32)
-                .addComponent(cost, GroupLayout.PREFERRED_SIZE, 159, GroupLayout.PREFERRED_SIZE)
+                .addComponent(serialNumber, GroupLayout.PREFERRED_SIZE, 159, GroupLayout.PREFERRED_SIZE)
                 .addGap(34, 34, 34)
                 .addComponent(brandName, GroupLayout.PREFERRED_SIZE, 138, GroupLayout.PREFERRED_SIZE)
                 .addGap(36, 36, 36)
-                .addComponent(serialNumber, GroupLayout.PREFERRED_SIZE, 113, GroupLayout.PREFERRED_SIZE)
+                .addComponent(stock, GroupLayout.PREFERRED_SIZE, 113, GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(17, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -43,9 +43,9 @@ public class TableItem extends JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                     .addComponent(name)
-                    .addComponent(cost)
+                    .addComponent(serialNumber)
                     .addComponent(brandName)
-                    .addComponent(serialNumber))
+                    .addComponent(stock))
                 .addContainerGap(7, Short.MAX_VALUE))
         );
     }

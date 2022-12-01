@@ -32,7 +32,7 @@ public class BaseFrame extends JFrame {
     public EnterCustomerDetails enterCustomerDetails;
 
     private final BaseFrame thisFrame = this;
-    public static Order currentOrder = null;
+    public static Order currentOrder = new Order();
 
     public BaseFrame(){
 

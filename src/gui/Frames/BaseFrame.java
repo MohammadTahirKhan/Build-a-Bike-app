@@ -64,9 +64,9 @@ public class BaseFrame extends JFrame {
                 setTitle("Bikes Ltd.");
                 initializeHeader();
                 //1000x575
-                setMinimumSize(new Dimension(900, 600));
-                setPreferredSize(new Dimension(900, 600));
-                setSize(new Dimension(900, 600));
+                setMinimumSize(new Dimension(900, 640));
+                setPreferredSize(new Dimension(900, 640));
+                setSize(new Dimension(900, 640));
                 setVisible(true);
 
                 displayPanel(productBrowse, false, true, true, false, false);

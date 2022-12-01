@@ -28,6 +28,12 @@ public class Password {
         }
     }
 
+    /**
+     * Hashes the password with an inputted salt
+     * @param password Plain text password
+     * @param salt Salt used to create the hash
+     * @return Hashed password from plaintext and salt
+     */
     public static byte[][] hashPassword(String password, byte[] salt) {
         try {
             KeySpec spec = new PBEKeySpec(password.toCharArray(), salt, 65536, 128);
@@ -40,6 +46,10 @@ public class Password {
         }
     }
 
+    /**
+     * Generates a secure random salt
+     * @return secure random salt
+     */
     public static byte[] getSalt(){
         SecureRandom random = new SecureRandom();
         byte[] salt = new byte[16];

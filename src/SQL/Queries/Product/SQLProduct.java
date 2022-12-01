@@ -3,8 +3,10 @@ package SQL.Queries.Product;
 import Order.Order;
 import Product.Product;
 import SQL.DbConnection;
+import SQL.Utils;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 public class SQLProduct {
 
@@ -102,6 +104,30 @@ public class SQLProduct {
     }
 
     /**
+     * Sets the stock to a specific ammount based on serial number and brandName
+     * @param serialNumber serialNumber of product
+     * @param brandName brandName of product
+     * @param stockNumber number of stock
+     */
+    public static void addStock(int serialNumber, String brandName, int stockNumber) {
+
+//        Have a decrement exception
+        Connection con = DbConnection.getCon();
+        assert con != null;
+
+        try {
+            String sql = "UPDATE Product SET stock = stock + ? WHERE serialNumber = ? AND brandName = ?";
+            PreparedStatement statement = con.prepareStatement(sql);
+            statement.setInt(1, stockNumber);
+            statement.setInt(2, serialNumber);
+            statement.setString(3, brandName);
+            statement.executeUpdate();
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
+
+    /**
      * Used by backend to set the stock of a specific product
      * @param productID  the productID of the product
      * @param quantity  The stock the product is being set to
@@ -120,6 +146,4 @@ public class SQLProduct {
             e.printStackTrace();
         }
     }
-
-
 }

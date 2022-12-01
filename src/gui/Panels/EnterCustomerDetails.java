@@ -1,74 +1,72 @@
 package gui.Panels;
 
-import Order.Order;
+import javax.swing.*;
+
 import gui.Frames.BaseFrame;
 
-import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
-import static SQL.Queries.Order.SQLOrder.getOrder;
-
-public class ForgottenOrderNumber extends JPanel {
-    private final GroupLayout.Alignment LEADING = GroupLayout.Alignment.LEADING;
+public class EnterCustomerDetails extends JPanel {  
+     private final GroupLayout.Alignment LEADING = GroupLayout.Alignment.LEADING;
     private final GroupLayout.Alignment TRAILING = GroupLayout.Alignment.TRAILING;
     private final int DEFAULT = GroupLayout.DEFAULT_SIZE;
     private final int PREFERRED = GroupLayout.PREFERRED_SIZE;
+                  
+    private Button nextButton;
+    private TextField forenameField;
+    private Label forenameLabel;
+    private JPanel forgottenOrderForm;
+    private Label forgottenOrderFormTitle;
+    private TextField houseNumberField;
+    private TextField houseNumberField1;
+    private TextField houseNumberField2;
+    private Label houseNumberLabel;
+    private Label houseNumberLabel1;
+    private Label houseNumberLabel2;
+    private TextField postcodeField;
+    private Label postcodeLabel;
+    private Label surnameLabel;
+    private TextField textField2;
 
-    private final Button findOrderButton;
-    private final TextField forenameField;
-    private final Label forenameLabel;
-    private final JPanel forgottenOrderForm;
-    private final Label forgottenOrderFormTitle;
-    private final JLabel forgottenOrderTitle;
-    private final TextField houseNumberField;
-    private final Label houseNumberLabel;
-    private final TextField postcodeField;
-    private final Label postcodeLabel;
-    private final Label surnameLabel;
-    private final TextField textField2;
-
-    private final BaseFrame parentFrame;
-
-    public ForgottenOrderNumber(BaseFrame parentFrame) {
-        this.parentFrame = parentFrame;
-        forgottenOrderTitle = new JLabel();
+    private BaseFrame parentFrame;
+  
+    public EnterCustomerDetails(BaseFrame baseFrame) {
+        parentFrame = baseFrame;
         forgottenOrderForm = new JPanel();
         forenameField = new TextField();
         textField2 = new TextField();
         forenameLabel = new Label();
         surnameLabel = new Label();
         forgottenOrderFormTitle = new Label();
-        findOrderButton = new Button();
+        nextButton = new Button();
         houseNumberField = new TextField();
         houseNumberLabel = new Label();
         postcodeLabel = new Label();
         postcodeField = new TextField();
-
-
-        forgottenOrderTitle.setFont(new Font("Segoe UI", 1, 24));
-
-        forgottenOrderTitle.setHorizontalAlignment(SwingConstants.CENTER);
-        forgottenOrderTitle.setText("Forgotten Order Number");
-
-        initializeButtons();
+        houseNumberLabel1 = new Label();
+        houseNumberField1 = new TextField();
+        houseNumberLabel2 = new Label();
+        houseNumberField2 = new TextField();
 
         forgottenOrderForm.setBorder(BorderFactory.createEtchedBorder());
+
+        initializeButtons();
 
         forenameLabel.setText("Forename");
 
         surnameLabel.setText("Surname");
 
         forgottenOrderFormTitle.setAlignment(Label.CENTER);
-
-        forgottenOrderFormTitle.setFont(new Font("Dialog", 0, 18));
+        forgottenOrderFormTitle.setFont(new Font("Dialog", 0, 18)); // NOI18N
         forgottenOrderFormTitle.setText("Enter Your Details Below");
 
         houseNumberLabel.setText("House Number");
 
         postcodeLabel.setText("Postcode");
+
+        houseNumberLabel1.setText("Road Name");
+
+        houseNumberLabel2.setText("City");
 
         GroupLayout forgottenOrderFormLayout = new GroupLayout(forgottenOrderForm);
         forgottenOrderForm.setLayout(forgottenOrderFormLayout);
@@ -87,10 +85,14 @@ public class ForgottenOrderNumber extends JPanel {
                             .addComponent(houseNumberLabel, PREFERRED, DEFAULT, PREFERRED)
                             .addComponent(houseNumberField, PREFERRED, 317, PREFERRED)
                             .addComponent(postcodeLabel, PREFERRED, DEFAULT, PREFERRED)
-                            .addComponent(postcodeField, PREFERRED, 317, PREFERRED)))
+                            .addComponent(postcodeField, PREFERRED, 317, PREFERRED)
+                            .addComponent(houseNumberLabel1, PREFERRED, DEFAULT, PREFERRED)
+                            .addComponent(houseNumberField1, PREFERRED, 317, PREFERRED)
+                            .addComponent(houseNumberLabel2, PREFERRED, DEFAULT, PREFERRED)
+                            .addComponent(houseNumberField2, PREFERRED, 317, PREFERRED)))
                     .addGroup(forgottenOrderFormLayout.createSequentialGroup()
-                        .addGap(166, 166, 166)
-                        .addComponent(findOrderButton, PREFERRED, 95, PREFERRED)))
+                        .addGap(162, 162, 162)
+                        .addComponent(nextButton, PREFERRED, 95, PREFERRED)))
                 .addContainerGap(61, Short.MAX_VALUE))
         );
         forgottenOrderFormLayout.setVerticalGroup(
@@ -111,54 +113,44 @@ public class ForgottenOrderNumber extends JPanel {
                 .addGap(0, 0, 0)
                 .addComponent(houseNumberField, PREFERRED, DEFAULT, PREFERRED)
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(houseNumberLabel1, PREFERRED, DEFAULT, PREFERRED)
+                .addGap(0, 0, 0)
+                .addComponent(houseNumberField1, PREFERRED, DEFAULT, PREFERRED)
+                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(houseNumberLabel2, PREFERRED, DEFAULT, PREFERRED)
+                .addGap(0, 0, 0)
+                .addComponent(houseNumberField2, PREFERRED, DEFAULT, PREFERRED)
+                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(postcodeLabel, PREFERRED, DEFAULT, PREFERRED)
                 .addGap(0, 0, 0)
                 .addComponent(postcodeField, PREFERRED, DEFAULT, PREFERRED)
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(findOrderButton, PREFERRED, DEFAULT, PREFERRED)
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addComponent(nextButton, PREFERRED, DEFAULT, PREFERRED)
+                .addContainerGap(DEFAULT, Short.MAX_VALUE))
         );
 
+        houseNumberLabel2.getAccessibleContext().setAccessibleName("City");
+
         GroupLayout layout = new GroupLayout(this);
-        setLayout(layout);
+        this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(LEADING)
             .addGroup(TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(forgottenOrderTitle, DEFAULT, DEFAULT, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(228, 228, 228)
+                .addContainerGap(232, Short.MAX_VALUE)
                 .addComponent(forgottenOrderForm, PREFERRED, DEFAULT, PREFERRED)
-                .addContainerGap(230, Short.MAX_VALUE))
+                .addGap(226, 226, 226))
         );
         layout.setVerticalGroup(
-                layout.createParallelGroup(LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                                .addGap(17, 17, 17)
-                                .addComponent(forgottenOrderTitle, PREFERRED, 82, PREFERRED)
-                                .addGap(18, 18, 18)
-                                .addComponent(forgottenOrderForm, PREFERRED, DEFAULT, PREFERRED)
-                                .addGap(0, 76, Short.MAX_VALUE))
+            layout.createParallelGroup(LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(47, 47, 47)
+                .addComponent(forgottenOrderForm, PREFERRED, DEFAULT, PREFERRED)
+                .addContainerGap(55, Short.MAX_VALUE))
         );
-    } 
+    }  
     
     private void initializeButtons() {
-        findOrderButton.setLabel("Find My Order");
-        findOrderButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-                ArrayList<Order> order = getOrder(forenameField.getText().trim(), textField2.getText().trim(), Integer.parseInt(houseNumberField.getText().trim()), postcodeField.getText().trim());
-                if (order == null) {
-                    JOptionPane.showMessageDialog(parentFrame, "Order not found");
-                } else if (order.size() == 1) {
-                    BaseFrame.currentOrder = order.get(0);
-                    parentFrame.displayPanel(parentFrame.viewOrder, true, false, false, false, false);
-                } else {
-                    JOptionPane.showMessageDialog(parentFrame, "multiple orders found");
-                }
-                parentFrame.displayPanel(parentFrame.viewOrder, true, false, false, false, false);
-            }
-		});
-	}                 
+        nextButton.setLabel("Next");
+        nextButton.addActionListener(e -> parentFrame.displayPanel(parentFrame.confirmOrder, true, false, true, false, false));
+    }
 }

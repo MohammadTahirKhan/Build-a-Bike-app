@@ -1,6 +1,7 @@
 package gui.Panels;
 
 
+import Product.Product;
 import gui.Frames.BaseFrame;
 
 import javax.swing.*;
@@ -39,26 +40,7 @@ public class ViewOrder extends JPanel {
 
         initializeButtons();
 
-        GroupLayout itemsSelectedLayout = new GroupLayout(itemsSelected);
-        GroupLayout.SequentialGroup seqGroup = itemsSelectedLayout.createSequentialGroup();
-        GroupLayout.ParallelGroup parGroup = itemsSelectedLayout.createParallelGroup(LEADING);
-
-        for (ProductPanel productPanel : productPanels) {
-            seqGroup.addGap(29, 29, 29)
-                    .addComponent(productPanel, PREFERRED, DEFAULT, PREFERRED);
-            parGroup.addComponent(productPanel, DEFAULT, DEFAULT, Short.MAX_VALUE);
-        }
-        seqGroup.addContainerGap(29, Short.MAX_VALUE);
-
-
-        itemsSelected.setLayout(itemsSelectedLayout);
-        itemsSelectedLayout.setHorizontalGroup(
-                itemsSelectedLayout.createParallelGroup(LEADING)
-                        .addGroup(seqGroup)
-        );
-        itemsSelectedLayout.setVerticalGroup(
-                parGroup
-        );
+        initPanels();
 
         yourSelection.setFont(new Font("Segoe UI", Font.BOLD, 24));
         yourSelection.setHorizontalAlignment(SwingConstants.CENTER);
@@ -101,20 +83,61 @@ public class ViewOrder extends JPanel {
                 .addContainerGap())
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(yourSelection, PREFERRED, 82, PREFERRED)
-                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(itemsSelected, PREFERRED, DEFAULT, PREFERRED)
-                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(orderOptions, PREFERRED, DEFAULT, PREFERRED)
-                .addContainerGap())
+                layout.createParallelGroup(LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(yourSelection, PREFERRED, 82, PREFERRED)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(itemsSelected, PREFERRED, DEFAULT, PREFERRED)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(orderOptions, PREFERRED, DEFAULT, PREFERRED)
+                                .addContainerGap())
         );
-    }  
-    
+    }
+
+    public void initPanels() {
+        itemsSelected.removeAll();
+        productPanels.clear();
+
+
+        Product handleBar = null;
+        Product frame = null;
+        Product wheels = null;
+
+        if (BaseFrame.currentOrder.getBike() != null) {
+            handleBar = BaseFrame.currentOrder.getBike().getHandleBar();
+            frame = BaseFrame.currentOrder.getBike().getFrame();
+            wheels = BaseFrame.currentOrder.getBike().getWheels();
+        }
+
+        if (handleBar != null) productPanels.add(new ProductPanel(handleBar));
+        if (frame != null) productPanels.add(new ProductPanel(frame));
+        if (wheels != null) productPanels.add(new ProductPanel(wheels));
+
+        GroupLayout itemsSelectedLayout = new GroupLayout(itemsSelected);
+        GroupLayout.SequentialGroup seqGroup = itemsSelectedLayout.createSequentialGroup();
+        GroupLayout.ParallelGroup parGroup = itemsSelectedLayout.createParallelGroup(LEADING);
+
+        for (ProductPanel productPanel : productPanels) {
+            seqGroup.addGap(29, 29, 29)
+                    .addComponent(productPanel, PREFERRED, DEFAULT, PREFERRED);
+            parGroup.addComponent(productPanel, DEFAULT, DEFAULT, Short.MAX_VALUE);
+        }
+        seqGroup.addContainerGap(29, Short.MAX_VALUE);
+
+
+        itemsSelected.setLayout(itemsSelectedLayout);
+        itemsSelectedLayout.setHorizontalGroup(
+                itemsSelectedLayout.createParallelGroup(LEADING)
+                        .addGroup(seqGroup)
+        );
+        itemsSelectedLayout.setVerticalGroup(
+                parGroup
+        );
+    }
+
     private void initializeButtons() {
-		restartButton.setBackground(new Color(51, 51, 51));
+        restartButton.setBackground(new Color(51, 51, 51));
         restartButton.setForeground(new Color(255, 255, 255));
         restartButton.setText("Restart");
         restartButton.setToolTipText("");
@@ -150,8 +173,9 @@ public class ViewOrder extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
                 //TODO: link to back
-                parentFrame.displayPanel(parentFrame.confirmOrder, false, true, true, false, false);	
-			}
+                parentFrame.confirmOrder.initPanels();
+                parentFrame.displayPanel(parentFrame.confirmOrder, false, true, true, false, false);
+            }
 		});
 	}
 }

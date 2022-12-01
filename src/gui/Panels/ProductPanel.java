@@ -1,6 +1,10 @@
 package gui.Panels;
 
+import Product.Frame;
+import Product.HandleBar;
 import Product.Product;
+import Product.Wheels;
+import gui.Frames.BaseFrame;
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,7 +13,7 @@ public class ProductPanel extends JPanel {
     private static final Font SEGOE_UI = new Font("Segoe UI", Font.PLAIN, 14);
     private final JLabel addToBikeLabel = new JLabel("Add to Bike");
 
-    private final Product product;
+    final Product product;
 
     private final JLabel image = new JLabel();
     private final JLabel displayName = new JLabel();
@@ -29,6 +33,26 @@ public class ProductPanel extends JPanel {
 
         image.setHorizontalAlignment(SwingConstants.CENTER);
         image.setText("/IMAGE/");
+
+        select.addActionListener(e -> {
+            if (select.isSelected()) {
+                if (product instanceof Frame) {
+                    BaseFrame.currentOrder.getBike().setFrame((Frame) product);
+                } else if (product instanceof Wheels) {
+                    BaseFrame.currentOrder.getBike().setWheels((Wheels) product);
+                } else if (product instanceof HandleBar) {
+                    BaseFrame.currentOrder.getBike().setHandleBar((HandleBar) product);
+                }
+            } else {
+                if (product instanceof Frame) {
+                    BaseFrame.currentOrder.getBike().setFrame((Frame) product);
+                } else if (product instanceof Wheels) {
+                    BaseFrame.currentOrder.getBike().setWheels((Wheels) product);
+                } else if (product instanceof HandleBar) {
+                    BaseFrame.currentOrder.getBike().setHandleBar((HandleBar) product);
+                }
+            }
+        });
 
 
         displayName.setFont(SEGOE_UI); // NOI18N
@@ -97,5 +121,9 @@ public class ProductPanel extends JPanel {
         this.addToBikeLabel.setText(label);
     }
 
+
+    public boolean isSelected() {
+        return select.isSelected();
+    }
 }
 

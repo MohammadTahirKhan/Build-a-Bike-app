@@ -4,8 +4,8 @@ import gui.Frames.BaseFrame;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+
+import static SQL.Queries.Order.SQLOrder.getOrder;
 
 public class StaffFindOrder extends JPanel {
     private final GroupLayout.Alignment LEADING = GroupLayout.Alignment.LEADING;
@@ -100,12 +100,14 @@ public class StaffFindOrder extends JPanel {
         findOrderButton.setFont(new Font("Dialog", 1, 12));
         findOrderButton.setLabel("Find Order");
 
-        findOrderButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO: link to back
+        findOrderButton.addActionListener(e -> {
+            Order.Order order = getOrder(Integer.parseInt(orderNumberField.getText().trim()));
+            if (order != null) {
+                BaseFrame.currentOrder = order;
                 parentFrame.displayPanel(parentFrame.staffAssembleOrder, false, false, false, true, true);
-			}
-		});
-	}        
+            } else {
+                JOptionPane.showMessageDialog(parentFrame, "Order not found");
+            }
+        });
+    }
 }

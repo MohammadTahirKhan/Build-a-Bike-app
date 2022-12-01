@@ -1,5 +1,6 @@
 package gui.Panels;
 
+import SQL.Queries.Product.SQLProduct;
 import gui.Frames.BaseFrame;
 
 import javax.swing.*;
@@ -134,9 +135,13 @@ public class AddStock extends JPanel {
         addStock.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
-                parentFrame.displayPanel(parentFrame.stockBrowse, false, false, false, false, true);	
-			}
+                SQLProduct.addStock(
+                        Integer.parseInt(serialNumberField.getText().trim()),
+                        brandNameField.getText().trim(),
+                        Integer.parseInt(quantityField.getText().trim())
+                );
+                parentFrame.displayPanel(parentFrame.stockBrowse, false, false, false, false, true);
+            }
 		});
 	}                            
 }

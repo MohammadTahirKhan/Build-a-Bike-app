@@ -116,7 +116,7 @@ public class StaffAssembleOrder extends JPanel {
         confirmButton.setBackground(new Color(51, 51, 51));
         confirmButton.setFont(new Font("Segoe UI", Font.BOLD, 12));
         confirmButton.setForeground(new Color(255, 255, 255));
-        confirmButton.setText("Confirm Assemblyr");
+        confirmButton.setText("Confirm Assembly");
         confirmButton.setToolTipText("");
 
         cancelButton.addActionListener(new ActionListener() {
@@ -129,7 +129,7 @@ public class StaffAssembleOrder extends JPanel {
         confirmButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-                //TODO: link to back
+
                 parentFrame.displayPanel(parentFrame.staffFindOrder, false, false, false, true, true);	
 			}
 		});

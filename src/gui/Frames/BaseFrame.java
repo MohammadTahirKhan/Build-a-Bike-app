@@ -1,5 +1,6 @@
 package gui.Frames;
 
+import Order.Order;
 import gui.Panels.*;
 
 import javax.swing.*;
@@ -28,10 +29,14 @@ public class BaseFrame extends JFrame {
     public StaffFindOrder staffFindOrder;
     public StaffAssembleOrder staffAssembleOrder;
     public StaffViewOrders staffViewOrders;
+    public EnterCustomerDetails enterCustomerDetails;
 
     private final BaseFrame thisFrame = this;
+    public static Order currentOrder = new Order();
 
     public BaseFrame(){
+
+
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 header = new JMenuBar();
@@ -53,6 +58,7 @@ public class BaseFrame extends JFrame {
                 staffFindOrder = new StaffFindOrder(thisFrame);
                 staffAssembleOrder = new StaffAssembleOrder(thisFrame);
                 staffViewOrders = new StaffViewOrders();
+                enterCustomerDetails = new EnterCustomerDetails(thisFrame);
 
                 setDefaultCloseOperation(EXIT_ON_CLOSE);
                 setTitle("Bikes Ltd.");

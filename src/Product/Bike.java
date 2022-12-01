@@ -27,16 +27,12 @@ public class Bike extends Product{
         this.handleBar = handleBar;
         this.setProductDetails(pKey, name, serialNumber, unitCost, brandName, stock);
     }
-
-
-
     public Bike(Wheels wheels, Frame frame, HandleBar handleBar) {
         this.wheels = wheels;
         this.frame = frame;
         this.handleBar = handleBar;
         this.setValues();
     }
-
     public Bike(){
 
     }
@@ -65,7 +61,10 @@ public class Bike extends Product{
 
 //    Sets all the values
     public void setValues(){
-        int serialNumber = Integer.getInteger(this.wheels.getSerialNumber() + "" + this.frame.getSerialNumber() + "" + this.handleBar.getSerialNumber());
+        String wSerial = String.valueOf(this.wheels.getSerialNumber());
+        String fSerial = String.valueOf(this.frame.getSerialNumber());
+        String hSerial = String.valueOf(this.handleBar.getSerialNumber());
+        int serialNumber = Integer.parseInt(wSerial + fSerial + hSerial);
         this.setProductDetails(-1, "", serialNumber, 0, frame.getBrandName(), 1);
     }
 }

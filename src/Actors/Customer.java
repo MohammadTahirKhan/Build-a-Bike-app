@@ -1,6 +1,6 @@
 package Actors;
 
-public class Customer extends Shopper {
+public class Customer {
 //    variables
     private int customerId;
     private String forename;

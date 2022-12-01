@@ -63,7 +63,6 @@ public class Wheels extends Product{
 
 
 //    Private Setters
-
     public void setDiameter(double diameter) {
         this.diameter = diameter;
     }

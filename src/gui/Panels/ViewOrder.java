@@ -173,7 +173,7 @@ public class ViewOrder extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
                 parentFrame.confirmOrder.initPanels();
-                parentFrame.displayPanel(parentFrame.enterCustomerDetails, false, true, true, false, false);
+                parentFrame.displayPanel(parentFrame.enterCustomerDetails, true, true, true, false, false);
             }
 		});
 	}

@@ -55,7 +55,7 @@ public class ForgottenFindOrder extends JPanel {
                                 .addComponent(serialNumber, GroupLayout.PREFERRED_SIZE, 139, GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(serialNumber1, GroupLayout.PREFERRED_SIZE, 139, GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addContainerGap(40, Short.MAX_VALUE))
         );
         tableHeadingLabelsLayout.setVerticalGroup(
                 tableHeadingLabelsLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
@@ -112,25 +112,21 @@ public class ForgottenFindOrder extends JPanel {
         GroupLayout productTableItemsLayout = new GroupLayout(productTableItems);
         productTableItems.setLayout(productTableItemsLayout);
 
-        GroupLayout.ParallelGroup horzGroup = productTableItemsLayout.createParallelGroup();
+        GroupLayout.ParallelGroup horzGroup = productTableItemsLayout.createParallelGroup(GroupLayout.Alignment.LEADING);
         GroupLayout.SequentialGroup vertGroup = productTableItemsLayout.createSequentialGroup();
 
         for (Order order : orders) {
             OrderTableItem orderTableItem = new OrderTableItem(order);
             orderTableItems.add(orderTableItem);
-            horzGroup.addComponent(orderTableItem, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE);
+            horzGroup.addComponent(orderTableItem, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE);
             vertGroup.addComponent(orderTableItem, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE).addPreferredGap(LayoutStyle.ComponentPlacement.RELATED);//.addGap(0, 0, Short.MAX_VALUE);
         }
 
-        productTableItemsLayout.setHorizontalGroup(
-                productTableItemsLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                        .addGroup(productTableItemsLayout.createSequentialGroup()
-                        .addGroup(horzGroup)
-                        .addGap(0,82,Short.MAX_VALUE))
-        );
+        productTableItemsLayout.setHorizontalGroup(horzGroup);
+
         productTableItemsLayout.setVerticalGroup(
                 productTableItemsLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                        .addGroup(vertGroup).addGap(0,0,Short.MAX_VALUE)
+                        .addGroup(vertGroup).addGap(0,244,Short.MAX_VALUE)
         );
 
         productTable.setViewportView(productTableItems);

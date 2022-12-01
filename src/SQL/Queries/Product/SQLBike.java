@@ -43,7 +43,6 @@ public class SQLBike {
     }
 
 
-
 //    Getting bike
     /**
      * Used by backend to get bike from table

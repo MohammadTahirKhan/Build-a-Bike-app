@@ -11,6 +11,7 @@ import java.sql.Date;
 import java.time.LocalDate;
 
 import static SQL.Queries.Order.SQLOrder.insertOrder;
+import static SQL.Queries.Product.SQLProduct.decrementStock;
 
 public class EnterCustomerDetails extends JPanel {
     private final GroupLayout.Alignment LEADING = GroupLayout.Alignment.LEADING;
@@ -170,7 +171,10 @@ public class EnterCustomerDetails extends JPanel {
                 BaseFrame.currentOrder.setCustomer(customer);
                 BaseFrame.currentOrder.setStatus(Order.Status.PENDING);
                 BaseFrame.currentOrder.setDate((Date.valueOf(LocalDate.now())));
+                BaseFrame.currentOrder.getBike().setValues();
                 BaseFrame.currentOrder = insertOrder(BaseFrame.currentOrder);
+                assert BaseFrame.currentOrder != null;
+                decrementStock(BaseFrame.currentOrder);
 
                 parentFrame.confirmOrder.initPanels();
                 parentFrame.displayPanel(parentFrame.confirmOrder, true, false, true, false, false);

@@ -30,25 +30,22 @@ public class ProductPanel extends JPanel {
         image.setText("/IMAGE/");
 
         select.addActionListener(e -> {
-            if (select.isSelected()) {
-                if (product instanceof Frame) {
-                    BaseFrame.currentOrder.getBike().setFrame((Frame) product);
-                } else if (product instanceof Wheels) {
-                    BaseFrame.currentOrder.getBike().setWheels((Wheels) product);
-                } else if (product instanceof HandleBar) {
-                    BaseFrame.currentOrder.getBike().setHandleBar((HandleBar) product);
-                }
-            } else {
-                if (product instanceof Frame) {
-                    BaseFrame.currentOrder.getBike().setFrame((Frame) product);
-                } else if (product instanceof Wheels) {
-                    BaseFrame.currentOrder.getBike().setWheels((Wheels) product);
-                } else if (product instanceof HandleBar) {
-                    BaseFrame.currentOrder.getBike().setHandleBar((HandleBar) product);
-                }
+            if (product instanceof Frame) {
+                BaseFrame.currentOrder.getBike().setFrame((Frame) product);
+            } else if (product instanceof Wheels) {
+                BaseFrame.currentOrder.getBike().setWheels((Wheels) product);
+            } else if (product instanceof HandleBar) {
+                BaseFrame.currentOrder.getBike().setHandleBar((HandleBar) product);
             }
         });
 
+        if (product instanceof Frame) {
+            isSelected(BaseFrame.currentOrder.getBike().getFrame() != null && BaseFrame.currentOrder.getBike().getFrame().getPKey() == product.getPKey());
+        } else if (product instanceof Wheels) {
+            isSelected(BaseFrame.currentOrder.getBike().getWheels() != null && BaseFrame.currentOrder.getBike().getWheels().getPKey() == product.getPKey());
+        } else if (product instanceof HandleBar) {
+            isSelected(BaseFrame.currentOrder.getBike().getHandleBar() != null && BaseFrame.currentOrder.getBike().getHandleBar().getPKey() == product.getPKey());
+        }
 
         displayName.setFont(SEGOE_UI); // NOI18N
         displayName.setText(product.getName());
@@ -120,7 +117,6 @@ public class ProductPanel extends JPanel {
         if (selected != isSelected()) {
             select.doClick();
         }
-        select.isSelected();
     }
 }
 

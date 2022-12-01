@@ -8,6 +8,7 @@ import java.sql.*;
 
 public class SQLStaff {
 
+//    Insert(s)
     /**
      * Used by backend to insert directly into Staff table
      * @param staff staff object
@@ -28,6 +29,7 @@ public class SQLStaff {
         return null;
     }
 
+//    Getter(s)
     /**
      * Gets a staff member by their username and password
      * @param staffUsername Staff member username

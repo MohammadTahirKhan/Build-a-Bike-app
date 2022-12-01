@@ -1,50 +1,30 @@
 package SQL;
 
-import Product.Wheels;
-
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.sql.*;
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.*;
 
 public class Utils {
 
-//    Lists the drivers
-    public static void main(String[] args) throws Exception {
-        System.out.println("\nDrivers loaded as properties:");
-        System.out.println(System.getProperty("jdbc.drivers"));
-        System.out.println("\nDrivers loaded by DriverManager:");
-        Enumeration<Driver> list = DriverManager.getDrivers();
-        while (list.hasMoreElements())
-            System.out.println(list.nextElement());
-    }
+    /**
+     * Get the credentials from the properties file
+     * @return string of credentials
+     */
+    static String[] getCredentials() {
 
-//    Retrieves the credentials from Credentials.txt
-    static String[] getCredentials(){
-        String[] creds = new String[2];
+        String[] credentials = new String[2];
 
-        try {
-            File myObj = new File("Credentials.txt");
-            Scanner myReader = new Scanner(myObj);
-            while (myReader.hasNextLine()) {
-                creds[0] = myReader.nextLine().split("=")[1];
-                creds[1] = myReader.nextLine().split("=")[1];
-            }
-            myReader.close();
-        } catch (FileNotFoundException e) {
-            System.out.println("An error occurred.");
+        try (InputStream propertiesInput = Files.newInputStream(Paths.get("Credentials.properties"))) {
+
+            Properties properties = new Properties();
+            properties.load(propertiesInput);
+
+            credentials[0] = properties.getProperty("db.username");
+            credentials[1] = properties.getProperty("db.password");
+        } catch (IOException e){
             e.printStackTrace();
         }
-        return creds;
+        return credentials;
     }
-
-
-    public static String isAllEnum(Enum enumValue){
-        if (enumValue.name().equals("ALL"))
-            return "*";
-        else
-            return enumValue.name();
-    }
-
-
 }

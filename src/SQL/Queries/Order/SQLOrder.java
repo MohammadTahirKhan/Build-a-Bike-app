@@ -65,9 +65,8 @@ public class SQLOrder {
 //            If commit fails, rollback
             System.out.println(e);
             DbConnection.rollback(con);
-        } finally{
-            DbConnection.setAutoCommit(con, true);
         }
+        DbConnection.setAutoCommit(con, true);
         return null;
     }
 
@@ -181,7 +180,6 @@ public class SQLOrder {
     }
 
 
-
 //    Deleting order
     /**
      * used to delete an order from the database via order ID
@@ -201,7 +199,6 @@ public class SQLOrder {
         }
 
     }
-
 
 
 //    Updating Order

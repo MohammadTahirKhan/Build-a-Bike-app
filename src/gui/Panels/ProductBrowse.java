@@ -235,7 +235,7 @@ public class ProductBrowse extends JPanel {
                 break;
         }
         productPanels.clear();
-        products.forEach(product -> productPanels.add(new ProductPanel(product)));
+        products.forEach(product -> productPanels.add(new ProductPanel(product, "Add to Bike")));
         drawProductPanels();
     }
 }

@@ -111,9 +111,9 @@ public class ViewOrder extends JPanel {
             wheels = BaseFrame.currentOrder.getBike().getWheels();
         }
 
-        if (handleBar != null) productPanels.add(new ProductPanel(handleBar));
-        if (frame != null) productPanels.add(new ProductPanel(frame));
-        if (wheels != null) productPanels.add(new ProductPanel(wheels));
+        if (handleBar != null) productPanels.add(new ProductPanel(handleBar, "Add to Bike"));
+        if (frame != null) productPanels.add(new ProductPanel(frame, "Add to Bike"));
+        if (wheels != null) productPanels.add(new ProductPanel(wheels, "Add to Bike"));
 
         GroupLayout itemsSelectedLayout = new GroupLayout(itemsSelected);
         GroupLayout.SequentialGroup seqGroup = itemsSelectedLayout.createSequentialGroup();

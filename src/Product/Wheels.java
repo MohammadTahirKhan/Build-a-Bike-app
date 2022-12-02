@@ -79,11 +79,4 @@ public class Wheels extends Product{
         this.brakeType = BrakeType.valueOf(brakeType);
     }
 
-
-//    SQL Get wheels
-
-//    public static Wheels[] pullWheels(){
-//        return Queries.getWheels();
-//    }
-
 }

@@ -21,6 +21,7 @@ public class SQLCustomer {
         Connection con = DbConnection.getCon();
         assert con != null;
 
+//        If the customer has already ordered a bike, return that object, if not, insert a new customer into the database
         Customer retrievedCustomer = getCustomer(customer);
         if (retrievedCustomer != null){
             return retrievedCustomer;

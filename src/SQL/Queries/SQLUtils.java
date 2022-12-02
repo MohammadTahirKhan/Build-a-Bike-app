@@ -26,7 +26,10 @@ import static SQL.Queries.Product.SQLWheels.insertWheels;
 
 public class SQLUtils {
 
-//    Sets autocommit to false then deletes and populates the database
+    /**
+     * Runs deleteDatabase then populateDatabase
+     * @throws SQLException If there is an issue deleting the database
+     */
     public static void setDatabase() throws SQLException {
         deleteDatabase();
         populateDatabase();

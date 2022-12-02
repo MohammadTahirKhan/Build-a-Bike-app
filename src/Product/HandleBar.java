@@ -10,7 +10,7 @@ public class HandleBar extends Product{
         ALL
     }
 
-//    Declaring variable(s)
+//    Declaring variable
     protected Style style;
 
     /**
@@ -36,7 +36,7 @@ public class HandleBar extends Product{
         return style;
     }
 
-//    Private Setters
+//    Setter
     public void setStyle(Style style) {
         this.style = style;
     }

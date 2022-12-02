@@ -54,6 +54,9 @@ public class SQLOrder {
         try {
             DbConnection.setAutoCommit(con, false);
 
+//            Inserts order address then customer then the order itself.
+//            It does this so that order has the primary key of the customer
+//            And customer has the primary key of the address
             order.getCustomer().setAddress(insertAddressTable(order.getCustomer().getAddress()));
             order.setCustomer(insertCustomerTable(order.getCustomer()));
             order.setBike(insertBikeTable(order.getBike()));
@@ -113,7 +116,7 @@ public class SQLOrder {
      * @param postCode  postCode of customer
      * @return  Arraylist of Orders
      */
-    public static ArrayList<Order> getOrder(String forename, String surname, int houseNum, String postCode) {
+    public static ArrayList<Order> getOrders(String forename, String surname, int houseNum, String postCode) {
 
         Connection con = DbConnection.getCon();
         assert con != null;
@@ -149,7 +152,7 @@ public class SQLOrder {
      * @return  Arraylist of Orders
      */
     @SuppressWarnings("JpaQueryApiInspection")
-    public static ArrayList<Order> getOrder(Order.Status orderStatus) {
+    public static ArrayList<Order> getOrders(Order.Status orderStatus) {
 
         Connection con = DbConnection.getCon();
         assert con != null;

@@ -20,6 +20,7 @@ public class SQLAddress {
         Connection con = DbConnection.getCon();
         assert con != null;
 
+//        If the address is already in the database, use that address, if not, insert a new one
         Address retrievedAddress = getAddress(address);
         if (retrievedAddress != null){
             return retrievedAddress;

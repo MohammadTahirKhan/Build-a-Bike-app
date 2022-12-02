@@ -1,11 +1,12 @@
 package gui.Panels;
 
+import SQL.Queries.Order.SQLOrder;
 import gui.Frames.BaseFrame;
 
 import javax.swing.*;
 import java.awt.*;
 
-import static SQL.Queries.Order.SQLOrder.getOrder;
+import static SQL.Queries.Order.SQLOrder.getOrders;
 
 public class StaffFindOrder extends JPanel {
     private final GroupLayout.Alignment LEADING = GroupLayout.Alignment.LEADING;
@@ -101,7 +102,7 @@ public class StaffFindOrder extends JPanel {
         findOrderButton.setLabel("Find Order");
 
         findOrderButton.addActionListener(e -> {
-            Order.Order order = getOrder(Integer.parseInt(orderNumberField.getText().trim()));
+            Order.Order order = SQLOrder.getOrder(Integer.parseInt(orderNumberField.getText().trim()));
             if (order != null) {
                 BaseFrame.currentOrder = order;
                 parentFrame.staffAssembleOrder.drawPanels();

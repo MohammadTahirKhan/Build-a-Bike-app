@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 
 import static SQL.Queries.Order.SQLOrder.getOrders;
+import static SQL.Queries.Order.SQLOrder.getOrders;
 
 public class StaffViewOrders extends JPanel {
     private final GroupLayout.Alignment LEADING = GroupLayout.Alignment.LEADING;

@@ -57,7 +57,7 @@ public class TableItem extends JPanel {
         serialNumber = new JLabel(String.valueOf(order.getBike().getSerialNumber()));
         brandName = new JLabel(String.valueOf(order.getStatus()));
         order.setCost();
-        stock = new JLabel(String.valueOf(order.getCost()));
+        stock = new JLabel(String.valueOf(Math.round(order.getCost() * 100)/100.0));
 
         setBorder(new SoftBevelBorder(BevelBorder.RAISED));
 

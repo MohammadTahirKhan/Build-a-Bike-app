@@ -12,7 +12,7 @@ public class StaffLogin extends JPanel {
     public static final Font SEGOE_UI = new Font("Segoe UI", Font.BOLD, 24);
 
     private final Button loginButton;
-    private final TextField passwordField;
+    private final JPasswordField passwordField;
     private final TextField usernameField;
 
     private final BaseFrame parentFrame;
@@ -22,7 +22,7 @@ public class StaffLogin extends JPanel {
         JLabel staffLogin = new JLabel();
         JPanel loginForm = new JPanel();
         usernameField = new TextField();
-        passwordField = new TextField();
+        passwordField = new JPasswordField();
         Label usernameLabel = new Label();
         Label passwordLabel = new Label();
         Label loginFormTitle = new Label();

@@ -15,9 +15,12 @@ public class SQLStaff {
      * @param staff staff object
      */
     public static void insertStaffTable(Staff staff) {
+        Connection con = DbConnection.getCon();
+        assert con != null;
+
         try {
-            String sql = "INSERT INTO `team002`.`Staff` (`username`, `hash`, `salt`) VALUES (?, ?, ?);";
-            PreparedStatement statement = DbConnection.getCon().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            String sql = "INSERT INTO Staff (`username`, `hash`, `salt`) VALUES (?, ?, ?);";
+            PreparedStatement statement = con.prepareStatement(sql);
             statement.setString(1, staff.getUsername());
             statement.setBytes(2, staff.getHash());
             statement.setBytes(3, staff.getSalt());

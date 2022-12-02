@@ -16,7 +16,7 @@ public class ImagePanel extends JPanel {
 
     static {
         try {
-            frame = ImageIO.read(ImagePanel.class.getClassLoader().getResource("resources/images/frame.png"));
+            frame = ImageIO.read(ImagePanel.class.getClassLoader().getResource("resources/images/frame.jpg"));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -24,7 +24,7 @@ public class ImagePanel extends JPanel {
 
     static {
         try {
-            wheel = ImageIO.read(ImagePanel.class.getClassLoader().getResource("resources/images/wheel.png"));
+            wheel = ImageIO.read(ImagePanel.class.getClassLoader().getResource("resources/images/wheel.jpg"));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -32,7 +32,7 @@ public class ImagePanel extends JPanel {
 
     static {
         try {
-            handlebar = ImageIO.read(ImagePanel.class.getClassLoader().getResource("resources/images/handlebar.png"));
+            handlebar = ImageIO.read(ImagePanel.class.getClassLoader().getResource("resources/images/handlebar.jpg"));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

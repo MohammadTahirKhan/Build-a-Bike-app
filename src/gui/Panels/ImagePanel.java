@@ -1,5 +1,7 @@
 package gui.Panels;
 
+import Product.Product;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -8,15 +10,51 @@ import java.io.IOException;
 
 public class ImagePanel extends JPanel {
 
-    private BufferedImage image;
+    static private final BufferedImage frame;
+    static private final BufferedImage wheel;
+    static private final BufferedImage handlebar;
 
-    public ImagePanel(String filename) {
+    static {
         try {
-            image = ImageIO.read(this.getClass().getResource("/resources/images/" + filename));
-
+            frame = ImageIO.read(ImagePanel.class.getClassLoader().getResource("resources/images/frame.png"));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    static {
+        try {
+            wheel = ImageIO.read(ImagePanel.class.getClassLoader().getResource("resources/images/wheel.png"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    static {
+        try {
+            handlebar = ImageIO.read(ImagePanel.class.getClassLoader().getResource("resources/images/handlebar.png"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private final BufferedImage image;
+
+    public ImagePanel(Product.Products product) {
+        switch (product) {
+            case FRAME:
+                image = frame;
+                break;
+            case WHEELS:
+                image = wheel;
+                break;
+            case HANDLEBAR:
+                image = handlebar;
+                break;
+            default:
+                throw new IllegalArgumentException("Unknown product type");
+        }
+
     }
 
     @Override

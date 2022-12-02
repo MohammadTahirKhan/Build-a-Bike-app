@@ -27,11 +27,11 @@ public class ProductPanel extends JPanel {
         this.setBorder(BorderFactory.createEtchedBorder());
 
         if (product instanceof Frame) {
-            image = new ImagePanel("frame.png");
+            image = new ImagePanel(Product.Products.FRAME);
         } else if (product instanceof Wheels) {
-            image = new ImagePanel("wheel.png");
+            image = new ImagePanel(Product.Products.WHEELS);
         } else if (product instanceof HandleBar) {
-            image = new ImagePanel("handlebar.png");
+            image = new ImagePanel(Product.Products.HANDLEBAR);
         }
 
         select.addActionListener(e -> {

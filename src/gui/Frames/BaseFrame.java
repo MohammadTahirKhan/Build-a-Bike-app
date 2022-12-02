@@ -146,6 +146,8 @@ public class BaseFrame extends JFrame {
             public void mouseClicked(MouseEvent e) {
                 if (Objects.equals(item.getText(), "Logout")) {
                     //TODO: link to back
+                    BaseFrame.currentOrder = new Order();
+                    productBrowse.drawProductPanels();
                     displayPanel(productBrowse, false, true, true, false, false);
                 }
                 if (Objects.equals(item.getText(), "Back To Browse")) {

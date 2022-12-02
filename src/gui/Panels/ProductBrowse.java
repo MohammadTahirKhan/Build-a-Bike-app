@@ -120,7 +120,7 @@ public class ProductBrowse extends JPanel {
                                 .addContainerGap()));
     }
 
-    private void drawProductPanels() {
+    public void drawProductPanels() {
         allProducts = new JPanel();
 
         GroupLayout allProductsLayout = new GroupLayout(allProducts);

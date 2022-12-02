@@ -1,5 +1,6 @@
 package gui.Panels;
 
+import Order.Order;
 import Product.Product;
 import gui.Frames.BaseFrame;
 
@@ -137,8 +138,13 @@ public class ConfirmOrder extends JPanel {
         backToBrowseButton.setForeground(new Color(255, 255, 255));
         backToBrowseButton.setText("Back To Browse");
         backToBrowseButton.setToolTipText("");
-        backToBrowseButton.addActionListener(e -> parentFrame.displayPanel(parentFrame.productBrowse, false, true, true, false, false));
-	}
+        backToBrowseButton.addActionListener(e ->
+                {
+                    BaseFrame.currentOrder = new Order();
+                    parentFrame.displayPanel(parentFrame.productBrowse, false, true, true, false, false);
+                }
+        );
+    }
 }
 
 

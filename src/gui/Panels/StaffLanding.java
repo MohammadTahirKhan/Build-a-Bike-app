@@ -1,8 +1,8 @@
 package gui.Panels;
 
 import Order.Order;
-import gui.Frames.BaseFrame;
 import SQL.Queries.Order.SQLOrder;
+import gui.Frames.BaseFrame;
 
 import javax.swing.*;
 import java.awt.*;
@@ -80,7 +80,7 @@ public class StaffLanding extends JPanel {
                 Object[] options = {"Cancel", "Confirm Payment Received"};
                 int n = JOptionPane.showOptionDialog(this, "Follow instructions on visa system.", "Confirm Payment", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
                 if (n == 1) {
-                    SQLOrder.updateOrderStatus(order, Order.Status.FULFILLED);
+                    SQLOrder.updateOrderStatus(order, Order.Status.CONFIRMED);
               } else {
                     JOptionPane.showMessageDialog(this,"Cancelled.");
                 }

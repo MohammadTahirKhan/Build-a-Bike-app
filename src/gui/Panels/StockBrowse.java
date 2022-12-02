@@ -151,7 +151,7 @@ public class StockBrowse extends JPanel {
         productTable.setViewportView(productTableItems);
     }
 
-    private void populateTable() {
+    public void populateTable() {
         productTableItems.removeAll();
 
 

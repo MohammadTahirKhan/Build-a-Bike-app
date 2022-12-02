@@ -44,7 +44,7 @@ public class ViewOrder extends JPanel {
         yourSelection.setFont(new Font("Segoe UI", Font.BOLD, 24));
         yourSelection.setHorizontalAlignment(SwingConstants.CENTER);
         yourSelection.setText("Your Selection");
-        if (BaseFrame.currentOrder.getStatus() == Order.Status.FULFILLED || BaseFrame.currentOrder.getStatus() == Order.Status.PENDING || BaseFrame.currentOrder.getStatus() == Order.Status.CONFIRMED) {
+        if (BaseFrame.currentOrder.getID() != -1 && (BaseFrame.currentOrder.getStatus() == Order.Status.FULFILLED || BaseFrame.currentOrder.getStatus() == Order.Status.PENDING || BaseFrame.currentOrder.getStatus() == Order.Status.CONFIRMED)) {
             yourSelection.setText("Order Placed! : #" + BaseFrame.currentOrder.getID() + " (" + BaseFrame.currentOrder.getStatus() + ")");
         }
 
@@ -136,7 +136,7 @@ public class ViewOrder extends JPanel {
         itemsSelectedLayout.setVerticalGroup(
                 parGroup
         );
-        if (BaseFrame.currentOrder.getStatus() == Order.Status.FULFILLED || BaseFrame.currentOrder.getStatus() == Order.Status.PENDING || BaseFrame.currentOrder.getStatus() == Order.Status.CONFIRMED) {
+        if (BaseFrame.currentOrder.getID() != -1 && (BaseFrame.currentOrder.getStatus() == Order.Status.FULFILLED || BaseFrame.currentOrder.getStatus() == Order.Status.PENDING || BaseFrame.currentOrder.getStatus() == Order.Status.CONFIRMED)) {
             yourSelection.setText("Order Placed! : #" + BaseFrame.currentOrder.getID() + " (" + BaseFrame.currentOrder.getStatus() + ")");
         }
     }
@@ -166,8 +166,17 @@ public class ViewOrder extends JPanel {
         backToBrowseButton.addActionListener(e -> parentFrame.displayPanel(parentFrame.productBrowse, false, true, true, false, false));
 
         placeOrderButton.addActionListener(e -> {
-            parentFrame.confirmOrder.initPanels();
-            parentFrame.displayPanel(parentFrame.enterCustomerDetails, false, true, true, false, false);
+            if (BaseFrame.currentOrder.getBike() != null) {
+                if (BaseFrame.currentOrder.getBike().getFrame() != null && BaseFrame.currentOrder.getBike().getHandleBar() != null && BaseFrame.currentOrder.getBike().getWheels() != null) {
+                    parentFrame.confirmOrder.initPanels();
+                    parentFrame.displayPanel(parentFrame.enterCustomerDetails, false, true, true, false, false);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Please select all parts before placing order!");
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Please select a bike before placing an order.");
+            }
+
         });
     }
 }

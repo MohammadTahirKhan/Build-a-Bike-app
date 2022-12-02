@@ -1,7 +1,12 @@
 package gui.Panels;
 
+import Order.Order;
+
 import javax.swing.*;
 import java.util.ArrayList;
+import java.util.HashSet;
+
+import static SQL.Queries.Order.SQLOrder.getOrder;
 
 public class StaffViewOrders extends JPanel {
     private final GroupLayout.Alignment LEADING = GroupLayout.Alignment.LEADING;
@@ -21,6 +26,8 @@ public class StaffViewOrders extends JPanel {
     private final JPanel tableHeadingLabels;
     private final JLabel cost;
     private final JButton all;
+
+    private HashSet<TableItem> productTableItemsList = new HashSet<>();
 
     private final ArrayList<TableItem> orders = new ArrayList<>();
 
@@ -71,9 +78,9 @@ public class StaffViewOrders extends JPanel {
 
         orderNumber.setText("Order Number");
 
-        serialNumber.setText("Status");
+        serialNumber.setText("Cost");
 
-        cost.setText("Cost");
+        cost.setText("serialNumber");
 
         status.setText("Status");
 
@@ -104,30 +111,7 @@ public class StaffViewOrders extends JPanel {
                 .addContainerGap())
         );
 
-        productTable.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-
-        productTableItems.setMaximumSize(new java.awt.Dimension(900, 32767));
-        productTableItems.setMinimumSize(new java.awt.Dimension(900, 100));
-
-        GroupLayout productTableItemsLayout = new GroupLayout(productTableItems);
-
-        GroupLayout.SequentialGroup sequentialGroup = productTableItemsLayout.createSequentialGroup();
-
-        for (TableItem item : orders) {
-            sequentialGroup.addComponent(item, PREFERRED, DEFAULT, PREFERRED).addGap(0, 0, Short.MAX_VALUE);
-        }
-
-        productTableItems.setLayout(productTableItemsLayout);
-        productTableItemsLayout.setHorizontalGroup(
-                productTableItemsLayout.createParallelGroup(LEADING)
-                        .addGroup(sequentialGroup)
-        );
-        productTableItemsLayout.setVerticalGroup(
-                productTableItemsLayout.createParallelGroup(LEADING)
-                        .addGroup(sequentialGroup)
-        );
-
-        productTable.setViewportView(productTableItems);
+        initPanels();
 
         GroupLayout layout = new GroupLayout(this);
         setLayout(layout);
@@ -145,17 +129,46 @@ public class StaffViewOrders extends JPanel {
                 .addGap(44, 44, 44))
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(stockNav, PREFERRED, DEFAULT, PREFERRED)
-                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tableHeadingLabels, PREFERRED, DEFAULT, PREFERRED)
-                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, DEFAULT, Short.MAX_VALUE)
-                .addComponent(productTable, PREFERRED, 276, PREFERRED)
-                .addGap(41, 41, 41))
+                layout.createParallelGroup(LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(stockNav, PREFERRED, DEFAULT, PREFERRED)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(tableHeadingLabels, PREFERRED, DEFAULT, PREFERRED)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, DEFAULT, Short.MAX_VALUE)
+                                .addComponent(productTable, PREFERRED, 276, PREFERRED)
+                                .addGap(41, 41, 41))
         );
-    }                    
+    }
+
+    public void initPanels() {
+        productTable.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+
+        productTableItems.setMaximumSize(new java.awt.Dimension(900, 32767));
+        productTableItems.setMinimumSize(new java.awt.Dimension(900, 100));
+
+        productTableItems.removeAll();
+
+        GroupLayout productTableItemsLayout = new GroupLayout(productTableItems);
+        productTableItems.setLayout(productTableItemsLayout);
+
+        GroupLayout.ParallelGroup horzGroup = productTableItemsLayout.createParallelGroup(GroupLayout.Alignment.LEADING);
+        GroupLayout.SequentialGroup vertGroup = productTableItemsLayout.createSequentialGroup();
+
+        for (TableItem order : productTableItemsList) {
+            horzGroup.addComponent(order, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE);
+            vertGroup.addComponent(order, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE).addPreferredGap(LayoutStyle.ComponentPlacement.RELATED);//.addGap(0, 0, Short.MAX_VALUE);
+        }
+
+        productTableItemsLayout.setHorizontalGroup(horzGroup);
+
+        productTableItemsLayout.setVerticalGroup(
+                productTableItemsLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addGroup(vertGroup).addGap(0, 244, Short.MAX_VALUE)
+        );
+
+        productTable.setViewportView(productTableItems);
+    }
 
     private void initializeButtons() {
         pending.setText("Pending");
@@ -164,19 +177,47 @@ public class StaffViewOrders extends JPanel {
         all.setText("All");
 
         pending.addActionListener(e -> {
-            // TODO: link to back
+            HashSet<Order> pendingOrders = new HashSet<>(getOrder(Order.Status.PENDING));
+            productTableItemsList = new HashSet<>();
+            if (pendingOrders.size() > 0) {
+                for (Order order : pendingOrders) {
+                    productTableItemsList.add(new TableItem(order));
+                }
+            }
+            initPanels();
         });
 
         confirmed.addActionListener(e -> {
-            // TODO: link to back
+            HashSet<Order> pendingOrders = new HashSet<>(getOrder(Order.Status.CONFIRMED));
+            productTableItemsList = new HashSet<>();
+            if (pendingOrders.size() > 0) {
+                for (Order order : pendingOrders) {
+                    productTableItemsList.add(new TableItem(order));
+                }
+            }
+            initPanels();
         });
 
         fulfilled.addActionListener(e -> {
-            // TODO: link to back
+            HashSet<Order> pendingOrders = new HashSet<>(getOrder(Order.Status.FULFILLED));
+            productTableItemsList = new HashSet<>();
+            if (pendingOrders.size() > 0) {
+                for (Order order : pendingOrders) {
+                    productTableItemsList.add(new TableItem(order));
+                }
+            }
+            initPanels();
         });
 
         all.addActionListener(e -> {
-            // TODO: link to back
+            HashSet<Order> pendingOrders = new HashSet<>(getOrder(Order.Status.All));
+            productTableItemsList = new HashSet<>();
+            if (pendingOrders.size() > 0) {
+                for (Order order : pendingOrders) {
+                    productTableItemsList.add(new TableItem(order));
+                }
+            }
+            initPanels();
         });
     }
 }

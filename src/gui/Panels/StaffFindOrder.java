@@ -6,28 +6,19 @@ import gui.Frames.BaseFrame;
 import javax.swing.*;
 import java.awt.*;
 
-import static SQL.Queries.Order.SQLOrder.getOrders;
-
 public class StaffFindOrder extends JPanel {
-    private final GroupLayout.Alignment LEADING = GroupLayout.Alignment.LEADING;
-    private final GroupLayout.Alignment TRAILING = GroupLayout.Alignment.TRAILING;
-    private final int DEFAULT = GroupLayout.DEFAULT_SIZE;
-    private final int PREFERRED = GroupLayout.PREFERRED_SIZE;
 
     private final Button findOrderButton;
-    private final JPanel orderFindForm;
-    private final Label orderFindFormTitle;
     private final TextField orderNumberField;
-    private final JLabel yourSelection;
 
     private final BaseFrame parentFrame;
 
     public StaffFindOrder(BaseFrame parentFrame) {
         this.parentFrame = parentFrame;
-        yourSelection = new JLabel();
-        orderFindForm = new JPanel();
+        JLabel yourSelection = new JLabel();
+        JPanel orderFindForm = new JPanel();
         orderNumberField = new TextField();
-        orderFindFormTitle = new Label();
+        Label orderFindFormTitle = new Label();
         findOrderButton = new Button();
 
         yourSelection.setFont(new Font("Segoe UI", Font.BOLD, 24));
@@ -44,6 +35,9 @@ public class StaffFindOrder extends JPanel {
 
         GroupLayout orderFindFormLayout = new GroupLayout(orderFindForm);
         orderFindForm.setLayout(orderFindFormLayout);
+        int PREFERRED = GroupLayout.PREFERRED_SIZE;
+        GroupLayout.Alignment TRAILING = GroupLayout.Alignment.TRAILING;
+        GroupLayout.Alignment LEADING = GroupLayout.Alignment.LEADING;
         orderFindFormLayout.setHorizontalGroup(
             orderFindFormLayout.createParallelGroup(LEADING)
             .addGroup(orderFindFormLayout.createSequentialGroup()
@@ -58,6 +52,7 @@ public class StaffFindOrder extends JPanel {
                         .addComponent(orderFindFormTitle, PREFERRED, 317, PREFERRED)))
                 .addContainerGap(61, Short.MAX_VALUE))
         );
+        int DEFAULT = GroupLayout.DEFAULT_SIZE;
         orderFindFormLayout.setVerticalGroup(
             orderFindFormLayout.createParallelGroup(LEADING)
             .addGroup(TRAILING, orderFindFormLayout.createSequentialGroup()

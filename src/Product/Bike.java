@@ -2,10 +2,7 @@ package Product;
 
 public class Bike extends Product{
 
-//    Constants
-    private final double ASSEMBLY_COST = 10;
-
-//    Declaring Variables
+    //    Declaring Variables
     private Wheels wheels;
     private Frame frame;
     private HandleBar handleBar;
@@ -65,6 +62,8 @@ public class Bike extends Product{
         String fSerial = String.valueOf(this.frame.getSerialNumber());
         String hSerial = String.valueOf(this.handleBar.getSerialNumber());
         int serialNumber = Integer.parseInt(wSerial + fSerial + hSerial);
+        //    Constants
+        double ASSEMBLY_COST = 10;
         this.setProductDetails(-1, (frame.getBrandName() + " " + serialNumber), serialNumber, ASSEMBLY_COST, frame.getBrandName(), 1);
     }
 }

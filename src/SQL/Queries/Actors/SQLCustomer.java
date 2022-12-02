@@ -6,8 +6,6 @@ import SQL.DbConnection;
 
 import java.sql.*;
 
-import static SQL.Queries.Actors.SQLAddress.getAddress;
-
 public class SQLCustomer {
 
 //    Insert(s)

@@ -11,14 +11,12 @@ import java.util.ArrayList;
 
 public class ViewOrder extends JPanel {
     private final GroupLayout.Alignment LEADING = GroupLayout.Alignment.LEADING;
-    private final GroupLayout.Alignment TRAILING = GroupLayout.Alignment.TRAILING;
     private final int DEFAULT = GroupLayout.DEFAULT_SIZE;
     private final int PREFERRED = GroupLayout.PREFERRED_SIZE;
 
     private final JButton backToBrowseButton;
     private final JPanel itemsSelected;
 
-    private final JPanel orderOptions;
     private final JButton placeOrderButton;
     private final JButton restartButton;
     private final JLabel yourSelection;
@@ -32,7 +30,7 @@ public class ViewOrder extends JPanel {
 
         itemsSelected = new JPanel();
         yourSelection = new JLabel();
-        orderOptions = new JPanel();
+        JPanel orderOptions = new JPanel();
         restartButton = new JButton();
         backToBrowseButton = new JButton();
         placeOrderButton = new JButton();
@@ -74,6 +72,7 @@ public class ViewOrder extends JPanel {
 
         GroupLayout layout = new GroupLayout(this);
         setLayout(layout);
+        GroupLayout.Alignment TRAILING = GroupLayout.Alignment.TRAILING;
         layout.setHorizontalGroup(
             layout.createParallelGroup(LEADING)
             .addGroup(layout.createSequentialGroup()

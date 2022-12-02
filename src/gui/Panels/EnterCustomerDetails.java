@@ -14,45 +14,33 @@ import static SQL.Queries.Order.SQLOrder.insertOrder;
 import static SQL.Queries.Product.SQLProduct.decrementStock;
 
 public class EnterCustomerDetails extends JPanel {
-    private final GroupLayout.Alignment LEADING = GroupLayout.Alignment.LEADING;
-    private final GroupLayout.Alignment TRAILING = GroupLayout.Alignment.TRAILING;
-    private final int DEFAULT = GroupLayout.DEFAULT_SIZE;
-    private final int PREFERRED = GroupLayout.PREFERRED_SIZE;
 
     private final Button nextButton;
     private final TextField forenameField;
-    private final Label forenameLabel;
-    private final JPanel forgottenOrderForm;
-    private final Label forgottenOrderFormTitle;
     private final TextField houseNumberField;
     private final TextField roadNameField;
     private final TextField cityField;
-    private final Label houseNumberLabel;
-    private final Label roadNameLabel;
-    private final Label cityLabel;
     private final TextField postcodeField;
-    private final Label postcodeLabel;
-    private final Label surnameLabel;
     private final TextField surnameField;
 
     private final BaseFrame parentFrame;
 
     public EnterCustomerDetails(BaseFrame baseFrame) {
         parentFrame = baseFrame;
-        forgottenOrderForm = new JPanel();
+        JPanel forgottenOrderForm = new JPanel();
         forenameField = new TextField();
         surnameField = new TextField();
-        forenameLabel = new Label();
-        surnameLabel = new Label();
-        forgottenOrderFormTitle = new Label();
+        Label forenameLabel = new Label();
+        Label surnameLabel = new Label();
+        Label forgottenOrderFormTitle = new Label();
         nextButton = new Button();
         houseNumberField = new TextField();
-        houseNumberLabel = new Label();
-        postcodeLabel = new Label();
+        Label houseNumberLabel = new Label();
+        Label postcodeLabel = new Label();
         postcodeField = new TextField();
-        roadNameLabel = new Label();
+        Label roadNameLabel = new Label();
         roadNameField = new TextField();
-        cityLabel = new Label();
+        Label cityLabel = new Label();
         cityField = new TextField();
 
         forgottenOrderForm.setBorder(BorderFactory.createEtchedBorder());
@@ -77,6 +65,9 @@ public class EnterCustomerDetails extends JPanel {
 
         GroupLayout forgottenOrderFormLayout = new GroupLayout(forgottenOrderForm);
         forgottenOrderForm.setLayout(forgottenOrderFormLayout);
+        int PREFERRED = GroupLayout.PREFERRED_SIZE;
+        int DEFAULT = GroupLayout.DEFAULT_SIZE;
+        GroupLayout.Alignment LEADING = GroupLayout.Alignment.LEADING;
         forgottenOrderFormLayout.setHorizontalGroup(
             forgottenOrderFormLayout.createParallelGroup(LEADING)
             .addGroup(forgottenOrderFormLayout.createSequentialGroup()
@@ -102,6 +93,7 @@ public class EnterCustomerDetails extends JPanel {
                         .addComponent(nextButton, PREFERRED, 95, PREFERRED)))
                 .addContainerGap(61, Short.MAX_VALUE))
         );
+        GroupLayout.Alignment TRAILING = GroupLayout.Alignment.TRAILING;
         forgottenOrderFormLayout.setVerticalGroup(
             forgottenOrderFormLayout.createParallelGroup(LEADING)
             .addGroup(TRAILING, forgottenOrderFormLayout.createSequentialGroup()

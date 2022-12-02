@@ -1,11 +1,9 @@
 package SQL.Queries.Actors;
 
 import Actors.Address;
-import Order.Order;
 import SQL.DbConnection;
 
 import java.sql.*;
-import java.util.ArrayList;
 
 public class SQLAddress {
 

@@ -1,6 +1,5 @@
 package SQL;
 
-import java.sql.SQLException;
 import static SQL.Queries.SQLUtils.setDatabase;
 
 public class BuildDatabase {
@@ -9,9 +8,8 @@ public class BuildDatabase {
     /**
      * Running this will clear then populate the database
      * @param args Null
-     * @throws SQLException If there is an issue deleting the database contents
      */
-    public static void main(String[] args) throws SQLException {
+    public static void main(String[] args) {
         System.out.println("Setting database...");
         try {
             setDatabase();

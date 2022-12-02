@@ -4,40 +4,29 @@ import javax.swing.*;
 import java.awt.*;
 
 public class ItemTile extends JPanel {
-    private final GroupLayout.Alignment LEADING = GroupLayout.Alignment.LEADING;
-    private final GroupLayout.Alignment TRAILING = GroupLayout.Alignment.TRAILING;
-    private final int DEFAULT = GroupLayout.DEFAULT_SIZE;
-    private final int PREFERRED = GroupLayout.PREFERRED_SIZE;
-
-    private final JLabel image;
-    private final JLabel itemDisplayCost;
-    private final JLabel itemDisplayName;
-    private final JLabel checkboxLabel;
-
-    private final JSeparator separator;
-    private final JSeparator separator1;
-    private final JSeparator separator2;
-
-    private final JCheckBox addToBike;
 
     public ItemTile(Boolean checkbox) {
-        separator1 = new JSeparator();
-        separator2 = new JSeparator();
-        separator = new JSeparator();
-        checkboxLabel = new JLabel("Add to bike");
-        addToBike = new JCheckBox();
-        image = new JLabel();
-        itemDisplayName = new JLabel("Super Swag Wheels 16\"");
-        itemDisplayCost = new JLabel("£69.99");
+        JSeparator separator1 = new JSeparator();
+        JSeparator separator2 = new JSeparator();
+        JSeparator separator = new JSeparator();
+        JLabel checkboxLabel = new JLabel("Add to bike");
+        JCheckBox addToBike = new JCheckBox();
+        JLabel image = new JLabel();
+        JLabel itemDisplayName = new JLabel("Super Swag Wheels 16\"");
+        JLabel itemDisplayCost = new JLabel("£69.99");
 
         setBorder(BorderFactory.createEtchedBorder());
         image.setHorizontalAlignment(SwingConstants.CENTER);
 
-        itemDisplayName.setFont(new Font("Segoe UI", 0, 14));
+        itemDisplayName.setFont(new Font("Segoe UI", Font.PLAIN, 14));
 
-        itemDisplayCost.setFont(new Font("Segoe UI", 0, 14));
+        itemDisplayCost.setFont(new Font("Segoe UI", Font.PLAIN, 14));
         itemDisplayCost.setHorizontalAlignment(SwingConstants.CENTER);
 
+        int PREFERRED = GroupLayout.PREFERRED_SIZE;
+        int DEFAULT = GroupLayout.DEFAULT_SIZE;
+        GroupLayout.Alignment TRAILING = GroupLayout.Alignment.TRAILING;
+        GroupLayout.Alignment LEADING = GroupLayout.Alignment.LEADING;
         if (!checkbox) {
             GroupLayout layout = new GroupLayout(this);
             setLayout(layout);

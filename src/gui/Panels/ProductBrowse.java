@@ -19,14 +19,11 @@ import static SQL.Queries.Product.SQLWheels.getAllWheels;
 
 public class ProductBrowse extends JPanel {
     private final GroupLayout.Alignment LEADING = GroupLayout.Alignment.LEADING;
-    private final GroupLayout.Alignment TRAILING = GroupLayout.Alignment.TRAILING;
     private final LayoutStyle.ComponentPlacement RELATED = LayoutStyle.ComponentPlacement.RELATED;
     private final int DEFAULT = GroupLayout.DEFAULT_SIZE;
     private final int PREFERRED = GroupLayout.PREFERRED_SIZE;
 
     private final BaseFrame parentFrame;
-    private JPanel allProducts;
-    private final JPanel orderNav;
     private final JScrollPane productView;
 
     private final JButton selectFrameSets;
@@ -34,20 +31,17 @@ public class ProductBrowse extends JPanel {
     private final JButton selectWheels;
     private final JButton viewOrder;
 
-    private final Choice sortBy;
-    private final Label sortByLabel;
-
     private final ArrayList<ProductPanel> productPanels = new ArrayList<>();
 
     public ProductBrowse(BaseFrame parentFrame) {
         this.parentFrame = parentFrame;
-        orderNav = new JPanel();
+        JPanel orderNav = new JPanel();
         selectWheels = new JButton();
         selectFrameSets = new JButton();
         selectHandlebars = new JButton();
         viewOrder = new JButton();
-		sortBy = new Choice();
-		sortByLabel = new Label();
+        Choice sortBy = new Choice();
+        Label sortByLabel = new Label();
 		productView = new JScrollPane();
 
 
@@ -71,7 +65,8 @@ public class ProductBrowse extends JPanel {
 								.addPreferredGap(RELATED)
 								.addComponent(viewOrder, PREFERRED, 214, PREFERRED)
 								.addContainerGap(DEFAULT, Short.MAX_VALUE)));
-		orderNavLayout.setVerticalGroup(
+        GroupLayout.Alignment TRAILING = GroupLayout.Alignment.TRAILING;
+        orderNavLayout.setVerticalGroup(
 				orderNavLayout.createParallelGroup(LEADING)
 						.addGroup(TRAILING, orderNavLayout.createSequentialGroup()
 								.addContainerGap()
@@ -121,7 +116,7 @@ public class ProductBrowse extends JPanel {
     }
 
     public void drawProductPanels() {
-        allProducts = new JPanel();
+        JPanel allProducts = new JPanel();
 
         GroupLayout allProductsLayout = new GroupLayout(allProducts);
 

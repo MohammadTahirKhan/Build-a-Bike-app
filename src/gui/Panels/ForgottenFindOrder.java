@@ -7,28 +7,21 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class ForgottenFindOrder extends JPanel {
-    private final JLabel brandName;
-    private final JLabel productName;
     private final JScrollPane productTable;
     private final JPanel productTableItems;
-    private final JLabel serialNumber;
-    private final JLabel serialNumber1;
-    private final JLabel staffLogin;
-    private final JPanel tableHeadingLabels;
-    private final JLabel unitCost;
 
     private final ArrayList<OrderTableItem> orderTableItems = new ArrayList<>();
 
     public ForgottenFindOrder() {
-        tableHeadingLabels = new JPanel();
-        productName = new JLabel();
-        serialNumber = new JLabel();
-        unitCost = new JLabel();
-        brandName = new JLabel();
-        serialNumber1 = new JLabel();
+        JPanel tableHeadingLabels = new JPanel();
+        JLabel productName = new JLabel();
+        JLabel serialNumber = new JLabel();
+        JLabel unitCost = new JLabel();
+        JLabel brandName = new JLabel();
+        JLabel serialNumber1 = new JLabel();
         productTable = new JScrollPane();
         productTableItems = new JPanel();
-        staffLogin = new JLabel();
+        JLabel staffLogin = new JLabel();
 
         productName.setText("Bike Name");
 

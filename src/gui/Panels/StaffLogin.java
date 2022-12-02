@@ -10,31 +10,22 @@ import static SQL.Queries.Actors.SQLStaff.getStaff;
 public class StaffLogin extends JPanel {
 
     public static final Font SEGOE_UI = new Font("Segoe UI", Font.BOLD, 24);
-    private final GroupLayout.Alignment LEADING = GroupLayout.Alignment.LEADING;
-    private final GroupLayout.Alignment TRAILING = GroupLayout.Alignment.TRAILING;
-    private final int DEFAULT = GroupLayout.DEFAULT_SIZE;
-    private final int PREFERRED = GroupLayout.PREFERRED_SIZE;
 
     private final Button loginButton;
-    private final JPanel loginForm;
-    private final Label loginFormTitle;
     private final TextField passwordField;
-    private final Label passwordLabel;
-    private final JLabel staffLogin;
     private final TextField usernameField;
-    private final Label usernameLabel;
 
     private final BaseFrame parentFrame;
 
     public StaffLogin(BaseFrame parentFrame) {
         this.parentFrame = parentFrame;
-        staffLogin = new JLabel();
-        loginForm = new JPanel();
+        JLabel staffLogin = new JLabel();
+        JPanel loginForm = new JPanel();
         usernameField = new TextField();
         passwordField = new TextField();
-        usernameLabel = new Label();
-        passwordLabel = new Label();
-        loginFormTitle = new Label();
+        Label usernameLabel = new Label();
+        Label passwordLabel = new Label();
+        Label loginFormTitle = new Label();
         loginButton = new Button();
 
         staffLogin.setFont(SEGOE_UI);
@@ -54,6 +45,9 @@ public class StaffLogin extends JPanel {
 
         GroupLayout loginFormLayout = new GroupLayout(loginForm);
         loginForm.setLayout(loginFormLayout);
+        int PREFERRED = GroupLayout.PREFERRED_SIZE;
+        int DEFAULT = GroupLayout.DEFAULT_SIZE;
+        GroupLayout.Alignment LEADING = GroupLayout.Alignment.LEADING;
         loginFormLayout.setHorizontalGroup(
                 loginFormLayout.createParallelGroup(LEADING)
                         .addGroup(loginFormLayout.createSequentialGroup()
@@ -71,6 +65,7 @@ public class StaffLogin extends JPanel {
                         .addComponent(loginButton, PREFERRED, 95, PREFERRED)))
                 .addContainerGap(61, Short.MAX_VALUE))
         );
+        GroupLayout.Alignment TRAILING = GroupLayout.Alignment.TRAILING;
         loginFormLayout.setVerticalGroup(
             loginFormLayout.createParallelGroup(LEADING)
             .addGroup(TRAILING, loginFormLayout.createSequentialGroup()

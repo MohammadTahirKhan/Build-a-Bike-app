@@ -1,24 +1,18 @@
 package gui.Panels;
 
 import Order.Order;
+
 import javax.swing.*;
 
 public class OrderTableItem extends JPanel {
-    private final JLabel bikeName;
-    private final JLabel handleBarName;
-    private final JLabel frameName;
-    private final JLabel wheelsName;
-    private final JLabel bikeSerialNumber;
-    private final Order order;
 
     public OrderTableItem(Order order) {
-        this.order = order;
 
-        bikeName = new JLabel();
-        bikeSerialNumber = new JLabel();
-        handleBarName = new JLabel();
-        frameName = new JLabel();
-        wheelsName = new JLabel();
+        JLabel bikeName = new JLabel();
+        JLabel bikeSerialNumber = new JLabel();
+        JLabel handleBarName = new JLabel();
+        JLabel frameName = new JLabel();
+        JLabel wheelsName = new JLabel();
 
         bikeName.setText(order.getBike().getName());
         bikeSerialNumber.setText(String.valueOf(order.getBike().getSerialNumber()));

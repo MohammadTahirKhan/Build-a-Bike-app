@@ -7,25 +7,14 @@ import java.util.ArrayList;
 import java.util.HashSet;
 
 import static SQL.Queries.Order.SQLOrder.getOrders;
-import static SQL.Queries.Order.SQLOrder.getOrders;
 
 public class StaffViewOrders extends JPanel {
-    private final GroupLayout.Alignment LEADING = GroupLayout.Alignment.LEADING;
-    private final GroupLayout.Alignment TRAILING = GroupLayout.Alignment.TRAILING;
-    private final int DEFAULT = GroupLayout.DEFAULT_SIZE;
-    private final int PREFERRED = GroupLayout.PREFERRED_SIZE;
 
-    private final JLabel status;
-    private final JLabel orderNumber;
     private final JScrollPane productTable;
     private final JPanel productTableItems;
     private final JButton confirmed;
     private final JButton fulfilled;
     private final JButton pending;
-    private final JLabel serialNumber;
-    private final JPanel stockNav;
-    private final JPanel tableHeadingLabels;
-    private final JLabel cost;
     private final JButton all;
 
     private HashSet<TableItem> productTableItemsList = new HashSet<>();
@@ -33,16 +22,16 @@ public class StaffViewOrders extends JPanel {
     private final ArrayList<TableItem> orders = new ArrayList<>();
 
     public StaffViewOrders() {
-        stockNav = new JPanel();
+        JPanel stockNav = new JPanel();
         pending = new JButton();
         confirmed = new JButton();
         fulfilled = new JButton();
         all = new JButton();
-        tableHeadingLabels = new JPanel();
-        orderNumber = new JLabel();
-        serialNumber = new JLabel();
-        cost = new JLabel();
-        status = new JLabel();
+        JPanel tableHeadingLabels = new JPanel();
+        JLabel orderNumber = new JLabel();
+        JLabel serialNumber = new JLabel();
+        JLabel cost = new JLabel();
+        JLabel status = new JLabel();
         productTable = new JScrollPane();
         productTableItems = new JPanel();
 
@@ -52,6 +41,9 @@ public class StaffViewOrders extends JPanel {
 
         GroupLayout stockNavLayout = new GroupLayout(stockNav);
         stockNav.setLayout(stockNavLayout);
+        int PREFERRED = GroupLayout.PREFERRED_SIZE;
+        int DEFAULT = GroupLayout.DEFAULT_SIZE;
+        GroupLayout.Alignment LEADING = GroupLayout.Alignment.LEADING;
         stockNavLayout.setHorizontalGroup(
             stockNavLayout.createParallelGroup(LEADING)
             .addGroup(stockNavLayout.createSequentialGroup()
@@ -65,6 +57,7 @@ public class StaffViewOrders extends JPanel {
                 .addComponent(all, PREFERRED, 214, PREFERRED)
                 .addContainerGap(DEFAULT, Short.MAX_VALUE))
         );
+        GroupLayout.Alignment TRAILING = GroupLayout.Alignment.TRAILING;
         stockNavLayout.setVerticalGroup(
             stockNavLayout.createParallelGroup(LEADING)
             .addGroup(TRAILING, stockNavLayout.createSequentialGroup()

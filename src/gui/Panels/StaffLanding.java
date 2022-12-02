@@ -9,9 +9,6 @@ import java.awt.*;
 
 public class StaffLanding extends JPanel {
     public static final Font SEGOE_UI = new Font("Segoe UI", Font.BOLD, 14);
-    private final GroupLayout.Alignment LEADING = GroupLayout.Alignment.LEADING;
-    private final GroupLayout.Alignment TRAILING = GroupLayout.Alignment.TRAILING;
-    private final int PREFERRED = GroupLayout.PREFERRED_SIZE;
 
     private final JButton acceptPayment;
     private final JButton assembleBike;
@@ -31,6 +28,9 @@ public class StaffLanding extends JPanel {
 
         GroupLayout layout = new GroupLayout(this);
         setLayout(layout);
+        int PREFERRED = GroupLayout.PREFERRED_SIZE;
+        GroupLayout.Alignment TRAILING = GroupLayout.Alignment.TRAILING;
+        GroupLayout.Alignment LEADING = GroupLayout.Alignment.LEADING;
         layout.setHorizontalGroup(
             layout.createParallelGroup(LEADING)
             .addGroup(TRAILING, layout.createSequentialGroup()
@@ -91,8 +91,6 @@ public class StaffLanding extends JPanel {
 
         manageStock.addActionListener(e -> parentFrame.displayPanel(parentFrame.stockBrowse, false, false, false, true, true));
 
-        viewOrders.addActionListener(e -> {
-            parentFrame.displayPanel(parentFrame.staffViewOrders, false, false, false, true, true);
-        });
+        viewOrders.addActionListener(e -> parentFrame.displayPanel(parentFrame.staffViewOrders, false, false, false, true, true));
     }
 }

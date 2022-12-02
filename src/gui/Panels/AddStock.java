@@ -7,20 +7,10 @@ import javax.swing.*;
 import java.awt.*;
 
 public class AddStock extends JPanel {
-    private final GroupLayout.Alignment LEADING = GroupLayout.Alignment.LEADING;
-    private final GroupLayout.Alignment TRAILING = GroupLayout.Alignment.TRAILING;
-    private final int DEFAULT = GroupLayout.DEFAULT_SIZE;
-    private final int PREFERRED = GroupLayout.PREFERRED_SIZE;
 
     private final JButton addStock;
     private final BaseFrame parentFrame;
 
-    private final JPanel form;
-    private final JLabel addStockTitle;
-    private final Label formTitle;
-    private final Label quantityLabel;
-    private final Label serialNumberLabel;
-    private final Label brandNameLabel;
     private final TextField quantityField;
     private final TextField serialNumberField;
     private final TextField brandNameField;
@@ -28,17 +18,17 @@ public class AddStock extends JPanel {
 
     public AddStock(BaseFrame baseFrame) {
         parentFrame = baseFrame;
-        form = new JPanel();
-        addStockTitle = new JLabel();
+        JPanel form = new JPanel();
+        JLabel addStockTitle = new JLabel();
 
-        serialNumberLabel = new Label();
+        Label serialNumberLabel = new Label();
         serialNumberField = new TextField();
-        brandNameLabel = new Label();
+        Label brandNameLabel = new Label();
         brandNameField = new TextField();
-        quantityLabel = new Label();
+        Label quantityLabel = new Label();
         quantityField = new TextField();
 
-        formTitle = new Label();
+        Label formTitle = new Label();
         addStock = new JButton();
 
         addStockTitle.setFont(new Font("Segoe UI", Font.BOLD, 24));
@@ -61,6 +51,9 @@ public class AddStock extends JPanel {
 
         GroupLayout formLayout = new GroupLayout(form);
         form.setLayout(formLayout);
+        int PREFERRED = GroupLayout.PREFERRED_SIZE;
+        int DEFAULT = GroupLayout.DEFAULT_SIZE;
+        GroupLayout.Alignment LEADING = GroupLayout.Alignment.LEADING;
         formLayout.setHorizontalGroup(
             formLayout.createParallelGroup(LEADING)
             .addGroup(formLayout.createSequentialGroup()
@@ -80,6 +73,7 @@ public class AddStock extends JPanel {
                         .addComponent(addStock, PREFERRED, 95, PREFERRED)))
                 .addContainerGap(61, Short.MAX_VALUE))
         );
+        GroupLayout.Alignment TRAILING = GroupLayout.Alignment.TRAILING;
         formLayout.setVerticalGroup(
             formLayout.createParallelGroup(LEADING)
             .addGroup(TRAILING, formLayout.createSequentialGroup()

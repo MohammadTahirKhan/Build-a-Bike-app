@@ -10,12 +10,10 @@ import java.util.ArrayList;
 
 public class ConfirmOrder extends JPanel {
     private final GroupLayout.Alignment LEADING = GroupLayout.Alignment.LEADING;
-    private final GroupLayout.Alignment TRAILING = GroupLayout.Alignment.TRAILING;
     private final int DEFAULT = GroupLayout.DEFAULT_SIZE;
     private final int PREFERRED = GroupLayout.PREFERRED_SIZE;
 
     private final JPanel itemsSelected;
-    private final JPanel orderOptions;
     private final JButton backToBrowseButton;
     private final JLabel yourSelection;
     private final ArrayList<ProductPanel> productPanels = new ArrayList<>(3);
@@ -27,7 +25,7 @@ public class ConfirmOrder extends JPanel {
 
 
         itemsSelected = new JPanel();
-        orderOptions = new JPanel();
+        JPanel orderOptions = new JPanel();
         yourSelection = new JLabel();
         backToBrowseButton = new JButton();
 
@@ -59,6 +57,7 @@ public class ConfirmOrder extends JPanel {
 
         GroupLayout layout = new GroupLayout(this);
         setLayout(layout);
+        GroupLayout.Alignment TRAILING = GroupLayout.Alignment.TRAILING;
         layout.setHorizontalGroup(
             layout.createParallelGroup(LEADING)
             .addGroup(layout.createSequentialGroup()

@@ -13,14 +13,12 @@ import static SQL.Queries.Order.SQLOrder.updateOrderStatus;
 
 public class StaffAssembleOrder extends JPanel {
     private final GroupLayout.Alignment LEADING = GroupLayout.Alignment.LEADING;
-    private final GroupLayout.Alignment TRAILING = GroupLayout.Alignment.TRAILING;
     private final int DEFAULT = GroupLayout.DEFAULT_SIZE;
     private final int PREFERRED = GroupLayout.PREFERRED_SIZE;
 
     private final JButton cancelButton;
     private final JPanel itemsSelected;
 
-    private final JPanel orderOptions;
     private final JButton confirmButton;
     private final JLabel yourSelection;
 
@@ -33,7 +31,7 @@ public class StaffAssembleOrder extends JPanel {
 
         itemsSelected = new JPanel();
         yourSelection = new JLabel();
-        orderOptions = new JPanel();
+        JPanel orderOptions = new JPanel();
         cancelButton = new JButton();
         confirmButton = new JButton();
 
@@ -68,6 +66,7 @@ public class StaffAssembleOrder extends JPanel {
 
         GroupLayout layout = new GroupLayout(this);
         setLayout(layout);
+        GroupLayout.Alignment TRAILING = GroupLayout.Alignment.TRAILING;
         layout.setHorizontalGroup(
             layout.createParallelGroup(LEADING)
             .addGroup(layout.createSequentialGroup()

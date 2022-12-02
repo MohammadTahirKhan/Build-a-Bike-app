@@ -15,21 +15,13 @@ import static SQL.Queries.Product.SQLWheels.getAllWheels;
 
 public class StockBrowse extends JPanel {
     private final GroupLayout.Alignment LEADING = GroupLayout.Alignment.LEADING;
-    private final GroupLayout.Alignment TRAILING = GroupLayout.Alignment.TRAILING;
     private final int DEFAULT = GroupLayout.DEFAULT_SIZE;
     private final int PREFERRED = GroupLayout.PREFERRED_SIZE;
 
-    private final JLabel brandName;
-    private final JLabel productName;
-    private final JScrollPane productTable;
     private final JPanel productTableItems;
     private final JButton selectFrameSets;
     private final JButton selectHandlebars;
     private final JButton selectWheels;
-    private final JLabel serialNumber;
-    private final JPanel stockNav;
-    private final JPanel tableHeadingLabels;
-    private final JLabel stockAmount;
     private final JButton addStock;
 
     private final ArrayList<TableItem> productItems = new ArrayList<>();
@@ -38,17 +30,17 @@ public class StockBrowse extends JPanel {
 
     public StockBrowse(BaseFrame baseFrame) {
         this.parentFrame = baseFrame;
-        stockNav = new JPanel();
+        JPanel stockNav = new JPanel();
         selectWheels = new JButton();
         selectFrameSets = new JButton();
         selectHandlebars = new JButton();
         addStock = new JButton();
-        tableHeadingLabels = new JPanel();
-        productName = new JLabel();
-        serialNumber = new JLabel();
-        stockAmount = new JLabel();
-        brandName = new JLabel();
-        productTable = new JScrollPane();
+        JPanel tableHeadingLabels = new JPanel();
+        JLabel productName = new JLabel();
+        JLabel serialNumber = new JLabel();
+        JLabel stockAmount = new JLabel();
+        JLabel brandName = new JLabel();
+        JScrollPane productTable = new JScrollPane();
         productTableItems = new JPanel();
 
         initializeButtons();
@@ -70,6 +62,7 @@ public class StockBrowse extends JPanel {
                 .addComponent(addStock, PREFERRED, 214, PREFERRED)
                 .addContainerGap(DEFAULT, Short.MAX_VALUE))
         );
+        GroupLayout.Alignment TRAILING = GroupLayout.Alignment.TRAILING;
         stockNavLayout.setVerticalGroup(
             stockNavLayout.createParallelGroup(LEADING)
             .addGroup(TRAILING, stockNavLayout.createSequentialGroup()

@@ -10,39 +10,28 @@ import java.util.ArrayList;
 import static SQL.Queries.Order.SQLOrder.getOrders;
 
 public class ForgottenOrderNumber extends JPanel {
-    private final GroupLayout.Alignment LEADING = GroupLayout.Alignment.LEADING;
-    private final GroupLayout.Alignment TRAILING = GroupLayout.Alignment.TRAILING;
-    private final int DEFAULT = GroupLayout.DEFAULT_SIZE;
-    private final int PREFERRED = GroupLayout.PREFERRED_SIZE;
 
     private final Button findOrderButton;
     private final TextField forenameField;
-    private final Label forenameLabel;
-    private final JPanel forgottenOrderForm;
-    private final Label forgottenOrderFormTitle;
-    private final JLabel forgottenOrderTitle;
     private final TextField houseNumberField;
-    private final Label houseNumberLabel;
     private final TextField postcodeField;
-    private final Label postcodeLabel;
-    private final Label surnameLabel;
     private final TextField textField2;
 
     private final BaseFrame parentFrame;
 
     public ForgottenOrderNumber(BaseFrame parentFrame) {
         this.parentFrame = parentFrame;
-        forgottenOrderTitle = new JLabel();
-        forgottenOrderForm = new JPanel();
+        JLabel forgottenOrderTitle = new JLabel();
+        JPanel forgottenOrderForm = new JPanel();
         forenameField = new TextField();
         textField2 = new TextField();
-        forenameLabel = new Label();
-        surnameLabel = new Label();
-        forgottenOrderFormTitle = new Label();
+        Label forenameLabel = new Label();
+        Label surnameLabel = new Label();
+        Label forgottenOrderFormTitle = new Label();
         findOrderButton = new Button();
         houseNumberField = new TextField();
-        houseNumberLabel = new Label();
-        postcodeLabel = new Label();
+        Label houseNumberLabel = new Label();
+        Label postcodeLabel = new Label();
         postcodeField = new TextField();
 
 
@@ -70,6 +59,9 @@ public class ForgottenOrderNumber extends JPanel {
 
         GroupLayout forgottenOrderFormLayout = new GroupLayout(forgottenOrderForm);
         forgottenOrderForm.setLayout(forgottenOrderFormLayout);
+        int PREFERRED = GroupLayout.PREFERRED_SIZE;
+        int DEFAULT = GroupLayout.DEFAULT_SIZE;
+        GroupLayout.Alignment LEADING = GroupLayout.Alignment.LEADING;
         forgottenOrderFormLayout.setHorizontalGroup(
             forgottenOrderFormLayout.createParallelGroup(LEADING)
             .addGroup(forgottenOrderFormLayout.createSequentialGroup()
@@ -91,6 +83,7 @@ public class ForgottenOrderNumber extends JPanel {
                         .addComponent(findOrderButton, PREFERRED, 95, PREFERRED)))
                 .addContainerGap(61, Short.MAX_VALUE))
         );
+        GroupLayout.Alignment TRAILING = GroupLayout.Alignment.TRAILING;
         forgottenOrderFormLayout.setVerticalGroup(
             forgottenOrderFormLayout.createParallelGroup(LEADING)
             .addGroup(TRAILING, forgottenOrderFormLayout.createSequentialGroup()

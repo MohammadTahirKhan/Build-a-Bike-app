@@ -6,7 +6,7 @@ import javax.swing.*;
 import java.util.ArrayList;
 import java.util.HashSet;
 
-import static SQL.Queries.Order.SQLOrder.getOrder;
+import static SQL.Queries.Order.SQLOrder.getOrders;
 
 public class StaffViewOrders extends JPanel {
     private final GroupLayout.Alignment LEADING = GroupLayout.Alignment.LEADING;
@@ -177,7 +177,7 @@ public class StaffViewOrders extends JPanel {
         all.setText("All");
 
         pending.addActionListener(e -> {
-            HashSet<Order> pendingOrders = new HashSet<>(getOrder(Order.Status.PENDING));
+            HashSet<Order> pendingOrders = new HashSet<>(getOrders(Order.Status.PENDING));
             productTableItemsList = new HashSet<>();
             if (pendingOrders.size() > 0) {
                 for (Order order : pendingOrders) {
@@ -188,7 +188,7 @@ public class StaffViewOrders extends JPanel {
         });
 
         confirmed.addActionListener(e -> {
-            HashSet<Order> pendingOrders = new HashSet<>(getOrder(Order.Status.CONFIRMED));
+            HashSet<Order> pendingOrders = new HashSet<>(getOrders(Order.Status.CONFIRMED));
             productTableItemsList = new HashSet<>();
             if (pendingOrders.size() > 0) {
                 for (Order order : pendingOrders) {
@@ -199,7 +199,7 @@ public class StaffViewOrders extends JPanel {
         });
 
         fulfilled.addActionListener(e -> {
-            HashSet<Order> pendingOrders = new HashSet<>(getOrder(Order.Status.FULFILLED));
+            HashSet<Order> pendingOrders = new HashSet<>(getOrders(Order.Status.FULFILLED));
             productTableItemsList = new HashSet<>();
             if (pendingOrders.size() > 0) {
                 for (Order order : pendingOrders) {
@@ -210,7 +210,7 @@ public class StaffViewOrders extends JPanel {
         });
 
         all.addActionListener(e -> {
-            HashSet<Order> pendingOrders = new HashSet<>(getOrder(Order.Status.All));
+            HashSet<Order> pendingOrders = new HashSet<>(getOrders(Order.Status.All));
             productTableItemsList = new HashSet<>();
             if (pendingOrders.size() > 0) {
                 for (Order order : pendingOrders) {

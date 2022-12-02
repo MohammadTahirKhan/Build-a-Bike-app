@@ -15,7 +15,7 @@ public class ProductPanel extends JPanel {
 
     final Product product;
 
-    private final JLabel image = new JLabel();
+    private ImagePanel image;
     private final JLabel displayName = new JLabel();
     private final JLabel displayCost = new JLabel();
     private final JCheckBox select = new JCheckBox();
@@ -26,8 +26,13 @@ public class ProductPanel extends JPanel {
         this.product = product;
         this.setBorder(BorderFactory.createEtchedBorder());
 
-        image.setHorizontalAlignment(SwingConstants.CENTER);
-        image.setText("/IMAGE/");
+        if (product instanceof Frame) {
+            image = new ImagePanel("frame.png");
+        } else if (product instanceof Wheels) {
+            image = new ImagePanel("wheel.png");
+        } else if (product instanceof HandleBar) {
+            image = new ImagePanel("handlebar.png");
+        }
 
         select.addActionListener(e -> {
             if (product instanceof Frame) {

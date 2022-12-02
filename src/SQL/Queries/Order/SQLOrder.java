@@ -60,6 +60,7 @@ public class SQLOrder {
             order = insertOrderTable(order);
 
             con.commit();
+            DbConnection.setAutoCommit(con, true);
             return order;
 //            Commit the queries
         } catch (SQLException e){

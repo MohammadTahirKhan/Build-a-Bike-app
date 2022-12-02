@@ -14,22 +14,20 @@ public class SQLStaff {
      *
      * @param staff staff object
      */
-    public static int insertStaffTable(Staff staff) {
+    public static void insertStaffTable(Staff staff) {
         Connection con = DbConnection.getCon();
         assert con != null;
 
         try {
             String sql = "INSERT INTO Staff (`username`, `hash`, `salt`) VALUES (?, ?, ?);";
-            PreparedStatement statement = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement statement = con.prepareStatement(sql);
             statement.setString(1, staff.getUsername());
             statement.setBytes(2, staff.getHash());
             statement.setBytes(3, staff.getSalt());
             statement.executeUpdate();
-            return DbConnection.getPrimaryKey(statement);
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return -1;
     }
 
 //    Getter(s)

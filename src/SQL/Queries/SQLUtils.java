@@ -37,6 +37,8 @@ public class SQLUtils {
      */
     private static void populateDatabase() {
 
+        Connection con = DbConnection.getCon();
+
 //        First insert all the components of a bike
         Wheels wheels1 = insertWheels(new Wheels(24, Wheels.Style.HYBRID, Wheels.BrakeType.RIM, "HS127", 1, 21.49, "Schwalbe", 61));
         Wheels wheels2 = insertWheels(new Wheels(24, Wheels.Style.MOUNTAIN, Wheels.BrakeType.DISKBRAKE, "Land Cruiser", 2, 19.99, "Schwalbe", 12));

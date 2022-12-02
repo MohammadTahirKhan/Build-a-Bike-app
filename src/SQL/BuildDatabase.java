@@ -1,14 +1,16 @@
 package SQL;
 
 import java.sql.SQLException;
-
-import static SQL.Queries.Order.SQLOrder.getOrder;
 import static SQL.Queries.SQLUtils.setDatabase;
-
 
 public class BuildDatabase {
 
-//    Main
+
+    /**
+     * Running this will clear then populate the database
+     * @param args Null
+     * @throws SQLException If there is an issue deleting the database contents
+     */
     public static void main(String[] args) throws SQLException {
         System.out.println("Setting database...");
         try {
@@ -18,9 +20,6 @@ public class BuildDatabase {
             e.printStackTrace();
             System.out.println("Failure!");
         }
-
-
-
     }
 }
 

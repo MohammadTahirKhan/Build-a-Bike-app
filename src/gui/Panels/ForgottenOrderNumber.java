@@ -7,7 +7,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
-import static SQL.Queries.Order.SQLOrder.getOrder;
+import static SQL.Queries.Order.SQLOrder.getOrders;
 
 public class ForgottenOrderNumber extends JPanel {
     private final GroupLayout.Alignment LEADING = GroupLayout.Alignment.LEADING;
@@ -144,7 +144,7 @@ public class ForgottenOrderNumber extends JPanel {
     private void initializeButtons() {
         findOrderButton.setLabel("Find My Order");
         findOrderButton.addActionListener(e -> {
-            ArrayList<Order> order = getOrder(forenameField.getText().trim(), textField2.getText().trim(), Integer.parseInt(houseNumberField.getText().trim()), postcodeField.getText().trim());
+            ArrayList<Order> order = getOrders(forenameField.getText().trim(), textField2.getText().trim(), Integer.parseInt(houseNumberField.getText().trim()), postcodeField.getText().trim());
             if (order == null) {
                 JOptionPane.showMessageDialog(parentFrame, "Order not found");
             } else if (order.size() == 1) {
